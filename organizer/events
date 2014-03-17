@@ -1,0 +1,115 @@
+#
+# events file
+#
+
+# birthdays
+* 06 08 *** URODZINY Kasi Szmatuly
+* 09 18 *** URODZINY Oli Szafranskiej
+* 06 11 *** URODZINY Edyty Blutke
+* 06 02 *** URODZINY Agnieszki Majchrowskiej
+* 05 06 *** URODZINY Bartka Cieplucha
+* 04 26 *** URODZINY Pawla Wiecka
+* 04 11 *** URODZINY Piotrka Biernackiego
+* 07 13 *** URODZINY Bozenki Majowskiej
+* 06 19 *** URODZINY Banki Gabrysiak
+* 09 24 *** URODZINY Dentki
+* 06 04 *** URODZINY Faith'a
+* 04 18 *** URODZINY Franczeska
+* 05 03 *** URODZINY Ilony
+* 11 17 *** URODZINY Majki
+* 03 04 *** URODZINY Krobanka
+* 01 11 *** URODZINY Marty Biernackiej
+* 09 18 *** URODZINY Paulinki Koperskiej
+* 07 24 *** URODZINY dziadziusia Miecia
+* 08 27 *** URODZINY Krzyska Kujawskiego
+* 08 25 *** URODZINY Pszczolki
+* 06 14 *** URODZINY wojka Edmunda
+* 01 19 *** URODZINY dziadziusia Andrzeja
+* 03 14 *** URODZINY babci Basi
+* 04 08 *** URODZINY mamy
+* 05 01 *** URODZINY taty
+* 06 28 *** URODZINY Zuzy Kaweckiej
+* 08 17 *** URODZINY Mihasia
+* 09 04 *** URODZINY woja Johna
+* 09 27 *** URODZINY ciaci Emily
+* 09 19 *** URODZINY babci Zosi
+* 11 04 *** URODZINY cioci Ani
+* 11 14 *** URODZINY Darii
+* 12 23 *** URODZINY Ann
+* 12 19 *** URODZINY Krzysia Koperskiego
+* 09 28 *** URODZINY Rafala Gisko
+* 11 16 *** URODZINY Kuby Galki
+* 11 28 *** URODZINY Czesi
+* 01 12 *** URODZINY Fica
+* 01 20 *** URODZINY Michala Majowskiego
+
+# imieniny
+* 01 01 *** IMIENINY dziadziusia Miecia
+* 05 15 *** IMIENINY babci Zosi
+* 08 03 *** IMIENINY mamy
+* 09 29 *** IMIENINY Krobanka
+* 11 30 *** IMIENINY dziadziusia Andrzeja
+* 12 04 *** IMIENINY babci Basi
+
+#
+# other const dates
+#
+
+# security:
+* * 08 **  backupowac stuff na necropolis'a (tweety)
+* * 18 **  backupowac stuff na necropolis'a (tweety)
+* * 28 **  backupowac stuff na necropolis'a (tweety)
+* * 14 **  backupowac stuff na CD/DVD-R (tweety, necropolis)
+* * 28 **  backupowac stuff na CD/DVD-R (necropolis)
+
+# formal:
+* *  01 *** ZAPLACIC kom-net (79zl)
+* *  01 *** ZAPLACIC rachunki (mieszkanie) (421.67zl)
+* *  01 *** przelac pieniadze na splate KREDYTU (2500zl)
+* 11 01 *** ZAPLACIC za domeny explicosoft.com, explicosoft.pl (DNS w home.pl) (12.08zl ?)
+* 11 10 *** ZAPLACIC za explicosoft.home.pl (pakiet w home.pl) (183zl ?)
+* 01 20 *** ZAPLACIC za domene baszerr.org (DNS w home.pl) (12.08zl ?)
+* 10 20 *** ZAPLACIC za domene morskaprzygoda.pl (DNS w home.pl) (12.08zl ?)
+* 01 20 *** jesli nie przyszla prognoza za energie elektryczna dzwonic do energii-pro
+* 07 20 *** jesli nie przyszla prognoza za energie elektryczna dzwonic do energii-pro
+
+# watering flowers:
+* * 07 **  podlac kwiatki i choinke :)
+* * 14 **  podlac kwiatki i choinke :)
+* * 21 **  podlac kwiatki i choinke :)
+* * 28 **  podlac kwiatki i choinke :)
+
+# misc:
+* 01 21 *** dzien babci
+* 01 22 *** dzien dziadka
+* 02 14 *   WALEtynki
+* 03 08 *** dzien kobiet
+* 03 14 *   dzien Pi :)
+* 03 17 *   dzien lodzi podwodnej :)
+* 05 26 *** dzien matki
+* 06 01 *** dzien dziecka :)
+* 06 23 *** dzien taty
+* 07 15 **  rocznica bitwy pod Grunwaldem 1410r.! DO BOJU! >)
+* 09 30 *   dzien chlopaka
+
+# OpCedes:
+* 02 03 **  zaplanowac zmiane filtrow/plynow w OpCedesie.
+* 06 01 **  zaplanowac konserwacje spodu OpCedesa.
+* 08 03 *   jak ~222k[km] przejechane to zmienic klocki i tarcze w OpCedesie.
+* 01 03 *   jak ~222k[km] przejechane to zmienic klocki i tarcze w OpCedesie.
+
+#
+# temporary tasks
+#
+2009 03 23 **  gdzies w tej okolicy powinien byc tel. w sprawie szybowcow (http://www.aeroklub.wroc.pl) od 0609-46-33-20
+2009 03 24 *   Pszczola rok temu zadeklarowal, ze zrobi burito (jak Kasie z Kromera zabieralismy)
+2009 03 28 **  spotkanie szybowcowe moze?
+2009 03 29 **  spotkanie szybowcowe moze?
+2009 06 09 *** jutro wyjazd na mazury!!!!!!!
+2009 07 20 *** we wrzesniu mija termin waznosci karty bankomatowej z m-banku! zamowic nowa!
+2009 08 01 **  ostatni miesiac prenumeraty 'Mlodego Technika' (przedluzyc?)
+2009 08 01 **  ostatni miesiac prenumeraty 'Swiata Nauki' (przedluzyc?)
+# next year or so...
+2010 03 01 **  zapisac sie na oboz studencki pod zagle: http://nafali.eu/
+2015 03 04 *** URODZINY Krobanka - msciwie przypomniec o ukonczeniu cwiercwiecza! >)=
+2015 06 19 *** URODZINY Banki Gabrysiak - msciwie przypomniec o ukonczeniu cwiercwiecza! >)=

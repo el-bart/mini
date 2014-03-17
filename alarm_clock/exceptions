@@ -1,0 +1,8 @@
+#
+# list of exceptions for alarm clock, in form YYYY.MM.DD .
+# to insert comments use '#' mark.
+#
+
+# some test dates:
+2008.07.06
+2009.08.07 # and more! :)

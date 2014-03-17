@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# DynDNS script for automating update of entries
+#
+# http://www.baszerr.eu/doku.php/prjs/dyndns_update
+#
+
+# configuration
+USER="abc"
+PASS="def"
+DOMAIN="$USER.dyndns.org"
+
+# metchod of getting current IP; this one's valid for OpenWRT/Backfire
+#IP="`ifconfig  eth0.1 | grep addr: | sed 's#^ *inet addr:##' | sed 's# .*##'`"
+
+# this workd in general case - IP is obtained via dyndns' page
+IP="`wget -q -O - http://checkip.dyndns.com | sed 's%.*ddress: \([0-9\.]\+\).*%\1%'`"
+if echo "$IP" | grep -q "[^0-9\.]"
+then
+  echo "$0: cannot obtain IP address (got: $IP)" >&2
+  exit 2
+fi
+
+# get last set IP
+LAST_IP_FILE="$HOME/.dyndns_last_ip"
+touch "$LAST_IP_FILE"
+LAST_IP="`cat "$LAST_IP_FILE"`"
+
+# skip if not changed and not forced
+[ "$1" != "-f" ] && [ "$LAST_IP" = "$IP" ] && exit 0
+
+# update on change
+wget -O /dev/null "http://$USER:$PASS@members.dyndns.org/nic/update?hostname=$DOMAIN&myip=$IP&wildcard=NOCHG&mx=NOCHG&backmx=NOCHG" || exit $?
+echo "$IP" > "$LAST_IP_FILE"
+exit $?

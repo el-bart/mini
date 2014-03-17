@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /usr/local/share/games/quake || exit 1
+exec /usr/local/bin/quake -game id1_dissolution_of_eternity ${*} || exit 2
+exit 0
+

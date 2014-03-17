@@ -1,0 +1,146 @@
+#!/bin/bash
+#
+# script randomizing single image from a given pool, giving lower priority
+# to the images that have been already displayed (multiple displays makes
+# priority even lower)
+#
+# http://www.baszerr.eu/doku.php/prjs/img_randomizer
+#
+
+# basic setup
+CFG_DIR="$HOME/.img_randomizer"
+CFG_FILE="$CFG_DIR/config"
+LIST="$CFG_DIR/img_files_prioritized_list"
+
+# in case of first run
+mkdir -p "$CFG_DIR"
+touch "$LIST"
+if ! [ -f "$CFG_FILE" ]
+then
+  cat > "$CFG_FILE" <<EOF
+# root directory with images
+ROOT="$HOME/mmedia/wallpapers/"
+
+# selection penalty - the greater number, the lower chance to
+# select given image more than once
+SEL_PNT="5"
+EOF
+  echo "config file has been created: $CFG_FILE" >&2
+  echo "update it to your needs before running this program" >&2
+  exit 1
+fi # if no config
+
+# read config
+. "$CFG_FILE" || exit $?
+
+#
+# functions
+#
+
+# removes file entries that does not exist anymore
+function purify_files
+{
+  cat "$LIST" > "$TMP" || return $?
+  {
+    cat "$TMP" | while read no file
+    do
+      # if file exists put it back to DB
+      [ -f "$file" ] && echo "$no $file"
+    done
+  } > "$LIST"
+  return 0
+}
+
+# adds new files to data base
+function append_new_files
+{
+  find "$ROOT" -type f > "$TMP"
+  { awk '{ print $2 }' < "$LIST" ; cat "$TMP" ; } | sort | uniq -u | sed 's:^:0 :' >> "$LIST"
+  return $?
+}
+
+# returns line number of randomized file
+function get_random_line_no
+{
+  {
+    # initialize required variables
+    cat << EOF
+max=0
+n=0
+EOF
+    # inialize basic elements
+    cat "$LIST" | while read no file
+    do
+      echo "tab[n++]=$no"
+      echo "if(max<$no) { max=$no; }"
+    done
+    # reverse priority of elements - greater means worse
+    cat << EOF
+sum=0
+max+=1
+for(i=0; i<n; ++i)
+{
+  tab[i]=max-tab[i]
+  sum+=tab[i]
+}
+EOF
+
+    # find proper entry
+    cat << EOF
+rand=$RANDOM`head -c 30 /dev/urandom | sha512sum | sed 's:[^0-9]::g'`
+stop=rand%sum
+now=0
+for(i=0; i<n; ++i)
+{
+  now+=tab[i]
+  if(now>stop)
+  {
+    print i+1
+    print "\n"
+    break
+  }
+}
+EOF
+  } | bc -q
+  return $?
+}
+
+# update priorites in data base
+function update_priorities
+{
+  local NO="$1"
+  local LINE_PRE="`head "-$NO" "$LIST" | tail -1`"      || return $?
+  local CNT="`awk '{ print $1 }' <<< "$LINE_PRE"`"      || return $?
+  # enlarge call count
+  CNT="$(($CNT+$SEL_PNT))" || return $?
+  # prepare new line
+  LINE_POST="$CNT `awk '{ print $2 }' <<< "$LINE_PRE"`" || return $?
+  # replace old one with new one
+  sed -i "s:^$LINE_PRE$:$LINE_POST:" "$LIST"            || return $?
+  return 0
+}
+
+# returns file name that has been randomized
+function get_random_file
+{
+  local NO="$1"
+  head "-$NO" "$LIST" | tail -1 | awk '{ print $2 }' || return $?
+  return 0
+}
+
+#
+# main
+#
+TMP="`mktemp /tmp/.img_randomizer_tmp_XXXXXXXX`" || exit $?
+(
+  purify_files                   || exit $?
+  append_new_files               || exit $?
+  RND="`get_random_line_no`"     || exit $?
+  update_priorities "$RND"       || exit $?
+  IMG="`get_random_file "$RND"`" || exit $?
+  echo "$IMG"
+)
+# clean up
+RET="$?"
+rm -f "$TMP"
+exit $RET

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+CONF_NAME="bzr_team.conf"
+TEMPLATE=".${CONF_NAME}-template"
+
+if [ "$#" -ne 1 ]
+then
+  echo "$0 <repo_to_clone>" >&2
+  exit 1
+fi
+REPO_NAME="$1"
+
+# get config
+. "$TEMPLATE"
+# set proper repo name
+PARENT="`sed "s:REPO_NAME:$REPO_NAME:" <<< "$PARENT"`"
+# make local clone
+bzr clone "$PARENT" "$REPO_NAME" || exit $?
+
+# prepare template
+sed "s:REPO_NAME:$REPO_NAME:" "$TEMPLATE" > "$REPO_NAME/$CONF_NAME" || exit $?
+
+exit 0

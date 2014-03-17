@@ -1,0 +1,70 @@
+#!/bin/bash
+
+TMP_LST="`  mktemp`"
+TMP_AUMIX="`mktemp`"
+LOG_FILE="`readlink -f "$0"`.log"
+
+ROOT_PATH="`dirname "$0"`"
+PLAYLIST="$ROOT_PATH/music.lst"
+EXCEPTIONS="$ROOT_PATH/exceptions"
+
+DATE="`date +%Y.%m.%d`"
+
+function random_track
+{
+  FROM="$1"
+  TO="$2"
+  CNT="`wc -l < "$FROM"`"
+  POS="`expr \( $RANDOM % $CNT \) + 1`"
+  head -$POS "$FROM" | tail -1 > "$TO"
+}
+
+# preare environment and play
+(
+  echo
+  echo '@ --------'
+  echo "@ `date`"
+  # skip if given day is an exception
+  if sed 's:#.*$::' "$EXCEPTIONS" | grep -q "$DATE"
+  then
+    echo "@ skipping $DATE as an exception"
+	exit 0
+  fi
+  echo "@ saving volume"
+  aumix -f "$TMP_AUMIX" -S
+  echo "@ killing other players"
+  pkill mpg123
+  pkill mp3blaster
+  #fuser -k -m /dev/dsp
+  echo "@ setting new volume"
+  aumix -v 60 -w 100 -W 100
+
+  # play (loop to avoid non-existing tracks)
+  echo "@ search for random tracks"
+  i=0
+  while true
+  do
+    random_track "$PLAYLIST" "$TMP_LST"
+    echo "@ testing '`cat $TMP_LST`'"
+    [ -f "`cat "$TMP_LST"`" ] && break
+	((++i))
+	if [ "$i" -ge "300" ]
+	then
+	  echo "ERROR: too many missed tracks in a row! aborting..."
+	  exit 1
+	fi
+    sleep 0.1
+  done
+  echo "@ playing '`cat $TMP_LST`'"
+  mpg123 -@ "$TMP_LST"
+
+  # restore environment
+  echo "@ restoring volume"
+  aumix -f "$TMP_AUMIX" -L
+  echo "@ done (`date`)"
+) >> "$LOG_FILE" 2>&1
+ret=$?
+
+# clean up
+rm "$TMP_AUMIX" "$TMP_LST"
+exit $(($ret+$?))

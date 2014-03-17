@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+if [ $# -ne 2 ]
+then
+  echo "$(basename $0) <input.cpp> <output.png>" >&2
+  exit 1
+fi
+
+IN=$1
+shift
+OUT=$1
+shift
+
+enscript --color -f Courier12 -B -1 --highlight=cpp -h -o "${OUT}.ps" "$IN"
+gs -sDEVICE=jpeg -r400 -sPAPERSIZE=a4 -dBATCH -dNOPAUSE -sOutputFile="${OUT}.png" "${OUT}.ps"
+rm -f "${OUT}.ps"
+convert "${OUT}.png" -trim -border 10 -scale "50%" "$OUT"
+rm -f "${OUT}.png"

@@ -1,0 +1,4 @@
+#!/bin/bash
+export WINDOWMANAGER="fluxbox"
+exec /usr/bin/X11/startx
+exit $?

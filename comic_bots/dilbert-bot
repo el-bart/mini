@@ -1,0 +1,25 @@
+#!/bin/bash
+
+HOST="http://www.dilbert.com"
+DATE="`date +%F`"
+DST_DIR="."
+[ "$1" ] && DST_DIR="$1"
+[ "$2" ] && DATE="$2"
+DST_DIR="`readlink -f "$DST_DIR"`"
+WWW="$HOST/$DATE/index.html"
+TMP_DIR="`mktemp -d`"
+
+cd "$TMP_DIR"    || exit $?
+wget -q "$WWW"   || exit $?
+IMG="`grep '"/dyn/str_strip/.*"' index.html | sed 's:.*"/\(dyn/str_strip/[^"]\+\)".*:\1:'`"
+STRIP="$HOST/$IMG"
+wget -q "$STRIP" || exit $?
+IMG_FILE="`sed 's:.*/::' <<< "$IMG"`"
+cp "$IMG_FILE" "$DST_DIR/dilbert_$DATE.gif" || exit $?
+
+# cleanup
+cd "$TMP_DIR"             || exit $?
+rm index.html "$IMG_FILE" || exit $?
+rmdir "$TMP_DIR"          || exit $?
+
+exit 0
