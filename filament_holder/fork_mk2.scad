@@ -1,8 +1,7 @@
 h=11;      // height
 w=14;      // width
-d=(5+1)/2; // diameter of the holes
+d=(5+1.5)/2; // diameter of the holes
 
-		difference() {
 difference()
 {
   union()
@@ -28,15 +27,9 @@ difference()
   }
 
   // lower hole for screw
-  translate([0, -80-33, -1])
+  translate([0, -80-34.5, -1])
     cylinder(h=h+2, r=d);
   // higher hole for screw
-  translate([0, -80-33+11, -1])
+  translate([0, -80-34.5+11, -1])
     cylinder(h=h+2, r=d);
 }
-
-	 translate([-60, -96, 0])
-		 cube([200, 200, h]);
-	 translate([3, -98, 0])
-		 cube([200, 200, h]);
-			}
