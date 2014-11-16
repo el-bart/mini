@@ -1,36 +1,20 @@
 .SECONDARY:
 
-EXTERNAL_SRCS += center.stl
-EXTERNAL_SRCS += fork.stl
-EXTERNAL_SRCS += holder_bottom.stl
-EXTERNAL_SRCS += holder_top.stl
-EXTERNAL_GCODES := $(EXTERNAL_SRCS:.stl=.gcode)
-
-SRCS   += fork_mk2.stl
-GCODES := $(EXTERNAL_GCODES) $(SRCS:.stl=.gcode)
+SCADS  := $(wildcard *.scad)
+STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
+GCODES := $(STLS:.stl=.gcode)
 
 .PHONY: all
 all: $(GCODES)
 
-center.gcode: center.stl Makefile config-pla.ini
-	slic3r --load config-pla.ini --scale 10 "$<"
+$(STLS) $(SCADS) $(GCODES): Makefile config-pla-coarse.ini
 
-holder_bottom.gcode: holder_bottom.stl Makefile config-pla.ini
-	slic3r --load config-pla.ini --scale 10 "$<"
+%.gcode: %.stl
+	slic3r --load config-pla-coarse.ini "$<"
 
-holder_top.gcode: holder_top.stl Makefile config-pla.ini
-	slic3r --load config-pla.ini --scale 10 "$<"
-
-fork.gcode: fork.stl Makefile config-pla.ini
-	slic3r --load config-pla.ini --scale 10 "$<"
-
-
-%.gcode: %.stl Makefile config-pla.ini
-	slic3r --load config-pla.ini "$<"
-
-%.stl: %.scad Makefile config-pla.ini
+%.stl: %.scad
 	openscad -o "$@" "$<"
 
 .PHONY: clean
 clean:
-	rm -fv $(GCODES)
+	rm -fv $(GCODES) $(SCADS:.scad=.stl)
