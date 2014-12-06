@@ -57,7 +57,7 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
         translate([boxSize[0]-98-5, 40+16+10, 0])
           cableGuide();
         // side mounting wing cut-in, so that screw will hold tight
-        cube([15, 30, 6]);
+        cube([15, 40, 6]);
       }
     }
 
