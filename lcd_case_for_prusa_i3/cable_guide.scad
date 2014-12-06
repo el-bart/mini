@@ -4,9 +4,10 @@ module cableGuide()
   {
     // upper baund
     translate([0, 20, 0])
-      cube([75, 1, 6+7]);
+      cube([98, 1, 6+7]);
     // lower baund
-    cube([60, 1, 6+7]);
+    translate([(98-70)/2, 0, 0])
+      cube([70, 1, 6+7]);
   }
 }
 
