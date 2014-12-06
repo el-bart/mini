@@ -34,7 +34,18 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
           cube([143-15, 53, boxSize[2]]);
         // LCD
         translate(lcdOffset)
+        {
+          // LCD itself
+          translate([1/2-2/2, 10-1, 2])
+            cube([97+2, 40+2, 10]);
+          // place for PCB
+          translate([-2/2, -1/2, -lcdOffset[2]-7])
+            cube([98+2, 60+1, 10]);
+          // place for cables
+          translate([9, 60-5, -2])
+            cube([39,10,4]);
           lcdBoard();
+        }
         // encoder
         translate(encoderOffset)
         {
