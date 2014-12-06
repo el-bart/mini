@@ -49,15 +49,15 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
         translate([boxSize[0]-75-5, 40+16+10, 0])
           cableGuide();
         // side mounting wing cut-in, so that screw will hold tight
-          cube([15, 30, 6]);
+        cube([15, 30, 6]);
       }
     }
 
     // mounting drills
     for(offsetOY = [ 13/2+5/2, 40+13+5])
       for(offsetOX = [15/2, boxSize[0]-70+16/2, boxSize[0]-16/2])
-        translate([offsetOX, offsetOY, 0])
-          cylinder(r=5/2, h=6+7, $fs=1);
+        translate([offsetOX, offsetOY, -1])
+          cylinder(r=5/2, h=6+7+2, $fs=1);
   }
 
   // LCD stub
