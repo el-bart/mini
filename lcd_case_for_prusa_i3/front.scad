@@ -37,14 +37,22 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
           lcdBoard();
         // encoder
         translate(encoderOffset)
+        {
+          translate([-2, -1/2, -8])
+            cube([14+2*2, 12+1, 8+6]);
           menuKnob();
+        }
         // SD card mount
         translate(sdCardOffset)
           rotate([0,180,0])
             sdCardReader();
         // reset button
         translate(resetButtonOffset)
+        {
+          translate([0, 0, -resetButtonOffset[2]])
+            cylinder(r=(16+1)/2, h=boxSize[2])
           resetButton();
+        }
         // cable guide drill
         translate([boxSize[0]-75-5, 40+16+10, 0])
           cableGuide();
