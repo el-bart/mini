@@ -72,7 +72,25 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
       }
     }
 
-    // mounting drills
+    // SD card mounting drills
+    translate(sdCardOffset)
+      rotate([0,180,0])
+      {
+        for(offset = [
+                       [3/2+1, 3/2+1, -20/2],
+                       [3/2+1, 31-3/2-1, -20/2]
+                     ])
+        {
+          translate(offset)
+            cylinder(r=3/2, h=20, $fs=1);
+        }
+      }
+    // SD card mounting place
+    translate(sdCardOffset + [+2/2, -2/2, 0])
+      rotate([0,180,0])
+        cube([45+2,31+2,2+8]);
+
+    // frame-mounting drills
     for(offsetOY = [ 13/2+5/2, 40+13+5])
       for(offsetOX = [15/2, boxSize[0]-70+16/2, boxSize[0]-16/2])
         translate([offsetOX, offsetOY, -1])
