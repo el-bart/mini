@@ -4,12 +4,7 @@ use <menu_knob_manipulator.scad>
 use <reset_button.scad>
 use <sdcard_reader.scad>
 use <cable_guide.scad>
-
-boxSize = [143, 148, 6+7];
-lcdOffset = boxSize - [98+5, 60+5, 12];
-encoderOffset = [20-14/2, boxSize[1]-30/2-15/2-3, boxSize[2]-(6+7)];
-sdCardOffset = [35, 80, boxSize[2]-6];
-resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
+include <positions.scad>
 
 //rotate([180, 0, 0])
 {
@@ -89,6 +84,19 @@ resetButtonOffset = [encoderOffset[0]+14/2, 68, 1];
     translate(sdCardOffset + [+2/2, -2/2, 0])
       rotate([0,180,0])
         cube([45+2,31+2,2+8]);
+
+    // LCD mounting drills
+    translate(lcdOffset)
+      for(offset = [
+                     [3/2+1, 3/2+1, -1],
+                     [98-3/2-1, 3/2+1, -1],
+                     [3/2+1, 60-3/2-1, -1],
+                     [98-3/2-1, 60-3/2-1, -1]
+                   ])
+      {
+        translate(offset)
+          cylinder(r=3/2, h=20, $fs=1);
+      }
 
     // frame-mounting drills
     for(offsetOY = [ 13/2+5/2, 40+13+5])
