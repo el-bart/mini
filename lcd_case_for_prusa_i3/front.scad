@@ -125,5 +125,5 @@ module front()
     resetButton();
 }
 
-//rotate([180, 0, 0])
+rotate([180, 0, 0])
   front();
