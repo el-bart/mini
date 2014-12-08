@@ -6,7 +6,7 @@ use <sdcard_reader.scad>
 use <cable_guide.scad>
 include <positions.scad>
 
-//rotate([180, 0, 0])
+module front()
 {
   difference()
   {
@@ -124,3 +124,6 @@ include <positions.scad>
   %translate(resetButtonOffset)
     resetButton();
 }
+
+//rotate([180, 0, 0])
+  front();
