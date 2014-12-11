@@ -1,7 +1,7 @@
 .SECONDARY:
 
 #SCADS  := $(wildcard *.scad)
-SCADS  := front.scad
+SCADS  := front.scad menu_knob_manipulator.scad
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
 CONFIG := $(wildcard *.ini)
