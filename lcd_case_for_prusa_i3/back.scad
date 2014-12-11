@@ -39,7 +39,7 @@ module back()
     for(offsetOY = [ 13/2+5/2, 40+13+5])
       for(offsetOX = [15/2, boxSize[0]-70+16/2, boxSize[0]-16/2])
         translate([offsetOX, offsetOY, -1])
-          cylinder(r=5/2, h=6+7+2, $fs=1);
+          cylinder(r=(5+1)/2, h=6+7+2, $fs=1);
   }
 }
 

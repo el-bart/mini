@@ -14,7 +14,7 @@ module menuKnob()
   }
   // cap holder
   translate([14/2, 12/2, 6])
-    cylinder(r=7/2, h=10, $fs=1);
+    cylinder(r=(7+1)/2, h=10, $fs=1);
   // push button distance
   translate([14/2, 12/2, 6+10])
     cylinder(r=(6-2*1)/2, h=1, $fs=1);

@@ -1,6 +1,6 @@
 module resetButton()
 {
-  cylinder(r=16/2, h=15);
+  cylinder(r=(16+1)/2, h=15);
   // soldering pins:
   translate([0,0,-6])
   {
