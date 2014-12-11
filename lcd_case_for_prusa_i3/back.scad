@@ -41,11 +41,11 @@ module back()
         translate([offsetOX, offsetOY, -1])
           cylinder(r=5/2, h=6+7+2, $fs=1);
   }
-
-  // front stub
-  %translate([0, 0, 7])
-    front();
 }
+
+// front stub
+%translate([0, 0, 7])
+  front();
 
 //rotate([180, 0, 0])
   back();
