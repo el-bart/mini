@@ -35,7 +35,7 @@ module front()
             cube([97+2, 40+2, 10]);
           // place for PCB
           translate([-2/2, -1/2, -lcdOffset[2]-7])
-            cube([98+2, 60+1, 10]);
+            cube([98+2, 60+2, 10]);
           // place for cables
           translate([9, 60-5, -2])
             cube([39,10,4]);
