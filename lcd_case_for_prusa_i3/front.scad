@@ -56,7 +56,11 @@ module front()
         translate(resetButtonOffset)
         {
           translate([0, 0, -resetButtonOffset[2]])
-            cylinder(r=(16+2)/2, h=boxSize[2], $fs=1)
+          {
+            cylinder(r=(16+2)/2, h=boxSize[2], $fs=1);
+            translate([0, 0, 0])
+              cylinder(r=(16+10)/2, h=boxSize[2]/2, $fs=1);
+          }
           resetButton();
         }
         // cable guide drill
