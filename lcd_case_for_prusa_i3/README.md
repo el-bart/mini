@@ -13,6 +13,6 @@ to assemble it also requires:
  - six 3mm screws
 
 print time:
- - front: 3:15h
- - back: ??
- - knob: ??
+ - front: ~3:15h
+ - back:  ~2h
+ - knob:  ~0:20h
