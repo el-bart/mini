@@ -11,10 +11,10 @@ module resetButton()
   }
   // mounting cap
   translate([0,0,15-2])
-    cylinder(r=22/2, h=2);
+    cylinder(r=22/2, h=2, $fs=1);
   // button's moving part
   translate([0,0,15])
-    cylinder(r=16/2-2, h=2);
+    cylinder(r=16/2-2, h=2, $fs=1);
 }
 
 resetButton();

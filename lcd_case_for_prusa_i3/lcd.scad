@@ -22,7 +22,7 @@ module lcdBoard()
                  ])
     {
       translate(offset)
-        cylinder(r=(3+1)/2, h=4, $fs=1);
+        cylinder(r=3/2, h=4, $fs=1);
     }
   }
 }

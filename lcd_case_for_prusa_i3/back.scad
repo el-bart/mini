@@ -34,12 +34,12 @@ module back()
       cube([8, 31+2, 7]);
     // reset button hole
     translate(resetButtonOffset - [0, 0, 10])
-      cylinder(r=16/2+1, h=30);
+      cylinder(r=(16+2)/2, h=30, $fs=1);
     // frame-mounting drills
-    for(offsetOY = [ 13/2+5/2, 40+13+5])
+    for(offsetOY = [ 13/2+5/2, 40+13+4])
       for(offsetOX = [15/2, boxSize[0]-70+16/2, boxSize[0]-16/2])
         translate([offsetOX, offsetOY, -1])
-          cylinder(r=(5+1)/2, h=6+7+2, $fs=1);
+          cylinder(r=(5+2)/2, h=6+7+2, $fs=1);
   }
 }
 
