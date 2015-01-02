@@ -82,8 +82,11 @@ module brush_holder()
  * main program
  */
 
-for(offset = [0:brushes_count-1])
+rotate([90, 0, 0])
 {
-  translate(offset * [60, 0, 0])
-    brush_holder();
+  for(offset = [0:brushes_count-1])
+  {
+    translate(offset * [60, 0, 0])
+      brush_holder();
+  }
 }
