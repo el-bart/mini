@@ -24,8 +24,8 @@ module upper_ring()
   translate([0, (24+5)/2, 0])
     difference()
     {
-      cylinder(h=16, r=(24+5)/2);
-      cylinder(h=16, r=(24+0)/2);
+      cylinder(h=10, r=(24+5)/2);
+      cylinder(h=10, r=(24+0)/2);
     }
 }
 
@@ -36,7 +36,7 @@ module back_wall()
   translate([-40/2, 0, 0])
     cube([40, 3, 20]);
   // upper part
-  translate([-40/2, 0, 100-16+13])
+  translate([-40/2, 0, 100-10])
     cube([40, 3, 20]);
   // connector
   translate([-10/2, 0, 0])
@@ -47,7 +47,7 @@ module back_wall()
 module brush_holder()
 {
   lower_tub();
-  translate([0,0,100])
+  translate([0,0,100-5])
     upper_ring();
   back_wall();
   // lower mounting
@@ -60,12 +60,12 @@ module brush_holder()
         lower_tub();
   }
   // upper mounting
-  translate([0, 0, 100])
+  translate([0, 0, 100-5])
   {
     difference()
     {
       translate([-25/2, 3, 0])
-        cube([25, 10, 16]);
+        cube([25, 10, 10]);
       translate([0, 0.1, 0]) // needed to make model simple (aka: manifold)
         hull()
           upper_ring();
