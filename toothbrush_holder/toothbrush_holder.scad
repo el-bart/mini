@@ -1,6 +1,7 @@
 /*
  * configuration
  */
+
 brushes_count = 2;
 
 
@@ -29,6 +30,7 @@ module upper_ring()
     }
 }
 
+
 module back_wall()
 {
   translate([0,0,0])
@@ -45,6 +47,7 @@ module back_wall()
   }
 }
 
+
 module brush_holder()
 {
   lower_tub();
@@ -56,8 +59,9 @@ module brush_holder()
   {
     translate([-30/2, 3, 0])
       cube([30, 10, 10+3]);
-    hull()
-      lower_tub();
+    translate([0, 0.1, 0]) // needed to make model simple (aka: manifold)
+      hull()
+        lower_tub();
   }
   // upper mounting
   translate([0, 0, 100])
@@ -66,15 +70,18 @@ module brush_holder()
     {
       translate([-40/2, 3, 0])
         cube([40, 10, 16]);
-      hull()
-        upper_ring();
+      translate([0, 0.1, 0]) // needed to make model simple (aka: manifold)
+        hull()
+          upper_ring();
     }
   }
 }
 
+
 /*
  * main program
  */
+
 for(offset = [0:brushes_count-1])
 {
   translate(offset * [60, 0, 0])
