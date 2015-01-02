@@ -1,9 +1,8 @@
 /*
  * configuration
  */
-
 brushes_count = 2;
-
+$fn=200;
 
 /*
  * modules
