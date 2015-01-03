@@ -2,7 +2,7 @@
  * configuration
  */
 brushes_count = 2;
-$fn=200;
+//$fn=200;
 
 /*
  * modules
@@ -13,7 +13,7 @@ module lower_tub()
   translate([0, (20+4)/2, 0])
     difference()
     {
-      cylinder(h=10+3, r=20/2);
+      cylinder(h=10+3, r=(20+3)/2);
       translate([0,0,3])
         cylinder(h=10+3, r2=20/2, r1=16/2);
     }
