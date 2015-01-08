@@ -35,10 +35,16 @@ module cover_shape()
 module cover()
 {
   extra_size = 2;
-  minkowski()
+  difference()
   {
-    cube(extra_size*[1,1,1]);
-    cover_shape();
+    minkowski()
+    {
+      cube(extra_size*[1,1,1]);
+      cover_shape();
+    }
+    // cut for the regulation screw
+   translate([21, 25, 0])
+      cube([15, 15, 50]);
   }
 }
 
