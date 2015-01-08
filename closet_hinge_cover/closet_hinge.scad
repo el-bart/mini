@@ -39,7 +39,7 @@ module closet_hinge()
   // side mounting screws
   translate([0, 41-10-18/2, 0])
   {
-    for(offsetOX = [-19/2, 21+19/2])
+    for(offsetOX = [-15/2, 21+15/2])
       translate([offsetOX, 0, 0])
         cylinder(r=7/2, h=6, $fs=2);
   }
