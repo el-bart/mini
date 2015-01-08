@@ -1,33 +1,47 @@
 use <closet_hinge.scad>
 
-module shell(extra_size)
+module cover_shape()
 {
-  cube_size=100;
-
-  difference()
-  {
-    resize([60, 60, 70] + extra_size*[1,1,1])
-      sphere(r=25);
-    // front cut
-    translate(cube_size*[-1/2, -1, -1/2] + [0, -20, 0])
-      cube(cube_size*[1,1,1]);
-    // bottom cut
-    translate(cube_size*[-1/2, -1/2, -1])
-      cube(cube_size*[1,1,1]);
-  }
+  h1=5;
+  polyhedron(
+    points = [
+               [55,  0,  0], // 0
+               [55,  0, h1], // 1
+               [55, 45, h1], // 2
+               [55, 45,  0], // 3
+               [ 0, 45, h1], // 4
+               [ 0, 45,  0], // 5
+               [ 0,  0,  0], // 6
+               [ 0,  0, h1], // 7
+               [55/2,0, 30], // 8
+               [55/2,40,30]  // 9
+             ], 
+    faces = [
+               [0,1,2],
+               [0,2,3],
+               [5,2,4],
+               [2,5,3],
+               [7,6,4],
+               [5,4,6],
+               [4,8,7],
+               [9,8,4],
+               [4,2,9],
+               [1,8,9],
+               [1,9,2],
+            ]
+  );
 }
-
 
 module cover()
 {
-  difference()
+  extra_size = 2;
+  minkowski()
   {
-    shell(3);
-    shell(0);
+    cube(extra_size*[1,1,1]);
+    cover_shape();
   }
 }
 
-
-%translate([-21/2, -41/2, 0])
+%translate([18, 0, 0])
   closet_hinge();
 cover();
