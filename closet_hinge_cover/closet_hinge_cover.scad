@@ -46,6 +46,13 @@ module cover()
    translate([21, 25, 0])
       cube([15, 15, 50]);
   }
+  // side mounting panels
+  for(offsetOX = [-10+2, 55+2-2])
+    translate([offsetOX, 0, 0])
+      cube([10, 20, 2]);
+  // back mounting panel
+  translate([(55+2-20)/2, 45, 0])
+    cube([20, 10, 2]);
 }
 
 %translate([18, 0, 0])
