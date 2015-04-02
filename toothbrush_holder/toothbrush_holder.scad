@@ -1,3 +1,5 @@
+include <Write.scad>
+
 /*
  * configuration
  */
@@ -77,12 +79,17 @@ module brush_holder()
 /*
  * main program
  */
+name = ["name1", "name2"];
 
 rotate([90, 0, 0])
 {
-  for(offset = [0:brushes_count-1])
+  for(i = [0:brushes_count-1])
   {
-    translate(offset * [30, 0, 0])
+    translate([i*30,4,55])
+      rotate([-90, 90, 0])
+        scale([2,1,1])
+          write(name[i], t=2, h=8, center=true);
+    translate(i * [30, 0, 0])
       brush_holder();
   }
 }
