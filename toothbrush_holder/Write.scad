@@ -187,7 +187,7 @@ module writesphere(text,where,radius){
 	wid=(.125* h *5.5 * space);
 	widall=wid*(len(text)-1)/2;
 	
-	echo("-----------------",widall,wid,mmangle(radius));
+	//echo("-----------------",widall,wid,mmangle(radius));
 	//angle that measures width of letters on sphere
 	function NAngle(radius)=(wid/(pi2*radius))*360;
 	//angle of half width of text
@@ -278,9 +278,9 @@ module writethecube(text,where,size){
 
 module write(word){
 	
-	echo (h);
-	echo (word);
-	echo ("There are " ,len(word) ," letters in this string");
+	//echo (h);
+	//echo (word);
+	//echo ("There are " ,len(word) ," letters in this string");
 //	echo ("The second letter is ",word[1]);
 //	echo (str(word[0],"_"));
 rotate(rotate,[0,0,-1]){
