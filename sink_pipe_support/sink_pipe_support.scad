@@ -17,7 +17,10 @@ rotate([90, 0, 0])
       cube([30, 30, h-5-2]);
     translate([0, -60/2, 35])
       rotate([0, 90, 90])
-        cylinder(r=5+2, h=60);
+        cylinder(r=(5+2)/2, h=60);
+    translate([-60/2, 0, 20])
+      rotate([0, 90, 0])
+        cylinder(r=(5+2)/2, h=60);
   }
 
   // pipe holer's top part

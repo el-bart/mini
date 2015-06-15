@@ -12,7 +12,10 @@ module holder()
       cube([d, d, h]);
     translate([-h/2, 0, h-10])
       rotate([0, 90, 0])
-        cylinder(r=5+1, h=h);
+        cylinder(r=(5+2)/2, h=h);
+    translate([0, -h/2, 20])
+      rotate([0, 90, 90])
+        cylinder(r=(5+2)/2, h=h);
   }
 }
 
