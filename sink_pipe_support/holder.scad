@@ -1,7 +1,7 @@
 module holder()
 {
   cylinder(h=5, r=50);
-  d=30;
+  d=30+2*2;
   e=d+4;
   h=5+40;
   difference()
