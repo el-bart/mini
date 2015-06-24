@@ -3,7 +3,7 @@ include <Write.scad>
 /*
  * configuration
  */
-names = ["JOHN", "JANE", "BILLY"];
+names = ["LIS"];
 brushes_count = len(names);
 //$fn=200;
 
@@ -39,18 +39,18 @@ module back_wall()
   translate([-40/2, 0, 0])
     cube([40, 3, 20]);
   // upper part
-  translate([-40/2, 0, 100-10])
+  translate([-40/2, 0, 100-10-25])
     cube([40, 3, 20]);
   // connector
   translate([-10/2, 0, 0])
-    cube([10, 3, 100]);
+    cube([10, 3, 100-25]);
 }
 
 
 module brush_holder()
 {
   lower_tub();
-  translate([0,0,100-5])
+  translate([0,0,100-5-25])
     upper_ring();
   back_wall();
   // lower mounting
@@ -63,7 +63,7 @@ module brush_holder()
         lower_tub();
   }
   // upper mounting
-  translate([0, 0, 100-5])
+  translate([0, 0, 100-5-25])
   {
     difference()
     {
@@ -85,8 +85,8 @@ rotate([90, 0, 0])
 {
   for(i = [0:brushes_count-1])
   {
-    translate([i*30,4,55])
-      rotate([-90, 90, 0])
+    translate([i*30,4,45])
+      rotate([-90, -90, 0])
         scale([2,1,1])
           write(names[i], t=2, h=8, center=true);
     translate(i * [30, 0, 0])
