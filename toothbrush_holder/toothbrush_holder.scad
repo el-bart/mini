@@ -3,7 +3,7 @@ include <Write.scad>
 /*
  * configuration
  */
-names = ["LIS"];
+names = ["JOHN", "JANE"];
 brushes_count = len(names);
 //$fn=200;
 
