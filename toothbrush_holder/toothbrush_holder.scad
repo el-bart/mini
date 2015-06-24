@@ -3,7 +3,7 @@ include <Write.scad>
 /*
  * configuration
  */
-names = ["JOHN", "JANE"];
+names = ["TOM", "JERRY"];
 brushes_count = len(names);
 //$fn=200;
 
@@ -85,7 +85,7 @@ rotate([90, 0, 0])
 {
   for(i = [0:brushes_count-1])
   {
-    translate([i*30,4,45])
+    translate([i*30,4,42])
       rotate([-90, -90, 0])
         scale([2,1,1])
           write(names[i], t=2, h=8, center=true);
