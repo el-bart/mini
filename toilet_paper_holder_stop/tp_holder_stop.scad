@@ -17,4 +17,4 @@ for(i = [0, 1, 2])
   // pack of 2 for each end of the holder
   for(j = [0, spacing])
     translate([j, i*spacing, 0])
-      holderStop(6 + i*0.5);
+      holderStop(6+1 + i*1/3);
