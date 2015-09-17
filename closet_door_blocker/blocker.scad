@@ -1,3 +1,10 @@
+// closing nails' parameters
+nail_thickness = 1;
+nail_head      = 3.5;
+nail_span      = 43;
+nail_outstand  = 3;
+
+
 module cut(height, length, span_up, span_down)
 {
   up_offset = (span_down-span_up)/2;
@@ -17,24 +24,35 @@ module cut(height, length, span_up, span_down)
               [4,5,7],
               [5,6,7],
               // top
-              [0,1,2],
-              [2,3,0],
+              [2,1,0],
+              [0,3,2],
               // upper wall
               [1,2,5],
-              [2,5,6],
+              [6,5,2],
               // lower wall
-              [0,3,4],
+              [4,3,0],
               [3,4,7],
               // left wall
               [0,1,4],
-              [1,4,5],
+              [5,4,1],
               // right wall
               [2,3,7],
-              [2,6,7]
+              [7,6,2]
             ]
-);
-
+  );
 }
 
 
-cut(2, 20, 2, 15);
+top    = 1.5*nail_thickness;
+bottom = 2*nail_head;
+cut_h  = (nail_head-nail_thickness)*6;
+h      = cut_h + 2*5;
+l      = nail_span + bottom/2*2 + 2*5;
+side   = nail_outstand/2;
+
+difference()
+{
+  cube([l, h, side]);
+  translate([0, (h-cut_h)/2, 0])
+    cut(2*side, cut_h, top, bottom);
+}
