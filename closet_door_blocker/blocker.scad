@@ -46,9 +46,9 @@ module cut(height, length, span_up, span_down)
 spacing = 2;
 top     = 1.5*nail_thickness;
 bottom  = 2*nail_head;
-cut_h   = (nail_head-nail_thickness)*8;
+cut_h   = (nail_head - nail_thickness)*8;
 h       = cut_h + 2*spacing;
-l       = nail_span + bottom/2*2 + 2*5;
+l       = nail_span + bottom/2*2 + 2*spacing;
 thick   = nail_outstand/2;
 
 difference()
