@@ -43,16 +43,18 @@ module cut(height, length, span_up, span_down)
 }
 
 
-top    = 1.5*nail_thickness;
-bottom = 2*nail_head;
-cut_h  = (nail_head-nail_thickness)*6;
-h      = cut_h + 2*5;
-l      = nail_span + bottom/2*2 + 2*5;
-side   = nail_outstand/2;
+spacing = 2;
+top     = 1.5*nail_thickness;
+bottom  = 2*nail_head;
+cut_h   = (nail_head-nail_thickness)*8;
+h       = cut_h + 2*spacing;
+l       = nail_span + bottom/2*2 + 2*5;
+thick   = nail_outstand/2;
 
 difference()
 {
-  cube([l, h, side]);
-  translate([0, (h-cut_h)/2, 0])
-    cut(2*side, cut_h, top, bottom);
+  cube([l, h, thick]);
+  for(dx = [spacing, l-spacing-bottom])
+    translate([dx, (h-cut_h)/2, 0])
+      cut(thick, cut_h, top, bottom);
 }
