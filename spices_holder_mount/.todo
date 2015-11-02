@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<todo version="0.1.20">
+    <note priority="medium" time="1446488425">
+        add extra 3mm space for holders, so that there will be some space left, even with bridges left-overs
+    </note>
+    <note priority="medium" time="1446488508">
+        distance between supports is calculated wrong - they do not match spaces between jars
+    </note>
+</todo>
