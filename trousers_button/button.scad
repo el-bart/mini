@@ -1,6 +1,7 @@
 count=2;
+spacing=18;
 
-module femalePart()
+module externalPart()
 {
   cylinder(r=14/2, h=2, $fn=100);
   translate([0,0,2])
@@ -11,14 +12,20 @@ module femalePart()
     }
 }
 
-module malePart()
+module internalPart()
 {
-  cylinder(r=14/2, h=2, $fn=100);
+  cylinder(r=(14+2)/2, h=2, $fn=100);
   translate([0,0,2])
-    cylinder(r=3/2, h=5-0.5, $fn=50);
+    cylinder(r=(5-1)/2, h=5-0.5, $fn=50);
 }
 
 
-translate([20,0,0])
-  femalePart();
-malePart();
+for(i=[0:count-1])
+{
+  translate([0, i*spacing, 0])
+  {
+    translate([spacing, 0, 0])
+      externalPart();
+    internalPart();
+  }
+}
