@@ -30,11 +30,11 @@ module wing()
           channel(2*batteryDiameter);
     }
     // removal of unnecessary elements
-    translate([wall, 0, wall])
+    translate([wall, wall, wall])
       cube([batteryDiameter, 2*batteryDiameter, surround]);
     rotate([0,0,60])
       translate([wall, -2*batteryDiameter, wall])
-        cube([batteryDiameter, 2*batteryDiameter, surround]);
+        cube([batteryDiameter, 1.5*batteryDiameter, surround]);
     // removal of part from which battery will be extracted
     rotate([0,0,60])
       translate([3*wall, -2*batteryDiameter+wall, wall])
