@@ -39,7 +39,10 @@ module wing()
     rotate([0,0,60])
       translate([3*wall, -2*batteryDiameter+wall, wall])
         cube([batteryDiameter, batteryDiameter, surround]);
-    // extra space on the bottom for the fingers to catch the battery smoothly
+    // extra space on the bottom for the fingers to catch the battery easily
+    rotate([0,0,60])
+      translate([-0.1, -2*batteryDiameter-0.1, surround])
+        cube([batteryDiameter, 1.5*batteryDiameter, batteryLength/2-surround]);
   }
   rotate([0,0,60])
     translate([0, -2*batteryDiameter, 0])
