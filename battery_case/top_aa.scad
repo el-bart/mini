@@ -10,7 +10,7 @@ module topAA()
   // hinge
   difference()
   {
-    translate([sizeOX, (sizeOY+2)/2-4, 0])
+    translate([sizeOX, (sizeOY+2)/2-4-0.5, 0])
     {
       cube([7, 4, sizeOZ/2]);
       translate([1,0,sizeOZ/2])
@@ -22,7 +22,7 @@ module topAA()
       }
     }
     // hole
-    translate([sizeOX+holeR+2, (sizeOY+2)/2+18/2, sizeOZ/2+holeR+1])
+    translate([sizeOX+holeR+2, (sizeOY+2)/2+18/2-0.5, sizeOZ/2+holeR+1])
       rotate([90,0,0])
         cylinder(r=holeR, h=18, $fs=0.01);
   }
