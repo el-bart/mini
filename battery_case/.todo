@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <todo version="0.1.20">
-    <note priority="medium" time="1450556203">
-        finish this model :P
-    </note>
     <note priority="medium" time="1450556316" done="1450636518">
         use screw-based hinge mounting to connect both ends
         <comment>
             done
         </comment>
     </note>
-    <note priority="medium" time="1450556390">
+    <note priority="medium" time="1450556390" done="1450637407">
         use catch at the other end to seal the box
+    </note>
+    <note priority="medium" time="1450556203" done="1450637413">
+        finish this model :P
     </note>
 </todo>

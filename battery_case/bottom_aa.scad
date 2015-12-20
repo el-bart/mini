@@ -7,6 +7,7 @@ holeR = (screwDiameter+1)/2;
 module bottomAA()
 {
   gondola();
+  // hinge
   difference()
   {
     translate([-7, (sizeOY+2)/2, 0])
@@ -16,6 +17,9 @@ module bottomAA()
       rotate([90,0,0])
         cylinder(r=holeR, h=18, $fs=0.01);
   }
+  // catch
+  translate([sizeOX, (sizeOY+2)/2-6/2, sizeOZ/2-2-1])
+    cube([1, 6, 2]);
 }
 
 bottomAA();
