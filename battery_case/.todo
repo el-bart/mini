@@ -3,8 +3,11 @@
     <note priority="medium" time="1450556203">
         finish this model :P
     </note>
-    <note priority="medium" time="1450556316">
+    <note priority="medium" time="1450556316" done="1450636518">
         use screw-based hinge mounting to connect both ends
+        <comment>
+            done
+        </comment>
     </note>
     <note priority="medium" time="1450556390">
         use catch at the other end to seal the box
