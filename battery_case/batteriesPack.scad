@@ -1,5 +1,5 @@
 use <battery.scad>
-include <config.scad>
+include <config.inc>
 
 module batteriesPack(s)
 {
@@ -10,4 +10,4 @@ module batteriesPack(s)
           batteryAA();
 }
 
-%batteriesPack([margin, margin, margin]);
+batteriesPack([margin, margin, margin]);

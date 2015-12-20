@@ -1,6 +1,6 @@
 use <batteriesPack.scad>
 use <gondola.scad>
-include <config.scad>
+include <config.inc>
 
 module bottomAA()
 {

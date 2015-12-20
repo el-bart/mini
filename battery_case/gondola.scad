@@ -1,5 +1,5 @@
 use <batteriesPack.scad>
-include <config.scad>
+include <config.inc>
 
 module gondola()
 {
