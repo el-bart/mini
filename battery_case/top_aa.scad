@@ -37,8 +37,8 @@ module topAA()
         translate([-1, 0, sizeOZ/2+3])
           cube([1, 6+2*3, sizeOZ/2-3]);
       }
-      translate([-1, 2, sizeOZ/2+0.2])
-        cube([1+2*1, 6+2*1, 1+2*0.5]);
+      translate([-1, 2, sizeOZ/2])
+        cube([1+2*1, 6+2*1, 2+2*0.5]);
     }
   }
 }

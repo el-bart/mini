@@ -18,7 +18,7 @@ module bottomAA()
         cylinder(r=holeR, h=18, $fs=0.01);
   }
   // catch
-  translate([sizeOX, (sizeOY+2)/2-6/2, sizeOZ/2-2-1])
+  translate([sizeOX, (sizeOY+2)/2-6/2, sizeOZ/2-2-0.5])
     cube([1, 6, 2]);
 }
 
