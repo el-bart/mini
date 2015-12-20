@@ -27,17 +27,17 @@ module topAA()
         cylinder(r=holeR, h=18, $fs=0.01);
   }
   // catch
-  translate([-1, (sizeOY+2)/2-(6+2*2)/2, 0])
+  translate([-1, (sizeOY+2)/2-(6+2*3)/2, 0])
   {
     difference()
     {
       union()
       {
-        cube([1, 6+2*2, sizeOZ-4]);
+        cube([1, 6+2*3, sizeOZ-4]);
         translate([-1, 0, sizeOZ/2+3])
-          cube([1, 6+2*2, sizeOZ/2-3]);
+          cube([1, 6+2*3, sizeOZ/2-3]);
       }
-      translate([-1, 1, sizeOZ/2+0.2])
+      translate([-1, 2, sizeOZ/2+0.2])
         cube([1+2*1, 6+2*1, 1+2*0.5]);
     }
   }
