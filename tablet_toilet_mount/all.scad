@@ -1,7 +1,10 @@
 use <support.scad>
 use <wallMount.scad>
 
-support();
+//support();
+//wallMount();
 
-translate([10,0,0])
-  wallMount();
+%wallMount();
+%translate([150, 0, 14.5])
+  rotate([0, 180, 0])
+    support();
