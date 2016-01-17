@@ -3,7 +3,8 @@ use <wallMount.scad>
 
 module bothElements()
 {
-  support();
+  translate([0, 55, 0])
+    support();
   wallMount();
 }
 
@@ -26,6 +27,6 @@ module openPosition()
 
 
 //%closedPosition();
-%openPosition();
+//%openPosition();
 
-//bothElements();
+bothElements();
