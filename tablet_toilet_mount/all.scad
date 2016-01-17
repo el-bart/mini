@@ -29,4 +29,5 @@ module openPosition()
 //%closedPosition();
 //%openPosition();
 
-bothElements();
+rotate([0, 0, 90])
+  bothElements();
