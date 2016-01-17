@@ -16,17 +16,18 @@ module _supportSurface()
             cube([30, 20, 2]);
       }
       // lower stripe for wall-support
-      off = 6.5/2+2+2;
+      off = 4;
       translate([0, -off, 0])
         cube([150, off, 3]);
       // upport tablet block-wall
-      translate([0, 40, 0])
+      translate([0, 40-2, 0])
         cube([150, 2, 9]);
     }
     // lock cut-in
-    translate([(150-10)/2, 40-(10-2), 0])
+    radius = 7.5;
+    translate([150/2, 40-(10), 0])
       rotate([-90, 0, 0])
-        cylinder(h=10, r=7.5, $fs=0.01);
+        cylinder(h=10, r=radius, $fs=0.01);
   }
 }
 
