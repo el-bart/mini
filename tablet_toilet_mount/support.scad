@@ -18,7 +18,7 @@ module _supportSurface()
       // lower stripe for wall-support
       off = 4;
       translate([0, -off, 0])
-        cube([150, off, 3]);
+        cube([150, off, 3.5]);
       // upport tablet block-wall
       translate([0, 40-2, 0])
         cube([150, 2, 9]);
