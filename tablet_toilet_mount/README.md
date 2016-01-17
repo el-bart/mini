@@ -11,6 +11,4 @@ to assemble it also requires:
  - three 3mm screws (at least 17mm length)
  - three 3mm nuts
 
-print time:
- - wall part: ~hh:mm
- - support: ~hh:mm
+print time: ~50min
