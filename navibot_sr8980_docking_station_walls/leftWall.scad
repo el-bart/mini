@@ -4,7 +4,7 @@ ft=1.5;     // floor thickness
 wt=3;       // wall thickness
 wh=65;      // wall height
 
-module leftWall()
+module leftWallImpl()
 {
   // internal support
   cube([l, 5, sh]);
@@ -76,6 +76,12 @@ module leftWall()
               [3,7,6],
             ]
   );
+}
+
+module leftWall()
+{
+  rotate([0,0,90])
+    leftWallImpl();
 }
 
 leftWall();

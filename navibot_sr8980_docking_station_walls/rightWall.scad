@@ -2,7 +2,7 @@ use <leftWall.scad>
 
 module rightWall()
 {
-  mirror([0,1,0])
+  mirror([1,0,0])
     leftWall();
 }
 

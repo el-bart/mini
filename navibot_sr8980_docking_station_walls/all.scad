@@ -2,5 +2,5 @@ use <leftWall.scad>
 use <rightWall.scad>
 
 leftWall();
-translate([0, -85, 0])
+translate([85, 0, 0])
   rightWall();
