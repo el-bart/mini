@@ -1,0 +1,5 @@
+mumble-server:
+  image: mumble-server
+  ports:
+    - 64738:64738/tcp
+    - 64738:64738/udp
