@@ -5,7 +5,14 @@ RUN apt-get update
 RUN apt-get dist-upgrade -y --force-yes
 RUN apt-get install -y --force-yes vim mumble-server
 RUN apt-get clean
-RUN echo "SECURITY NOTE: be sure to change server password in /etc/mumble-server.ini file"
+
+RUN echo && \
+echo "###############################################################################" && \
+echo && \
+echo "SECURITY NOTE: be sure to change server password in /etc/mumble-server.ini file" && \
+echo && \
+echo "###############################################################################" && \
+echo
 
 COPY mumble-server.ini /etc/mumble-server.ini
 
