@@ -1,2 +1,4 @@
 #!/bin/bash
-exec docker build -c $((1024/$(nproc)/4)) -m $((128*1024*1024)) -t mumble-server .
+set -e
+docker build  -c $((1024/$(nproc)/4)) -m $((128*1024*1024)) -t mumble-server .
+docker create --publish="64738:64738/tcp" --publish="64738:64738/udp" --name="mumble-server" mumble-server
