@@ -19,4 +19,4 @@ COPY mumble-server.ini /etc/mumble-server.ini
 #STOPSIGNAL SIGTERM SIGINT
 
 EXPOSE 64738/tcp 64738/udp
-ENTRYPOINT /usr/sbin/murmurd -ini /etc/mumble-server.ini -fg -v
+ENTRYPOINT ["/usr/sbin/murmurd", "-ini", "/etc/mumble-server.ini", "-fg", "-v"]
