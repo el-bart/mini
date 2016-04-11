@@ -20,22 +20,12 @@ module _wallSurface()
 }
 
 
-module _lock()
-{
-  translate([0, 3, 0])
-    rotate([0, 0, -90])
-      joint(4);
-}
-
-
 module wallMount()
 {
   _wallSurface();
   for(offset = [10, 150-10-3])
     translate([offset, 0, 2])
       joint(2);
-  translate([(150-20)/2 + 10-6.5/2, 40+7-3, 2])
-    _lock();
 }
 
 
