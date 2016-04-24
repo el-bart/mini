@@ -3,9 +3,9 @@ module rollup_string_limiter(r)
   difference()
   {
     // main element
-    cube([17, 6, 3]);
+    cube([16, 6, 3]);
     // spherical holes
-    for(offset = [0.5, 0.5+2*r+0.5, 17-2*r-0.5])
+    for(offset = [0, 2*r, 4*r, 6*r])
       translate([r+offset, 6/2, 3])
         sphere(r=r, $fs=0.01);
     // string entry/exit points
@@ -15,4 +15,4 @@ module rollup_string_limiter(r)
   }
 }
 
-rollup_string_limiter( (3+2)/2 );
+rollup_string_limiter( (3+1)/2 );

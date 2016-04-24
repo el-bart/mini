@@ -3,11 +3,11 @@ use <rollup_string_limiter.scad>
 
 // required quantities. adjust according to your needs.
 // (note: you need two identical elements per functional part)
-fixes = 2*2;
+fixes    = 2*2;
 limiters = 3*2;
 
 // ball-size
-r=(3+2)/2;
+r=(3+1)/2;
 
 if(fixes)
   for(i = [0:fixes])
