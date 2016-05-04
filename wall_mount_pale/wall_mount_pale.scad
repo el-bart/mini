@@ -24,7 +24,7 @@ module halfElement()
 for(i = [0:count-1])
   translate([i*22, 0, 0])
   {
-    translate([0, 5, 0])
+    translate([0, 7, 0])
       halfElement();
     rotate([0, 0, 180])
       halfElement();
