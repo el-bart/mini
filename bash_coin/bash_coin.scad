@@ -1,5 +1,5 @@
-N=1;
-M=1;
+N=2;
+M=3;
 
 module coin()
 {
@@ -11,9 +11,8 @@ module coin()
 }
 
 
-/*
+
 for(i = [0:N-1])
   for(j = [0:M-1])
-    translate([i*20, j*20, 0])
-*/
+    translate([i*30, j*30, 0])
       coin();
