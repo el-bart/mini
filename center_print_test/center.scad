@@ -1,1 +1,3 @@
-cylinder(r=2, h=1, center=true, $fs=0.1);
+cube([10,1,1], center=true);
+rotate([0,0,90])
+  cube([10,1,1], center=true);
