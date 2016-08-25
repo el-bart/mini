@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+ip a | grep -e '\<eth[0-9]\>' -e '\<inet\>' | grep -v '127\.0\.0\.1/8'
+exec /usr/sbin/sshd -D
