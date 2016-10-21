@@ -3,9 +3,8 @@ APP=$(basename "$0")
 
 function log
 {
-  MSG="$(date): $APP: $*"
-  echo   "$MSG"
-  logger "$MSG"
+  echo   "$(date): $APP: $*"
+  logger          "$APP: $*"
 }
 
 
