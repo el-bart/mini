@@ -1,0 +1,14 @@
+#!/bin/bash -ex
+(
+  while sleep 10
+  do
+    date
+    [ "$(xprintidle)" -lt "$((30*1000))" ] && continue
+    xset dpms force off
+    sleep 20
+  done
+) &
+MONITOR=$!
+
+xtrlock -b
+kill "$MONITOR"
