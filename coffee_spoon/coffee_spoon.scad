@@ -1,6 +1,6 @@
 vol = 11700;                // Volumen of the final construct
 b   = 30;                   // Base
-w   = 20;                   // Width
+w   = 30;                   // Width
 h   = ceil( 2*vol/(b*w) );  // Height
 t   = 1.5;                  // wall Thickness
 
