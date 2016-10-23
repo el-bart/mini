@@ -3,8 +3,9 @@ APP=$(basename "$0")
 
 function log
 {
-  echo   "$(date): $APP: $*"
-  logger          "$APP: $*"
+  MSG="$(date): $APP: $*"
+  echo   "$MSG"
+  logger "$MSG"
 }
 
 
@@ -31,4 +32,8 @@ xtrlock -b
 log "screen unlocked"
 
 kill "$MONITOR"
+timeout 5 wait "$MONITOR"
 log "monitor script stopped"
+
+log "disabling screen blanking"
+prevent_monitor_sleep
