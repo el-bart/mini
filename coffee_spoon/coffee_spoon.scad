@@ -44,5 +44,5 @@ translate([-w/2, 0, 0])
   rotate([0, 0, -90])
     spoon();
 
-translate([-15/2, +r-1, 0])
+translate([-15/2, 0, 0])
   cube([15, 120, 3]);
