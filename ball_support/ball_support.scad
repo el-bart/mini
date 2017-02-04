@@ -8,6 +8,6 @@ module theBall()
 
 difference()
 {
-  cylinder(r=ball_radius/3, h=20, $fn=100);
+  cylinder(r=ball_radius/5, h=20, $fn=100);
   #theBall();
 }
