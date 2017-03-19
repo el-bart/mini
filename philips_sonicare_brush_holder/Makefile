@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := $(wildcard *.scad)
+SCADS  := brush_holder.scad
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
 
