@@ -1,4 +1,13 @@
 h=2;
-cube([25,10,h]);
-translate([25,5,0])
-  cylinder(h=h, r=5, $fs=0.1);
+count=3;
+
+module extension()
+{
+  cube([25,10,h]);
+  translate([25,5,0])
+    cylinder(h=h, r=5, $fs=0.1);
+}
+
+for(x=[0:2])
+  translate([0, x*13, 0])
+    extension();
