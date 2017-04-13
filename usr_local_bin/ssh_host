@@ -1,3 +1,0 @@
-#!/bin/sh
-[ -z "$RU" ] || RU="$RU@"
-exec ssh -Y "$RU`basename "$0"`" "$@"

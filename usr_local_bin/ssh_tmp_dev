@@ -1,7 +1,0 @@
-#!/bin/bash
-#
-# script for doing SSH into an environment we do not really care about security.
-# very usefull for test instancess that often change and accessing local services from docker.
-#
-set -e
-exec ssh -X -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$@"
