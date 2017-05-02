@@ -14,7 +14,7 @@ CXXFLAGS:=-Wall -O3 -DNDEBUG -std=c++11 -pipe -lpthread
 
 
 .PHONY: all
-all: rand_junk.out check.out repeated_data.out
+all: prng_junk.out rand_junk.out check.out repeated_data.out
 
 %.out: %.cpp Makefile
 	$(CXX) $(CXXFLAGS) $*.cpp -o $@
