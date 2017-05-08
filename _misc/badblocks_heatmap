@@ -1,0 +1,62 @@
+#!/usr/bin/env python2.7
+import sys
+import math
+from PIL import Image
+
+def count2color(bpp, bbCount):
+    if bbCount == 0:
+        return (0,255,0)
+    if bbCount < bpp/2:
+        return (128,0,0)
+    if bbCount < bpp:
+        return (255,0,0)
+    return (0,0,0)
+
+if len(sys.argv) != 1+4:
+    sys.stderr.write(sys.argv[0] + " <badblocks_list_file> <device_size_in_blocks> <blocks_per_pixel> <out_file.png>\n")
+    sys.exit(1)
+inFile = sys.argv[1]
+devSize = int(sys.argv[2])
+blocksPerPixel = int(sys.argv[3])
+outFile = sys.argv[4]
+
+imgSize = devSize / blocksPerPixel
+
+dimX = int( math.ceil( math.sqrt(imgSize) ) )
+dimY = imgSize / dimX
+if dimX*dimY < imgSize:
+    dimY += 1
+
+print "generating " + str(dimX) + "x" + str(dimY) + " pixels image..."
+
+bbCounts = [[0 for x in range(dimX)] for y in range(dimY)]
+for row in bbCounts:
+    for e in row:
+        e = 0
+
+print "counting invalid blocks..."
+with open(inFile, 'r') as f:
+    for line in f:
+        blockNo = int(line)
+        blockIndex = blockNo / blocksPerPixel
+        y = blockIndex / dimX
+        x = blockIndex % dimX
+        bbCounts[y][x] += 1
+
+outImg = Image.new( 'RGB', (dimX,dimY) )
+pixels = outImg.load()
+
+print "filling output image..."
+for y in range(dimY):
+    for x in range(dimX):
+        pix = count2color( blocksPerPixel, bbCounts[y][x] )
+        pixels[x,y] = pix
+
+for x in range(imgSize % dimX, dimX):
+    white = (255,255,255)
+    pixels[x,dimY-1] = white
+
+print "writing image to file..."
+outImg.save(outFile)
+
+print "done!"
