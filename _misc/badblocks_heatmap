@@ -1,4 +1,7 @@
 #!/usr/bin/env python2.7
+#
+# script for generating badblocks hit-map, based on the output of 'badblocks' command.
+#
 import sys
 import math
 from PIL import Image
