@@ -40,7 +40,7 @@ module side()
   // base and mount
   phi=4; // diameter for screw
   pad=3; // padding around each hole
-  ext=phi/2+pad; // external element size
+  ext=phi+pad; // external element size
   difference()
   {
     union()
