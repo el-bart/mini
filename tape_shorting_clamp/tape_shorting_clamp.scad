@@ -1,6 +1,7 @@
 count=2;
 
-w = 18+2*(4+2*2);
+s = 3;              // spacing
+w = 18+2*(4+2+s);   // width
 
 module distancingElement()
 {
@@ -26,7 +27,7 @@ module clamp()
 
 
 for(i = [0:count-1])
-  translate([i*35,0,0])
+  translate([i*38,0,0])
     {
       distancingElement();
       for(dy = [0, 10])
