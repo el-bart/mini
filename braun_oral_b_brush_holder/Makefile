@@ -3,14 +3,15 @@
 SCADS  := $(wildcard *.scad)
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
+CONFIG := $(wildcard *.ini)
 
 .PHONY: all
 all: $(GCODES)
 
-$(STLS) $(SCADS) $(GCODES): Makefile config-pla-coarse.ini
+$(STLS) $(SCADS) $(GCODES): Makefile $(CONFIG)
 
 %.gcode: %.stl
-	slic3r --load config-pla-coarse.ini "$<"
+	slic3r --load "$(CONFIG)" "$<"
 
 %.stl: %.scad
 	openscad -o "$@" "$<"
