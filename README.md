@@ -1,4 +1,4 @@
 mini
 ====
 
-repo for mini-projects (one-filers, etc...)
+repo for mini-projects (one-filers, etc...).
