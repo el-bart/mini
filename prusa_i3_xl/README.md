@@ -1,6 +1,7 @@
 prusa i3 xl
 ====
 
+configuration of the 3D printer in use.
 parameters of the printer:
 
 * nozzle diameter: 0.5[mm]
