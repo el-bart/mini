@@ -17,6 +17,6 @@ module holder()
 rotate([-90, 0, 0])
 {
   holder();
-  translate([-90/2, -110, 0])
-    cube([90, 110, 5]);
+  translate([-120/2, -110, 0])
+    cube([120, 110, 5]);
 }
