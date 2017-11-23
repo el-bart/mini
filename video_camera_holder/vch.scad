@@ -9,7 +9,7 @@ module holder()
         cylinder(r=30/2, h=5, $fs=0.01);
         for(deg = [0, 120, 240])
           rotate(deg)
-            #translate([0, 21.25, -1])
+            translate([0, 24.83, -1])
               cylinder(r=3.5/2, h=5+2*1, $fs=0.1);
       }
 }
