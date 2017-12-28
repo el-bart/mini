@@ -86,7 +86,7 @@ rotate([90, 0, 0])
   for(i = [0:brushes_count-1])
   {
     translate([i*30,4,55])
-      rotate([-90, 90, 0])
+      rotate([-90, -90, 0])
         scale([2,1,1])
           write(names[i], t=2, h=8, center=true);
     translate(i * [30, 0, 0])
