@@ -13,7 +13,7 @@ difference()
     for(angle = [0, 120, 240])
       rotate([0, 0, angle])
         translate([-1/2, -1/2, 0] + [16/2-1/2, 0, 0])
-          cube([1, 1, 2]);
+          cube([1.5, 1, 2]);
     
     // main screw mount - bottom part
     intersection()
@@ -35,7 +35,8 @@ difference()
     }
   }
   // screw hole
-  translate([0, 0, 2.5+1])
-    cylinder(r=(7+1.5)/2, h=7-1, $fs=1);
+  screw_box_size=7+0.5;
+  translate([-screw_box_size/2, -screw_box_size/2, 2.5+1])
+    cube([screw_box_size, screw_box_size, 7-1]);
   cylinder(r=4/2, h=12, $fs=1);
 }
