@@ -6,7 +6,7 @@ difference()
     difference()
     {
       cylinder(r=24.5/2, h=2.5);
-      cylinder(r=16/2, h=2);
+      cylinder(r=16/2, h=1.5);
     }
     
     // 3 side blockers
