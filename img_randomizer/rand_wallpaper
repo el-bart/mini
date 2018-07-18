@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+# pre-buffer image from disk, to display it faster later on :)
+IMG="`img_randomizer`"
+cat "$IMG" > /dev/null
+xsetroot -solid black
+feh --bg-fill "$IMG"
+echo "$IMG" > ~/.img_randomizer/last_wallpaper.txt
+exit $?
