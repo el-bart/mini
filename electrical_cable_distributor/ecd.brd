@@ -56,18 +56,18 @@
 </layers>
 <board>
 <plain>
-<text x="24" y="46" size="1.778" layer="25">V+</text>
+<text x="26" y="46" size="1.778" layer="25" rot="R90">V+</text>
 <text x="47" y="59" size="1.778" layer="25">V+</text>
-<text x="59" y="36" size="1.778" layer="25">V+</text>
-<text x="37" y="24" size="1.778" layer="25">V+</text>
-<text x="24" y="36" size="1.778" layer="25">V-</text>
-<text x="47" y="24" size="1.778" layer="25">V-</text>
-<text x="59" y="46" size="1.778" layer="25">V-</text>
+<text x="62" y="36" size="1.778" layer="25" rot="R90">V+</text>
+<text x="37" y="23" size="1.778" layer="25">V+</text>
+<text x="26" y="36" size="1.778" layer="25" rot="R90">V-</text>
+<text x="47" y="23" size="1.778" layer="25">V-</text>
+<text x="62" y="46" size="1.778" layer="25" rot="R90">V-</text>
 <text x="37" y="59" size="1.778" layer="25">V-</text>
-<text x="24" y="41" size="1.778" layer="25">PE</text>
-<text x="59" y="41" size="1.778" layer="25">PE</text>
-<text x="41" y="59" size="1.778" layer="25">PE</text>
-<text x="41" y="24" size="1.778" layer="25">PE</text>
+<text x="26" y="40.5" size="1.778" layer="25" rot="R90">PE</text>
+<text x="62" y="40.5" size="1.778" layer="25" rot="R90">PE</text>
+<text x="41.5" y="59" size="1.778" layer="25">PE</text>
+<text x="41.25" y="23" size="1.778" layer="25">PE</text>
 <text x="26" y="51" size="1.778" layer="25" rot="R45">ECD v1.0</text>
 </plain>
 <libraries>
