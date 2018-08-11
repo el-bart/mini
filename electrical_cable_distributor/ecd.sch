@@ -283,10 +283,10 @@ In this library the device names are the same as the pin names of the symbols, t
 </class>
 </classes>
 <parts>
-<part name="X2" library="con-ptr500" deviceset="AK500/3" device="" value="DG300-5.0-03P-13-00AH"/>
-<part name="X1" library="con-ptr500" deviceset="AK500/3" device="" value="DG300-5.0-03P-13-00AH"/>
-<part name="X3" library="con-ptr500" deviceset="AK500/3" device="" value="DG300-5.0-03P-13-00AH"/>
-<part name="X4" library="con-ptr500" deviceset="AK500/3" device="" value="DG300-5.0-03P-13-00AH"/>
+<part name="X2" library="con-ptr500" deviceset="AK500/3" device=""/>
+<part name="X1" library="con-ptr500" deviceset="AK500/3" device=""/>
+<part name="X3" library="con-ptr500" deviceset="AK500/3" device=""/>
+<part name="X4" library="con-ptr500" deviceset="AK500/3" device=""/>
 <part name="SUPPLY1" library="supply2" deviceset="PE" device=""/>
 <part name="SUPPLY2" library="supply2" deviceset="PE" device=""/>
 <part name="SUPPLY3" library="supply2" deviceset="PE" device=""/>
