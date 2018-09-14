@@ -42,8 +42,8 @@ module junction_box_impl()
         union()
         {
           cylinder(r=10/2, h=int_size[2]-4);
-          translate([(12/2/2+2)*(dx-1), -10/2, 0])
-            cube([12/2+3, 10, int_size[2]-4]);
+          translate([((12/2+2)/2)*(dx-1), -10/2, 0])
+            cube([12/2+2, 10, int_size[2]-4]);
         }
         cylinder(r=(3+1)/2, h=int_size[2]-2, $fs=1);
         // nut cut-in
@@ -66,7 +66,7 @@ module junction_box_impl()
     translate([dx, 0, 0])
       side_bruse_impl();
   // side bruses for better mounting - up/down
-  for(dy = [-3, int_size[0]+2*wall])
+  for(dy = [-3, int_size[1]+2*wall])
     translate([75, dy, 0])
       rotate([0, 0, 90])
         side_bruse_impl();
