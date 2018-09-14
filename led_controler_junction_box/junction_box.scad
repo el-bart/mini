@@ -14,7 +14,7 @@ module junction_box_impl()
 {
   wall = 2;
   extra_depth = 5;
-  int_size = [70, 70, 24+3+extra_depth];
+  int_size = [73, 70, 24+3+extra_depth];
 
   difference()
   {
@@ -41,13 +41,13 @@ module junction_box_impl()
         // main screw corridor
         union()
         {
-          cylinder(r=10/2, h=int_size[2]-2);
-          translate([12/2/2*(dx-1), -10/2, 0])
-            cube([12/2, 10, int_size[2]-2]);
+          cylinder(r=10/2, h=int_size[2]-4);
+          translate([(12/2/2+2)*(dx-1), -10/2, 0])
+            cube([12/2+3, 10, int_size[2]-4]);
         }
         cylinder(r=(3+1)/2, h=int_size[2]-2, $fs=1);
         // nut cut-in
-        translate([0, 0, int_size[2]-2-13])
+        translate([0, 0, int_size[2]-4-13])
           scale(1.1)
             hull()
             {
