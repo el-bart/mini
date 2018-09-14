@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := junction_box.scad
+SCADS  := multi_junction_box.scad
 STLS   := $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
 CONFIG := $(wildcard *.ini)
