@@ -24,15 +24,17 @@ module junction_box_impl()
       cube(int_size);
     // place for cables
     cable_cut_in = [20, 10, wall];
-    #translate([(int_size[0]+2*wall-cable_cut_in[0])/2, wall, 0])
+    translate([(int_size[0]+2*wall-cable_cut_in[0])/2, wall, 0])
       cube(cable_cut_in);
   }
 
-  // screw drivers
+  // screw holes
   dist_from_center = 59/2;
   for(dx = [-1, +1])
   {
-    translate([(int_size[0]+2*wall)/2+dx*dist_from_center, wall+30, wall])
+    translate([(int_size[0]+2*wall)/2+dx*dist_from_center,
+               wall+int_size[1]/2,
+               wall])
     {
       difference()
       {
@@ -40,7 +42,7 @@ module junction_box_impl()
         union()
         {
           cylinder(r=10/2, h=int_size[2]-2);
-          #translate([12/2/2*(dx-1), -10/2, 0])
+          translate([12/2/2*(dx-1), -10/2, 0])
             cube([12/2, 10, int_size[2]-2]);
         }
         cylinder(r=(3+1)/2, h=int_size[2]-2, $fs=1);
