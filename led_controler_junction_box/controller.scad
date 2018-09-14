@@ -22,7 +22,7 @@ module controller()
         cube([20, 8, 10]);
       // screw hole frame
       for(dx = [15, 88-15])
-        translate([dx, 43-13/2, 24-3])
+        translate([dx, 43, 24-3])
           hull()
           {
             for(dy = [0, 13-10.5])
@@ -33,7 +33,7 @@ module controller()
 
     // screw mounts
     for(dx = [15, 88-15])
-      translate([dx, 43-13/2, 0])
+      translate([dx, 43, 0])
         hull()
         {
           for(dy = [0, 13-10.5])
@@ -42,8 +42,8 @@ module controller()
         }
 
     // screw holes
-    #for(dx = [15, 88-15+3/2/2])
-      translate([dx, 43-13/2, 24-3])
+    for(dx = [15, 88-15+3/2/2])
+      translate([dx, 43, 24-3])
         hull()
         {
           for(dy = [0, 13-10.5])
