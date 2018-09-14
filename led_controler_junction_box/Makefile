@@ -1,7 +1,7 @@
 .SECONDARY:
 
-SCADS  := $(junction_box.scad)
-STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
+SCADS  := junction_box.scad
+STLS   := $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
 CONFIG := $(wildcard *.ini)
 
