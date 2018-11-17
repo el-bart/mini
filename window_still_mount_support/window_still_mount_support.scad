@@ -29,7 +29,7 @@ module wedge(width, span, height)
 module support()
 {
   h=4.5;
-  w=110;
+  w=119;
   s=21;
 
   difference()
