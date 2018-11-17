@@ -29,30 +29,32 @@ module wedge(width, span, height)
 module support()
 {
   h=4.5;
+  w=110;
+  s=21;
 
   difference()
   {
     union()
     {
-      wedge(width=110, span=21, height=h);
+      wedge(width=w, span=s, height=h);
 
       // rounded ending
-      translate([21/2,110,0])
+      translate([s/2, w, 0])
         difference()
         {
-          cylinder(r=21/2, h=h);
-          translate([-21/2, -21/2*2, 0])
-            cube([21,21,h]);
+          cylinder(r=s/2, h=h);
+          translate([-s/2, -s/2*2, 0])
+            cube([s, s, h]);
         }
     }
 
     // screw hole
-    translate([21/2, 110-8/2, 0])
+    translate([s/2, w-8/2, 0])
       cylinder(r=8/2, h=h);
   }
 }
 
-support();
+//support();
 
 translate([-5, 0, 0])
   rotate([0, -90, 0])
