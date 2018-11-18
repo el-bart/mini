@@ -28,7 +28,7 @@ module wedge(width, span, height)
 
 module support()
 {
-  h=4.5;
+  h=4;
   w=119;
   s=21;
 
@@ -54,7 +54,7 @@ module support()
   }
 }
 
-//support();
+support();
 
 translate([-5, 0, 0])
   rotate([0, -90, 0])
