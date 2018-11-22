@@ -28,9 +28,9 @@ module wedge(width, span, height)
 
 module support()
 {
-  h=4;
   w=119;
   s=21;
+  h=2.5;
 
   difference()
   {
@@ -54,8 +54,6 @@ module support()
   }
 }
 
-support();
-
-translate([-5, 0, 0])
-  rotate([0, -90, 0])
-    support();
+for(i=[0:0])
+  translate(i*[25, 0, 0])
+    support(2.5);
