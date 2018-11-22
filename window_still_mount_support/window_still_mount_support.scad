@@ -69,9 +69,7 @@ module support()
   // side walls
   for(i=[0, s+1])
     translate(i*[1,0,0])
-      fence(width=1, height=h+1);
+      fence(width=1, height=h+2);
 }
 
-for(i=[0:2])
-  translate(i*[25, 0, 0])
-    support(2.5);
+support(2.5);
