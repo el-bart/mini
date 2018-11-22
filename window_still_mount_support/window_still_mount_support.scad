@@ -72,6 +72,6 @@ module support()
       fence(width=1, height=h+1);
 }
 
-for(i=[0:0])
+for(i=[0:2])
   translate(i*[25, 0, 0])
     support(2.5);
