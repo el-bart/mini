@@ -72,4 +72,4 @@ module support()
       fence(width=1, height=h+2);
 }
 
-support(2.5);
+support();
