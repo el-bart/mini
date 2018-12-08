@@ -1,6 +1,6 @@
 spacing = 1.5;
 intX = 30 + 2*spacing;
-intY = 32 + 2*spacing;
+intY = 30 + 2*spacing;
 
 extX = 15 + intX + 15;
 extY = 15 + intY + 20;
