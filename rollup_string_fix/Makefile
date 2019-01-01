@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := $(wildcard *.scad)
+SCADS  := print.scad
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 GCODES := $(STLS:.stl=.gcode)
 CONFIG := $(wildcard *.ini)
