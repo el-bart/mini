@@ -1,4 +1,4 @@
 /*
  * small 3D cube for test prints
  */
-cube([30, 20, 10]);
+cube([50, 30, 10]);
