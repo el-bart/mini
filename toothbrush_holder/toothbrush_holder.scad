@@ -1,5 +1,3 @@
-include <Write.scad>
-
 /*
  * configuration
  */
@@ -88,7 +86,8 @@ rotate([90, 0, 0])
     translate([i*30,4,55])
       rotate([-90, -90, 0])
         scale([2,1,1])
-          write(names[i], t=2, h=8, center=true);
+          linear_extrude(height=1)
+            text(names[i], size=7, halign="center", valign="center");
     translate(i * [30, 0, 0])
       brush_holder();
   }
