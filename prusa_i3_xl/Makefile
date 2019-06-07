@@ -16,6 +16,10 @@ $(STLS) $(SCADS) $(GCODES): Makefile $(CONFIG)
 %.stl: %.scad
 	openscad -o "$@" "$<"
 
+.PHONY: time
+time:
+	@for gcode in $(GCODES) ; do echo "### $${gcode}:" ; gcoder "$$gcode" ; echo '\n\n' ; done
+
 .PHONY: clean
 clean:
 	rm -fv $(GCODES) $(SCADS:.scad=.stl)
