@@ -17,8 +17,8 @@ $(STLS) $(SCADS) $(GCODES): Makefile $(CONFIG)
 	openscad -o "$@" "$<"
 
 .PHONY: time
-time:
-	@for gcode in $(GCODES) ; do echo "### $${gcode}:" ; gcoder "$$gcode" ; echo '\n\n' ; done
+time: $(GCODES)
+	@for gcode in $(sort $(GCODES)) ; do echo "### $${gcode}:" ; gcoder "$$gcode" ; echo '\n\n' ; done
 
 .PHONY: clean
 clean:
