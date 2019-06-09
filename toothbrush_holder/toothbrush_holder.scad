@@ -83,7 +83,7 @@ rotate([90, 0, 0])
 {
   for(i = [0:brushes_count-1])
   {
-    translate([i*30,4,55])
+    translate([i*30,3,55])
       rotate([-90, -90, 0])
         scale([2,1,1])
           linear_extrude(height=1)
