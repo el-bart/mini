@@ -13,11 +13,8 @@ module wall(tr, size)
       difference()
       {
         for(t = corrners)
-        {
-          assign( off = [size[0]/2*t[0], size[1]/2*t[1], 0*t[2]] )
-            translate(off)
-              sphere(size[2]);
-        };
+          translate([size[0]/2*t[0], size[1]/2*t[1], 0*t[2]])
+            sphere(size[2]);
         translate([0,0,-size[2]]) cube(2*size, center=true);
       }
 }
@@ -29,11 +26,8 @@ module plane(tr, size)
     translate(tr)
       hull()
         for(t = corrners)
-        {
-          assign( off = [size[0]/2*t[0], size[1]/2*t[1], 0*t[2]] )
-            translate(off)
-              sphere(size[2]);
-        };
+          translate([size[0]/2*t[0], size[1]/2*t[1], 0*t[2]])
+            sphere(size[2]);
 }
 
 // element for holding a single brush
