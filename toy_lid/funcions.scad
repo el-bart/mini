@@ -4,11 +4,11 @@ module con()
 {
   difference()
   {
-    cylinder(h=30, r2=40/2, r1=15/2);
+    cylinder(h=20, r2=40/2, r1=15/2);
     translate([0,0,-3])
-      cylinder(h=30+2*3, r=3.5/2);
+      cylinder(h=20+2*3, r=3.5/2);
     translate([0,0,8])
-      cylinder(h=30, r=6/2);
+      cylinder(h=20, r=6/2);
   }
 }
 
