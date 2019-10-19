@@ -22,10 +22,10 @@ module lid(internal_diameter, external_diameter)
   }
   difference()
   {
-    cylinder(r=internal_diameter/2+3, h=3+10);
-    cylinder(r=internal_diameter/2,   h=3+10+1);
+    cylinder(r=internal_diameter/2,   h=3+10);
+    cylinder(r=internal_diameter/2-3, h=3+10+1);
   }
 }
 
 //con();
-//lid(100);
+//lid(internal_diameter=100, external_diameter=120);
