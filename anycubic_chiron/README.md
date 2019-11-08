@@ -5,7 +5,7 @@ parameters of the printer:
 
 * print area size: 40x40x45[cm]
 * nozzle diameter: 0.4[mm]
-* fine-quality travel speeds: 20-100[mm/s]
+* print speed: 20-100[mm/s]
 * travel speed: 60[mm/s]
 * print accuracy: 0.05-0.3mm
 * maximum bed temperature: 100[C]
