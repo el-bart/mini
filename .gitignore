@@ -1,5 +1,6 @@
 *.stl
 *.gcode
+*.time
 .*.swp
 .*.swa
 *.out
