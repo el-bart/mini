@@ -58,3 +58,5 @@ if more is needed, then either bed is not sticky enough or nozzle too far from b
 ### misc hints
 * layer height at 1/2 nozzle diameter (tops)
 * extrusion width roughly equal to nozzle diameter (can be a bit bigger)
+* 1.75mm PLN is 1[g] per 41[cm] length (362.6[g] used 148.8[m] of filament)
+* real print time is approximately 151% of g-code based time (measured with `gcoder`)
