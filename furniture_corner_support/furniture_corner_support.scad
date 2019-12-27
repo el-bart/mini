@@ -2,27 +2,27 @@ $fn=30;
 
 module screw()
 {
-  translate([0,0,31.2])
+  translate([0, 0, 20.5])
     cylinder(r=8/2, h=4);
-  cylinder(r=3.5/2, h=31.2);
+  cylinder(r=3.5/2, h=24.5);
 }
 
 module body()
 {
   difference()
   {
-    cube([20, 40, 40]);
+    cube([15, 25, 25]);
     rotate([45,0,0])
       translate([-1, 0, 0])
-        cube([20+2, 60, 30]);
+        cube([15+2, 40, 30]);
   }
 }
 
 module screw_hole()
 {
-  translate([0,0,21])
+  translate([0,0,20.5-10])
     cylinder(r=(8+1)/2, h=5+10);
-  cylinder(r=(3.5+0.5)/2, h=21);
+  cylinder(r=(3.5+0.5)/2, h=20.5-10);
 }
 
 
@@ -31,12 +31,12 @@ module main()
   difference()
   {
     body();
-    translate([20/2, 30, 0])
+    translate([15/2, 17, 0])
       screw_hole();
   }
 }
 
 
 main();
-%translate([20/2, 30, -10+0.2])
+%translate([15/2, 17, -10+0.5])
   screw();
