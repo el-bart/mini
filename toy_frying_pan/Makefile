@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := $(wildcard *.scad)
+SCADS  := frying_pan_with_mount.scad
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 STLS   := $(sort $(STLS))  # remove duplicates
 GCODES := $(STLS:.stl=.gcode)
