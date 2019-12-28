@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := frying_pan_with_mount.scad
+SCADS  := $(wildcard *.scad)
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 STLS   := $(sort $(STLS))  # remove duplicates
 GCODES := $(STLS:.stl=.gcode)
@@ -27,4 +27,4 @@ time: $(TIMES)
 
 .PHONY: clean
 clean:
-	rm -fv $(GCODES) $(SCADS:.scad=.stl)
+	rm -fv $(GCODES) $(SCADS:.scad=.stl) $(TIMES)
