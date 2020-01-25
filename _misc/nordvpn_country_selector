@@ -1,0 +1,47 @@
+#!/bin/bash
+set -eu -o pipefail
+
+TMP_DIR=$(mktemp -d)
+cd "$TMP_DIR"
+
+function cleanup
+{
+  rm -rf "$TMP_DIR"
+}
+
+trap cleanup EXIT
+
+
+function code_name
+{
+  echo "BA Bosnia and Herzegovina"
+  echo "BG Bulgaria"
+  echo "CZ Czech Republic"
+  echo "EE Estonia"
+  echo "FI Finland"
+  echo "HU Hungary"
+  echo "LV Latvia"
+  echo "LU Luxembourg"
+  echo "NO Norway"
+  echo "RO Romania"
+  echo "RS Serbia"
+  echo "SK Slovakia"
+  echo "SI Slovenia"
+  echo "CH Switzerland"
+}
+
+wget -q "https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip" > /dev/null
+unzip "ovpn.zip" > /dev/null
+cd "ovpn_udp"
+
+code_name | while read code name
+do
+  echo "# $name ($code)"
+  lc=$(tr '[:upper:]' '[:lower:]' <<< "$code")
+  (
+    set +eu +o pipefail  # no-such-county is not an error here
+    cat "${lc}"* | grep '^remote [0-9\.]\+ 1194$'
+    exit 0
+  )
+  echo
+done
