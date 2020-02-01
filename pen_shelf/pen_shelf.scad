@@ -10,7 +10,7 @@ module part()
       translate([i*(250-10)+10/2, 2*5+70+14-10/2, 0])
         cylinder(r=10/2, h=5);
   // mounts
-  for(dx=[20, (250-30)/2 , 250-20-30])
+  for(dx=[20, (250-30/2)/2 , 250-20-30/2])
   {
     difference()
     {
@@ -30,3 +30,6 @@ module part()
 }
 
 part();
+translate([250, -5, 0])
+  rotate([0, 0, 180])
+    part();
