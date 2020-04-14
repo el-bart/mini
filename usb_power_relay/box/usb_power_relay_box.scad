@@ -1,11 +1,12 @@
 $fa=1;
 $fs=0.5;
-wall=1.5;
+wall=1.6;
+space=0.8;
 
 module bottom()
 {
-  translate(wall*[1, 1, 1])
-    cube([45, 60, wall]);
+  translate(wall*[1,1,1] + space*[1,1,0])
+    cube([45-2*space, 60-2*space, wall]);
   cube([45+2*wall, 60+2*wall, wall]);
 }
 
@@ -35,5 +36,9 @@ module cover()
 
 
 bottom();
+%translate([0, 0, 25+2*wall+wall])
+  rotate([180, 0, 0])
+    cover();
+
 translate([0, -5, 0])
   cover();
