@@ -1,6 +1,8 @@
 r_ext=(101+2*4)/2;
 r_int=r_ext-2;
 cut=5.9+0.1+0.2;
+total_h=150;
+cylinder_h=total_h-r_ext;
 
 $fn=200;
 
@@ -22,8 +24,8 @@ module box()
       // box
       translate([68+2+2+r_ext, r_ext, 0])
       {
-        cylinder(r=r_ext, h=150);
-        translate([0,0,150])
+        cylinder(r=r_ext, h=cylinder_h);
+        translate([0,0,cylinder_h])
           sphere(r=r_ext);
       }
     }
@@ -33,8 +35,8 @@ module box()
       translate([68+2+2+r_ext, r_ext, 0])
         translate([0,0,-1])
         {
-          cylinder(r=r_int, h=150+2);
-          translate([0,0,150])
+          cylinder(r=r_int, h=cylinder_h+2);
+          translate([0,0,cylinder_h])
             sphere(r=r_int);
         }
     }
