@@ -1,0 +1,51 @@
+#!/bin/bash
+set -eu -o pipefail
+
+HOST="bobthebuilder"
+CONFIG="$HOME/.EasyCam/$HOST.sh"
+OUTDIR_BASE="$HOME/data/tmp/recordings_3d_printer"
+APP=$(basename "$0")
+
+
+function wait_for_camera
+{
+  echo "$APP: waiting for $HOST camera..."
+  while ! ping -c 2 "$HOST"
+  do
+    echo "$APP: camera not found - waiting"
+    sleep 63
+  done
+  echo "$APP: camera found - giving it some time to boot..."
+  sleep 60
+}
+
+
+function kill_if_disconnected
+{
+  echo "$APP: waiting for camera to disconnect"
+  PID=$1
+  while ping -c 5 "$HOST"
+  do
+    sleep 17
+  done
+  echo "$APP: camera disconnected - killing recording process: $PID"
+  kill "$PID"
+}
+
+
+function record_once
+{
+  wait_for_camera
+  OUTDIR="$OUTDIR_BASE/$(date +%Y-%m-%d_%H%M%d)"
+  mkdir -p "$OUTDIR"
+  echo "$APP: recording to $OUTDIR"
+  "$HOME/bin/dahua_record" "$CONFIG" "$OUTDIR/rec" 10 &
+  PID="$!"
+  kill_if_disconnected "$PID"
+}
+
+
+while sleep 1
+do
+  record_once
+done

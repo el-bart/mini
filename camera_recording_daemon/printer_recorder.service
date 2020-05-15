@@ -1,0 +1,15 @@
+[Unit]
+Description=recording daemon for the 3D printer
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=6s
+User=el-bart
+Group=el-bart
+ExecStart=/usr/local/bin/printer_recorder_daemon
+#ExecStop=???
+
+[Install]
+WantedBy=multi-user.target
