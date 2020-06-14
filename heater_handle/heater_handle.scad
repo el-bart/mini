@@ -53,6 +53,9 @@ module _handle()
     for(dx=[0, span])
       translate([dx+dia/2, dia-2, 0])
         _hole();
+    // removing shapr edges from the bottom
+    translate([-1, 0, -1])
+      cube([span+dia+2, 4, dia/2+2]);
   }
 }
 
