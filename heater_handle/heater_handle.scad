@@ -32,7 +32,7 @@ module _hole()
   hull()
     for(dx=[-0.5, 0.5])
       translate([dx, 0, -1])
-        cylinder(r=3.8+0.5/2, h=dia/2+2, $fn=20);
+        cylinder(r=(3.8+0.5)/2, h=dia/2+2, $fn=20);
 }
 
 
@@ -51,7 +51,7 @@ module _handle()
         cube(dia*[1,2,1]+[0,0,2]);
     // screw holes
     for(dx=[0, span])
-      translate([dx+dia/2, dia, 0])
+      translate([dx+dia/2, dia-2, 0])
         _hole();
   }
 }
