@@ -1,22 +1,22 @@
-$fs=5;
+$fs=1;
 $fa=0.5;
 
-module saucer()
+module saucer(d)
 {
   difference()
   {
-    cylinder(h=22, r1=102/2, r2=122/2);
+    cylinder(h=22, r1=d/2, r2=(d+20)/2);
     translate([0, 0, 2])
-      cylinder(h=20, r1=100/2, r2=120/2);
+      cylinder(h=20, r1=(d-2)/2, r2=(d-2+20)/2);
   }
   difference()
   {
     for(rz=[0, 45, 90, 135])
       rotate([0, 0, rz])
-        translate([-102/2, -2/2, 2])
-          cube([102, 2, 2]);
-    cylinder(r=(102-2*30)/2, h=5);
+        translate([-d/2, -2/2, 2])
+          cube([d, 2, 2]);
+    cylinder(r=(d-2*30)/2, h=5);
   }
 }
 
-saucer();
+saucer(d=102);
