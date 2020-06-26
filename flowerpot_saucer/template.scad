@@ -15,8 +15,8 @@ module saucer(d)
       rotate([0, 0, rz])
         translate([-d/2, -2/2, 2])
           cube([d, 2, 2]);
-    cylinder(r=(d-2*30)/2, h=5);
+    cylinder(r=40/2, h=5);
   }
 }
 
-%saucer(d=102);
+saucer(d=102);
