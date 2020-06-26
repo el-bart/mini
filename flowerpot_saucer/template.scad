@@ -19,4 +19,4 @@ module saucer(d)
   }
 }
 
-saucer(d=102);
+%saucer(d=102);
