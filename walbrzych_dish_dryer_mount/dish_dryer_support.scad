@@ -1,4 +1,4 @@
-module support()
+module _support_impl()
 {
   thick=3;
   d=7+2*thick;
@@ -24,6 +24,12 @@ module support()
   }
 }
 
+module support()
+{
+  rotate([90, 0, 0])
+    _support_impl();
+}
+
 for(i=[0:2])
-  translate(i*[0, 20+5, 0])
+  translate(i*[0, 12, 0])
     support();
