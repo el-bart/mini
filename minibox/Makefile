@@ -1,6 +1,6 @@
 .SECONDARY:
 
-SCADS  := $(wildcard *.scad)
+SCADS  := $(wildcard minibox_*.scad)
 STLS   := $(wildcard *.stl) $(SCADS:.scad=.stl)
 STLS   := $(sort $(STLS))  # remove duplicates
 GCODES := $(STLS:.stl=.gcode)
