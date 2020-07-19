@@ -2,7 +2,9 @@ wall=2;
 spacing=0.5;
 r_int=30.5/2;
 r_round=wall;
+r_tube=16.5/2;
 h=25;
+magnet_size=[5, 5, 2];
 $fn=1/3*360;
 
 
@@ -37,5 +39,27 @@ module empty_cylinder_()
   }
 }
 
+module internal_tube_()
+{
+  rts=r_tube - spacing;
+  th=3.5+spacing;
+  sp_size=magnet_size + spacing*[2,2,0];
+  difference()
+  {
+    cylinder(r=rts, h=th);
+    for(dy=[-1,1])
+      translate(dy*[0, 3.5, 0]) // offset
+        translate([-sp_size[0]/2, -sp_size[1]/2, th-sp_size[2]]) // center
+          cube(sp_size);
+  }
+}
 
-empty_cylinder_();
+module cap()
+{
+  empty_cylinder_();
+  translate(wall*[0,0,1])
+    internal_tube_();
+}
+
+
+cap();
