@@ -1,7 +1,7 @@
 wall=2;
-spacing=0.5;
+spacing=0.4;
 r_int=30.5/2;
-r_round=wall;
+r_round=4;
 r_tube=16.5/2;
 h=25;
 magnet_size=[5, 5, 2];
@@ -42,7 +42,7 @@ module empty_cylinder_()
 module internal_tube_()
 {
   rts=r_tube - spacing;
-  th=3.5+spacing;
+  th=5.5+spacing;
   sp_size=magnet_size + spacing*[2,2,0];
   difference()
   {
