@@ -1,62 +1,26 @@
-names=["John", "Jane"];
-
-
-module rounded_surface_(size)
+module rounded_surface_(size, r)
 {
-  r=size[2]/2;
-  translate([0, 0, r])
-    hull()
-      for(dx=[r, size[0]-r])
-        for(dy=[r, size[1]-r])
-          translate([dx, dy, 0])
-            sphere(r=r, $fn=r*10); // TODO: r*20!
-}
-
-module rounded_half_surface_(size)
-{
-  translate([0, 0, -size[2]/2])
-    difference()
-    {
-      rounded_surface_(size);
-      translate(size[2]/2*[0,0,-1])
-        cube(size);
-    }
-}
-
-
-
-
-corrners = [ [-1,-1,0], [-1,+1,0], [+1,-1,0], [+1,+1,0] ];
-
-// wall-mounted part
-module wall(size)
-{
+  assert(len(size)==2);
   hull()
+    for(dx=[r, size[0]-r])
+      for(dy=[r, size[1]-r])
+        translate([dx, dy, r])
+          sphere(r=r, $fn=r*3); // TODO: r*10!
+}
+
+module rounded_half_surface_(size, r)
+{
+  assert(len(size)==2);
+  translate([0, 0, -r])
     difference()
     {
-      #for(t = corrners)
-      {
-        off = [size[0]/2*t[0], size[1]/2*t[1], 0*t[2]];
-          translate(off)
-            sphere(size[2]);
-      };
-      translate([0,0,-size[2]]) cube(2*size, center=true);
+      rounded_surface_(size, r);
+      cube([size[0], size[1], r]);
     }
 }
 
-// water drops catching plane
-module plane(size)
-{
-  translate([0, 0, size[1]/2])
-    rotate([90,0,0])
-      hull()
-        for(t = corrners)
-        {
-          off = [size[0]/2*t[0], size[1]/2*t[1], 0*t[2]];
-            translate(off)
-              sphere(size[2]);
-        };
-}
+
+
 
 // element for holding a single brush
 module holder(size)
@@ -71,16 +35,18 @@ module holder(size)
 }
 
 
-module brush_holder()
+module whole_holder(names)
 {
-  translate([0, -23.25, 0])
+  translate([0, 5+1, -5])
     rotate([90, 0, 0])
-      rounded_surface_([36-2*2, 29, 2]);
+      difference()
+      {
+        rounded_surface_([36, 35], 3);
+        cube([36, 5, 3*2]);
+      }
+  rounded_half_surface_([36, 50], 5);
   translate(1/2*[36, 50, 0]) // TODO: temporary
   {
-  translate(-1/2*[36,50, 0])    // TODO: to be removed
-    rounded_half_surface_([36, 50, 5]);
-
   for(dx=[-1, +1])
     translate([dx*20/2-1, -1, 2])
       holder([3,25,18]);
@@ -88,8 +54,9 @@ module brush_holder()
 }
 
 
-brush_holder();
+whole_holder(["John", "Jane"]);
+//rounded_surface_([36, 5, 30], 3/2);
 
 
-//rounded_surface_([20,30,5]);
-//rounded_half_surface_([20,30,5]);
+//rounded_surface_([30, 20], 3);
+//rounded_half_surface_([30, 20], 5);
