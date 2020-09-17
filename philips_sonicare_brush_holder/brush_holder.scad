@@ -9,7 +9,7 @@ module rounded_surface_(size)
       for(dx=[r, size[0]-r])
         for(dy=[r, size[1]-r])
           translate([dx, dy, 0])
-            sphere(r=r, $fn=30);
+            sphere(r=r, $fn=r*10); // TODO: r*20!
 }
 
 module rounded_half_surface_(size)
@@ -45,10 +45,10 @@ module wall(size)
 }
 
 // water drops catching plane
-module plane(tr, size)
+module plane(size)
 {
-  rotate([90,0,0])
-    translate(tr)
+  translate([0, 0, size[1]/2])
+    rotate([90,0,0])
       hull()
         for(t = corrners)
         {
@@ -73,11 +73,18 @@ module holder(size)
 
 module brush_holder()
 {
-  wall([36,50,2]);
-  plane([0,16.5,50/2-2], [36-2*2,29,2]);
+  translate([0, -23.25, 0])
+    rotate([90, 0, 0])
+      rounded_surface_([36-2*2, 29, 2]);
+  translate(1/2*[36, 50, 0]) // TODO: temporary
+  {
+  translate(-1/2*[36,50, 0])    // TODO: to be removed
+    rounded_half_surface_([36, 50, 5]);
+
   for(dx=[-1, +1])
     translate([dx*20/2-1, -1, 2])
       holder([3,25,18]);
+  }
 }
 
 
