@@ -5,7 +5,7 @@ module rounded_surface_(size, r)
     for(dx=[r, size[0]-r])
       for(dy=[r, size[1]-r])
         translate([dx, dy, r])
-          sphere(r=r, $fn=r*3); // TODO: r*10!
+          sphere(r=r, $fn=r*20);
 }
 
 module rounded_half_surface_(size, r)
@@ -23,8 +23,8 @@ module rounded_half_surface_(size, r)
 // element for holding a single brush
 module holder()
 {
-  translate([-3/2, 0, 0])
-    cube([3, 7, 17]);
+  translate([-4/2, 0, 0])
+    cube([4, 7, 17]);
   translate([0, 0, 17-2])
   {
     rotate([-90, 0, 0])
@@ -38,19 +38,24 @@ module holder()
 
 module whole_holder(names)
 {
+  assert( len(names) > 0 );
+  r=5;
+  spacing=20;
+  total_len=2*(r+3) + spacing*(len(names)-1) + 4;
+
   // plate
-  translate([0, 5+1, -5])
+  translate([0, r+2, -r])
     rotate([90, 0, 0])
       difference()
       {
-        rounded_surface_([36, 35], 3);
-        cube([36, 5, 3*2]);
+        rounded_surface_([total_len, 35], r/2+1);
+        cube([total_len, r, r*2]);
       }
   // back wall
-  rounded_half_surface_([36, 50], 5);
+  rounded_half_surface_([total_len, 50], r);
   // holders
   for(i=[0:len(names)-1])
-    translate([7+i*20, 25, 4])
+    translate([r+3+4/2, 25, r-1] + i*[spacing, 0, 0])
       holder();
 }
 
