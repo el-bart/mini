@@ -1,3 +1,5 @@
+// TODO: add names engravings
+
 module rounded_surface_(size, r)
 {
   assert(len(size)==2);
