@@ -7,7 +7,7 @@ module rounded_surface_(size, r)
     for(dx=[r, size[0]-r])
       for(dy=[r, size[1]-r])
         translate([dx, dy, r])
-          sphere(r=r, $fn=r*5); // TODO
+          sphere(r=r, $fn=r*20);
 }
 
 module rounded_half_surface_(size, r)
@@ -50,19 +50,19 @@ module whole_holder(names)
     rotate([90, 0, 0])
       difference()
       {
-        rounded_surface_([total_len, 35], r/2+1);
+        rounded_surface_([total_len, 40], r/2+1);
         cube([total_len, r, r*2]);
       }
   // back wall
   rounded_half_surface_([total_len, 60], r);
   // holders + names
-  translate([r+6+4/2, 25, r-1])
+  translate([r+6+4/2, 25, r])
   {
     for(i=[0:len(names)-1])
       translate(i*[spacing, 0, 0])
       {
         holder();
-        translate([0, 20, 0.9])
+        #translate([0, 25, 0])
           linear_extrude(3*0.2)
             text(names[i], size=4, halign="center");
       }
