@@ -7,7 +7,7 @@ module rounded_surface_(size, r)
     for(dx=[r, size[0]-r])
       for(dy=[r, size[1]-r])
         translate([dx, dy, r])
-          sphere(r=r, $fn=r*20);
+          sphere(r=r, $fn=r*2); // TODO
 }
 
 module rounded_half_surface_(size, r)
@@ -54,7 +54,7 @@ module whole_holder(names)
         cube([total_len, r, r*2]);
       }
   // back wall
-  rounded_half_surface_([total_len, 50], r);
+  rounded_half_surface_([total_len, 60], r);
   // holders
   for(i=[0:len(names)-1])
     translate([r+3+4/2, 25, r-1] + i*[spacing, 0, 0])
