@@ -74,9 +74,16 @@ module buggy_troley_mount()
 }
 
 
-buggy_troley_mount();
-%translate([-20/2-r_mount, -50, 0])
-  buggy_troley_closure();
 
-translate([-75, -30, 0])
-  buggy_troley_closure();
+for(pos=[[0,0,0], [180,1,35]])
+  translate([pos[2], 0, 0])
+    rotate([0, pos[0], 0])
+      mirror([0, 0, pos[1]])
+      {
+        buggy_troley_mount();
+        %translate([-20/2-r_mount, -50, 0])
+          buggy_troley_closure();
+
+        translate([-75, -30, 0])
+          buggy_troley_closure();
+      }
