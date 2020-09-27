@@ -1,18 +1,21 @@
-d=2;
+eps=0.01;
+depth=2;
+side = 20;
+size = side*[1,1,1];
+font_size = 15;
 
 difference()
 {
-  cube([20, 20, 20]);
-  translate([d/2,d,d/2])
+  cube(size);
+  translate([size[0]/2, depth, size[2]/2])
     rotate([90,0,0])
-      linear_extrude(height=d)
-        text("X", size=20-d);
-  rotate([0,0,90])
-    translate([d/2,0,d/2])
-      rotate([90,0,0])
-        linear_extrude(height=d)
-          text("Y", size=20-d);
-  translate([d,d,20-d])
-    linear_extrude(height=d)
-      text("Z", size=20-d);
+      linear_extrude(height=depth+eps)
+        text("X", size=font_size, valign="center", halign="center");
+  translate([-eps, size[1]/2, size[2]/2])
+    rotate([90,0,90])
+      linear_extrude(height=depth+eps)
+        text("Y", size=font_size, valign="center", halign="center");
+  translate([size[0]/2, size[1]/2, size[2]-depth])
+    #linear_extrude(height=depth+eps)
+      text("Z", size=font_size, valign="center", halign="center");
 }
