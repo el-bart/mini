@@ -25,7 +25,7 @@ module element()
     translate(wall*[1, 0, 1])
       cube(size - wall*[2, 1, 1]);
   }
-  
+
   // side teeth
   for(dy=[5, 25])
     translate([wall+spacing, dy, wall])
@@ -35,7 +35,7 @@ module element()
         rotate([0, 0, 180])
           tooth_();
     }
-  
+
   // upper teeth
   for(dx=[0:3])
     translate([wall + 15 + dx*18.5, size[1]-wall-spacing-l, 0])
@@ -44,4 +44,8 @@ module element()
           tooth_();
 }
 
-element();
+distance = 4;
+for(n=[0:1])
+  for(m=[0:4])
+    translate([n*(size[0]+distance), m*(size[1]+distance), 0])
+      element();
