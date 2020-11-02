@@ -1,9 +1,9 @@
-size = [92.75, 41, 15];
 wall = 1.75;
-spacing = 2;
+spacing = 1.3;
 l = 3.2;
+size = [90+2*wall, 41, 15];
 
-module tooth()
+module tooth_()
 {
   size = 4;
   difference()
@@ -16,27 +16,32 @@ module tooth()
   }
 }
 
-// body
-difference()
+module element()
 {
-  cube(size);
-  translate(wall*[1, 0, 1])
-    cube(size - wall*[2, 1, 1]);
+  // body
+  difference()
+  {
+    cube(size);
+    translate(wall*[1, 0, 1])
+      cube(size - wall*[2, 1, 1]);
+  }
+  
+  // side teeth
+  for(dy=[5, 25])
+    translate([wall+spacing, dy, wall])
+    {
+      tooth_();
+      translate([size[0]-2*(wall+spacing), wall, 0])
+        rotate([0, 0, 180])
+          tooth_();
+    }
+  
+  // upper teeth
+  for(dx=[0:3])
+    translate([wall + 15 + dx*18.5, size[1]-wall-spacing-l, 0])
+      translate([0, l, 0])
+        rotate([0, 0, -90])
+          tooth_();
 }
 
-// side teeth
-for(dy=[5, 25])
-  translate([wall+spacing, dy, wall])
-  {
-    tooth();
-    translate([size[0]-2*(wall+spacing), wall, 0])
-      rotate([0, 0, 180])
-        tooth();
-  }
-
-// upper teeth
-for(dx=[0:3])
-  translate([wall + 15 + dx*18.5, size[1]-wall-spacing-l, 0])
-    translate([0, l, 0])
-      rotate([0, 0, -90])
-        tooth();
+element();
