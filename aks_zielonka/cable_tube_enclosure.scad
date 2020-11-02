@@ -5,13 +5,14 @@ l = 3.2;
 
 module tooth()
 {
+  size = 4;
   difference()
   {
-    cube([l, wall, 16]);
+    cube([l, size, 16]);
     translate([0, 0, 16+l/2.5])
       rotate([0, 45, 0])
         translate([0, 0, -l])
-          cube(l*[1, 1, 2]);
+          cube([l, size, 2*l]);
   }
 }
 
