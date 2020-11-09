@@ -10,7 +10,7 @@ module main_handle_()
     difference()
     {
       cylinder(r=(8.5-0.5)/2, h=22+2+10);
-      translate([-5, 0, 22+2+5])
+      translate([-5, 0, 22+2+5.5])
         rotate([0, 90, 0])
           cylinder(r=(3+0.5)/2, h=10);
     }
@@ -40,11 +40,11 @@ module block_()
   {
     union()
     {
-      cylinder(r=30/2, h=0.6);
+      cylinder(r=30/2, h=1);
       cylinder(r=15/2, h=10);
     }
     cylinder(r=8.5/2, h=20);
-    translate([0, 0, 5])
+    translate([0, 0, 5.5])
       rotate([0, 90, 0])
       {
         translate([0, 0, 5])
