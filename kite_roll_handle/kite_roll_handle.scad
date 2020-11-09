@@ -55,7 +55,10 @@ module block_()
   }
 }
 
-
-main_handle_();
-translate([27, 0, 0])
-  block_();
+for(i=[0:1])
+  translate(i*[0, 35, 0])
+  {
+    main_handle_();
+    translate([27, 0, 0])
+      block_();
+  }
