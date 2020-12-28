@@ -6,7 +6,7 @@ difference()
   union()
   {
     cylinder(r=r_shaft, h=h);
-    cylinder(r=r_shaft+30, h=2);
+    cylinder(r=r_shaft+30, h=wall);
   }
   translate([0, 0, -eps])
     cylinder(r=r_shaft-wall, h=h+2*eps);
