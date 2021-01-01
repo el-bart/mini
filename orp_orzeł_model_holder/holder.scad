@@ -35,20 +35,20 @@ module holder_space_()
 module main_block_()
 {
   // desk mount
-//  difference()
-//  {
-//    cube([size[0], 19+2*2, 20+4]);
-//    translate([-eps, 2, 4])
-//      cube([size[0]+2*eps, 19, 20+1]);
-//  }
+  difference()
+  {
+    cube([size[0], 19+2*2, 20+4]);
+    translate([-eps, 2, 4])
+      cube([size[0]+2*eps, 19, 20+1]);
+  }
   // main surface
-  for(i=[0])//, size[0]-rounding])
+  for(i=[0, size[0]-rounding*2-1])
     translate([i, 0, 0])
       hull()
       {
-        cube([2*rounding+2, 1, 3]);
-        for(j=[0, spacing])
-          #translate(spacing*[1,0,0] + [j+1, size[1], 0])
+        cube([2*rounding+1, 1, 3]);
+        for(j=[0, 1])
+          translate(spacing*[1,0,0] + [j+1, size[1], 0])
             cylinder(r=rounding, h=3, $fn=120);
       }
 }
