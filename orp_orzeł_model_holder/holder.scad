@@ -22,7 +22,7 @@ module holder_()
 
 module holder_space_()
 {
-  space=2;
+  space=1;
   z=2-0.5;
   x=74.1;
   y=32.2+2*space;
@@ -59,7 +59,7 @@ module holder()
   difference()
   {
     main_block_();
-    translate([2, spacing, 0])
+    translate([3, spacing+1, 0])
       #holder_space_();
     translate(2*[1, 1, 0] + [size[0]-spacing-2, spacing, 1.5])
       rotate([0, 180, 0])
