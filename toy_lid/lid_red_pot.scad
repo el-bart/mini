@@ -1,4 +1,4 @@
-include <funcions.scad>;
+include <detail/funcions.scad>;
 
 int_dia=110;
 ext_dia=130;
