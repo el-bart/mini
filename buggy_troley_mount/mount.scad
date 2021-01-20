@@ -9,6 +9,19 @@ module mount_rod_space()
 }
 
 
+module rod_protection()
+{
+  $fn=50;
+  h=15;
+  difference()
+  {
+    cylinder(r=10.5/2, h=h);
+    translate([0,0,-eps])
+      cylinder(r=8.5/2, h=h+2*eps);
+  }
+}
+
+
 module body_core()
 {
   // main rod with mounts
@@ -87,3 +100,5 @@ for(pos=[[0,0,0], [180,1,35]])
         translate([-75, -30, 0])
           buggy_troley_closure();
       }
+
+%rod_protection();
