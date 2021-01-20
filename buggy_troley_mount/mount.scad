@@ -9,33 +9,23 @@ module mount_rod_space()
 }
 
 
-module rod_protection()
-{
-  $fn=50;
-  h=15;
-  difference()
-  {
-    cylinder(r=10.5/2, h=h);
-    translate([0,0,-eps])
-      cylinder(r=8.5/2, h=h+2*eps);
-  }
-}
-
-
 module body_core()
 {
   // main rod with mounts
   rotate([0, 0, 180-30])
   {
-    // main block
-    hull()
-      for(dx=[0, 90])
-        translate([dx, 0, 0])
-          cylinder(r=30/2, h=h);
-    // support rods
-    for(dx=[0, 29.5, 60.5])
-      translate([90-dx, 0, h])
-        cylinder(r=10.5/2, h=30, $fn=50);
+    difference()
+    {
+      // main block
+      hull()
+        for(dx=[0, 90])
+          translate([dx, 0, 0])
+            cylinder(r=30/2, h=h);
+      // support rods
+      for(dx=[0, 29.5, 60.5])
+        translate([90-dx, 0, -eps])
+          cylinder(r=8.5/2, h=30, $fn=50);
+    }
   }
   // rod_slot
   difference()
@@ -100,5 +90,3 @@ for(pos=[[0,0,0], [180,1,35]])
         translate([-75, -30, 0])
           buggy_troley_closure();
       }
-
-%rod_protection();
