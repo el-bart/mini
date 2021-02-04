@@ -1,0 +1,31 @@
+#!/bin/bash
+set -eu -o pipefail
+
+if [ $# -ne 3 ]
+then
+  echo "$(basename "$0") <input/dir> <Nth_frames_only> <output.avi>" >&2
+  exit 2
+fi
+DIR=$(readlink -e "$1")
+N=$2
+OUT=$3
+shift 3
+
+TMP=$(mktemp)
+trap "rm -fv '$TMP'" EXIT
+
+find "$DIR" -type f -name '*.jpg' \
+  | sort \
+  | awk "NR % $N == 0" \
+  | sed 's/^/file /' \
+  > "$TMP"
+
+time \
+  ffmpeg \
+    -y \
+    -f concat \
+    -safe 0 \
+    -i "$TMP" \
+    -c:v libx264 \
+    -vf "fps=25" \
+    "$OUT"
