@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eux -o pipefail
+KEY="tmp_ssh_key"
+HOST="rzezucha"
+
+cd /path/to/backup/dir
+
+if ! [ -f "$KEY" ]
+then
+  ssh-keygen -f "$KEY" -N ''
+fi
+
+time rsync -e "ssh -i $KEY" -rzPl "$HOST:images" images_backup
