@@ -1,0 +1,17 @@
+#!/bin/bash
+set -eu -o pipefail
+
+APP=$(basename "$0")
+
+find -name '????-??-??_??????' -type d | \
+  while read dir
+  do
+    last=$(find "$dir" -name '*.jpg' | sort | tail -1)
+    if [ -e "$last" ]
+    then
+      mv -v "$last" "$dir.jpg"
+    else
+      echo "$APP: '$dir' is empty"
+    fi
+    rm -rf "$dir"
+  done
