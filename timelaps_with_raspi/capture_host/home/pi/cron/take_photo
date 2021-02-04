@@ -1,0 +1,14 @@
+#!/bin/bash
+set -eux -o pipefail
+
+mkdir -p "$HOME/images"
+cd "$_"
+
+DIR=$(date +%Y-%m-%d_%H%M%S)
+mkdir "$DIR"
+cd "$_"
+
+# capturing multiple frames, but preserving just the last one. needed since many cameras need a couple of
+# "warm up" shots, to tune to lighting conditions.
+time mplayer -tv driver=v4l2:width=1920:height=1080:device=/dev/video0 -vo jpeg -frames 9 tv://
+rm -v *[^9].jpg

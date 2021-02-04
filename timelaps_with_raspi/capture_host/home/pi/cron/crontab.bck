@@ -1,0 +1,4 @@
+SHELL=/usr/local/bin/printiferror
+
+# m h  dom mon dow   command
+* * * * * ~/cron/take_photo
