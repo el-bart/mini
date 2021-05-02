@@ -1,5 +1,5 @@
 eps=0.01;
-r_stick=2.8/2; // extr_width=0.4, d=2.5mm, thus 7*0.4=2.8 as a next best thing
+r_stick=3.5/2; // d=2.5mm + 1mm for imprecissions, etc.
 
 module roller()
 {
@@ -42,7 +42,7 @@ module hook_()
   {
     translate([-2, -1.5/2, 0])
       cube([2, 1.5, 3+2*3]);
-    
+
     translate([-1, 0, (3+2*3)/2])
       translate([0, 1, 0])
         rotate([90, 0, 0])
