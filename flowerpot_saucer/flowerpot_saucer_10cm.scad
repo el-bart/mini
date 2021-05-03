@@ -1,2 +1,2 @@
 use <detail/template.scad>
-saucer(d=102);
+saucer(d=100);
