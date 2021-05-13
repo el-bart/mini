@@ -3,7 +3,7 @@ eps=0.1;
 module mount()
 {
   wall=5;
-  screw_d=4;
+  screw_d=3.5+1;
   ls_dim=[236+1, 162+1];
   ls_border=11.6-2;
   mount_len=60;
