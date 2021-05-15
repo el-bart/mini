@@ -1,12 +1,11 @@
-eps=0.1;
-
-module mount()
+module mount(screws)
 {
+  eps=0.1;
   wall=5;
   screw_d=3.5+1;
   ls_dim=[236+1, 162+1];
   ls_border=11.6-2;
-  mount_len=60;
+  mount_len=20*screws;
   mount_size=[30, 2*wall, mount_len+wall];
 
   module body_mount()
@@ -38,9 +37,10 @@ module mount()
     translate([-mount_size[0], 0, 0])
       difference()
       {
+        mss2=mount_size[2]/screws;
         cube(mount_size);
-        for(i=[-1,0,+1])
-          translate([mount_size[0]/2, -eps, mount_size[2]/2+i*18])
+        #for(i=[1:screws])
+          translate([mount_size[0]/2, -eps, mss2*i-mss2/2])
             screw();
       }
   }
@@ -51,4 +51,4 @@ module mount()
       screw_mount();
 }
 
-mount();
+mount(screws=3);
