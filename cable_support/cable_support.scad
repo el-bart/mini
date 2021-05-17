@@ -38,5 +38,5 @@ module element()
 
 
 for(i=[1:N])
-  translate([0, i*12, 0])
+  translate([0, (i-1)*12, 0])
     element();
