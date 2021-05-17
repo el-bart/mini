@@ -3,6 +3,7 @@ wall=4;
 h=wall+8+5;
 $fn=60;
 N=4;
+M=2;
 
 module support_()
 {
@@ -38,5 +39,6 @@ module element()
 
 
 for(i=[1:N])
-  translate([0, (i-1)*12, 0])
-    element();
+  for(j=[1:M])
+    translate([(j-1)*25, (i-1)*12, 0])
+      element();
