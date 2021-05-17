@@ -20,12 +20,16 @@ just renamed these to `patch.ini` and you're good to go.
 
 ## PET-G
 
+* 1kg of PET-G is 345m of 1.75mm filament
 * can print on glass/mirror, but watch out - can stick just too well...
 * add some extra space (around +0.05mm extra) compared to PLA (my OZ is -16.75mm)
 * bed does not need to be super clean (use IPA with care)
 * use a mixture of water with a drop of dishwashing soap to "paint" the glass surface (minimizes PET-G stickiness to the reasonable value)
 * if parts of the print remain on bed use acetone to dissolve and clean these off
 * [PET-G chemical resistance datasheet](http://kmac-plastics.net/data/chemical/petg-chemical.htm)
+* absorbs moisture from the air, that breaks print quality and strength - address:
+  - dry in oven in 50-60*C when unpacked (even new one!) for a couple of hours
+  - keep in a moisture-absorbing box at all times (also during printing)
 
 
 ## ABS
