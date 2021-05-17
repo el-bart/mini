@@ -2,6 +2,7 @@ eps=0.01;
 wall=4;
 h=wall+8+5;
 $fn=60;
+N=4;
 
 module support_()
 {
@@ -36,6 +37,6 @@ module element()
 }
 
 
-for(i=[0:2])
+for(i=[1:N])
   translate([0, i*12, 0])
     element();
