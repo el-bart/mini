@@ -18,7 +18,7 @@ module door_stop()
     translate([-10, -5, -15])
       cube([30, span+10, 15]);
     // drill
-    translate([5, span/2, -5])
+    translate([5/2, span/2, -5])
       cylinder(d=3.5, h=20, $fn=50);
   }
 }
