@@ -1,11 +1,17 @@
+# generated files
 *.stl
 *.gcode
 *.time
+
+# editors' temp files
 .*.swp
 .*.swa
 *.out
 *.?#?
-*.orig
 *.tmp
+
+# git temporary files
+*.orig
+*.rej
 
 build/*
