@@ -1,5 +1,6 @@
 module rollup_string_limiter(r)
 {
+  $fn=100;
   difference()
   {
     // main element
