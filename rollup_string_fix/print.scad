@@ -1,5 +1,5 @@
-use <rollup_string_fix.scad>
-use <rollup_string_limiter.scad>
+use <detail/rollup_string_fix.scad>
+use <detail/rollup_string_limiter.scad>
 
 // required quantities. adjust according to your needs.
 // (note: you need two identical elements per functional part)
