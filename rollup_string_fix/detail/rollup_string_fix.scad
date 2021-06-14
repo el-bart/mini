@@ -1,6 +1,6 @@
 module rollup_string_fix(r)
 {
-  $fn=100;
+  $fn=50;
   difference()
   {
     // main element
