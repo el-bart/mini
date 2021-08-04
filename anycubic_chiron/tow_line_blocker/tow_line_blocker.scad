@@ -1,6 +1,6 @@
 eps = 0.1;
 th0 = 2.4; // original thickness
-dth = 4; // extra thickness for the model
+dth = 0; // extra thickness for the model
 th  = th0 + dth;
 h = 10;
 
