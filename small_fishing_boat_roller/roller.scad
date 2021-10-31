@@ -67,6 +67,26 @@ module holder()
 }
 
 
+module crank()
+{
+  d=2.5+2*1;
+  difference()
+  {
+    dx_max = 10;
+    hull()
+      for(dx=[0, dx_max])
+        translate([dx, 0, 0])
+          cylinder(d=d, h=2, $fn=20);
+    translate([dx_max, 0, -eps])
+      cylinder(d=2.5, h=2+2*eps, $fn=20);
+  }
+  cylinder(d=d-1, h=2+8, $fn=20);
+}
+
+
+translate([1, -5, 0])
+  crank();
+
 for(i=[0,1])
   translate([-12, i*22, 0])
     roller_main();
