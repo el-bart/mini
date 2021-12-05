@@ -1,6 +1,6 @@
 batteryDiameter = 20;
 batteryLength   = 56;
-include <wing.scad>
+include <detail/wing.scad>
 
 for(m = [0,1])
 {
