@@ -1,10 +1,13 @@
 #!/bin/bash -ex
 set -eux -o pipefail
+app_dir=$(dirname "$(readlink -e "$0")")
 img='steam_image'
+
+cd "$app_dir"
 data="$PWD/data"
 mkdir -p "$data"
 
-function rebuild_image
+function image_rebuild_needed
 {
   # image does not exist?
   if ! docker image ls | grep "$img"
@@ -25,7 +28,7 @@ build_flags=()
 build_flags+=(--tag "$img")
 build_flags+=(--build-arg "UID=$(id -u)")
 build_flags+=(--build-arg "GID=$(id -g)")
-if rebuild_image
+if image_rebuild_needed
 then
   build_flags+=(--no-cache)
 fi
@@ -37,9 +40,9 @@ run_flags+=(--interactive)
 run_flags+=(--tty)
 run_flags+=(--rm)
 run_flags+=(--name "steam_$USER")
-# needed to prevent re-authorization on each startup
+# stable needed to prevent re-authorization on each startup
 run_flags+=(--hostname "steam-container")
-# pulseaudi
+# pulseaudio
 run_flags+=(--volume "/run/user/$UID/pulse:/run/user/$UID/pulse")
 # GPU
 run_flags+=(--volume "/dev/dri:/dev/dri")
