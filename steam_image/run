@@ -1,5 +1,5 @@
-#!/bin/bash -ex
-set -eux -o pipefail
+#!/bin/bash
+set -eu -o pipefail
 app_dir=$(dirname "$(readlink -e "$0")")
 img='steam_image'
 
