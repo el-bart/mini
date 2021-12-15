@@ -1,0 +1,60 @@
+#!/bin/bash -ex
+set -eux -o pipefail
+img='steam_image'
+data="$PWD/data"
+mkdir -p "$data"
+
+function rebuild_image
+{
+  # image does not exist?
+  if ! docker image ls | grep "$img"
+  then
+    return 0
+  fi
+  # image is too old?
+  local created_ts=$(docker inspect "$img" | jq -r '.[0].Created' | xargs date +%s -d)
+  local now_ts=$(date +%s)
+  if [ "$(($now_ts-$created_ts))" -gt "$((31*24*3600))" ]
+  then
+    return 0
+  fi
+  return 1
+}
+
+build_flags=()
+build_flags+=(--tag "$img")
+build_flags+=(--build-arg "UID=$(id -u)")
+build_flags+=(--build-arg "GID=$(id -g)")
+if rebuild_image
+then
+  build_flags+=(--no-cache)
+fi
+time docker build "${build_flags[@]}" img/
+
+run_flags=()
+# common stuff
+run_flags+=(--interactive)
+run_flags+=(--tty)
+run_flags+=(--rm)
+run_flags+=(--name "steam_$USER")
+# needed to prevent re-authorization on each startup
+run_flags+=(--hostname "steam-container")
+# pulseaudi
+run_flags+=(--volume "/run/user/$UID/pulse:/run/user/$UID/pulse")
+# GPU
+run_flags+=(--volume "/dev/dri:/dev/dri")
+run_flags+=(--volume "/dev/shm:/dev/shm")
+# perms mapped to local user to make things work
+run_flags+=(--user "$(id -u):$(id -g)")
+run_flags+=(--group-add "audio")
+# X11 pass-thorugh
+run_flags+=(--env DISPLAY="$DISPLAY")
+run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
+run_flags+=(--env QT_X11_NO_MITSHM=1)
+# home dir with the actual content
+run_flags+=(--volume "$data:/home/user")
+run_flags+=(--env "HOME=/home/user")
+run_flags+=(--workdir "/home/user")
+
+xhost "+si:localuser:$USER"
+exec docker run "${run_flags[@]}" "$img" steam
