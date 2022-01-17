@@ -4,6 +4,7 @@ DEPS:=$(SRCS:.cpp=.d)
 
 CXXFLAGS+=-Wall
 CXXFLAGS+=-std=c++17
+CXXFLAGS+=-MMD
 
 .PHONY: all
 all: debug
