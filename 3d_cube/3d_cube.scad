@@ -16,6 +16,6 @@ difference()
       linear_extrude(height=depth+eps)
         text("Y", size=font_size, valign="center", halign="center");
   translate([size[0]/2, size[1]/2, size[2]-depth])
-    #linear_extrude(height=depth+eps)
+    linear_extrude(height=depth+eps)
       text("Z", size=font_size, valign="center", halign="center");
 }
