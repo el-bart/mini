@@ -18,7 +18,8 @@ module qiabasz()
     cylinder(d=30, h=1+1, $fn=100);
     translate([0,0,-eps])
       linear_extrude(1+eps)
-        text("#!", size=18, halign="center", valign="center");
+        mirror([1, 0, 0])
+          text("#!", size=18, halign="center", valign="center");
   }
   qiagen_logo();
 }
