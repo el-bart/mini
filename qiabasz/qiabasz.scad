@@ -5,9 +5,8 @@ module qiagen_logo()
   translate([-10.5, -9, 0])
     translate([0,0,1+1])
       linear_extrude(1)
-//        mirror([1,0,0])
-          scale(.42*[1,1])
-            import("qiagen_logo.svg");
+        scale(.42*[1,1])
+          import("qiagen_logo.svg");
 }
 
 
@@ -18,5 +17,4 @@ difference()
     linear_extrude(1+eps)
       text("#!", size=18, halign="center", valign="center");
 }
-#qiagen_logo();
-
+qiagen_logo();
