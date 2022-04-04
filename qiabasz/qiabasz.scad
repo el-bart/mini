@@ -26,5 +26,5 @@ module qiabasz()
 
 for(i=[0:N-1])
   for(j=[0:M-1])
-    translate([i*35, j*35, 0])
+    translate([i*32, j*32, 0])
       qiabasz();
