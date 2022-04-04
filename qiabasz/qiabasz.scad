@@ -1,4 +1,6 @@
 eps = 0.01;
+N = 4;
+M = 4;
 
 module qiagen_logo()
 {
@@ -9,12 +11,20 @@ module qiagen_logo()
           import("qiagen_logo.svg");
 }
 
-
-difference()
+module qiabasz()
 {
-  cylinder(d=30, h=1+1, $fn=100);
-  translate([0,0,-eps])
-    linear_extrude(1+eps)
-      text("#!", size=18, halign="center", valign="center");
+  difference()
+  {
+    cylinder(d=30, h=1+1, $fn=100);
+    translate([0,0,-eps])
+      linear_extrude(1+eps)
+        text("#!", size=18, halign="center", valign="center");
+  }
+  qiagen_logo();
 }
-qiagen_logo();
+
+
+for(i=[0:N-1])
+  for(j=[0:M-1])
+    translate([i*35, j*35, 0])
+      qiabasz();
