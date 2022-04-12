@@ -52,4 +52,4 @@ run_flags+=(--env QT_X11_NO_MITSHM=1)
 
 xhost "+si:localuser:$USER"
 exec docker run "${run_flags[@]}" "$img" \
-  #flatpak run com.danplanet.chirp "$@"
+  chirpw "$@"
