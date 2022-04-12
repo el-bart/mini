@@ -51,4 +51,5 @@ run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
 run_flags+=(--env QT_X11_NO_MITSHM=1)
 
 xhost "+si:localuser:$USER"
-exec docker run "${run_flags[@]}" "$img" "$@"
+exec docker run "${run_flags[@]}" "$img" \
+  qdmr "$@"
