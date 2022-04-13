@@ -5,6 +5,8 @@ app_dir_name=$(basename "$app_dir")
 img=$app_dir_name
 
 cd "$app_dir"
+data="$PWD/data"
+mkdir -p "$data"
 
 function image_rebuild_needed
 {
@@ -39,7 +41,7 @@ run_flags+=(--interactive)
 run_flags+=(--tty)
 run_flags+=(--rm)
 run_flags+=(--name "${img}_$USER")
-run_flags+=(--hostname "docker-chirp-tmp")
+run_flags+=(--hostname "docker-chirp")
 run_flags+=(--device "/dev/ttyUSB0")
 # perms mapped to local user to make things work
 run_flags+=(--user "$(id -u):$(id -g)")
@@ -49,6 +51,10 @@ run_flags+=(--group-add "dialout")
 run_flags+=(--env DISPLAY="$DISPLAY")
 run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
 run_flags+=(--env QT_X11_NO_MITSHM=1)
+# home dir with the actual content
+run_flags+=(--volume "$data:/home/user")
+run_flags+=(--env "HOME=/home/user")
+run_flags+=(--workdir "/home/user")
 
 xhost "+si:localuser:$USER"
 exec docker run "${run_flags[@]}" "$img" \
