@@ -8,9 +8,11 @@ endif
 
 
 SCADS := $(wildcard *.scad)
+OBJS  := $(wildcard *.obj)
 STLS_REPO := $(addprefix build/, $(wildcard *.stl))
+STLS_CONV := $(addprefix build/, $(OBJS:.obj=.stl))
 STLS_GEN  := $(addprefix build/, $(SCADS:.scad=.stl))
-STLS := $(STLS_REPO) $(STLS_GEN)
+STLS := $(STLS_REPO) $(STLS_CONV) $(STLS_GEN)
 STLS := $(sort $(STLS))  # remove duplicates
 DEPS := $(STLS_GEN:.stl=.stl.d)
 
@@ -20,10 +22,10 @@ SCAD_FLAGS+=--check-parameter-ranges true
 
 
 .PHONY: all
-all: pla petg tpu
+all: pla petg tpu silk
 
-.PHONY: pla petg tpu
-pla petg tpu:
+.PHONY: pla petg tpu silk
+pla petg tpu silk:
 	$(SILENT)+$(MAKE) FILAMENT=$@ time gcode md5
 
 build/%.stl: %.scad Makefile
@@ -35,6 +37,11 @@ build/%.stl: %.stl Makefile
 	$(SILENT)echo "COPY $<"
 	$(SILENT)mkdir -p "build"
 	$(SILENT)cp "$<" "$@"
+
+build/%.stl: %.obj Makefile
+	$(SILENT)echo "CONVERT $<"
+	$(SILENT)mkdir -p "build"
+	$(SILENT)assimp export "$<" "$@" > "$@.log"
 
 -include $(DEPS)
 
@@ -64,8 +71,8 @@ build/$(FILAMENT)/config.ini: config/$(FILAMENT)/template.ini config/$(FILAMENT)
 gcode: $(GCODES) $(MD5S)
 
 build/$(FILAMENT)/%.gcode: build/%.stl build/$(FILAMENT)/config.ini Makefile
-	$(SILENT)echo "SLIC3R $(FILAMENT)/$(notdir $<)"
-	$(SILENT)slic3r --load "build/$(FILAMENT)/config.ini" --output "$@" "$<" > "$@.log"
+	$(SILENT)echo "SLICER $(FILAMENT)/$(notdir $<)"
+	$(SILENT)prusa-slicer --load "build/$(FILAMENT)/config.ini" --export-gcode --output "$@" "$<" > "$@.log"
 
 
 .PHONY: time
