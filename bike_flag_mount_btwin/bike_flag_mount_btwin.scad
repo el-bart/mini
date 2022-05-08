@@ -1,9 +1,10 @@
 use<m3d/fn.scad>
 
-d_a = 7;
-d_b = 8;
-a_b_distance = 10.5;
-b_top_distance = 18;
+d_stick = 6;
+d_a = 7; // bottom hole (aka: hole A)
+d_b = 8; // top hole (aka: hole B)
+a_b_distance = 10.5; // distance between A and B holes (edges! not the centers!)
+b_top_distance = 18; // distance from top of B hole to end of bike's frame (edge! not the center!)
 
 module screw_holes(h, extra_d=0.5)
 {
