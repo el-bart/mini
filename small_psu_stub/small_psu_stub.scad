@@ -1,9 +1,9 @@
 use <m3d/rounded_cube.scad>
 
 eps = 0.01;
-wall = 2*0.4;
-box_size = [60, 25, 20];
-roundings = 2;
+wall = 2;
+box_size = [60, 35, 20];
+roundings = 3;
 split_h = 5;
 int_size = box_size - 2*wall*[1,1,1];
 
@@ -12,17 +12,17 @@ module box_main()
   difference()
   {
     
-    rounded_cube(box_size, roundings, $fn=30);
+    rounded_cube(box_size, roundings, $fn=40);
     // empty interior
     translate(wall*[1,1,1])
-      rounded_cube(int_size, roundings-wall, $fn=30);
+      rounded_cube(int_size, roundings-wall, $fn=40);
     // holes for cable
     translate([-eps, box_size[1]/2, 3.25/2+roundings])
     rotate([0, 90, 0])
       hull()
         for(dy=[-1, +1])
           translate([0, dy*(5.5-2*3.5/2)/2, 0])
-            cylinder(d=3.5, h=box_size[0]+2*eps, $fn=20);
+            cylinder(d=3.5, h=box_size[0]+2*eps, $fn=30);
   }
 }
 
@@ -52,8 +52,8 @@ module box_top()
     {
       cube([int_size[0], int_size[1], split_h+3]);
       // just keep walls
-      translate(0.5*[1,1,0])
-        cube(int_size-2*0.5*[1,1,1]);
+      translate(1.2*[1,1,0])
+        cube(int_size-2*1.2*[1,1,1]);
       // corners removed for more flexibility
       for(dx=[0,1])
         for(dy=[0,1])
@@ -68,5 +68,5 @@ module box_top()
 }
 
 box_top();
-translate([0, -28, 0])
+translate([0, -box_size[1]-3, 0])
   box_bottom();
