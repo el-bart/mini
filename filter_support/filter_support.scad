@@ -3,6 +3,8 @@ eps=0.01;
 module support()
 {
   rotate([90, 0, 0])
+  {
+    // main block
     intersection()
     {
       difference()
@@ -19,6 +21,9 @@ module support()
       // truncating sharp edges
       cube([25, 25, 10+2*eps]);
     }
+    // support prolonging
+    cube([1.2, 35, 10]);
+  }
 }
 
 
