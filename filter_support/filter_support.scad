@@ -1,4 +1,5 @@
 eps=0.01;
+N = 4;
 
 module support()
 {
@@ -27,4 +28,6 @@ module support()
 }
 
 
-support();
+for(i=[0:N-1])
+  translate([0, i*(10+3), 0])
+    support();
