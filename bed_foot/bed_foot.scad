@@ -6,7 +6,7 @@ module bed_foot()
   d=52;
   difference()
   {
-    cylinder(d=d, h=h, $fn=200);
+    cylinder(d1=d+10, d2=d, h=h, $fn=200);
     {
       $fn=50;
       // screw drill
