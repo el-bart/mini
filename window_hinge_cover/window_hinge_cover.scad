@@ -3,11 +3,12 @@ wall = 0.65;
 length = 59;
 width = 21.6;
 cut_in_length = 15;
+extra_walls = 1.5;
 
 
 module element()
 {
-  module profile_shell()
+  module profile_shell_int()
   {
     module exterior()
     {
@@ -44,6 +45,31 @@ module element()
     }
   }
 
+  module profile_shell()
+  {
+    intersection()
+    {
+      // additional wall thickness
+      union()
+      {
+        difference()
+        {
+          minkowski()
+          {
+            profile_shell_int();
+            circle(r=wall*extra_walls, $fn=50);
+          }
+          #hull()
+            profile_shell_int();
+        }
+        profile_shell_int();
+      }
+      // remove bottom overhang
+      translate(-10*[1,0])
+        square(100*[1,1]);
+    }
+  }
+
   module surround()
   {
     linear_extrude(length)
@@ -51,7 +77,7 @@ module element()
   }
   module side()
   {
-    linear_extrude(wall)
+    linear_extrude(wall*(1+extra_walls))
       hull()
         profile_shell();
   }
@@ -59,7 +85,7 @@ module element()
   module core()
   {
     surround();
-    for(dz=[0, length-wall])
+    for(dz=[-extra_walls*wall, length-wall])
       translate([0,0,dz])
         side();
   }
