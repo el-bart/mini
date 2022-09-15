@@ -58,9 +58,9 @@ module support_core()
       cylinder(d=8+1, h=28+2*eps, $fn=80);
     // side screw holes
     {
-      d = 7.5 + 1;
+      d = 7.5;
       for(dx=[-1, +1])
-        translate([dx*(21.5+7.5)/2, d/2+4.4, -eps])
+        translate([dx*(21.5+d)/2, d/2+4.4, -eps])
           cylinder(d=d, h=h+2*eps, $fn=100);
     }
   }
