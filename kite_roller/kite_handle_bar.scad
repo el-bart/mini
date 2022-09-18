@@ -1,5 +1,3 @@
-use <m3d/screw_head_hex.scad>
-
 eps = 0.01;
 d_rod = 8+0.5;
 d_hand = 20;
@@ -14,32 +12,6 @@ module bearing()
     translate(eps*[0,0,-1])
       cylinder(d=8, h=7+2*eps, $fn=40);
   }
-}
-
-
-module screw_head() { screw_head_hex_m8(); }
-
-module washer(dh=0)
-{
-  difference()
-  {
-    cylinder(d=15.5, h=1.4+dh);
-    translate(eps*[0,0,-1])
-      cylinder(d=8.5, h=1.4+dh+2*eps);
-  }
-}
-
-
-// slot for ball bearing + 2 washers
-module bearing_slot()
-{
-  d_spacing = 0.5;
-  h_spacing = 0.2;
-  screw_head_hex_m8(d_spacing, h_spacing);
-
-  for(dh=[-1.4, 7+h_spacing])
-    translate([0, 0, dh])
-      washer();
 }
 
 
@@ -58,17 +30,13 @@ module bearing_mount()
   }
   %bearing();
 
+  // connecting element
   translate([0, 0, 7])
-  {
-    // connecting element
     difference()
     {
       cylinder(d1=d_ext, d2=d_hand, h=(d_ext-d_hand)/2);
       cylinder(d1=d_ext-2*wall+0.5, d2=d_rod, h=(d_ext-d_hand)/2);
     }
-    
-    // main e
-  }
 }
 
 
