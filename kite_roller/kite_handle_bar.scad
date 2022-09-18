@@ -1,5 +1,5 @@
 eps = 0.01;
-d_rod = 8+0.5;
+d_rod = 8+2*1; // need a lot of space, for a smooth move
 d_hand = 20;
 h_hand = 110;
 
