@@ -81,6 +81,4 @@ module side_block()
 }
 
 
-for(i=[0:1])
-  translate(i*[125, 0, 0])
-    side_block();
+side_block();

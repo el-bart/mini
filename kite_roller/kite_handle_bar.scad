@@ -62,6 +62,4 @@ module handle()
 }
 
 
-for(i=[0:1])
-  translate(i*[35,0,0])
-    handle();
+handle();
