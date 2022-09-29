@@ -1,4 +1,4 @@
-use <m3d/screw_head_hex.scad>
+use <../m3d/screw_head_hex.scad>
 
 eps = 0.01;
 
@@ -6,7 +6,7 @@ module screw_head()          { screw_head_hex_m8(); }
 module screw_head_slot(dh=0) { screw_head_hex_m8(0.5, 2*0.2+dh); }
 
 
-module side_block()
+module side_block(left)
 {
   module fin()
   {
@@ -20,7 +20,8 @@ module side_block()
     }
   }
 
-  dx_offset = 80/2;
+  direction = left ? -1 : +1;
+  dx_offset = direction * 80/2;
   module core_body()
   {
     cylinder(d=120, h=5, $fn=360);
@@ -71,7 +72,6 @@ module side_block()
         screw_head_hex_m3(0.5, h);
         cylinder(d=3+0.7, h=50, $fn=50);
       }
-
     }
 
     // asymetric cut, to connect 2 parts with friction
@@ -81,4 +81,4 @@ module side_block()
 }
 
 
-side_block();
+side_block(left=false);
