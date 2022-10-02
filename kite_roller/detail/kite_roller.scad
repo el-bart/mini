@@ -24,7 +24,14 @@ module side_block(left)
   dx_offset = direction * 80/2;
   module core_body()
   {
-    cylinder(d=120, h=5, $fn=360);
+    // bottom part + edge around it
+    difference()
+    {
+      $fn=360;
+      cylinder(d=120+0.1, h=5+3);
+      translate([0,0,5])
+        cylinder(d=120-1.5, h=5);
+    }
     cylinder(d=30, h=5+25, $fn=100);
     // spherical slot around screw head
     translate([dx_offset, 0, 5])
