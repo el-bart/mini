@@ -2,6 +2,11 @@
 
 full roller for small kites, for manual operations.
 
+![front view](pic/front.jpg)
+
+![side view](pic/side.jpg)
+
+
 ## BOM
 * filament: PLA or PET-G
 * ball bearing:
