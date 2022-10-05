@@ -35,29 +35,43 @@ fi
 time docker build "${build_flags[@]}" img/
 
 run_flags=()
+
 # common stuff
 run_flags+=(--interactive)
 run_flags+=(--tty)
 run_flags+=(--rm)
 run_flags+=(--name "steam_$USER")
+
 # stable needed to prevent re-authorization on each startup
 run_flags+=(--hostname "steam-container")
+
 # pulseaudio
 run_flags+=(--volume "/run/user/$UID/pulse:/run/user/$UID/pulse")
+
 # GPU
 run_flags+=(--volume "/dev/dri:/dev/dri")
 run_flags+=(--volume "/dev/shm:/dev/shm")
+
 # perms mapped to local user to make things work
 run_flags+=(--user "$(id -u):$(id -g)")
 run_flags+=(--group-add "audio")
+
 # X11 pass-thorugh
 run_flags+=(--env DISPLAY="$DISPLAY")
 run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
 run_flags+=(--env QT_X11_NO_MITSHM=1)
+
 # home dir with the actual content
 run_flags+=(--volume "$data:/home/user")
 run_flags+=(--env "HOME=/home/user")
 run_flags+=(--workdir "/home/user")
 
+# make sure joystick is forwarded
+run_flags+=(--group-add "$(grep input /etc/group | tr : ' ' | awk '{ print $3 }')")
+for dev in $(find /dev/input/* /dev/hidraw* -type c)
+do
+  run_flags+=(--device "$dev")
+done
+
 xhost "+si:localuser:$USER"
-exec docker run "${run_flags[@]}" "$img" steam "$@"
+exec docker run "${run_flags[@]}" "$img" # steam "$@"
