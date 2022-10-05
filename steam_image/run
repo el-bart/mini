@@ -60,4 +60,4 @@ run_flags+=(--env "HOME=/home/user")
 run_flags+=(--workdir "/home/user")
 
 xhost "+si:localuser:$USER"
-exec docker run "${run_flags[@]}" "$img" steam
+exec docker run "${run_flags[@]}" "$img" steam "$@"
