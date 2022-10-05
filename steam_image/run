@@ -74,4 +74,4 @@ do
 done
 
 xhost "+si:localuser:$USER"
-exec docker run "${run_flags[@]}" "$img" # steam "$@"
+exec docker run "${run_flags[@]}" "$img" steam "$@"
