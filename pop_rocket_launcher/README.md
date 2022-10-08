@@ -1,7 +1,10 @@
-# pop rocket
+# pop rocket launcher
 
 STEM children toy.
 rocket launches, when child jumps over a plastic bottle, increasing pressure suddenly.
+
+this repo has some 3D printed elements, required to complete the build
+
 
 ## materials
 - 2m rubber hose, 25mm inner diameter
