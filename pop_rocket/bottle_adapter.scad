@@ -8,7 +8,6 @@ narrowing_h=10;
 module adapter()
 {
   // bottom ring
-//  if(0)
   difference()
   {
     $fn=200;
@@ -27,7 +26,6 @@ module adapter()
         cylinder(d2=hose_phi-2*wall, d1=bottle_screw_phi, h=10+eps);
     }
     // top connector
-//    if(0)
     translate([0, 0, narrowing_h])
       difference()
       {
