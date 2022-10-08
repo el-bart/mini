@@ -76,19 +76,24 @@ module inner_pipe()
   dz = launch_side * sin(60);
   translate([0, -conn_phi/2, dz])
     pipe_connector(conn_phi-2*wall, 20+eps);
-  // interconenction of both
-  /*
+  // smooth interconenction of both
   hull()
   {
-    rotate([90, 0, 0])
-      triangular_prism(launch_side, 0.1);
-    translate([0, 0, dz])
-      for(r=[0:5:40])
+    // launch side
+    #rotate([90, 0, 0])
+      linear_extrude(height=eps)
+        triangle_2d_int(launch_side);
+    // top-level connection facing side
+    translate([0, -conn_phi/2, dz])
+      pipe_connector(conn_phi-2*wall, 0.1, $fn=50);
+    // gradual narrowing of the pipe
+    denom = 10;
+    translate([0, 0, dz-1.5])
+      for(r=[0:5:60])
         rotate([r, 0, 0])
-          translate([0, -conn_phi/2, 0])
-            pipe_connector(conn_phi-r/5, 0.1, $fn=50);
+          translate([0, -(conn_phi-r/denom)/2, 0])
+            pipe_connector(conn_phi-2*wall-r/denom, 0.1, $fn=50);
   }
-  */
 }
 
 
@@ -96,7 +101,7 @@ module launcher()
 {
   difference()
   {
-//    outer_pipe();
+    outer_pipe();
     inner_pipe();
   }
   // TODO screw holes :P
