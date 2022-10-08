@@ -62,7 +62,7 @@ module outer_pipe()
     pipe_connector(conn_phi, 20);
   // interconenction of both
   translate([-conn_phi/2, -conn_phi-conn_pipe_space, 0])
-    cube([conn_phi, conn_phi+conn_pipe_space, dz]);
+    cube([conn_phi, conn_phi+conn_pipe_space+wall, dz]);
 }
 
 
