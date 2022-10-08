@@ -1,7 +1,12 @@
 eps = 0.01;
-phi = 25;
 wall = 1.3;
-side = 22;
+
+launch_side = 22;
+launch_h = 180;
+
+conn_phi = 25;
+conn_h = 20;
+
 
 module screw_mount()
 {
@@ -30,47 +35,71 @@ module triangle_2d(side)
 }
 
 
-module triangular_prism(side, height)
+module triangle_2d_int(side)
 {
-  linear_extrude(height=height)
+  offset(r=-wall)
     triangle_2d(side);
 }
 
 
-module pipe_connector(d, h)
+module pipe_connector(d, h, $fn=200)
 {
-  cylinder(d=d, h=h, $fn=200);
+  cylinder(d=d, h=h);
+}
+
+
+module outer_pipe()
+{
+  // rocket side
+  translate([0, launch_h+eps, 0])
+    rotate([90, 0, 0])
+      linear_extrude(height=launch_h)
+        triangle_2d(launch_side);
+  // rubber pipe side
+  dz = launch_side * sin(60);
+  translate([0, -conn_phi/2, dz])
+    pipe_connector(conn_phi, 20);
+  // interconenction of both
+  translate([-conn_phi/2, -conn_phi, 0])
+    cube([conn_phi, conn_phi, dz]);
 }
 
 
 module inner_pipe()
 {
   // rocket side
-  ph = 180;
-  translate([0, ph, 0])
+  translate([0, launch_h+eps, 0])
     rotate([90, 0, 0])
-      triangular_prism(side, ph);
+      linear_extrude(height=launch_h+2*eps)
+        triangle_2d_int(launch_side);
   // rubber pipe side
-  dz = side * sin(60);
-  translate([0, -phi/2, dz])
-    pipe_connector(phi, 20);
+  dz = launch_side * sin(60);
+  translate([0, -conn_phi/2, dz])
+    pipe_connector(conn_phi-2*wall, 20+eps);
   // interconenction of both
+  /*
   hull()
   {
     rotate([90, 0, 0])
-      triangular_prism(side, 0.1);
+      triangular_prism(launch_side, 0.1);
     translate([0, 0, dz])
       for(r=[0:5:40])
         rotate([r, 0, 0])
-          translate([0, -phi/2, 0])
-            pipe_connector(phi-r/5, 0.1, $fn=50);
+          translate([0, -conn_phi/2, 0])
+            pipe_connector(conn_phi-r/5, 0.1, $fn=50);
   }
+  */
 }
 
 
 module launcher()
 {
-  inner_pipe();
+  difference()
+  {
+//    outer_pipe();
+    inner_pipe();
+  }
+  // TODO screw holes :P
 }
 
 launcher();
