@@ -1,5 +1,5 @@
 eps = 0.01;
-rod_d = 5;
+rod_d = 5+0.7;
 mount_h = 40;
 
 module rod_mount()
@@ -16,11 +16,11 @@ module rod_mount()
         translate([base_d/2-5, 0, -eps])
           cylinder(d=3.5, h=base_h+2*eps, $fn=30);
   }
-  // main block
+  // rod holder
   translate([0, 0, base_h])
     difference()
     {
-      cylinder(d=rod_d+1.5, h=mount_h, $fn=30);
+      cylinder(d=rod_d+2.5, h=mount_h, $fn=30);
       cylinder(d=rod_d, h=mount_h+eps, $fn=100);
     }
 }
