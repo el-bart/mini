@@ -20,6 +20,6 @@ module ecd_holder()
 }
 
 for(iy=[0:M-1])
-for(ix=[0:N-1])
-  translate([ix*20, iy*45, 0])
-    ecd_holder();
+  for(ix=[0:N-1])
+    translate([ix*20, iy*45, 0])
+      ecd_holder();
