@@ -9,17 +9,17 @@ module element()
       // center guideing element
       intersection()
       {
-        cylinder(d=35, h=42-4, $fn=200);
-        translate([-100/2, -4/2, 0])
-          cube([100, 4, 50]);
+        cylinder(d=35-0.5, h=42-4, $fn=200);
+        translate([-100/2, -3.5/2, 0])
+          cube([100, 3.5, 50]);
       }
       // core cylinder
-      cylinder(d=32, h=42-4, $fn=200);
+      cylinder(d=32-0.5, h=42-4, $fn=200);
     }
     // center side cut
     translate([0, 50/2, 26/2+7])
       rotate([90, 0, 0])
-        cylinder(d=26, h=50, $fn=200);
+        cylinder(d=26+0.5, h=50, $fn=200);
     // bottom cut
     translate([0, 0, -eps])
       cylinder(d=17, h=2.5);
