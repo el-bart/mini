@@ -6,13 +6,12 @@ struct Buzzer
 {
   Buzzer()
   {
-    // normal mode
-    TCCR0A |= 0u;
-    // clear on compare
-    TCCR0A |= _BV(COM0B0);
-    //TCCR0B |= _BV(WGM02);
+    // fast PWM mode
+    TCCR0A |= _BV(WGM01) | _BV(WGM00);
+    // 1->0 PWM's output compare
+    TCCR0A |= _BV(COM0B1);
     // volume 0-255
-    OCR0B = 100;
+    OCR0B = 2;
     // output mode
     DDRB |= _BV(PB1);
   }
