@@ -36,7 +36,7 @@ private:
     {
       wdg_.reset();
       buzzer_.on();
-      wait_units(3);
+      wait_units_buzzing(3);
       buzzer_.off();
       wdg_.reset();
       inter_unit_pause();
@@ -49,16 +49,16 @@ private:
     {
       wdg_.reset();
       buzzer_.on();
-      wait_units(1);
+      wait_units_buzzing(1);
       buzzer_.off();
       wdg_.reset();
       inter_unit_pause();
     }
   }
 
-  void inter_unit_pause()   { wait_units(1); wdg_.reset(); }
-  void inter_letter_pause() { wait_units(3); wdg_.reset(); }
-  void inter_word_pause()   { wait_units(7); wdg_.reset(); }
+  void inter_unit_pause()   { wait_units_silent(1); wdg_.reset(); }
+  void inter_letter_pause() { wait_units_silent(3); wdg_.reset(); }
+  void inter_word_pause()   { wait_units_silent(7); wdg_.reset(); }
 
   inline void end_of_text_pause()
   {
@@ -69,14 +69,26 @@ private:
     }
   }
 
-  void wait_units(uint8_t n)
+  void wait_units_silent(uint8_t n)
+  {
+    wait_units_impl(n, []{});
+  }
+
+  void wait_units_buzzing(uint8_t n)
+  {
+    wait_units_impl(n, [&]{ buzzer_.toggle(); });
+  }
+
+  template<typename F>
+  void wait_units_impl(uint8_t n, F&& f)
   {
     for(uint8_t i=0u; i<n; ++i)
-    {
-      wdg_.reset();
-      _delay_ms(100);   // wikipedia suggest 50ms, but it looks too fast on LED
-      wdg_.reset();
-    }
+      for(uint8_t j=0u; j<100; ++j) // wikipedia suggest 50ms, but it looks too fast on LED
+      {
+        f();
+        _delay_ms(1);
+        wdg_.reset();
+      }
   }
 
   Watchdog wdg_;
