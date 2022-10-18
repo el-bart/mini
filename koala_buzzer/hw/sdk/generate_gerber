@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+import os
+import sys
+import pcbnew
+
+if len(sys.argv) != 1+2:
+    sys.stderr.write("{} <my_board.kicad_pcb> </path/to/out/dir>\n".format(sys.argv[0]))
+    sys.exit(2)
+
+board_name = sys.argv[1]
+out_dir = sys.argv[2]
+
+project = board_name.split('.')[0]
+
+#
+# generate gerber files
+#
+
+board = pcbnew.LoadBoard(board_name)
+pctl = pcbnew.PLOT_CONTROLLER(board)
+enabled_layers = board.GetEnabledLayers()
+
+layer_ids = list(enabled_layers.Seq())
+
+layer_names = []
+for layer_id in layer_ids:
+    layer_names.append(board.GetLayerName(layer_id))
+max_string_len = max(layer_names, key=len)
+
+extensions = {
+    "B_Cu":      "gbl",
+    "B_Mask":    "gbs",
+    "B_Paste":   "gbp",
+    "B_SilkS":   "gbo",
+    "Edge_Cuts": "gm1",
+    "F_Cu":      "gtl",
+    "F_Mask":    "gts",
+    "F_Paste":   "gtp",
+    "F_SilkS":   "gto",
+}
+
+for i, layer_id in enumerate(layer_ids):
+    layer_name = board.GetLayerName(layer_id).replace(".", "_")
+    if layer_name not in extensions:
+        continue
+    pctl.SetLayer(layer_id)
+    pctl.OpenPlotfile("GEN-TMP", pcbnew.PLOT_FORMAT_GERBER, layer_name)
+    pctl.PlotLayer()
+    out_file = os.path.join(out_dir, project + "-" + layer_name + "." + extensions[layer_name])
+    tmp = project + "-GEN-TMP.gbr"
+    os.rename(tmp, out_file)
+
+#
+# generate drill files
+#
+# taken from:
+# https://gist.github.com/aster94/bd52972ab6dbf13a44fc046b4222f7e7
+# with minor modifications
+metric = True
+zero_format = pcbnew.GENDRILL_WRITER_BASE.DECIMAL_FORMAT
+integer_digits = 3
+mantissa_digits = 3
+mirror_y_axis = False
+header = True
+offset = pcbnew.wxPoint(0,0)
+merge_pth_npth = True
+drill_file = True
+map_file = False
+reporter = None
+drill_writer = pcbnew.EXCELLON_WRITER(board)
+drill_writer.SetFormat(metric, zero_format, integer_digits, mantissa_digits)
+drill_writer.SetOptions(mirror_y_axis, header, offset, merge_pth_npth)
+drill_writer.CreateDrillandMapFilesSet(out_dir, drill_file, map_file, reporter)
+out_file = os.path.join(out_dir, project + "-" + "NPTH.drl")
+os.rename(out_dir + "/" + project + ".drl", out_file)
