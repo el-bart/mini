@@ -21,8 +21,8 @@ export LD :=$(CC)
 # https://www.logikdev.com/2011/02/15/reset-clock-fuse-bits-on-avr/
 #export LFUSE:=
 #export HFUSE:=
-export LFUSE:=0x6B
-export HFUSE:=0xFB
+export LFUSE:=0x6A
+export HFUSE:=0xFF
 # type of MCU for the avrdude programmer
 export MCU_PROG_TYPE:=attiny13
 # mype of MCU for the compiler

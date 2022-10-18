@@ -4,7 +4,7 @@
 
 constexpr uint32_t kHz=1000ul;
 constexpr uint32_t MHz=1000ul * kHz;
-constexpr uint32_t fcpu = (128u*kHz)/8u;
+constexpr uint32_t fcpu = 1ul*MHz + 200ul*kHz;
 #define F_CPU fcpu
 
 // controls if full morse code table shall be compiled in.
