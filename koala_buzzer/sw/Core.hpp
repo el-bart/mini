@@ -8,7 +8,7 @@
 
 struct Core
 {
-  Core() { led_.off(); }
+  Core() { buzzer_.off(); }
 
   template<char ...Text>
   inline void run()
@@ -35,9 +35,9 @@ private:
     for(uint8_t i=0; i<n; ++i)
     {
       wdg_.reset();
-      led_.on();
+      buzzer_.on();
       wait_units(3);
-      led_.off();
+      buzzer_.off();
       wdg_.reset();
       inter_unit_pause();
     }
@@ -48,9 +48,9 @@ private:
     for(uint8_t i=0; i<n; ++i)
     {
       wdg_.reset();
-      led_.on();
+      buzzer_.on();
       wait_units(1);
-      led_.off();
+      buzzer_.off();
       wdg_.reset();
       inter_unit_pause();
     }
@@ -80,7 +80,7 @@ private:
   }
 
   Watchdog wdg_;
-  Buzzer led_;
+  Buzzer buzzer_;
 };
 
 

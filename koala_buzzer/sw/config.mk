@@ -1,5 +1,5 @@
 # name of the application
-export PROGRAM_NAME:=led_sat
+export PROGRAM_NAME:=buzzer
 
 # default toolchain - can be changed with 'make TC=xxx'
 export TC:=avr
