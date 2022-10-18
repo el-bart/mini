@@ -1,9 +1,9 @@
 #pragma once
 #include <inttypes.h>
 
-struct Led
+struct Buzzer
 {
-  Led() { DDRB |= _BV(1); }
+  Buzzer() { DDRB |= _BV(1); }
   void on()  { PORTB |=  _BV(1); }
   void off() { PORTB &= ~_BV(1); }
 };

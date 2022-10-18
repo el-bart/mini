@@ -2,7 +2,7 @@
 #include "config.hpp"
 #include <util/delay.h>
 
-#include "Led.hpp"
+#include "Buzzer.hpp"
 #include "Watchdog.hpp"
 
 
@@ -80,7 +80,7 @@ private:
   }
 
   Watchdog wdg_;
-  Led led_;
+  Buzzer led_;
 };
 
 
