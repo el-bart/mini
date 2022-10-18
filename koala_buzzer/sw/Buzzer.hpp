@@ -10,7 +10,7 @@ struct Buzzer
     TCCR0A |= _BV(WGM01) | _BV(WGM00);
     // 1->0 PWM's output compare
     TCCR0A |= _BV(COM0B1);
-    // volume 0-255
+    // volume 0-128
     OCR0B = 2;
     // output mode
     DDRB |= _BV(PB1);
