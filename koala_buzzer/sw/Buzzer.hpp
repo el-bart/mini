@@ -6,20 +6,21 @@ struct Buzzer
 {
   Buzzer()
   {
-    // phase correct PWM
-    TCCR0A |= _BV(WGM00);
+    // normal mode
+    TCCR0A |= 0u;
+    // clear on compare
+    TCCR0A |= _BV(COM0B0);
     //TCCR0B |= _BV(WGM02);
-    // 01 PWM
-    TCCR0A |= _BV(COM0B1);
-    // frequency ~1kHz
-    OCR0B = 20;
+    // volume 0-255
+    OCR0B = 100;
     // output mode
     DDRB |= _BV(PB1);
   }
 
   void on()
   {
-    TCCR0B |= _BV(CS00); // prescaler = 1
+    // ~586 [Hz]
+    TCCR0B |= _BV(CS01); // prescaler = 8
   }
 
   void off()
