@@ -1,0 +1,18 @@
+#!/bin/bash
+cat <<EOF
+c.run<
+$(
+  n=1
+  for w in "$@"
+  do
+    echo -en '    ' ; echo -n "$w" | sed "s/\(.\)/'\1',/g" | sed 's/,$//'
+    if [ $n -lt $# ]
+    then
+      echo ','
+      echo "    ' ',"
+      ((n++))
+    fi
+done
+)
+  >();
+EOF
