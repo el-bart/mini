@@ -2,6 +2,7 @@
 
 int main(void)
 {
+  _delay_ms(500);   // give step-up a sec to build up steady voltage
   Core c;
   c.run<
     'h','e','l','l','o',
