@@ -3,39 +3,22 @@ eps = 0.01;
 
 module tester()
 {
-  module rise_for(h)
-  {
-    translate([0, 0, 11-h+eps])
-      children();
-  }
-  module up()
-  {
-    translate([0, 9, 0])
-      children();
-  }
-  module right()
-  {
-    translate([9, 0, 0])
-      children();
-  }
   module pair(d, h)
   {
-    right()
+    translate([0, 0, 11-h+eps])
     {
-      rise_for(h)
-      {
-        cylinder(d=d, h=h);
-        up()
-          cylinder(d=d, h=h+10);
-      }
-      children();
+      cylinder(d=d, h=h);
+      translate([0, 9, 0])
+        cylinder(d=d, h=h+10);
     }
+    translate([1.5*d, 0, 0])
+      children();
   }
 
   difference()
   {
-    cube([37, 20, 11]);
-    translate([-3, 5, 0])
+    cube([35, 20, 11]);
+    translate([5, 5, 0])
     {
       pair(d=6.4, h=10.5)      // M5x9.5
         pair(d=6.4, h=6.8)     // M5x5.8
