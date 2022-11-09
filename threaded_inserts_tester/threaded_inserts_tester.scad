@@ -11,7 +11,7 @@ module tester()
       translate([0, 9, 0])
         cylinder(d=d, h=h+10);
     }
-    translate([1.5*d, 0, 0])
+    translate([5+0.6*d, 0, 0])
       children();
   }
 
