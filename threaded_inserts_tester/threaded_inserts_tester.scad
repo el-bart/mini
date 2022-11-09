@@ -11,13 +11,13 @@ module tester()
       translate([0, 9, 0])
         cylinder(d=d, h=h+10);
     }
-    translate([5+0.6*d, 0, 0])
+    translate([5+0.8*d, 0, 0])
       children();
   }
 
   difference()
   {
-    cube([35, 20, 11]);
+    cube([38, 20, 11]);
     translate([5, 5, 0])
     {
       pair(d=6.4, h=10.5)      // M5x9.5
