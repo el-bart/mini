@@ -5,15 +5,15 @@ module fin()
       linear_extrude(1)
         polygon(points=[
           [ 0,  0],
-          [40,  0],
-          [40, 10],
-          [ 0, 30]
+          [80, 10],
+          [80, 20],
+          [ 0, 60]
         ]);
   // base
-  translate([-4/2, 0, 0])
-    cube([4, 30, 1]);
+  translate([-6/2, 0, 0])
+    cube([6, 60, 1]);
 }
 
 for(i=[0:3])
-  translate([i*6, 0, 0])
+  translate([i*8, 0, 0])
     fin();
