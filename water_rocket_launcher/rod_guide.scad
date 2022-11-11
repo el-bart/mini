@@ -8,7 +8,7 @@ module rod_guide()
     // main block
     difference()
     {
-      cylinder(d=rod_d+1.5, h=20, $fn=30);
+      cylinder(d=rod_d+3*0.6, h=20, $fn=100);
       translate([0, 0, -eps])
         cylinder(d=rod_d, h=20+2*eps, $fn=100);
     }
@@ -19,7 +19,4 @@ module rod_guide()
   }
 }
 
-
-for(i=[0:1])
-  translate([0, i*(rod_d+3), 0])
-    rod_guide();
+rod_guide();
