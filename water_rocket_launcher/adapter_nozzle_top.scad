@@ -24,14 +24,15 @@ module nozzle()
 {
   module body()
   {
-    h = 5;
-    cylinder(d1=32, d2=21, h=h, $fn=fn(200));
-    translate([0,0,h])
+    h1 = 5;
+    cylinder(d1=32, d2=21, h=h1, $fn=fn(200));
+    translate([0,0,h1])
     {
+      h2 = 18;
       difference()
       {
-        cylinder(d=16+5, h=10, $fn=fn(200));
-        translate([0, 0, 6])
+        cylinder(d=21, h=h2, $fn=fn(200));
+        translate([0, 0, h2/2])
         {
           d_in = 17-0.5;
           d_r = 2.5;
