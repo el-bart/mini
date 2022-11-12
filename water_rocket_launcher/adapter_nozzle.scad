@@ -60,12 +60,5 @@ module nozzle()
   }
 }
 
-//rotate([180, 0, 0])
-intersection()
-{
-  translate([0, 0, 54.5])
-  cube([50, 50, 20], center=true);
+rotate([180, 0, 0])
   nozzle();
-}
-
-//oring_slot(d_in=17-0.25, d_r=2.5, d_ext=20, d_r_ext=3);
