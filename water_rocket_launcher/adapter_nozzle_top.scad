@@ -24,29 +24,19 @@ module nozzle()
 {
   module body()
   {
-    h = 15;
-    cylinder(d=26.5, h=h, $fn=fn(100));
+    h = 5;
+    cylinder(d1=32, d2=21, h=h, $fn=fn(200));
     translate([0,0,h])
     {
-      h = 24.5;
-      cylinder(d=32, h=h, $fn=fn(120));
-      translate([0,0,h])
+      difference()
       {
-        h = 5;
-        cylinder(d1=32, d2=21, h=h, $fn=fn(200));
-        translate([0,0,h])
+        cylinder(d=16+5, h=10, $fn=fn(200));
+        translate([0, 0, 6])
         {
-          difference()
-          {
-            cylinder(d=21, h=10, $fn=fn(200));
-            translate([0, 0, 6])
-            {
-              d_in = 17-0.5;
-              d_r = 2.5;
-              oring_slot(d_in=d_in, d_r=d_r, d_ext=d_in+1.5, d_r_ext=d_r+0.75);
-              %oring(d_in=d_in, d_r=d_r);
-            }
-          }
+          d_in = 17-0.5;
+          d_r = 2.5;
+          oring_slot(d_in=d_in, d_r=d_r, d_ext=d_in+1.5, d_r_ext=d_r+0.75);
+          %oring(d_in=d_in, d_r=d_r);
         }
       }
     }
@@ -60,5 +50,4 @@ module nozzle()
   }
 }
 
-rotate([180, 0, 0])
-  nozzle();
+nozzle();
