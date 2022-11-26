@@ -1,13 +1,9 @@
-/*
- * configuration
- */
+use <m3d/fn.scad>
+
 names = ["JOHN", "JANE", "BILLY"];
 brushes_count = len(names);
-//$fn=200;
+$fn=fn(200);
 
-/*
- * modules
- */
 
 module lower_tub()
 {
@@ -74,10 +70,6 @@ module brush_holder()
   }
 }
 
-
-/*
- * main program
- */
 
 rotate([90, 0, 0])
 {
