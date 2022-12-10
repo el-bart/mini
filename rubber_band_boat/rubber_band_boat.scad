@@ -1,4 +1,5 @@
 use <m3d/fn.scad>
+use <screw.scad>
 eps = 0.01;
 
 module hull_main(l, d, wall)
@@ -87,3 +88,7 @@ module hull_main(l, d, wall)
 
 
 hull_main(l=60, d=25, wall=1.5);
+
+%translate([0, -5, 13.75])
+  rotate([-90, 0 ,0])
+    sized_screw();
