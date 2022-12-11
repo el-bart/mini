@@ -113,7 +113,7 @@ module screw()
   {
     n = 3;
     for(i=[0:n-1])
-      rotate([0, i*360/n, 0])
+      rotate([0, i*360/n + 15, 0])
         single_blade();
   }
 }
