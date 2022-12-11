@@ -1,5 +1,5 @@
 use <m3d/fn.scad>
-include <detail/config.scad>
+include <config.scad>
 
 module ogive(r, l)
 {
