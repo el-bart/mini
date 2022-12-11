@@ -1,3 +1,3 @@
 PRINTER:=anycubic_chiron
 FILAMENT:=pla
-MODE:=hollow
+MODE:=hollow_cooled
