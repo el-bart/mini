@@ -111,9 +111,9 @@ module screw()
 
   translate([0, -aft_len+d/5, 0])
   {
-    n = 3;
+    n = 4;
     for(i=[0:n-1])
-      rotate([0, i*360/n + 15, 0])
+      rotate([0, i*360/(2*n) + 45, 0])
         single_blade();
   }
 }
