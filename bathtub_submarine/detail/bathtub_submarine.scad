@@ -1,4 +1,4 @@
-use <m3d/fn.scad>
+use <../m3d/fn.scad>
 include <config.scad>
 
 module ogive(r, l)
@@ -13,7 +13,7 @@ module ogive(r, l)
       square([p, p]);
     }
   }
-  
+
   rotate_extrude(angle=360)
     ogive2d();
 }
@@ -131,4 +131,3 @@ module bathtub_submarine()
 
 
 bathtub_submarine();
- 
