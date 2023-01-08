@@ -33,16 +33,16 @@ module u_profile_red(n)
         // wall
         hull()
         {
-          translate([-h/2, -w/2, 0])
-            cube([h, w, h]);
-          translate([-h/2, 0, wall_h-w/2])
+          translate([-2*h/2, -w/2, 0])
+            cube([2*h, w, h]);
+          translate([-2*h/2, 0, wall_h-w/2])
             rotate([0, 90, 0])
-              cylinder(d=w, h=h, $fn=60);
+              cylinder(d=w, h=2*h, $fn=60);
         }
         // screw hole
-        translate([-h/2-eps, 0, wall_h-d2e_v-d/2])
+        translate([-2*h/2-eps, 0, wall_h-d2e_v-d/2])
           rotate([0, 90, 0])
-            cylinder(d=d, h=h+2*eps, $fn=60);
+            cylinder(d=d, h=2*h+2*eps, $fn=60);
       }
 }
 
