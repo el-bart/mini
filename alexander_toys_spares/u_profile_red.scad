@@ -4,7 +4,7 @@ module u_profile_red(n)
 {
   d = 4;
   vert_wall = 11.0;
-  d2d = 5.9;
+  d2d = 6.0;
   d2e_v = 3.3;
   d2e_h = 4.0;
   w = 10.15;
