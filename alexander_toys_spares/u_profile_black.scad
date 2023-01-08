@@ -19,7 +19,7 @@ module u_profile_black()
   }
   // walls
   for(dx=[-1,+1])
-    translate([dx*l_size[0]/2, 0, 0])
+    translate([dx*(l_size[0]-h)/2, 0, 0])
       difference()
       {
         hull()
