@@ -6,6 +6,7 @@ module u_profile_black()
   d2e = 3.3;
   w = 10.15;
   h = 1.06;
+  wall_h = 15;
 
   // lower side
   l_size = [23.25, w, h];
@@ -25,12 +26,12 @@ module u_profile_black()
         {
           translate([-h/2, -w/2, 0])
             cube([h, w, h]);
-          translate([-h/2, 0, 15-w/2])
+          translate([-h/2, 0, wall_h-w/2])
             rotate([0, 90, 0])
               cylinder(d=w, h=h, $fn=60);
         }
         // screw hole
-        translate([-h/2-eps, 0, 15-3-d/2])
+        translate([-h/2-eps, 0, wall_h-d2e-d/2])
           rotate([0, 90, 0])
             cylinder(d=d, h=h+2*eps, $fn=60);
       }
