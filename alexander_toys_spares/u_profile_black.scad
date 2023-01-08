@@ -1,6 +1,6 @@
 eps = 0.01;
 
-module line(n)
+module u_profile_black()
 {
   d = 4;
   d2e = 3.3;
@@ -36,4 +36,4 @@ module line(n)
       }
 }
 
-line(n=15);
+u_profile_black();
