@@ -15,8 +15,8 @@ module line(n)
       for(dx=[-1,+1])
         translate([dx*(l-2*w/2)/2, 0, 0])
           cylinder(d=w, h=h, $fn=60);
+    // screw holes
     off_x = (n%2==1) ? 0 : d2d/2 + d/2;
-    // holes
     for(i=[0:floor(n/2)])
       for(dx=[-1,+1])
         translate([dx*(off_x + i*(d2d+2*d/2)), 0, -eps])
