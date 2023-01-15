@@ -1,22 +1,11 @@
 use <m3d/fn.scad>
 
-module oring(d_in, d_r)
+module oring_slot(d_ext, h, groove)
 {
-  rotate_extrude(angle=360, convexity=20, $fn=fn(120))
-    translate([d_in/2+d_r/2, 0, 0])
-      circle(d=d_r, $fn=fn(40));
-}
-
-module oring_slot(d_in, d_r, d_ext, d_r_ext)
-{
-  rotate_extrude(angle=360, convexity=20, $fn=fn(120))
-    hull()
-    {
-      translate([d_in/2+d_r/2, 0, 0])
-        circle(d=d_r, $fn=fn(40));
-      translate([d_ext/2+d_r_ext/2, 0, 0])
-        circle(d=d_r_ext, $fn=fn(40));
-    }
+  translate([0, 0, -h/2])
+    rotate_extrude(angle=360, convexity=20, $fn=fn(180))
+      translate([d_ext/2-groove, 0, 0])
+        square([h, h]);
 }
 
 
@@ -25,19 +14,18 @@ module nozzle()
   module body()
   {
     h1 = 5;
-    cylinder(d1=32, d2=21, h=h1, $fn=fn(200));
+    cylinder(d1=32, d2=21.5, h=h1, $fn=fn(200));
     translate([0,0,h1])
     {
       h2 = 18;
       difference()
       {
-        cylinder(d=21, h=h2, $fn=fn(200));
+        cylinder(d=21.5, h=h2, $fn=fn(200));
         translate([0, 0, h2/2])
         {
-          d_in = 17-0.5;
           d_r = 2.5;
-          oring_slot(d_in=d_in, d_r=d_r, d_ext=d_in+1.5, d_r_ext=d_r+0.75);
-          %oring(d_in=d_in, d_r=d_r);
+          d_in = 21.5;
+          oring_slot(d_ext=d_in, h=d_r, groove=2.5/2);
         }
       }
     }
