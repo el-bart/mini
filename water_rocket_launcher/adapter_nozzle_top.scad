@@ -14,7 +14,7 @@ module nozzle()
   module body()
   {
     h1 = 5;
-    d = 21;
+    d = 20.5;
     cylinder(d1=32, d2=d, h=h1, $fn=fn(200));
     translate([0,0,h1])
     {
