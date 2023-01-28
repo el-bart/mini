@@ -6,4 +6,20 @@ include <detail/config.scad>
 //top = wall / 2; // [mm]
 
 
-cube([1,1,1]);
+module desk_via_cover()
+{
+  difference()
+  {
+    union()
+    {
+      cylinder(d=top_d, h=top_h);
+      translate([0, 0, top_h])
+        cylinder(d=via_d, h=via_h);
+    }
+    translate([0, 0, top_h])
+      cylinder(d=via_d-2*wall, h=via_h+eps);
+  }
+}
+
+
+desk_via_cover();

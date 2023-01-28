@@ -1,5 +1,12 @@
-wall = 1.6; // [mm]
-via_d = 60; // [mm]
-via_h = 28; // [mm]
-top_h = wall / 2;   // [mm]
-top_d = via_d + 10; // [mm]
+include <../m3d/fn.scad>
+
+spacing = 1;
+
+wall = 1.6;
+via_d = 60 - 2*spacing;
+via_h = 28 - spacing;
+top_h = wall / 2;
+top_d = via_d + 10;
+
+eps = 0.01;
+$fn = fn(400);
