@@ -1,4 +1,5 @@
+wall = 1.6; // [mm]
 via_d = 60; // [mm]
 via_h = 28; // [mm]
-wall = 1.6; // [mm]
-top = wall / 2; // [mm]
+top_h = wall / 2;   // [mm]
+top_d = via_d + 10; // [mm]
