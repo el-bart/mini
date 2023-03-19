@@ -24,11 +24,9 @@ module screw_slot(ddh=0)
 module bg_mount(wall, dx, screws)
 {
   spacing = 0.6;
-//  is_size = [10.1+spacing, 25+spacing, 42-29+spacing];
   wood = (15+spacing)*[1, 1];
   core_size = [10+2*dx, wall+wood[0], 2*wall+wood[1]];
-//  core_size = [
-//  insert_slot(is_size);
+  // main body
   difference()
   {
     translate([-core_size[0]/2, 0, 0])
@@ -45,8 +43,17 @@ module bg_mount(wall, dx, screws)
           screw_slot(20);
     }
   }
+  // mount part
+  mount_size = [core_size[0], 10+wall, core_size[2]];
+  difference()
+  {
+    translate([-mount_size[0]/2, -mount_size[1], 0])
+      cube(mount_size);
+    cut = [25+2*spacing, 10.1+2*spacing, core_size[2]+2*eps];
+    translate([-cut[0]/2, -cut[1], -eps])
+      cube(cut);
+  }
 }
 
 
 bg_mount(wall=7, dx=50, screws=4);
-//screw_slot();
