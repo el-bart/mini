@@ -56,4 +56,5 @@ module bg_mount(wall, dx, screws)
 }
 
 
-bg_mount(wall=7, dx=50, screws=4);
+rotate([0, 90, 0])
+  bg_mount(wall=7, dx=50, screws=4);
