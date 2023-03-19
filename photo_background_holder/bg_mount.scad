@@ -38,9 +38,12 @@ module bg_mount(wall, dx, screws)
       cube([4*dx, wood[0]+eps, wood[1]]);
     // screw slots
     for(i=[1:screws])
+    {
+      hole_dist = core_size[0]/(screws);
       translate([0, core_size[1]-wood[0]/2, core_size[2]+eps])
-        translate([-core_size[0]/2 + i*(core_size[0]/(screws+1)), 0, 0])
+        translate([-core_size[0]/2-hole_dist/2 + i*hole_dist, 0, 0])
           screw_slot(20);
+    }
   }
 }
 
