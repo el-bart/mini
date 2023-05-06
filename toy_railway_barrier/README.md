@@ -30,3 +30,35 @@ most parts are to be glued with a hot glue gun.
 
 servo get screwed into harness with dual M2x10 screws and nuts.
 harness is designed for micro 9g servo.
+
+
+## building
+
+all builds are dockerized, thus no special SDK is needed locally.
+
+
+### enclosure
+
+```
+cd enclosure
+./make
+```
+
+by default it's tuned for my printer.
+you can extend it with configs for your printer.
+see [3d printing SDK](https://github.com/el-bart/3d_printing_sdk) for details.
+
+alternatively you can just grab created `enclosure/build/*.stl`s and put them into your slicer of choice. :)
+
+
+### software
+
+connect arduino nano board to you computer and type:
+
+```
+cd sw
+./make
+```
+
+this will build and flash your µC.
+after that step it can be used with a regular phone charger, acting as a power supply. :)
