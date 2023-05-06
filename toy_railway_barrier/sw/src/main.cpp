@@ -79,7 +79,7 @@ void setup()
 
   {
     wdt_disable();
-    //wdt_enable(WDTO_1S);
+    wdt_enable(WDTO_1S);
   }
 
   Serial.write("booted\n\r");
