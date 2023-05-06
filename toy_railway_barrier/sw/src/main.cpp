@@ -46,13 +46,14 @@ void setup()
     //wdt_enable(WDTO_1S);
   }
   Serial.write("booted\n\r");
+  wdt_reset();
 }
 
 void loop()
 {
   Serial.write("^");
   barrier_down();
-  Serial.write(" ");
+  Serial.write(".");
   barrier_up();
   Serial.write("v\n\r");
   wdt_reset();
