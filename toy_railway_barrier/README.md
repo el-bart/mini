@@ -1,5 +1,7 @@
 # toy railway barrier
 
+![final product](pic/final.jpg)
+
 toy railway barrier, having dual positions (up/.down).
 rising and falling is done slowly, for better realism.
 
@@ -9,6 +11,10 @@ default is up.
 based on arduino nano board.
 
 ## wiring
+
+![electronics](pic/electronics.jpg)
+
+![in the box](pic/in_the_box.jpg)
 
 servo shall be connected to pin 2.
 +5V can be taken directly from the board.
