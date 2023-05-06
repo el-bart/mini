@@ -21,11 +21,11 @@ module box_bottom()
     cube([10, 20, 26]);
   // servo info note
   color("blue")
-  translate([wall+12, size[1]+0.5, wall+5])
+  translate([wall+12, size[1]+0.5, wall+8])
     rotate([90, 0, 0])
       mirror([1, 0, 0])
         linear_extrude(1)
-          text("~+-", size=6);
+          text("~+-", size=8, valign="center", halign="center");
 }
 
 box_bottom();
