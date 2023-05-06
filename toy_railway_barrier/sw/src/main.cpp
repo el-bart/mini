@@ -14,6 +14,8 @@ void wait()
   delay(1000/50); // 50Hz servo
 }
 
+auto last_pos = 0;
+
 void barrier_up()
 {
   for(auto angle=angle_low; angle<=angle_high; ++angle)
@@ -33,6 +35,17 @@ void barrier_down()
     wdt_reset();
   }
 }
+
+void toggle_barrier()
+{
+  auto const prev = last_pos;
+  last_pos *= -1;
+  switch(prev)
+  {
+    case -1: barrier_down(); return;
+    case +1: barrier_up();   return;
+  }
+}
 }
 
 
@@ -41,6 +54,7 @@ void setup()
   Serial.begin(9600);   // RX == 0, TX == 1
   servo.attach(pin_servo);
   servo.write(angle_high);
+  last_pos = +1;
   {
     wdt_disable();
     //wdt_enable(WDTO_1S);
@@ -51,10 +65,7 @@ void setup()
 
 void loop()
 {
-  Serial.write("^");
-  barrier_down();
-  Serial.write(".");
-  barrier_up();
-  Serial.write("v\n\r");
+  toggle_barrier();
+  Serial.write("!");
   wdt_reset();
 }
