@@ -22,3 +22,4 @@ remember to add ~10k Ohm resistor from pin 3 to power line, so that button's sta
 most parts are to be glued with a hot glue gun.
 
 servo get screwed into harness with dual M2x10 screws and nuts.
+harness is designed for micro 9g servo.
