@@ -13,7 +13,7 @@ module servo_harness()
         cube([14, 5+eps, 24]);
       // screw holes
       for(dz=[-1, +1])
-        translate([0, 0, dz*27/2])
+        translate([0, 0, dz*28/2])
           translate([14/2, -5, 35/2])
             rotate([-90, 0, 0])
               cylinder(d=2+0.5, h=10, $fn=fn(50));
