@@ -1,6 +1,6 @@
 # toy railway barrier
 
-toy railway barrier, having dual posutions (up/.down).
+toy railway barrier, having dual positions (up/.down).
 rising and falling is done slowly, for better realism.
 
 position is toggled by a button press.
@@ -12,6 +12,7 @@ based on arduino nano board.
 
 servo shall be connected to pin 2.
 +5V can be taken directly from the board.
+depending on the board and power supply, you might want/need to solder 100µF decoupling capacitor on the power line.
 
 monostable button shall be connected to pin 3.
 it does not matter if button is normally open or closed - sw will handle both.
