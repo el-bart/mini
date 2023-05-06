@@ -18,22 +18,26 @@ auto last_pos = 0;
 
 void barrier_up()
 {
+  Serial.write("rising...");
   for(auto angle=angle_low; angle<=angle_high; ++angle)
   {
     servo.write(angle);
     wait();
     wdt_reset();
   }
+  Serial.write(" up!\n\r");
 }
 
 void barrier_down()
 {
+  Serial.write("lowering...");
   for(auto angle=angle_high; angle>=angle_low; --angle)
   {
     servo.write(angle);
     wait();
     wdt_reset();
   }
+  Serial.write(" down!\n\r");
 }
 
 void toggle_barrier()
@@ -66,6 +70,5 @@ void setup()
 void loop()
 {
   toggle_barrier();
-  Serial.write("!");
   wdt_reset();
 }
