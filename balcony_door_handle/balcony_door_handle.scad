@@ -1,4 +1,4 @@
-$fs=0.01;
+$fn=100;
 
 module supportCore()
 {
