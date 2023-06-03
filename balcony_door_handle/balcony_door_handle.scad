@@ -1,4 +1,5 @@
-$fn=100;
+use <m3d/fn.scad>
+$fn=fn(150);
 
 module supportCore()
 {
