@@ -38,7 +38,7 @@ module wheel_block()
 {
   %rod_mock();
 
-  spacing = 1;
+  spacing = 2*1;
   wall = 3;
 
   difference()
@@ -80,7 +80,7 @@ module wheel_block()
   // rod blockers
   for(dx = [-1, +1])
     translate([dx*3, -3, 20])
-      sphere(r=1, $fn=fn(30));
+      sphere(r=1.5, $fn=fn(30));
 }
 
 //intersection()
