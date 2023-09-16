@@ -9,7 +9,7 @@ d_sc = 0.75;
 module wall_2d()
 {
   sc = stack_cut;
-  h = sc + paint_h + top_space;
+  h = bottom_edge + paint_h + top_space;
   off_h = sc/sin(45);
   polygon([
             [0, sc],
@@ -114,13 +114,19 @@ module bottom(rows, cols)
         %paint_mock();
     }
   }
+  x_offsets = [ for(x=[0:rows-1])
+                  if (rows%2==0)
+                    x-rows/2+0.5
+                  else
+                    x-(rows-1)/2
+              ];
   // cut holes for paints
   difference()
   {
     bottom_block();
-    for(ix=[0:rows-1])
+    for(ix=x_offsets)
       for(iy=[0:cols-1])
-//        translate([])
+        translate([ix*(d_p+1) , iy*(d_p+1), 0])
           paint_slot();
   }
 }
@@ -133,4 +139,4 @@ module holder(rows, cols)
 }
 
 
-holder(rows=3, cols=2);
+holder(rows=5, cols=2);
