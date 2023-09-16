@@ -129,6 +129,13 @@ module bottom(rows, cols)
         translate([ix*(d_p+1) , iy*(d_p+1), 0])
           paint_slot();
   }
+  // poles for pain samples
+  {
+    for(ix=x_offsets)
+      translate([ix*(d_p+1) - d_p/2, 5/2+1, bottom_edge])
+        color("cyan")
+          cylinder(d=5, h=2, $fn=fn(20));
+  }
 }
 
 
