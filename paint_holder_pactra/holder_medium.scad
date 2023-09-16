@@ -1,3 +1,3 @@
 include <detail/holder.scad>
 
-holder(rows=6, cols=2);
+holder(rows=5, cols=2);
