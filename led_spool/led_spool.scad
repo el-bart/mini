@@ -43,17 +43,23 @@ module led_spool_left(d_in, d_out, h_in, wall)
 module led_spool_right(d_in, d_out, h_in, wall)
 {
   h = 2*wall+h_in;
-  difference()
-  {
-    union()
-    {
-      plate(d_in, d_out, h_in, wall);
-      cube(d_in/2*[1,1,h], center=true);
-    }
-    
-  }
+  plate(d_in, d_out, h_in, wall);
+  translate(-(d_in/2-1)/2*[1,1,0] + [0,0, wall])
+    cube((d_in/2-1)*[1,1,0] + [0,0,h-wall-1]);
 }
 
 
-//led_spool_right(d_in=36, d_out=126, h_in=10, wall=1.2);
-led_spool_left(d_in=36, d_out=126, h_in=10, wall=1.2);
+module led_spool(d_in, d_out, h_in, wall, mock=true)
+{
+  led_spool_left(d_in, d_out, h_in, wall);
+  if(mock)
+    %translate([0, 0, 1+3*wall+h_in])
+      mirror([0, 0, 1])
+        led_spool_right(d_in, d_out, h_in, wall);
+
+  translate([0, d_out+2, 0])
+    led_spool_right(d_in, d_out, h_in, wall);
+}
+
+
+led_spool(d_in=36, d_out=126, h_in=10, wall=1.2);
