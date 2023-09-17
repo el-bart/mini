@@ -46,6 +46,7 @@ module led_spool_right(d_in, d_out, h_in, wall)
   plate(d_in, d_out, h_in, wall);
   translate(-(d_in/2-1)/2*[1,1,0] + [0,0, wall])
     cube((d_in/2-1)*[1,1,0] + [0,0,h-wall-1]);
+  cylinder(d=d_in, h=wall, $fn=fn(d_in*5));
 }
 
 
