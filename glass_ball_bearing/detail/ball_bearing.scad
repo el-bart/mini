@@ -6,7 +6,6 @@ function ball_bearing_h(d_in, d_ball, d_out, n, wall, spacing, cage_spacing)
   = d_ball + 2*(spacing+wall);
 
 cage_cut_fraction = 3/4; // part of d_ball that's exposed
-cage_cut_r = 1.0;        // how much space there is between cage edges and 
 
 
 module ball_bearing_ball_locations(d_in, d_ball, d_out, n, wall, spacing, cage_spacing)
@@ -81,26 +80,27 @@ module ball_bearing_half_cage(d_in, d_ball, d_out, n, wall, spacing, cage_spacin
 
 
 
-d_in=5;
-d_ball=4;
-d_out=40;
-n=10;
-wall=2;
-spacing=0.5;
-cage_spacing=0.5;
-$fn=fn(70);
-
-difference()
+if(false)
 {
-union()
+  difference()
   {
-    ball_bearing_core(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
-//    ball_bearing_cage_space(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
-    #ball_bearing_half_cage(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
+    d_in=5;
+    d_ball=4;
+    d_out=30;
+    n=6;
+    wall=2;
+    spacing=0.5;
+    cage_spacing=0.5;
+    $fn=fn(70);
+
+    union()
+    {
+      ball_bearing_core(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
+      #ball_bearing_half_cage(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
+    }
+
+    if(0)
+      translate([0, -50, -50])
+        cube([100, 100, 100]);
   }
-
-if(0)
-translate([0, -50, -50])
-  cube([100, 100, 100]);
-
 }
