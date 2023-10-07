@@ -6,8 +6,8 @@ d_ball=4;
 d_out=30;
 n=6;
 wall=2;
-spacing=0.5;
-cage_spacing=0.5;
+spacing=0.4;
+cage_spacing=0.4;
 $fn=fn(70);
 
 ball_bearing_core(d_in, d_ball, d_out, n, wall, spacing, cage_spacing);
