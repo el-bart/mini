@@ -11,6 +11,7 @@ module webcam()
   cylinder_d = body_size[2] * 2/3;
   cover_wall = 3;
   cylinder_ext_d = cylinder_d + 2*cover_wall;
+  lens_offset = 5;
 
   module optics()
   {
@@ -60,8 +61,23 @@ module webcam()
       support();
   }
 
-  body();
-  translate([body_size[0]/2, body_size[1] - body_rounding, cylinder_ext_d/2])
+  module led_hole()
+  {
+    led_d = 5;
+    d = led_d-1;
+    l = body_size[1] + 2*eps;
+    translate([-0.5*d, 0, 0.5*d] - eps*[0,1,0])
+      rotate([-90, 0, 0])
+        cylinder(d=d, h=l, $fn=fn(40));
+  }
+
+  difference()
+  {
+    body();
+    translate([body_size[0]-8, 0, body_size[2]/2-4])
+      led_hole();
+  }
+  translate([body_size[0]/2-lens_offset, body_size[1] - body_rounding, cylinder_ext_d/2])
     rotate([-90, 0, 0])
       optics();
 }
