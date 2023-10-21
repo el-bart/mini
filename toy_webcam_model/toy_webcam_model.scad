@@ -14,10 +14,6 @@ module webcam()
 
   module optics()
   {
-    module core()
-    {
-      cylinder(h=cylinder_h, d=cylinder_d, $fn=fn(90));
-    }
     module lens()
     {
       translate([0,0,cylinder_h/2/2])
