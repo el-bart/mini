@@ -56,6 +56,19 @@ module fan_tube()
 }
 
 
+module box_mount_holes()
+{
+  // left
+  translate([-41.6, 2.94,0])
+    children();
+  // 2x rigth
+  for(dy=[8.2, -21.68])
+    translate([34.48, dy, 0])
+      children();
+}
+
+
+
 module pos_hotend_cooler()
 {
   translate([0, -20+wall, 27.8+fan_tune_len])
@@ -84,7 +97,7 @@ module template()
   pos_hotend_cooler()
     hotend_cooler_fan();
 
-  translate([20, -28, 20+wall])
+  translate([30, -20, 20+wall+4])
     rotate([0, 90, 0])
       filament_cooler_fan();
 
@@ -99,3 +112,6 @@ template();
 translate([0, -20, -15])
   pos_hotend_cooler()
     fan_tube();
+
+#box_mount_holes()
+  cylinder(d=2.8, h=10, $fn=30);
