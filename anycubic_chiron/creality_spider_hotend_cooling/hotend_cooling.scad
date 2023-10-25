@@ -1,3 +1,8 @@
+use <mocks/hotend_cooler_fan.scad>
+use <mocks/filament_cooler_fan.scad>
+
+wall = 1.8;
+
 module template()
 {
   module carriage()
@@ -15,6 +20,13 @@ module template()
 
   carriage();
   hotend();
+
+  translate([0, -20, 27.8+15])
+    hotend_cooler_fan();
+
+  translate([20, -20, 20+wall])
+    rotate([0, 90, 0])
+      filament_cooler_fan();
 }
 
 
