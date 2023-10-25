@@ -154,6 +154,8 @@ module enclosure()
       cube([10, wall, 42]);
       // bottom support against flat plane
       cube([10, 4+8, 2*wall]);
+      // side reinforcement
+      cube([wall, wall+5, 42]);
     }
   }
 }
