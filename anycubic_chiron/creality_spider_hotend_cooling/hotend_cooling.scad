@@ -105,7 +105,7 @@ module template()
 
   // TODO                                               
   %if(true)
-    translate([0, 13, 45])
+    translate([1, 11+1, 44.5])
       rotate([180, 0, 180])
         pcb();
 }
@@ -157,6 +157,16 @@ module enclosure()
       // side reinforcement
       cube([wall, wall+5, 42]);
     }
+  }
+  // PCB pannel supports
+  translate([0, 2, 33])
+  {
+    // right (single) support
+    translate([15, 0, 0])
+      #cube([8, 8, 10]);
+    // left (dual) support
+    translate([-21, 0, 0])
+      #cube([8, 20, 10]);
   }
 }
 
