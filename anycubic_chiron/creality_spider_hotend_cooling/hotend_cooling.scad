@@ -24,7 +24,7 @@ module template()
   translate([0, -20, 27.8+15])
     hotend_cooler_fan();
 
-  translate([20, -20, 20+wall])
+  translate([20, -28, 20+wall])
     rotate([0, 90, 0])
       filament_cooler_fan();
 }
