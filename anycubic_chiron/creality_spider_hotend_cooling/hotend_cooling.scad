@@ -84,6 +84,14 @@ module pos_filament_cooler()
 }
 
 
+module pos_pcb()
+{
+  translate([1, 11+1, 44.5])
+    rotate([180, 0, 180])
+      children();
+}
+
+
 module template()
 {
   module carriage()
@@ -112,9 +120,8 @@ module template()
 
   // TODO                                               
   %if(true)
-    translate([1, 11+1, 44.5])
-      rotate([180, 0, 180])
-        pcb();
+    pos_pcb()
+      pcb();
 }
 
 
@@ -215,6 +222,13 @@ module enclosure()
           translate([0, 0, -lf-eps])
             cylinder(d=4+0.5, h=lf+3*eps, $fn=fn(50));
     }
+    {
+      lp = 10;
+      pos_pcb()
+        pcb_screw_holes()
+          translate([0, 0, 1.5-eps])
+            cylinder(d=4+0.5, h=lp+3*eps, $fn=fn(50));
+    }
   }
 
   %template();
@@ -223,7 +237,3 @@ module enclosure()
 
 //rotate([90, 0, 0])
   enclosure();
-
-
-//#box_mount_holes()
-//  cylinder(d=2.8, h=10, $fn=30);
