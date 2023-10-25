@@ -4,8 +4,7 @@ eps = 0.01;
 
 module hotend_cooler_fan_screw_holes()
 {
-  d = 3.5;
-  span = 36 - 2*d/2;
+  span = 36 - 2*3.5/2;
   // M3 screw holes
   for(ix=[-1,+1])
     for(iy=[-1,+1])
@@ -25,10 +24,9 @@ module hotend_cooler_fan()
     translate([0, 0, -eps])
       cylinder(d=37.5, h=h);
     d = 3.5;
-    span = 36 - 2*d/2;
     // M3 screw holes
     hotend_cooler_fan_screw_holes()
-      cylinder(d=3.5, h=h, $fn=fn(20));
+      cylinder(d=d, h=h, $fn=fn(20));
   }
 }
 
