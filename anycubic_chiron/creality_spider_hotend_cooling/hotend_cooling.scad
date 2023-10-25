@@ -94,24 +94,82 @@ module template()
   carriage();
   hotend();
 
-  pos_hotend_cooler()
-    hotend_cooler_fan();
+  %if(true)
+    pos_hotend_cooler()
+      hotend_cooler_fan();
 
-  translate([30, -20, 20+wall+4])
-    rotate([0, 90, 0])
-      filament_cooler_fan();
+  %if(true)
+    translate([30.8, -20, 20+wall+4])
+      rotate([0, 90, 0])
+        filament_cooler_fan();
 
-  translate([-30, 0, 25])
-    rotate([90, 90, 0])
-      pcb();
+  %if(true)
+    translate([-30, 5, 19+3])
+      rotate([90, 90, 0])
+        pcb();
 }
 
 
-template();
+module enclosure()
+{
+  // right side
+  translate([29, -40, 0])
+  {
+    // plane for screws
+    cube([10, 55, wall]);
+    // right wall
+    cube([wall, 55, 43]);
+    // bottom right plane
+    translate([-15.5, 0, 0])
+      cube([15.5, wall, 43]);
+    // front, right panel around fan
+    translate([-9, 0, 43-wall])
+    {
+      cube([9, 55, wall]);
+      // mounts for filament cooling fan screws
+      for(dz=[0, -35.1])
+        translate([wall, 0, dz])
+          cube([9, 40, wall+3]);
+    }
+    // front, right panel around fan
+    translate([-9, 0, 43-wall])
+      cube([9, 55, wall]);
+  }
+  // bottom connector
+  {
+     translate([-50/2-15, -40, 30])
+      cube([65, wall, 13]);
+  }
+  // left side
+  translate([-29, -40, 0])
+  {
+    // front, left panel around fan
+    translate([-11-6, 0, 43-wall])
+      cube([20+6, 43.6, wall]);
+    // side and bottom
+    translate([-17, 0, 0])
+    {
+      // left, bottom plane
+      cube([32.5, wall, 42]);
+      // bottom support against flat plane
+      translate([10, 0, 0])
+        cube([10, 4+8, 10]);
+      // tiny block with screw ending
+      cube([10, 48, wall]);
+      // fat block towards left screw
+      #cube([10, 37, 10]);
+    }
+  }
+}
+
+
+enclosure();
+
+%template();
 
 translate([0, -20, -15])
   pos_hotend_cooler()
     fan_tube();
 
-#box_mount_holes()
-  cylinder(d=2.8, h=10, $fn=30);
+//#box_mount_holes()
+//  cylinder(d=2.8, h=10, $fn=30);
