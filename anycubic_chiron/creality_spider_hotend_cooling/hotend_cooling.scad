@@ -165,18 +165,36 @@ module enclosure()
     {
       // right (single) support
       translate([15, 0, 0])
-        #cube([8, 8, 10]);
+        cube([8, 8, 10]);
       // left (dual) support
       translate([-21, 0, 0])
-        #cube([8, 20, 10]);
+        cube([8, 20, 10]);
     }
-
+    // funnel for air
     translate([0, -20, -15])
       pos_hotend_cooler()
         fan_tube();
+    // solids to screw hotend fan to
+    {
+      d = 8;
+      l = 10;
+      pos_hotend_cooler()
+        hotend_cooler_fan_screw_holes()
+          translate(-d/2*[1,1,0] + [0, 0, -l])
+            cube([d, d, l]);
+    }
   }
 
-  core();
+  difference()
+  {
+    core();
+    // main mount holes
+    translate([0, 0, -eps])
+      box_mount_holes()
+        cylinder(d=3+0.5, h=wall+2*eps, $fn=fn(30));
+    // 
+//    pos_hotend_cooler()
+  }
 
   %template();
 }
