@@ -107,9 +107,8 @@ module template()
       hotend_cooler_fan();
 
   %if(true)
-    translate([30.8, -20, 20+wall+4])
-      rotate([0, 90, 0])
-        filament_cooler_fan();
+    pos_filament_cooler()
+      filament_cooler_fan();
 
   // TODO                                               
   %if(true)
