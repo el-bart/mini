@@ -192,8 +192,14 @@ module enclosure()
     translate([0, 0, -eps])
       box_mount_holes()
         cylinder(d=3+0.5, h=wall+2*eps, $fn=fn(30));
-    // 
-//    pos_hotend_cooler()
+    // places for threaded inserts for filement cooling fan
+    {
+      l = 10;
+      pos_hotend_cooler()
+        hotend_cooler_fan_screw_holes()
+          translate([0, 0, -l-eps])
+            cylinder(d=4+0.5, h=l+2*eps, $fn=fn(50));
+    }
   }
 
   %template();
