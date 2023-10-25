@@ -24,11 +24,11 @@ module pcb()
   {
     translate([-size.x/2, -size.y/2, 0])
       cube(size);
-    // bottom sockets
+    // bottom sockets (from motheboard)
     b_size = [25, 7.6, 7.4];
     translate([-size.x/2+7, -b_size.y/2, -b_size.z])
       cube(b_size);
-    // top sockets row
+    // top sockets row (fans, themistor, etc...)
     t_size = [26.6, 5.5, 6.75];
     translate([-size.x/2+6.4, -size.y/2, size.z])
       cube(t_size);
