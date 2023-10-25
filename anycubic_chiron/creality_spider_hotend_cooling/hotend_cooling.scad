@@ -103,9 +103,10 @@ module template()
       rotate([0, 90, 0])
         filament_cooler_fan();
 
+  // TODO                                               
   %if(true)
-    translate([-30, 5, 19+3])
-      rotate([90, 90, 0])
+    translate([0, 13, 45])
+      rotate([180, 0, 180])
         pcb();
 }
 
@@ -137,27 +138,22 @@ module enclosure()
   }
   // bottom connector
   {
-     translate([-50/2-15, -40, 30])
-      cube([65, wall, 13]);
+     translate([-50/2-11, -40, 30])
+      cube([50+11, wall, 13]);
   }
   // left side
   translate([-29, -40, 0])
   {
     // front, left panel around fan
-    translate([-11-6, 0, 43-wall])
-      cube([20+6, 43.6, wall]);
+    translate([-7, 0, 43-wall])
+      cube([16, 43.6, wall]);
     // side and bottom
-    translate([-17, 0, 0])
+    translate([-7, 0, 0])
     {
       // left, bottom plane
-      cube([32.5, wall, 42]);
+      cube([10, wall, 42]);
       // bottom support against flat plane
-      translate([10, 0, 0])
-        cube([10, 4+8, 10]);
-      // tiny block with screw ending
-      cube([10, 48, wall]);
-      // fat block towards left screw
-      #cube([10, 37, 10]);
+      cube([10, 4+8, 2*wall]);
     }
   }
 }
