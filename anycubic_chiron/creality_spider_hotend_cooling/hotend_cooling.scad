@@ -76,6 +76,14 @@ module pos_hotend_cooler()
 }
 
 
+module pos_filament_cooler()
+{
+  translate([30.8, -20, 20+wall+4])
+    rotate([0, 90, 0])
+      children();
+}
+
+
 module template()
 {
   module carriage()
@@ -130,9 +138,9 @@ module enclosure()
       {
         cube([9, 55, wall]);
         // mounts for filament cooling fan screws
-        for(dz=[0, -35.1])
+        for(dz=[-3, -37])
           translate([wall, 0, dz])
-            cube([9, 40, wall+3]);
+            cube([9, 41, 8]);
       }
       // front, right panel around fan
       translate([-9, 0, 43-wall])
@@ -192,13 +200,21 @@ module enclosure()
     translate([0, 0, -eps])
       box_mount_holes()
         cylinder(d=3+0.5, h=wall+2*eps, $fn=fn(30));
-    // places for threaded inserts for filement cooling fan
+    // hotend cooling fan: places for threaded inserts
     {
-      l = 10;
+      lh = 10;
       pos_hotend_cooler()
         hotend_cooler_fan_screw_holes()
-          translate([0, 0, -l-eps])
-            cylinder(d=4+0.5, h=l+2*eps, $fn=fn(50));
+          translate([0, 0, -lh-eps])
+            cylinder(d=4+0.5, h=lh+2*eps, $fn=fn(50));
+    }
+    // filement cooling fan: places for threaded inserts
+    {
+      lf = 9;
+      pos_filament_cooler()
+        filament_cooler_fan_screw_holes()
+          translate([0, 0, -lf-eps])
+            cylinder(d=4+0.5, h=lf+3*eps, $fn=fn(50));
     }
   }
 
