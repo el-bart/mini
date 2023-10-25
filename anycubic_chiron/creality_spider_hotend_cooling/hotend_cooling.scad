@@ -235,5 +235,5 @@ module enclosure()
 }
 
 
-//rotate([90, 0, 0])
+rotate([90, 0, 0])
   enclosure();
