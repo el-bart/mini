@@ -2,6 +2,17 @@ use <../m3d/fn.scad>
 
 eps = 0.01;
 
+module hotend_cooler_fan_screw_holes()
+{
+  d = 3.5;
+  span = 36 - 2*d/2;
+  // M3 screw holes
+  for(ix=[-1,+1])
+    for(iy=[-1,+1])
+      translate([ix*span/2, iy*span/2, -eps])
+        children();
+}
+
 module hotend_cooler_fan()
 {
   size = [40.2, 40.2, 10.6];
@@ -16,10 +27,8 @@ module hotend_cooler_fan()
     d = 3.5;
     span = 36 - 2*d/2;
     // M3 screw holes
-    for(ix=[-1,+1])
-      for(iy=[-1,+1])
-        translate([ix*span/2, iy*span/2, -eps])
-          cylinder(d=3.5, h=h, $fn=fn(20));
+    hotend_cooler_fan_screw_holes()
+      cylinder(d=3.5, h=h, $fn=fn(20));
   }
 }
 
