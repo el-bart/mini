@@ -113,71 +113,78 @@ module template()
 
 module enclosure()
 {
-  // right side
-  translate([29, -40, 0])
+  module core()
   {
-    // plane for screws
-    cube([10, 55, wall]);
-    // right wall
-    cube([wall, 55, 43]);
-    // bottom right plane
-    translate([-15.5, 0, 0])
-      cube([15.5, wall, 43]);
-    // front, right panel around fan
-    translate([-9, 0, 43-wall])
+    // right side
+    translate([29, -40, 0])
     {
-      cube([9, 55, wall]);
-      // mounts for filament cooling fan screws
-      for(dz=[0, -35.1])
-        translate([wall, 0, dz])
-          cube([9, 40, wall+3]);
+      // plane for screws
+      cube([10, 55, wall]);
+      // right wall
+      cube([wall, 55, 43]);
+      // bottom right plane
+      translate([-15.5, 0, 0])
+        cube([15.5, wall, 43]);
+      // front, right panel around fan
+      translate([-9, 0, 43-wall])
+      {
+        cube([9, 55, wall]);
+        // mounts for filament cooling fan screws
+        for(dz=[0, -35.1])
+          translate([wall, 0, dz])
+            cube([9, 40, wall+3]);
+      }
+      // front, right panel around fan
+      translate([-9, 0, 43-wall])
+        cube([9, 55, wall]);
     }
-    // front, right panel around fan
-    translate([-9, 0, 43-wall])
-      cube([9, 55, wall]);
-  }
-  // bottom connector
-  {
-     translate([-50/2-11, -40, 30])
-      cube([50+11, wall, 13]);
-  }
-  // left side
-  translate([-29, -40, 0])
-  {
-    // front, left panel around fan
-    translate([-7, 0, 43-wall])
-      cube([16, 43.6, wall]);
-    // side and bottom
-    translate([-7, 0, 0])
+    // bottom connector
     {
-      // left, bottom plane
-      cube([10, wall, 42]);
-      // bottom support against flat plane
-      cube([10, 4+8, 2*wall]);
-      // side reinforcement
-      cube([wall, wall+5, 42]);
+       translate([-50/2-11, -40, 30])
+        cube([50+11, wall, 13]);
     }
+    // left side
+    translate([-29, -40, 0])
+    {
+      // front, left panel around fan
+      translate([-7, 0, 43-wall])
+        cube([16, 43.6, wall]);
+      // side and bottom
+      translate([-7, 0, 0])
+      {
+        // left, bottom plane
+        cube([10, wall, 42]);
+        // bottom support against flat plane
+        cube([10, 4+8, 2*wall]);
+        // side reinforcement
+        cube([wall, wall+5, 42]);
+      }
+    }
+    // PCB pannel supports
+    translate([0, 2, 33])
+    {
+      // right (single) support
+      translate([15, 0, 0])
+        #cube([8, 8, 10]);
+      // left (dual) support
+      translate([-21, 0, 0])
+        #cube([8, 20, 10]);
+    }
+
+    translate([0, -20, -15])
+      pos_hotend_cooler()
+        fan_tube();
   }
-  // PCB pannel supports
-  translate([0, 2, 33])
-  {
-    // right (single) support
-    translate([15, 0, 0])
-      #cube([8, 8, 10]);
-    // left (dual) support
-    translate([-21, 0, 0])
-      #cube([8, 20, 10]);
-  }
+
+  core();
+
+  %template();
 }
 
 
-enclosure();
+//rotate([90, 0, 0])
+  enclosure();
 
-%template();
-
-translate([0, -20, -15])
-  pos_hotend_cooler()
-    fan_tube();
 
 //#box_mount_holes()
 //  cylinder(d=2.8, h=10, $fn=30);
