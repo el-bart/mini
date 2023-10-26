@@ -5,4 +5,4 @@ translate([-5, -5, 0])
 
 for(i=[0:1])
   translate(i*[15, 0, 0])
-    cylinder(r=5/2, h=20);
+    cylinder(d1=5, d2=1, h=20);
