@@ -1,4 +1,5 @@
 use <m3d/fn.scad>
+use <mocks/filament_cooler_fan.scad>
 
 eps = 0.01;
 
@@ -7,6 +8,14 @@ module pos_filament_cooling_duct()
   translate([0, -20, 5.2])
     rotate([0, 90, -90])
       children();
+}
+
+module duct_pos_filament_cooler_fan()
+{
+  translate([5.15, 0, -20])
+    rotate([-90, 0, 0])
+      rotate([0, -90, 0])
+        children();
 }
 
 
@@ -122,5 +131,10 @@ module filament_cooling_duct()
 }
 
 
-rotate([-90, 0, 0])
+//rotate([-90, 0, 0])
   filament_cooling_duct();
+
+
+%if($preview)
+  duct_pos_filament_cooler_fan()
+    filament_cooler_fan();
