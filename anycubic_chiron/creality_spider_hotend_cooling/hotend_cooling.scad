@@ -2,6 +2,7 @@ use <m3d/fn.scad>
 use <mocks/hotend_cooler_fan.scad>
 use <mocks/filament_cooler_fan.scad>
 use <mocks/pcb.scad>
+use <filament_cooling_duct.scad>
 
 eps = 0.01;
 wall = 1.8;
@@ -115,10 +116,16 @@ module template()
       hotend_cooler_fan();
 
   %if(true)
+  {
     pos_filament_cooler()
       filament_cooler_fan();
+    // TODO: temp...
+    pos_filament_cooler()
+    translate([0, -20, 5])
+      rotate([0, 90, -90])
+        filament_cooling_duct();
+  }
 
-  // TODO                                               
   %if(true)
     pos_pcb()
       pcb();
@@ -231,7 +238,8 @@ module enclosure()
     }
   }
 
-  %template();
+  if($preview)
+    %template();
 }
 
 
