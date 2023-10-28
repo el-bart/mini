@@ -4,7 +4,9 @@ eps = 0.01;
 
 module pos_filament_cooling_duct()
 {
-  // TODO
+  translate([0, -20, 5.2])
+    rotate([0, 90, -90])
+      children();
 }
 
 
@@ -56,7 +58,7 @@ module duct()
 {
   angle = 55;
   length = 24;
-  wall = 1.6;
+  wall = 2.0;
   rot_r = 5;
   max_h = 27-4;
 

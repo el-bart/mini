@@ -118,12 +118,11 @@ module template()
   %if(true)
   {
     pos_filament_cooler()
+    {
       filament_cooler_fan();
-    // TODO: temp...
-    pos_filament_cooler()
-    translate([0, -20, 5])
-      rotate([0, 90, -90])
+      pos_filament_cooling_duct()
         filament_cooling_duct();
+    }
   }
 
   %if(true)
