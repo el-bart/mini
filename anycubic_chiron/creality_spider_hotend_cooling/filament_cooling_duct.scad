@@ -1,73 +1,99 @@
+use <m3d/fn.scad>
+
 eps = 0.01;
 
-module bender(r, angle, length, dh)
+module duct_interal(angle, length, rot_r)
 {
-  n = floor(length / dh);
-  da = angle / n;
+  size_in  = [8, 28];
+  size_out = [3, 26];
+  rot_off = [-rot_r, 0];
 
-  module cut_2d(h)
+  module curved_connector()
   {
-    projection(cut=true)
-      translate([0, 0, -h])
-        children();
+    rotate([-90, 0, 0])
+      translate(-rot_off)
+        rotate_extrude(angle=angle, $fn=fn(100))
+          translate(rot_off)
+            translate(-0.5*size_in)
+              square(size_in);
   }
 
-  for(i = [0:n-1])
+  module funnel()
   {
-    a = i*da;
-    h = i*dh;
-    echo(i, a, h);
-    rotate([0, a, 0])
-      rotate([-90, 0, 0])
-        rotate_extrude(angle=da)
-          translate([-r, 0, 0])
-            cut_2d(h)
-              children();
+    module core()
+    {
+      hull()
+      {
+        // end
+        translate(length*[0,0,1])
+          linear_extrude(eps)
+            #translate([-0.5*size_in.x, -size_out.y/2 + (size_in.y-size_out.y)/2])
+              square(size_out);
+        // start
+        linear_extrude(eps)
+          translate(-0.5*size_in)
+            square(size_in);
+      }
+    }
+
+    translate(-rot_off)
+      rotate([0, angle, 0])
+        translate(rot_off)
+          core();
   }
+
+  curved_connector();
+  funnel();
 }
 
-
-module straight_tube(s1, s2, h, wall)
+module duct()
 {
-  module chimney(s1, s2, h)
+  angle = 50;
+  length = 20;
+  wall = 1.2;
+  rot_r = 10;
+
+  module exterior()
   {
-    hull()
+    module surrounding()
     {
-      linear_extrude(eps)
-        translate(-0.5*[s1.x, s1.y])
-          square(s1);
-      translate([0, 0, h])
-        linear_extrude(eps)
-          translate(-0.5*[s2.x, s2.y])
-            square(s2);
+      minkowski()
+      {
+        duct_interal(angle=angle, length=length, rot_r=10);
+        cube(wall*[1,1,1], center=true);
+        // sphere(r=wall, $fn=fn(20));
+      }
+    }
+
+    intersection()
+    {
+      // body
+      surrounding();
+      x = 100;
+      // remove input closing
+      {
+        translate(-0.5*[x,x,0])
+          cube([x, x, x]);
+      }
+      // remove output closing
+      {
+        extra = 100;
+        rot_off = [-rot_r, 0];
+        translate(-rot_off)
+          rotate([0, angle, 0])
+            translate(rot_off)
+              translate(-0.5*[x,x,0])
+                translate([0, 0, -extra])
+                  cube([x, x, length+extra]);
+      }
     }
   }
 
   difference()
   {
-    chimney(s1, s2, h);
-    translate([0,0,-eps])
-      chimney(s1-wall*[2,2], s2-wall*[2,2], h+2*eps);
+    exterior();
+    duct_interal(angle=angle, length=length, rot_r=10);
   }
 }
 
-h = 40;
-bender(r=40, angle=90, length=h, dh=0.2)
-  straight_tube(s1=[10, 30], s2=[5, 15], h=h, wall=1.6);
-
-
-module object(h)
-{
-  difference()
-  {
-    cylinder(d1=20, d2=5, h=h);
-    translate([-3/2, -3/2, -eps])
-      cube([3,3,h+2*eps]);
-  }
-}
-
-
-
-//h = 30;
-//bender(r=40, angle=45, length=h, dh=0.2)
-//  object(h=h);
+duct();
