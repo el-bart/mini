@@ -125,16 +125,49 @@ module duct()
 }
 
 
+module oy_centered_cube(size)
+{
+  translate([0, -size.y/2, 0])
+    cube(size);
+}
+
+
 module filament_cooling_duct()
 {
+  module base()
+  {
+    h = 6;      // non-overlapping height
+    oh = 6.5;   // overlap height
+    wall = 2;
+    oy_centered_cube([wall, 30, oh]);
+    translate([-wall, 0, -h])
+      oy_centered_cube([wall, 40, h+oh]);
+    translate([-wall, -20, -40])
+      cube([wall, 10, 40]);
+  }
+
+  module base_with_screw_holes()
+  {
+    difference()
+    {
+      translate([-5, 0, 0])
+        base();
+      duct_pos_filament_cooler_fan()
+        filament_cooler_fan_screw_holes()
+          cylinder(d=3+0.5, h=20, $fn=fn(50));
+    }
+  }
+
+  base_with_screw_holes();
   duct();
 }
 
 
-//rotate([-90, 0, 0])
+rotate([0, -90, 0])
+{
   filament_cooling_duct();
 
-
-%if($preview)
-  duct_pos_filament_cooler_fan()
-    filament_cooler_fan();
+  %if($preview)
+    duct_pos_filament_cooler_fan()
+      filament_cooler_fan();
+}
