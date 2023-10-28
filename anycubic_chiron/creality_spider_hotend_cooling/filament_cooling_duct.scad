@@ -48,10 +48,11 @@ module duct_interal(angle, length, rot_r)
 
 module duct()
 {
-  angle = 50;
-  length = 20;
-  wall = 1.2;
-  rot_r = 10;
+  angle = 55;
+  length = 24;
+  wall = 1.6;
+  rot_r = 5;
+  max_h = 27-4;
 
   module exterior()
   {
@@ -59,7 +60,7 @@ module duct()
     {
       minkowski()
       {
-        duct_interal(angle=angle, length=length, rot_r=10);
+        duct_interal(angle=angle, length=length, rot_r=rot_r);
         cube(wall*[1,1,1], center=true);
         // sphere(r=wall, $fn=fn(20));
       }
@@ -89,11 +90,28 @@ module duct()
     }
   }
 
-  difference()
+  module core()
   {
-    exterior();
-    duct_interal(angle=angle, length=length, rot_r=10);
+    difference()
+    {
+      exterior();
+      duct_interal(angle=angle, length=length, rot_r=rot_r);
+    }
+  }
+
+  // ensure core duct part does not exceed maximum allowed h (aka: print clearance)
+  intersection()
+  {
+    core();
+    cube([100, 100, 2*max_h], center=true);
   }
 }
 
-duct();
+
+module filament_cooling_duct()
+{
+  duct();
+}
+
+
+filament_cooling_duct();
