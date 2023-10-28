@@ -114,4 +114,5 @@ module filament_cooling_duct()
 }
 
 
-filament_cooling_duct();
+rotate([-90, 0, 0])
+  filament_cooling_duct();
