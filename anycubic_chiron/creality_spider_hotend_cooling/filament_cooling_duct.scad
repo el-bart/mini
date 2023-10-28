@@ -2,10 +2,16 @@ use <m3d/fn.scad>
 
 eps = 0.01;
 
+module pos_filament_cooling_duct()
+{
+  // TODO
+}
+
+
 module duct_interal(angle, length, rot_r)
 {
   size_in  = [8, 28];
-  size_out = [3, 26];
+  size_out = [3, 15];
   rot_off = [-rot_r, 0];
 
   module curved_connector()
