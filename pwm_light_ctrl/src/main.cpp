@@ -18,10 +18,9 @@ void setup()
 
 void loop()
 {
-  static unsigned n = 0;
-  n++;
-  Serial.print("loop #");
-  Serial.print(n, DEC);
+  auto s = analogRead(pin_adc);
+  Serial.print("read: ");
+  Serial.print(s, DEC);
   Serial.print("\n");
   wdt_reset();
   delay(200);
