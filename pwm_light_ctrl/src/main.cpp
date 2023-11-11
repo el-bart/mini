@@ -43,7 +43,6 @@ uint8_t clamp(uint8_t min, uint8_t value, uint8_t max)
 void loop()
 {
   auto in = analogRead(pin_adc);
-  //auto s = static_cast<uint8_t>(in / 4);
   auto gcs = gamma(in, 1.3);
   auto cgcs = clamp(5, gcs, 255);
   analogWrite(pin_pwm, cgcs);
@@ -55,5 +54,5 @@ void loop()
   Serial.print("\n");
 
   wdt_reset();
-  delay(200);
+  delay(100);
 }
