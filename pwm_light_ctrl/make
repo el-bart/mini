@@ -1,0 +1,34 @@
+#!/bin/bash
+set -eu -o pipefail
+shopt -s nullglob
+
+app_dir=$(dirname "$(readlink -e "$0")")
+vcs_root=$( { git rev-parse --show-toplevel | xargs dirname ; } 2>/dev/null || dirname "$app_dir")
+image="$(sed "s%^$vcs_root/%%" <<< "$app_dir" | tr '/.\- &' '_' | tr '[:upper:]' '[:lower:]')_sdk"
+
+docker build -t "$image" "$app_dir/sdk/"
+
+EXTRA_FLAGS=()
+if tty -s
+then
+  EXTRA_FLAGS+=("-it")
+fi
+
+for dev in /dev/ttyUSB*
+do
+  EXTRA_FLAGS+=("--device" "$dev")
+  export PIO_PORT=$dev
+done
+
+DIALOUT_GID=$(grep "dialout" "/etc/group" | awk 'BEGIN { FS=":" } { print $3 }')
+
+docker run \
+  "${EXTRA_FLAGS[@]}" \
+  --env "PIO_PORT" \
+  --rm \
+  --group-add "$DIALOUT_GID" \
+  -u "$(id -u):$(id -g)" \
+  -v "$app_dir:/mnt" \
+  -w "/mnt" \
+  "$image" \
+  make "$@"
