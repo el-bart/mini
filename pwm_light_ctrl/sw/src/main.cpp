@@ -4,6 +4,7 @@
 
 auto constexpr pin_adc = A7;
 auto constexpr pin_pwm = 3;
+auto constexpr gamma = 1.3;
 
 
 void setup()
@@ -23,7 +24,7 @@ void setup()
 
 namespace
 {
-uint8_t gamma(uint16_t in, double gamma)
+uint8_t gamma_correction(uint16_t in, double gamma)
 {
   double v = in / 1023.0;
   double out = pow(v, gamma);
@@ -43,7 +44,7 @@ uint8_t clamp(uint8_t min, uint8_t value, uint8_t max)
 void loop()
 {
   auto in = analogRead(pin_adc);
-  auto gcs = gamma(in, 1.3);
+  auto gcs = gamma_correction(in, gamma);
   auto cgcs = clamp(5, gcs, 255);
   analogWrite(pin_pwm, cgcs);
 
