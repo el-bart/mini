@@ -2,7 +2,7 @@ use<m3d/fn.scad>
 use<template/house.scad>
 include<detail/common.scad>
 
-module wall_root(dir)
+module wall_roof(dir)
 {
   single_wall();
   translate([0, mount_len, 0])
@@ -16,6 +16,6 @@ translate([-wall*2-0.5, 0, 0])
     for(i=[0:2])
       translate([-dir*(i+1)*(wall+2), 0, 0])
         translate([-wall/2, 119.5, 0])
-          wall_root(dir);
+          wall_roof(dir);
 
 %house();
