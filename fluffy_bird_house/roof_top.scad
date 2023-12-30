@@ -1,4 +1,4 @@
-use<template/house.scad>
+use<detail/house.scad>
 include<detail/common.scad>
 
 module roof_top()
