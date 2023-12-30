@@ -1,8 +1,7 @@
-module house(h=0.01, show=$preview)
+module house(h=0.01)
 {
-  if(show)
-    linear_extrude(h)
-      import("house.svg");
+  linear_extrude(h)
+    import("house.svg");
 }
 
 house();
