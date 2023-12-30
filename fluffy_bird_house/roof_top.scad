@@ -1,4 +1,3 @@
-use<m3d/fn.scad>
 use<template/house.scad>
 include<detail/common.scad>
 

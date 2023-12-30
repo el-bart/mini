@@ -1,3 +1,5 @@
+use<../m3d/fn.scad>
+
 eps = 0.01;
 
 wall = 1.5;
