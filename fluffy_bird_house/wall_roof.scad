@@ -12,7 +12,7 @@ module wall_roof(dir)
 
 translate([-wall*2-0.5, 0, 0])
   for(dir=[-1,+1])
-    for(i=[0:4])
+    for(i=[0:2])
       translate([-dir*(i+1)*(wall+2), 0, 0])
         translate([-wall/2, 119.5, 0])
           wall_roof(dir);
