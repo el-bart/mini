@@ -12,7 +12,7 @@ module connector(h)
           cylinder(r=8, h=wall, $fn=fn(50));
     for(i=[-1,+1])
       translate([0, i*dist/2, -wall])
-        cylinder(r=hole_d, h=3*wall, $fn=fn(50));
+        cylinder(d=hole_d, h=3*wall, $fn=fn(50));
   }
 }
 
