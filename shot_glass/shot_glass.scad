@@ -14,17 +14,17 @@ module glass(wall, base, angle, volume)
 
   hh = b / (2 * tan(a));
   v_hh = pi * pow(b,3) / (24 * tan(a));
-  echo(hh);
-  echo(v_hh);
+//  echo("haight of the 'invisible' part: ", hh);
+//  echo("volume of the 'invisible' part: ", v_hh);
   v = v_g + v_hh;
   H = pow(3*v / (pi * pow(tan(a), 2)), 1/3);
-  echo(v);
-  echo(H);
+//  echo("whole cone volume: ", v);
+//  echo("full cone height: ", H);
   h = H - hh;
-  echo(h);
+  echo("haight: ", h);
   x = h * tan(a);
   r = b/2 + x;
-  echo(r);
+  echo("top diameter: ", 2*r);
   
   module interior()
   {
