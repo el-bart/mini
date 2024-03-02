@@ -43,6 +43,17 @@ module hinge_block()
 }
 
 
+module hinge_locations()
+{
+  a = hinge_side_dist;
+  c = size.x-hinge_side_dist;
+  b = (a+c)/2;
+  for(dx=[a, b, c])
+    translate([dx, size.y, cut_h])
+      children();
+}
+
+
 module box()
 {
   module body()
@@ -63,9 +74,8 @@ module box()
   }
 
   body();
-  for(dx=[hinge_side_dist, size.x-hinge_side_dist])
-    translate([dx, size.y, cut_h])
-      hinge_low();
+  hinge_locations()
+    hinge_low();
 }
 
 intersection()
