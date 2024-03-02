@@ -5,7 +5,7 @@ include<config.scad>
 
 module hinge_block()
 {
-  wall = 2;
+  wall = hinge_wall;
   d = 1.75 + 0.3;
   h = d + 2*wall;
   base = h;
@@ -38,6 +38,46 @@ module hinge_block()
   }
 
   translate([-length/2, 0, 0])
+    rotate([-90, 0, 0])
+      core();
+}
+
+
+module hinge_top()
+{
+  wall = hinge_wall;
+  d = 1.75 + 0.3;
+  h = d + 2*wall;
+  base = h;
+  length = hinge_len;
+  eps = 0.01;
+
+  module c2p()
+  {
+    translate([0, 2*h, h-(wall+d)])
+      rotate([0, 90, 0])
+        children();
+  }
+
+  module core()
+  {
+    difference()
+    {
+      // main body
+      hull()
+      {
+        cube([length, eps, eps]);
+        c2p()
+          cylinder(d=d+wall, h=length, $fn=fn(50));
+      }
+      // hinge hole
+      translate([-eps, 0, 0])
+        c2p()
+          cylinder(d=d, h=length+2*eps, $fn=fn(50));
+    }
+  }
+
+  translate([-length/2, 0, base/2+h])
     rotate([-90, 0, 0])
       core();
 }
@@ -80,6 +120,9 @@ module box()
 
 intersection()
 {
-  box();
-  cube([1000, 1000, cut_h]);
+//  box();
+//  cube([1000, 1000, cut_h]);
 }
+
+#hinge_top();
+hinge_block();
