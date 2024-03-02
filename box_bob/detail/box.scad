@@ -14,7 +14,7 @@ module hinge_block()
 
   module c2p()
   {
-    translate([0, base/2, h-(wall+d)])
+    translate([0, base/2, d/2+wall])
       rotate([0, 90, 0])
         children();
   }
@@ -28,7 +28,7 @@ module hinge_block()
       {
         cube([length, base, eps]);
         c2p()
-          cylinder(d=d+wall, h=length, $fn=fn(50));
+          cylinder(d=d+2*wall, h=length, $fn=fn(50));
       }
       // hinge hole
       translate([-eps, 0, 0])
@@ -54,7 +54,7 @@ module hinge_top()
 
   module c2p()
   {
-    translate([0, 2*h, h-(wall+d)])
+    translate([0, h*2, d/2+wall])
       rotate([0, 90, 0])
         children();
   }
@@ -68,7 +68,7 @@ module hinge_top()
       {
         cube([length, eps, eps]);
         c2p()
-          cylinder(d=d+wall, h=length, $fn=fn(50));
+          cylinder(d=d+2*wall, h=length, $fn=fn(50));
       }
       // hinge hole
       translate([-eps, 0, 0])
@@ -135,9 +135,10 @@ module box()
     snap();
 }
 
-intersection()
-{
-  box();
-  translate([0, -10, 0])
-    cube([1000, 1000, cut_h]);
-}
+if(false)
+  intersection()
+  {
+    box();
+    translate([0, -10, 0])
+      cube([1000, 1000, cut_h]);
+  }
