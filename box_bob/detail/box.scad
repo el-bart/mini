@@ -94,6 +94,21 @@ module hinge_locations()
 }
 
 
+module snap()
+{
+  r = 1.5;
+  l = 10;
+  difference()
+  {
+    translate([-l/2, 0, -r])
+      rotate([0, 90, 0])
+        cylinder(r=r, h=l, $fn=fn(50));
+    translate([-l, 0, -2*r])
+      cube([2*l, r, 2*r+1]);
+  }
+}
+
+
 module box()
 {
   module body()
@@ -116,13 +131,13 @@ module box()
   body();
   hinge_locations()
     hinge_low();
+  translate([size.x/2, 0, cut_h])
+    snap();
 }
 
 intersection()
 {
-//  box();
-//  cube([1000, 1000, cut_h]);
+  box();
+  translate([0, -10, 0])
+    cube([1000, 1000, cut_h]);
 }
-
-#hinge_top();
-hinge_block();
