@@ -35,7 +35,7 @@ module top()
   intersection()
   {
     box();
-    translate([0, -eps, cut_h-eps])
+    translate([0, -eps, cut_h+eps])
       cube([size.x, size.y+20, size.z]);
   }
   hinge_locations()
