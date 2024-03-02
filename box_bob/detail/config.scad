@@ -2,6 +2,7 @@ wall = 1.2;
 
 size = [220, 88, 50];
 corner_r = 14/2;
+plug_cut = [16, 10];
 
 cut_h = 35;
 
