@@ -135,7 +135,7 @@ module box()
     snap();
 }
 
-if(false)
+if(true)
   intersection()
   {
     box();
