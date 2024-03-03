@@ -116,9 +116,9 @@ module box()
     eps = 0.01;
     difference()
     {
-      side_rounded_cube(size, corner_r=corner_r, $fn=fn(50));
+      side_rounded_cube(size, corner_r=corner_r, $fn=fn(150));
       translate(wall*[1, 1, 1])
-        side_rounded_cube(size-2*wall*[1,1,1], corner_r=corner_r, $fn=fn(50));
+        side_rounded_cube(size-2*wall*[1,1,1], corner_r=corner_r-wall, $fn=fn(150));
       // cables hole
       translate([size.x-wall-eps, wall+corner_r, wall])
         cube([wall+2*eps, plug_cut.x, plug_cut.y]);
