@@ -4,10 +4,10 @@ include <m3d/math.scad>
 
 d = 3.5;
 d_torus_ext = 20;
-sup_len = 5;
+sup_len = d;
 mount_len = 20;
 wall = 1.5;
-spacing = 0.25;
+spacing = 0.15;
 $fn = fn(30);
 
 module hook()
@@ -53,26 +53,44 @@ module hook()
 module plate(mocks=false)
 {
   r = d/2*0.9;
-  s = [mount_len, mount_len+2*r, d];
+  extra_len = 10;
+  s = [mount_len, mount_len + 2*r + wall + extra_len, d];
+  s_sup = [d, mount_len, sup_len];
+  s_int = s_sup + spacing*[2,1,0];
+  s_ext = s_int + wall*[2,1,0];
+
   // base
-  translate([-s.x/2, -r, 0])
-    rounded_cube(size=s, corner_r=r);
+  difference()
+  {
+    translate([-s.x/2, -r, 0])
+      rounded_cube(size=s, corner_r=r);
+    // string hole
+    translate([0, s.y - r - extra_len*1/3, -eps])
+      cylinder(d=2, h=s.z+2*eps);
+  }
+
   // support elements
   translate([0, 0, s.z])
   {
-    s_sup = [d, sup_len, d];
-    s_int = s_sup + spacing*[1,1,1];
-    s_ext = s_int + wall*[1,1,0];
     difference()
     {
       translate([-s_ext.x/2, 0, 0])
         cube(s_ext);
       translate([-s_int.x/2, wall, 0])
-        cube(s_int);
+        cube(s_int + eps*[0, 1, 1]);
     }
   }
+
+  %if(mocks)
+    translate([0, spacing, s.z])
+      rotate([0, 0, 180])
+        translate([d/2, -d/2-wall, 0])
+          rotate([0, -90, 0])
+            translate([sup_len+d/2, 0, d/2])
+              hook();
 }
 
-//hook();
+translate([mount_len/2 + 10, mount_len, d/2])
+  hook();
 
 plate(mocks=true);
