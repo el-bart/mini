@@ -66,7 +66,7 @@ module plate(mocks=false)
       rounded_cube(size=s, corner_r=r);
     // string hole
     translate([0, s.y - r - extra_len*1/3, -eps])
-      cylinder(d=2, h=s.z+2*eps);
+      cylinder(d=3, h=s.z+2*eps);
   }
 
   // support elements
