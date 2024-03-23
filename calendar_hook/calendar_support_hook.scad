@@ -14,7 +14,7 @@ module hook()
 {
   module torus(d_ext, d_t)
   {
-    rotate_extrude(angle=180, $fn=fn(70))
+    rotate_extrude(angle=90, $fn=fn(70))
       translate([d_ext/2+d_t/2, 0])
         circle(d=d_t);
   }
@@ -29,10 +29,10 @@ module hook()
 
   module hook_core()
   {
-    translate([d_torus_ext/2+d/2, 0, 0])
+    translate([0, -d_torus_ext/2-d/2, 0])
       torus(d_ext=d_torus_ext, d_t=d);
-    translate([d_torus_ext+d, 0, 0])
-      extension(d=d, l=15);
+    translate([d_torus_ext/2+d/2, -d_torus_ext/2-d/2, 0])
+      extension(d=d, l=8);
     hull()
     {
       sphere(d=d);
@@ -45,7 +45,7 @@ module hook()
   hook_core();
   // mount block
   cs = [d, mount_len, d];
-  translate([-sup_len, -cs.y/2, 0])
+  translate([-sup_len, -cs.y/2+d/2, 0])
     cube(cs, center=true);
 }
 
