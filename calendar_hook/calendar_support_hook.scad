@@ -70,7 +70,7 @@ module plate(mocks=false)
   }
 
   // support elements
-  translate([0, 0, s.z-0.06]) // 0.006 is for rounded_cube's inaccuracies
+  translate([0, 0, s.z])
   {
     difference()
     {
