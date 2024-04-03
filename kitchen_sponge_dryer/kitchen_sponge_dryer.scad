@@ -58,7 +58,7 @@ module sink_mock(length, spacing=0)
 
 module dryer(mocks=false)
 {
-  module sink_cut_2d(spacing_x=0, spacing_y=0.5)
+  module sink_cut_2d(spacing_x=1, spacing_y=0.5)
   {
     h = sink_bump_h + spacing_y;
     sbs = sink_x_bottom_start;
@@ -67,7 +67,7 @@ module dryer(mocks=false)
     polygon([
       [start_x, 0],
       [start_x, h],
-      [start_x + sink_x_rise + sink_x_top_length, h],
+      [start_x + sink_x_rise + sink_x_top_length + spacing_x, h],
       [end_x, 0],
       [end_x, -eps],
       [end_x, -eps]
@@ -180,7 +180,7 @@ module dryer(mocks=false)
 
   %if(false)
     sink_cut();
-  %if(true)
+  %if(mocks)
     sink_mock(length=200, spacing=0);
 }
 
@@ -188,7 +188,7 @@ module dryer(mocks=false)
 if(0)
   intersection()
   {
-    dryer();
+    dryer(mocks=false);
     translate([0, box_enc_size.y/2, 0]) cube([sink_x_base_length, box_enc_size.y, box_enc_size.z]);
   }
 else
