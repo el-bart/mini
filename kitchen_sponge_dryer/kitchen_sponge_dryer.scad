@@ -159,7 +159,7 @@ module dryer(mocks=false)
       {
         // main cut-in
         translate([wall, wall, bottom_h + 10 + slope_h])
-          side_rounded_cube(int_size, rounding_r, $fn=fn(40));
+          side_rounded_cube(int_size, rounding_r-wall, $fn=fn(40));
         // slope part
         intersection()
         {
