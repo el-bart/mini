@@ -58,7 +58,10 @@ module sink_mock(length, spacing=0)
 
 module dryer(mocks=false)
 {
-  module sink_cut_2d(spacing_x=1, spacing_y=0.5)
+  spacing_x = 2;
+  spacing_y = 0.5;
+
+  module sink_cut_2d()
   {
     h = sink_bump_h + spacing_y;
     sbs = sink_x_bottom_start;
@@ -86,7 +89,7 @@ module dryer(mocks=false)
   {
     h = sink_x_base_length;
     l = sink_tube_len;
-    dx = sink_x_base_length + 2*wall;// + sink_tube_h;
+    dx = sink_x_base_length + 2*wall + spacing_x;// + sink_tube_h;
 
     module base()
     {
@@ -137,7 +140,7 @@ module dryer(mocks=false)
         sink_tube();
       }
       // limit to sink end
-      cube([sink_x_base_length + wall, box_enc_size.y, box_enc_size.z]);
+      cube([sink_x_base_length + wall + spacing_x, box_enc_size.y, box_enc_size.z]);
     }
   }
 
@@ -185,11 +188,11 @@ module dryer(mocks=false)
 }
 
 
-if(0)
+if(false)
   intersection()
   {
-    dryer(mocks=false);
+    dryer(mocks=true);
     translate([0, box_enc_size.y/2, 0]) cube([sink_x_base_length, box_enc_size.y, box_enc_size.z]);
   }
 else
-  dryer();
+  dryer(mocks=$preview);
