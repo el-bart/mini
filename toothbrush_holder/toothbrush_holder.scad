@@ -1,10 +1,6 @@
 use <m3d/fn.scad>
 include <m3d/math.scad>
 
-names = ["JOHN"]; // , "JANE", "BILLY"];
-brushes_count = len(names);
-$fn=fn(100);
-
 
 module lower_tub()
 {
@@ -71,16 +67,25 @@ module brush_holder()
 }
 
 
-rotate([90, 0, 0])
+module holder(names)
 {
-  for(i = [0:brushes_count-1])
+  $fn=fn(100);
+  brushes_count = len(names);
+  rotate([90, 0, 0])
   {
-    translate([i*30,3,55])
-      rotate([-90, -90, 0])
-        scale([2,1,1])
-          linear_extrude(height=1)
-            text(names[i], size=7, halign="center", valign="center");
-    translate(i * [30, 0, 0])
-      brush_holder();
+    for(i = [0:brushes_count-1])
+    {
+      translate([i*30,3,55])
+        rotate([-90, -90, 0])
+          scale([2,1,1])
+            linear_extrude(height=1)
+              text(names[i], size=7, halign="center", valign="center");
+      translate(i * [30, 0, 0])
+        brush_holder();
+    }
   }
 }
+
+
+//holder(["JOHN" , "JANE", "BILLY"]);
+holder(["foo"]);
