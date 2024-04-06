@@ -15,13 +15,77 @@ module lower_tub()
 
 module upper_ring()
 {
-  translate([0, (24+5)/2, 0])
+  h = 10;
+  wall = 5/2;
+  d_int = 24;
+  d_ext = d_int + 2*wall;
+
+  module base_bottom()
+  {
+    module base()
+    {
+      difference()
+      {
+        cylinder(h=h, d=d_ext);
+        translate([0, 0, -eps])
+         cylinder(h=h+2*eps, d=d_int);
+      }
+    }
+
+    module split()
+    {
+      q = max(h, d_ext) + 2*eps;
+      s = q*[1,1,1];
+      translate(-[s.x/2, 0, eps])
+        cube(s);
+    }
+
     difference()
     {
-      cylinder(h=10, r=(24+5)/2);
-      translate([0, 0, -eps])
-       cylinder(h=10+2*eps, r=(24+0)/2);
+      base();
+      split();
     }
+  }
+
+  module base_top()
+  {
+    module split_2d()
+    {
+      q = max(h, d_ext) + 2*eps;
+      s = q*[1,1];
+      translate(-[s.x/2, 0])
+        square(s);
+    }
+
+    module int_2d()
+    {
+      resize([0, 1.5*d_ext, 0])
+        circle(d=d_int);
+    }
+
+    module core_2d()
+    {
+      intersection()
+      {
+        difference()
+        {
+          offset(r=wall)
+            int_2d();
+          int_2d();
+        }
+        split_2d();
+      }
+    }
+
+    linear_extrude(h)
+      core_2d();
+  }
+
+  translate([0, (24+5)/2, 0])
+  {
+    base_bottom();
+    base_top();
+  }
 }
 
 
@@ -87,5 +151,4 @@ module holder(names)
 }
 
 
-//holder(["JOHN" , "JANE", "BILLY"]);
-holder(["foo"]);
+holder(["JOHN" , "JANE", "BILLY"]);
