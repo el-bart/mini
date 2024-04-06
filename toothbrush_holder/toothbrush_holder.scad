@@ -62,8 +62,8 @@ module brush_holder()
   {
     difference()
     {
-      translate([-25/2, 3, 0])
-        cube([25, 10, 10]);
+      translate([-25/2, 3, eps])
+        cube([25, 10, 10-2*eps]);
       hull()
         upper_ring();
     }
