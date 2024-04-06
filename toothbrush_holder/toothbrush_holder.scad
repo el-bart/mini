@@ -1,8 +1,9 @@
 use <m3d/fn.scad>
+include <m3d/math.scad>
 
-names = ["JOHN", "JANE", "BILLY"];
+names = ["JOHN"]; // , "JANE", "BILLY"];
 brushes_count = len(names);
-$fn=fn(200);
+$fn=fn(100);
 
 
 module lower_tub()
@@ -10,7 +11,7 @@ module lower_tub()
   translate([0, (20+4)/2, 0])
     difference()
     {
-      cylinder(h=10+3, r=(20+3)/2);
+      cylinder(h=10+3+eps, r=(20+3)/2);
       translate([0,0,3])
         cylinder(h=10+3, r2=20/2, r1=16/2);
     }
@@ -22,7 +23,8 @@ module upper_ring()
     difference()
     {
       cylinder(h=10, r=(24+5)/2);
-      cylinder(h=10, r=(24+0)/2);
+      translate([0, 0, -eps])
+       cylinder(h=10+2*eps, r=(24+0)/2);
     }
 }
 
@@ -52,9 +54,8 @@ module brush_holder()
   {
     translate([-15/2, 3, 0])
       cube([15, 4, 10+3]);
-    translate([0, 0.1, 0]) // needed to make model simple (aka: manifold)
-      hull()
-        lower_tub();
+    hull()
+      lower_tub();
   }
   // upper mounting
   translate([0, 0, 100-5])
@@ -63,9 +64,8 @@ module brush_holder()
     {
       translate([-25/2, 3, 0])
         cube([25, 10, 10]);
-      translate([0, 0.1, 0]) // needed to make model simple (aka: manifold)
-        hull()
-          upper_ring();
+      hull()
+        upper_ring();
     }
   }
 }
