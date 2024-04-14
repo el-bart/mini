@@ -57,6 +57,25 @@ module holder()
     }
   }
 
+  module weight_slot()
+  {
+    s = [base_size.x, 2*wall+weight_d, weight_d];
+    si = s - 2*wall*[1,1,0];
+    translate(-1/2*[s.x, s.y, 0])
+      difference()
+      {
+        cube(s);
+        translate(wall*[1,1,0])
+        {
+          translate([0, 0, s.z/2])
+            cube(si);
+          translate([0, weight_d/2, s.z/2+wall])
+            rotate([0, 90, 0])
+              cylinder(d=weight_d, h=si.x, $fn=fn(30));
+        }
+      }
+  }
+
   module base()
   {
     translate(-1/2*[base_size.x, base_size.y, 0])
@@ -69,7 +88,9 @@ module holder()
     translate([dx*(base_size.x/2 - arm_cross_len/2), 0, 0])
       column();
 
-  // TODO: weight holders
+  for(dy=[-1,+1])
+    translate([0, dy*(base_size.y/2), 0])
+      weight_slot();
 }
 
 

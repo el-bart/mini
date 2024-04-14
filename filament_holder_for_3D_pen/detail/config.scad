@@ -4,3 +4,4 @@ arm_h = 120;
 arm_cross_len = 12;
 bar_d = 10;
 bar_spacing = 1;
+weight_d = 19.5 + 1;
