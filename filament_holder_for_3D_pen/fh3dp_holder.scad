@@ -1,6 +1,7 @@
 use <m3d/fn.scad>
 include <m3d/math.scad>
 include <detail/config.scad>
+use <fh3dp_bar.scad>
 
 
 module holder()
@@ -95,3 +96,7 @@ module holder()
 
 
 holder();
+%if(1)
+  translate([-(base_size.x + 2*bar_side_h)/2, 0, arm_h])
+    rotate([0, 90, 0])
+      bar();
