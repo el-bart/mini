@@ -60,20 +60,15 @@ module holder()
 
   module weight_slot()
   {
-    s = [base_size.x, 2*wall+weight_d, weight_d];
+    s = [base_size.x, 2*wall+weight_d, wall + weight_d/2];
     si = s - 2*wall*[1,1,0];
-    translate(-1/2*[s.x, s.y, 0])
+    translate([-s.x/2, -s.y/2, 0])
       difference()
       {
         cube(s);
-        translate(wall*[1,1,0])
-        {
-          translate([0, 0, s.z/2])
-            cube(si);
-          translate([0, weight_d/2, s.z/2+wall])
-            rotate([0, 90, 0])
-              cylinder(d=weight_d, h=si.x, $fn=fn(30));
-        }
+        translate([0, weight_d/2, weight_d/2] + wall*[1,1,1])
+          rotate([0, 90, 0])
+            cylinder(d=weight_d, h=si.x, $fn=fn(60));
       }
   }
 
