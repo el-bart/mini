@@ -30,7 +30,7 @@ build_flags+=(--build-arg "UID=$(id -u)")
 build_flags+=(--build-arg "GID=$(id -g)")
 if image_rebuild_needed
 then
-  build_flags+=(--no-cache)
+  date > "img/last-dist-upgrade.ts"
 fi
 time docker build "${build_flags[@]}" img/
 
@@ -74,4 +74,7 @@ do
 done
 
 xhost "+si:localuser:$USER"
+
+echo "$0: if CEF fails again, edit ~/data_misc/steam/data/.local/share/Steam/ubuntu12_64/steamwebhelper.sh"
+
 exec docker run "${run_flags[@]}" "$img" steam "$@"
