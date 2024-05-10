@@ -1,12 +1,12 @@
-FROM debian:11
+FROM debian:12
 RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get update && apt-get install -y \
     ca-certificates
 
 # steam core
 COPY steam.list /etc/apt/sources.list.d/
-COPY steam-keyring.gpg /usr/share/keyrings/
-RUN apt-get update && apt-get dist-upgrade
+COPY steam.gpg /usr/share/keyrings/
+RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get update && apt-get install -y --no-install-recommends -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' \
     steam-launcher
 # extra deps, missing from package
@@ -20,6 +20,19 @@ RUN ln -s /usr/bin/steam /usr/local/bin/steam
 RUN apt-get update && apt-get install --yes \
     pulseaudio-utils
 COPY pulse-client.conf /etc/pulse/client.conf
+
+# some tools
+RUN apt-get update && apt-get install --yes \
+    htop \
+    vim
+
+# things needed by latest steam, that are not listed as a dependency
+RUN apt-get update && apt-get install --yes \
+    lsof
+
+# nifty trick to force rebuild from here - dist upgrade
+COPY last-dist-upgrade.ts /tmp/
+RUN apt-get update && apt-get dist-upgrade -y
 
 # create local user and add to audio group
 ARG UID
