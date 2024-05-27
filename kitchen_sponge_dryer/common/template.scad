@@ -1,31 +1,11 @@
-use <m3d/fn.scad>
-use <m3d/rounded_cube.scad>
-include <m3d/math.scad>
-
-wall = 2;
-rounding_r = 4;
-assert(rounding_r > wall);
-
-sink_bump_h = 7.25;
-sink_a_rise = 90 - 19.1 + 0.6; // measured on photo - take with a grain of salt...
-sink_x_rise = sink_bump_h / tan(sink_a_rise);
-sink_x_bottom_start = 28;
-sink_x_top_length = 22;
-sink_x_base_length = sink_x_bottom_start + 36.5;
-sink_x_fall_start = sink_x_bottom_start + sink_x_rise + sink_x_top_length;
-sink_x_fall = sink_x_base_length - sink_x_fall_start;
-assert(sink_x_fall_start > 0);
-sink_a_fall = atan( sink_bump_h / sink_x_fall );
-assert(sink_x_fall_start > 0);
-
-sink_tube_len = 25;
-sink_tube_h = 10;
-slope_h = 10;
-
-box_enc_size = [45, 175, 100] + [0, 0, sink_bump_h + wall + slope_h];
+use <../m3d/fn.scad>
+use <../m3d/rounded_cube.scad>
+include <../m3d/math.scad>
+include <config.scad>
 
 
-module sink_mock(length, spacing=0)
+
+module sink_mock(box_enc_size, length, spacing=0)
 {
   w = 1;
 
@@ -56,7 +36,7 @@ module sink_mock(length, spacing=0)
 }
 
 
-module dryer(mocks=false)
+module dryer(box_enc_size, mocks=false)
 {
   spacing_x = 2;
   spacing_y = 0.5;
@@ -184,15 +164,5 @@ module dryer(mocks=false)
   %if(false)
     sink_cut();
   %if(mocks)
-    sink_mock(length=200, spacing=0);
+    sink_mock(box_enc_size=box_enc_size, length=200, spacing=0);
 }
-
-
-if(false)
-  intersection()
-  {
-    dryer(mocks=true);
-    translate([0, box_enc_size.y/2, 0]) cube([sink_x_base_length, box_enc_size.y, box_enc_size.z]);
-  }
-else
-  dryer(mocks=$preview);
