@@ -55,15 +55,32 @@ module front()
 }
 
 
+module rear()
+{
+  module base()
+  {
+    translate([-0.05, 61.5, -11.67])
+      rotate([90, 0, 0])
+        translate([-24, 0, 0])
+          import("stl/mosquito_voron_th_rear_cw2.stl");
+  }
+
+  difference()
+  {
+    base();
+    extra_heatsink_space();
+  }
+}
+
+
 
 module assembly(mocks)
 {
-//  extra_heatsink_space();
   front();
-  if(mocks)
+  if(mocks || 1)
   {
-    %hotend_mock();
-//    rear();
+    #hotend_mock();
+    rear();
   }
 }
 
@@ -73,4 +90,11 @@ intersection()
   assembly(mocks=$preview &&1);
 //  translate([0, 0, -50])
 //  cube([100, 100, 100]);
+}
+
+
+if(0)
+{
+  hotend_mock();
+  %extra_heatsink_space();
 }
