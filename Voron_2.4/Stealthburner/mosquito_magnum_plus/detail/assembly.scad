@@ -1,6 +1,3 @@
-use <rear.scad>
-
-
 module hotend_mock()
 {
   translate([0, 14.4, 0])
@@ -10,7 +7,7 @@ module hotend_mock()
           translate([13.65, -1.745, -23.09])
             rotate([0, -90, 0])
               translate([-110, -50, 0])
-                import("stl/hotend_mosquito_magnum_plus.stl");
+                import("../stl/hotend_mosquito_magnum_plus.stl");
 }
 
 
@@ -44,7 +41,7 @@ module front()
     translate([0, 61.5, -1.28 - 27.41])
       rotate([90, 0, 0])
         translate([-35.52, 0, 0])
-          import("stl/mosquito_voron_th_front.stl");
+          import("../stl/mosquito_voron_th_front.stl");
   }
 
   difference()
@@ -62,7 +59,7 @@ module rear()
     translate([-0.05, 61.5, -11.67])
       rotate([90, 0, 0])
         translate([-24, 0, 0])
-          import("stl/mosquito_voron_th_rear_cw2.stl");
+          import("../stl/mosquito_voron_th_rear_cw2.stl");
   }
 
   difference()
@@ -77,21 +74,23 @@ module rear()
 module assembly(mocks)
 {
   front();
-  if(mocks || 1)
+  %if(mocks || 1)
   {
-    #hotend_mock();
+    hotend_mock();
     rear();
   }
 }
 
 
-intersection()
+if(0)
 {
-  assembly(mocks=$preview &&1);
-//  translate([0, 0, -50])
-//  cube([100, 100, 100]);
+  intersection()
+  {
+    assembly(mocks=$preview);
+    translate([0, 0, -50])
+    cube([100, 100, 100]);
+  }
 }
-
 
 if(0)
 {
