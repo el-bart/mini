@@ -87,8 +87,9 @@ if(0)
   intersection()
   {
     assembly(mocks=$preview);
-    translate([0, 0, -50])
-    cube([100, 100, 100]);
+    if(0)
+      translate([0, 0, -50])
+        cube([100, 100, 100]);
   }
 }
 
