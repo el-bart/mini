@@ -1,3 +1,6 @@
+include <../m3d/math.scad>
+
+
 module hotend_mock()
 {
   translate([0, 14.4, 0])
@@ -44,10 +47,39 @@ module front()
           import("../stl/mosquito_voron_th_front.stl");
   }
 
+  cut_h = 47.29;
+  cutoff_dh = 10;
+  cutoff_len = 19;
+
+  module cut_block()
+  {
+    s = [80, cut_h+eps, 30+eps];
+    translate([-s.x/2, -eps, -s.z+eps])
+      cube(s);
+  }
+
+  module cut_top()
+  {
+    intersection()
+    {
+      base();
+      cut_block();
+    }
+  }
+
+  module cut_bottom()
+  {
+    difference()
+    {
+      base();
+      cut_block();
+    }
+  }
+
   difference()
   {
     base();
-    extra_heatsink_space();
+//    extra_heatsink_space();
   }
 }
 
@@ -98,3 +130,12 @@ if(0)
   hotend_mock();
   %extra_heatsink_space();
 }
+
+
+if(0)
+{
+  front();
+  %hotend_mock();
+}
+
+front();
