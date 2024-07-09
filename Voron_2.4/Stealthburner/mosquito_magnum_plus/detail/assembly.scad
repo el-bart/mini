@@ -60,8 +60,7 @@ module front()
   cut_h = 47.29;
   cutoff_dh = 11;
   cutoff_len = 19;
-  // these should be computed, but it's a bit of a pain, so it's eyeballed instead
-  cutoff_angle = 45;
+  cutoff_skew = 0.579; // this should be computed, but it's a pain, so it's eyeballed instead
 
   module cut_block()
   {
@@ -97,34 +96,30 @@ module front()
             base();
   }
 
-  module corridor_top()
+  module corridor()
   {
+    module skew()
+    {
+      s = cutoff_skew;
+      m = [ [ 1, 0, s, 0 ],
+            [ 0, 1, 0, 0 ],
+            [ 0, 0, 1, 0 ],
+            [ 0, 0, 0, 1 ] ] ;
+      multmatrix(m=m)
+        children();
+    }
     translate([0, cut_h, 0])
-      rotate([-180, 0, 0])
-        rotate([0, 90, 0])
-          rotate_extrude(angle=cutoff_angle, convexity=10, $fn=fn(60))
-            cut_plane_2d();
+      rotate([-90, 0, 0])
+        rotate([0, 0, -90])
+          skew()
+            linear_extrude(cutoff_len)
+              cut_plane_2d();
   }
 
-  module corridor_bottom()
-  {
-    translate([0, cut_h + cutoff_len, -19])
-      rotate([cutoff_angle, 0, 0])
-        rotate([0, 0, 180])
-          rotate([0, -90, 0])
-            rotate_extrude(angle=-cutoff_angle, convexity=10, $fn=fn(60))
-              translate([30, 0])
-                cut_plane_2d();
-  }
-
-  corridor_bottom();
-  if(1)
-  {
-    corridor_top();
-    cut_top();
-    translate([0, cutoff_len, cutoff_dh])
-      cut_bottom();
-  }
+  corridor();
+  cut_top();
+  translate([0, cutoff_len, cutoff_dh])
+    cut_bottom();
 }
 
 
