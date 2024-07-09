@@ -47,8 +47,17 @@ module front()
           import("../stl/mosquito_voron_th_front.stl");
   }
 
+  module base_spaced()
+  {
+    difference()
+    {
+      base();
+      extra_heatsink_space();
+    }
+  }
+
   cut_h = 47.29;
-  cutoff_dh = 10;
+  cutoff_dh = 11;
   cutoff_len = 19;
 
   module cut_block()
@@ -62,7 +71,7 @@ module front()
   {
     intersection()
     {
-      base();
+      base_spaced();
       cut_block();
     }
   }
@@ -71,16 +80,14 @@ module front()
   {
     difference()
     {
-      base();
+      base_spaced();
       cut_block();
     }
   }
 
-  difference()
-  {
-    base();
-//    extra_heatsink_space();
-  }
+  cut_top();
+  translate([0, cutoff_len, cutoff_dh])
+    cut_bottom();
 }
 
 
