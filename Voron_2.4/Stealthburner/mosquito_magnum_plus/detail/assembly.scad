@@ -133,10 +133,18 @@ module rear()
           import("../stl/mosquito_voron_th_rear_cw2.stl");
   }
 
+  module air_duct_space()
+  {
+    translate([15, 40, -19])
+      rotate([32, 0, 0])
+        cube([25, 50, 10]);
+  }
+
   difference()
   {
     base();
     extra_heatsink_space();
+    air_duct_space(); // otherwise side cable mask will collide with raised air ducts
   }
 }
 
@@ -174,7 +182,6 @@ if(0)
 if(0)
 {
   front();
+  rear();
   %hotend_mock();
 }
-
-front();
