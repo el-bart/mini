@@ -18,7 +18,7 @@ module holder()
       translate([0, wall])
       {
         square([wall, 20]);
-        #translate([wall+25, 0])
+        translate([wall+25, 0])
           square([wall, 20]);
       }
     }
@@ -26,6 +26,10 @@ module holder()
 
   linear_extrude(h)
     side_2d();
+  // base and top supports
+  for(dz=[0, h-wall])
+    translate([0, 20+wall, dz])
+      cube([25+2*wall, wall, wall]);
 }
 
 
