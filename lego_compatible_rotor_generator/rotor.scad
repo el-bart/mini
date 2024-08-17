@@ -34,7 +34,7 @@ module lego_mount(length)
 }
 
 
-module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, blade_len)
+module rotor(mount_d, mount_h=-1, pitch, blades, blade_chord, blade_len)
 {
   profile_d = 1;
   mount_h = mount_h == -1 ? blade_chord + 2*profile_d : mount_h;
@@ -42,10 +42,6 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
   module mount_base()
   {
     cylinder(d=mount_d, h=mount_h, $fn=fn(50), center=true);
-  }
-  module mount_holes()
-  {
-    // TODO
   }
 
   module blade()
@@ -58,8 +54,8 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
             circle(d=profile_d, $fn=fn(10));
     }
 
-    rotate([0, 0, -pitch_start])
-      linear_extrude(height=blade_len, twist=pitch_end-pitch_start, $fn=fn(500))
+    rotate([0, 0, -pitch])
+      linear_extrude(height=blade_len, $fn=fn(500))
         profile();
   }
 
@@ -80,10 +76,9 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
 }
 
 
-rotor(mount_d = 9,
-      mount_h = 19.6,
-      pitch_start = 20,
-      pitch_end = 60,
+rotor(mount_d = 16,
+      mount_h = 15,
+      pitch = 45,
       blades = 5,
       blade_chord = 20,
       blade_len = 70);
