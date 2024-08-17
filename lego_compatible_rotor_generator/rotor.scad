@@ -18,7 +18,7 @@ module lego_mount(length)
 
   module lego_axle_slot(length)
   {
-    lego_axle(length=length, spacing=0.1);
+    lego_axle(length=length, spacing=0.4);
   }
 
   module lego_round_slot(length)
@@ -36,16 +36,13 @@ module lego_mount(length)
 
 module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, blade_len)
 {
+  blade_len_fwd = blade_len - blade_chord/2 - profile_d; // leave space for for end rounding
   profile_d = 1;
   mount_h = mount_h == -1 ? blade_chord + 2*profile_d : mount_h;
 
   module mount_base()
   {
     cylinder(d=mount_d, h=mount_h, $fn=fn(50), center=true);
-  }
-  module mount_holes()
-  {
-    // TODO
   }
 
   module blade()
@@ -59,8 +56,19 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
     }
 
     rotate([0, 0, -pitch_start])
-      linear_extrude(height=blade_len, twist=pitch_end-pitch_start, $fn=fn(500))
+      linear_extrude(height=blade_len_fwd, twist=pitch_end-pitch_start, $fn=fn(500))
         profile();
+    // rounding at the top
+    translate([0, 0, blade_len_fwd])
+      rotate([0, 0, -pitch_end])
+        rotate([90, 0, 0])
+          intersection()
+          {
+            d = blade_chord+profile_d;
+            cylinder(d=d, h=profile_d, center=true, $fn=fn(50));
+            translate(d/2*[0, 1, 0])
+              cube(d*[1,1,1], center=true);
+          }
   }
 
   module core()
