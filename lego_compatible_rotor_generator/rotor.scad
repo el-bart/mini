@@ -36,7 +36,7 @@ module lego_mount(length)
 
 module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, blade_len)
 {
-  profile_d = 0.6;
+  profile_d = 1;
   mount_h = mount_h == -1 ? blade_chord + 2*profile_d : mount_h;
   blade_len_fwd = blade_len - blade_chord/2 - profile_d/2; // leave space for for end rounding
 
