@@ -18,7 +18,7 @@ module lego_mount(length)
 
   module lego_axle_slot(length)
   {
-    lego_axle(length=length, spacing=0.4);
+    lego_axle(length=length, spacing=0.3);
   }
 
   module lego_round_slot(length)
@@ -93,7 +93,7 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
 }
 
 
-rotor(mount_d = 9,
+rotor(mount_d = 12,
       mount_h = 13,
       pitch_start = 10,
       pitch_end = 50,
