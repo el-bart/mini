@@ -72,18 +72,23 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
           blade();
   }
 
-  difference()
+  intersection()
   {
-    core();
-    lego_mount(mount_h+2*eps);
+    difference()
+    {
+      core();
+      lego_mount(mount_h+2*eps);
+    }
+    // make it printable w/o supports
+    cylinder(d=3*blade_len, h=mount_h, center=true);
   }
 }
 
 
 rotor(mount_d = 9,
-      mount_h = 19.6,
-      pitch_start = 20,
-      pitch_end = 60,
+      mount_h = 13,
+      pitch_start = 10,
+      pitch_end = 50,
       blades = 5,
       blade_chord = 20,
       blade_len = 70);
