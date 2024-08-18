@@ -1,5 +1,0 @@
-# https://e3d-online.com/pages/revo-nozzle-maximum-flow-rates
-PLA 220  13
-PETG 240 17
-ASA 260  15
-max_volumetric_speed = xxx
