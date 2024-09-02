@@ -1,6 +1,7 @@
 # pressure advance test print
 
 good explanation of [calibrating pressure advance](https://www.obico.io/blog/klipper-pressure-advance/).
+some more notes on [pressure advance smooth time and troubleshooting](https://clevercreations.org/klipper-pressure-advance-tuning/).
 
 
 ## prodecude (klipper)
