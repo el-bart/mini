@@ -2,6 +2,9 @@ use <m3d/threaded_inserts/cnc_kitchen.scad>
 use <m3d/fn.scad>
 include <m3d/math.scad>
 
+spacing = 0.5; // extra space between holder and mount, on each side
+
+
 module endstop_mock()
 {
   // main body
@@ -38,9 +41,9 @@ module holder_mount()
     }
   }
 
-  cube([21+2*8+2, 14+4, 2]);
+  cube([21+2*8+2*spacing, 14+4, 2]);
   for(dy=[0, 14])
-    for(dx=[4, 33+2])
+    for(dx=[4, 33+2*spacing])
       translate([dx, dy, 0])
         screw_slot();
 }
@@ -66,22 +69,21 @@ module endstop_holder(mocks)
   // base
   cube([21, 17, 2]);
   // threaded inserts slots
-  for(dx=[-4-1, 21+4+1])
+  for(dx=[-4-spacing, 21+4+spacing])
     translate([dx, 13, 0])
       ti_mount();
   // connector
-  translate([-8-1, 13, 0])
-    cube([21+2*8+2*1, 4, 2]);
+  translate([-8-spacing, 13, 0])
+    cube([21+2*8+2*spacing, 4, 2]);
 
   %if(mocks)
-    translate([-8-1, 21, 10.8])
+    translate([-8-spacing, 21, 10.8])
       rotate([180, 0, 0])
         holder_mount();
 }
 
 
-
 endstop_holder(mocks=true);
 
-translate([-8-1, 19, 0])
+translate([-8-spacing, 19, 0])
   holder_mount();
