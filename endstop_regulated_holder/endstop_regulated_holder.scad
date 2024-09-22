@@ -38,15 +38,15 @@ module holder_mount()
     }
   }
 
-  cube([21+2*8, 14+4, 2]);
+  cube([21+2*8+2, 14+4, 2]);
   for(dy=[0, 14])
-    for(dx=[4, 33])
+    for(dx=[4, 33+2])
       translate([dx, dy, 0])
         screw_slot();
 }
 
 
-module endstop_holder()
+module endstop_holder(mocks)
 {
   module ti_mount()
   {
@@ -60,23 +60,28 @@ module endstop_holder()
     }
   }
 
-  %translate([0.5, 0, 2])
-    endstop_mock();
+  %if(mocks)
+    translate([0.5, 0, 2])
+      endstop_mock();
   // base
   cube([21, 17, 2]);
   // threaded inserts slots
-  for(dx=[-4, 21+4])
+  for(dx=[-4-1, 21+4+1])
     translate([dx, 13, 0])
       ti_mount();
+  // connector
+  translate([-8-1, 13, 0])
+    cube([21+2*8+2*1, 4, 2]);
 
-  %translate([-8, 21, 10.8])
-    rotate([180, 0, 0])
-      holder_mount();
+  %if(mocks)
+    translate([-8-1, 21, 10.8])
+      rotate([180, 0, 0])
+        holder_mount();
 }
 
 
 
-endstop_holder();
+endstop_holder(mocks=true);
 
-translate([-8, 19, 0])
+translate([-8-1, 19, 0])
   holder_mount();
