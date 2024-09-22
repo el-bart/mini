@@ -1,4 +1,5 @@
 use <m3d/threaded_inserts/cnc_kitchen.scad>
+include <m3d/math.scad>
 
 module endstop_mock()
 {
@@ -24,6 +25,26 @@ module endstop_mock()
 
 module endstop_holder()
 {
+  module ti_mount()
+  {
+    difference()
+    {
+      translate([-8/2, 0, 0])
+        cube([8, 4, 8]);
+      translate([0, -eps, 4])
+        rotate([90, 0, 0])
+          ti_cnck_m3_short(dl=2*eps);
+    }
+  }
+
+  %translate([0.5, 0, 2])
+    endstop_mock();
+  // base
+  cube([21, 17, 2]);
+  // threaded inserts slots
+  for(dx=[-4, 21+4])
+    translate([dx, 13, 0])
+      ti_mount();
 }
 
 
@@ -36,5 +57,3 @@ module holder_mount()
 endstop_holder();
 
 holder_mount();
-
-//%endstop_mock();
