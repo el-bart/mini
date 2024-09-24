@@ -8,7 +8,7 @@ module LED_sensor_mock()
     cube(size, center=true);
 }
 
-module LED_sensor_cover()
+module LED_sensor_cover(mocks)
 {
   int_cut_size = led_cover_ext_size - [2*3*0.4, 2*3*0.4, 2*0.2];
   cable_cut_size = [7, led_cover_ext_size.y+2*eps, 5];
@@ -24,9 +24,10 @@ module LED_sensor_cover()
       cube(cable_cut_size + [0,0,eps], center=true);
   }
 
-  %LED_sensor_mock();
+  %if(mocks)
+    LED_sensor_mock();
 }
 
 
 rotate([0 , 180, 0])
-  LED_sensor_cover();
+  LED_sensor_cover(mocks=$preview);
