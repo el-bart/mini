@@ -1,8 +1,6 @@
 include <detail/config.scad>
 include <m3d/math.scad>
 
-N = 3;
-
 module LED_sensor_mock()
 {
   size = [8.5, 48, 6];
@@ -30,7 +28,5 @@ module LED_sensor_cover()
 }
 
 
-for(n=[0:N-1])
-  translate([n*(led_cover_ext_size.x+3), 0, 0])
-    rotate([0 , 180, 0])
-      LED_sensor_cover();
+rotate([0 , 180, 0])
+  LED_sensor_cover();
