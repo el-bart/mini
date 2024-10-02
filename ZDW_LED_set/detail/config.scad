@@ -6,3 +6,7 @@ led_flat_mount_width = 28;
 cupboard_cable_cover_ext_size = [ led_cover_ext_size.x,
                                   cupboard_depth - cupboard_front_free_space - led_flat_mount_width - led_cover_ext_size.y,
                                   led_cover_ext_size.z ];
+
+
+angle_led_frame_side = 16.5;
+angle_led_frame_wall = 2.6;
