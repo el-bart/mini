@@ -10,7 +10,7 @@ cupboard_cable_cover_ext_size = [ led_cover_ext_size.x,
 
 angle_led_frame_side = 16.5;
 angle_led_frame_wall = 2.6;
-angle_led_frame_spacing = 0.5;
+angle_led_frame_spacing = 0.2;
 angle_led_mount_wall = 3;
 
 angle_led_mount_endcap_len = 15;
