@@ -109,4 +109,5 @@ module profile_ext_body(mocks)
 }
 
 
-profile_ext_body(mocks=$preview);
+rotate([180, 0, 0])
+  profile_ext_body(mocks=$preview);
