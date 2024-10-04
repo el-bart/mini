@@ -18,13 +18,11 @@ module profile_mock(l)
 }
 
 
-module profile_slot(l)
+module profile_slot(l, delta = angle_led_frame_spacing)
 {
-  translate([-ext_offset, l, angle_led_frame_side])
-    rotate([90, 90, 0])
-      linear_extrude(l)
-        offset(delta=angle_led_frame_spacing)
-          led_angle_profile_2d();
+  linear_extrude(l)
+    offset(delta=delta)
+      led_angle_profile_2d();
 }
 
 
@@ -39,8 +37,22 @@ module profile_ext_frame(l, mocks)
 {
   translate([-ext_offset, l + angle_led_mount_corner_space, angle_led_frame_side])
     rotate([90, 90, 0])
-      linear_extrude(l + angle_led_mount_corner_space)
-        profile_ext_frame_2d();
+      difference()
+      {
+        linear_extrude(l + angle_led_mount_corner_space)
+          profile_ext_frame_2d();
+        // front slot
+        translate([0, 0, -eps])
+        {
+          profile_slot(l+eps);
+          // LED cut
+          translate(angle_led_frame_wall*[1, 1, 0])
+            cube(angle_led_frame_side*[2, 2, 0] + [0, 0, l]);
+          // LED strip endstop
+          translate([0, 0, angle_led_mount_endcap_len-eps])
+            profile_slot(wall+eps, delta=-1.5);
+        }
+      }
   %if(mocks)
     translate([0, angle_led_mount_corner_space, 0])
       profile_mock(l+20);
@@ -49,6 +61,7 @@ module profile_ext_frame(l, mocks)
 
 module profile_ext_corner()
 {
+  // TODO: add upper surface for a top mount
   pos_fix = angle_led_frame_spacing + wall;
   translate([0,0, angle_led_frame_side + pos_fix])
     rotate([0, 180, 90])
