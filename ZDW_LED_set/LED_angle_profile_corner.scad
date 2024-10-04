@@ -1,0 +1,62 @@
+use <m3d/fn.scad>
+use <detail/LED_angle_profile_2d.scad>
+include <m3d/math.scad>
+include <detail/config.scad>
+
+wall = angle_led_mount_wall;
+l = angle_led_mount_endcap_len;
+ext_offset = angle_led_frame_side + 1*wall + 1*angle_led_frame_spacing;
+ext_len    = angle_led_frame_side + 2*wall + 2*angle_led_frame_spacing;
+
+
+module profile_mock(l)
+{
+  translate([-ext_offset, l, angle_led_frame_side])
+    rotate([90, 90, 0])
+      linear_extrude(l)
+        led_angle_profile_2d();
+}
+
+
+module profile_slot(l)
+{
+  translate([-ext_offset, l, angle_led_frame_side])
+    rotate([90, 90, 0])
+      linear_extrude(l)
+        offset(delta=angle_led_frame_spacing)
+          led_angle_profile_2d();
+}
+
+
+module profile_ext_frame_2d()
+{
+  offset(delta=angle_led_frame_spacing + wall)
+    led_angle_profile_2d();
+}
+
+
+module profile_ext_frame(l)
+{
+  translate([-ext_offset, l, angle_led_frame_side])
+    rotate([90, 90, 0])
+      linear_extrude(l)
+        profile_ext_frame_2d();
+}
+
+module profile_ext_corner()
+{
+  pos_fix = angle_led_frame_spacing + wall;
+  translate([0,0, angle_led_frame_side+pos_fix])
+    rotate([0, 180, 90])
+      rotate_extrude(angle=90, $fn=fn(150))
+        translate([ext_len, 0])
+          mirror([1, 0])
+            translate((pos_fix-0.0001)*[1,1])
+              profile_ext_frame_2d();
+}
+
+
+//%profile_mock(30);
+//profile_slot(10);
+profile_ext_frame(10);
+#profile_ext_corner();
