@@ -35,28 +35,39 @@ module profile_ext_frame_2d()
 }
 
 
-module profile_ext_frame(l)
+module profile_ext_frame(l, mocks)
 {
-  translate([-ext_offset, l, angle_led_frame_side])
+  translate([-ext_offset, l + angle_led_mount_corner_space, angle_led_frame_side])
     rotate([90, 90, 0])
-      linear_extrude(l)
+      linear_extrude(l + angle_led_mount_corner_space)
         profile_ext_frame_2d();
+  %if(mocks)
+    translate([0, angle_led_mount_corner_space, 0])
+      profile_mock(l+20);
 }
+
 
 module profile_ext_corner()
 {
   pos_fix = angle_led_frame_spacing + wall;
-  translate([0,0, angle_led_frame_side+pos_fix])
+  translate([0,0, angle_led_frame_side + pos_fix])
     rotate([0, 180, 90])
       rotate_extrude(angle=90, $fn=fn(150))
         translate([ext_len, 0])
           mirror([1, 0])
-            translate((pos_fix-0.0001)*[1,1])
+            translate((pos_fix - 0.0001)*[1,1])
               profile_ext_frame_2d();
 }
 
 
-//%profile_mock(30);
-//profile_slot(10);
-profile_ext_frame(10);
-#profile_ext_corner();
+module profile_ext_body(mocks)
+{
+  profile_ext_frame(l, mocks);
+  profile_ext_corner();
+  mirror([1, 0, 0])
+    rotate([0, 0, 90])
+      profile_ext_frame(l, mocks);
+}
+
+
+profile_ext_body(mocks=$preview);
