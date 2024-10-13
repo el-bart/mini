@@ -1,6 +1,9 @@
+use <m3d/rounded_cube.scad>
+use <m3d/fn.scad>
 include <m3d/math.scad>
 
-wall = 2;
+corner_r = 3/2;
+wall = 1.5;
 pcb_size = [108, 61.5, 1.1];
 pcb_cut_pos = [pcb_size.x-3.4, 16.9, 0];
 pcb_connectors_size = [9.3, 29, 6.1];
@@ -12,7 +15,7 @@ module screen_mock()
     // PCB
     difference()
     {
-      cube(pcb_size);
+      side_rounded_cube(pcb_size, corner_r=corner_r, $fn=fn(40));
       translate(pcb_cut_pos + [0, 0, -eps])
         cube([3.4+eps, 28.5, pcb_size.z+2*eps]);
     }
@@ -37,7 +40,8 @@ module box(mocks)
   {
     difference()
     {
-      cube(ext_size);
+      side_rounded_cube(ext_size, corner_r=corner_r, $fn=fn(40));
+      assert(wall >= corner_r);
       translate(wall*[1,1,1])
         cube(int_size);
     }
