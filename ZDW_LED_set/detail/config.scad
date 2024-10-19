@@ -14,6 +14,7 @@ angle_led_frame_spacing = 0.2;
 angle_led_mount_wall = 3;
 
 angle_led_mount_endcap_len = 15;
+angle_led_mount_support_len = 20;
 
 angle_led_mount_corner_space = 2;
 angle_led_mount_corner_slot_int_delta = 1.5;
