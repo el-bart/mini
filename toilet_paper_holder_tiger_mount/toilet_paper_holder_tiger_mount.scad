@@ -55,7 +55,8 @@ module support_rod_core()
 {
   spc = base_spacing + base_surround;
   s_ext = mount_size + spc*[0,2,1];
-  anchor_s = s_ext - base_rounding*[2/2, 2, 1];
+  anchor_s = s_ext - base_rounding/2*[2,2,1];
+  echo(anchor_s);
 
   module anchor()
   {
@@ -112,11 +113,24 @@ module support_rod(mocks)
     }
   }
 
+  module set_screw_hole()
+  {
+    d_screw = 3.3;
+    d = 2*d_screw;
+    h = base_spacing + base_surround + 2*eps;
+    dy = mount_size.y/2 - eps;
+    dz = mount_size.z - 4.8 - d_screw/2;
+    translate([0, -dy, dz])
+      rotate([90, 0, 0])
+        cylinder(d=d, h=h, $fn=fn(30));
+  }
+
   difference()
   {
     support_rod_core();
     cut();
     screw_mount();
+    set_screw_hole();
   }
 
   %if(mocks)
