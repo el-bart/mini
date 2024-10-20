@@ -116,7 +116,8 @@ module support_rod(mocks)
   module set_screw_hole()
   {
     d_screw = 3.3;
-    d = 2*d_screw;
+    d = 5;
+    assert(d > d_screw);
     h = base_spacing + base_surround + 2*eps;
     dy = mount_size.y/2 - eps;
     dz = mount_size.z - 4.8 - d_screw/2;
