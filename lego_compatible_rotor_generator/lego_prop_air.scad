@@ -6,4 +6,5 @@ rotor(mount_d = 14,
       pitch_end = 45,
       blades = 5,
       blade_chord = 20,
-      blade_len = 70);
+      blade_len = 70,
+      bottom_supports = true);
