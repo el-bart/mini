@@ -1,5 +1,5 @@
-use <m3d/fn.scad>
-include <m3d/math.scad>
+use <../m3d/fn.scad>
+include <../m3d/math.scad>
 
 module lego_mount(length)
 {
@@ -91,12 +91,3 @@ module rotor(mount_d, mount_h=-1, pitch_start, pitch_end, blades, blade_chord, b
     cylinder(d=3*blade_len, h=mount_h, center=true);
   }
 }
-
-
-rotor(mount_d = 14,
-      mount_h = 13,
-      pitch_start = 45,
-      pitch_end = 45,
-      blades = 5,
-      blade_chord = 20,
-      blade_len = 70);
