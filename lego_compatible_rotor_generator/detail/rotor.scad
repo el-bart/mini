@@ -34,14 +34,14 @@ module lego_mount(length)
 }
 
 
-module rotor(mount_d,
-             mount_h=-1,
-             pitch_start,
-             pitch_end,
-             blades,
-             blade_chord,
-             blade_len,
-             bottom_supports)
+module rotor_body(mount_d,
+                  mount_h=-1,
+                  pitch_start,
+                  pitch_end,
+                  blades,
+                  blade_chord,
+                  blade_len,
+                  bottom_supports)
 {
   profile_d = 1;
   mount_h = mount_h == -1 ? blade_chord + 2*profile_d : mount_h;
@@ -97,9 +97,34 @@ module rotor(mount_d,
     // make it printable w/o supports
     cylinder(d=3*blade_len, h=mount_h, center=true);
   }
+}
 
-  if(bottom_supports)
+module rotor(mount_d,
+             mount_h=-1,
+             pitch_start,
+             pitch_end,
+             blades,
+             blade_chord,
+             blade_len,
+             helper_discs)
+{
+  rotor_body(mount_d,
+             mount_h,
+             pitch_start,
+             pitch_end,
+             blades,
+             blade_chord,
+             blade_len);
+
+  // break-off supports at the bottom
+  if(helper_discs)
   {
+    dy = ( mount_h/2 ) / tan(90-pitch_end);
+    for(dr = [0 : 360/(blades) : 360])
+      rotate([0, 0, dr])
+        translate([0, -dy, 0])
+          translate([blade_len - blade_chord/2, 0, -mount_h / 2])
+            cylinder(r=10, h=2*0.2);
   }
 }
 
@@ -112,4 +137,4 @@ rotor(mount_d = 14,
       blades = 3,
       blade_chord = 20,
       blade_len = 30,
-      bottom_supports=false);
+      helper_discs = true);

@@ -7,4 +7,4 @@ rotor(mount_d = 14,
       blades = 5,
       blade_chord = 20,
       blade_len = 70,
-      bottom_supports = true);
+      helper_discs = true);
