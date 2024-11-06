@@ -73,6 +73,11 @@ do
   run_flags+=(--device "$dev")
 done
 
+# making bwrap happy
+run_flags+=(--cap-add SYS_ADMIN)
+run_flags+=(--security-opt apparmor=unconfined)
+run_flags+=(--security-opt seccomp=unconfined)
+
 xhost "+si:localuser:$USER"
 
 echo "$0: if CEF fails again, edit ~/data_misc/steam/data/.local/share/Steam/ubuntu12_64/steamwebhelper.sh"
