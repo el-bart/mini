@@ -13,3 +13,6 @@ this repo has some 3D printed elements, required to complete the build
 - 2x 3.5x20mm wood screw
 - 20x20cm plywood sheet (to screw
 - paper rocket from NASA's [Rocket educator guide](https://www.nasa.gov/stem-ed-resources/rockets.html) (p.71, as of 2022-10-08)
+
+## external resources
+* [threads-scad](https://github.com/rcolyer/threads-scad) library ([CC-1.0 license](https://github.com/rcolyer/threads-scad/blob/master/LICENSE.txt))
