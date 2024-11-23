@@ -1,3 +1,4 @@
+//
 // Created 2016-2017 by Ryan A. Colyer.
 // This work is released with CC0 into the public domain.
 // https://creativecommons.org/publicdomain/zero/1.0/
@@ -5,6 +6,9 @@
 // https://www.thingiverse.com/thing:1686322
 //
 // v2.1
+//
+// taken from: https://github.com/rcolyer/threads-scad
+//
 
 
 screw_resolution = 0.2;  // in mm
