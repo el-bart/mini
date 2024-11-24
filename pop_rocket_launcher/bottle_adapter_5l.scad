@@ -6,7 +6,7 @@ include <m3d/math.scad>
 // 5l bottle thread is 48mm on the outside - 1 full rotation (h=5mm).
 bottle_cap_d_ext = 48;
 bottle_cap_d_int = 40.8;
-bottle_cap_h = 5;
+bottle_cap_h = 10;
 bottle_cap_wall = 2.5;
 
 // 1.5l bottle is 27mm (not strictly needed but useful for connecting a hose).
@@ -25,7 +25,12 @@ module adapter()
 {
   module bottom()
   {
-    ScrewHole(outer_diam=bottle_cap_d_ext, height=bottle_cap_h)
+    ScrewHole(outer_diam=bottle_cap_d_ext,
+              height=bottle_cap_h,
+              pitch=3.25,
+              tooth_angle=50,
+              //tolerance=0.4,
+              tooth_height=3)
       screw_head_hex(y=60, h=bottle_cap_h);
   }
 
@@ -33,8 +38,14 @@ module adapter()
   {
     difference()
     {
-      cylinder(d1=bottle_cap_d_ext + 2*bottle_cap_wall, $fn=fn(50));
-      cylinder(d1=bottle_cap_d_int, d2=hose_plug_d_int, h=link_h, $fn=fn(50));
+      cylinder(d1=bottle_cap_d_ext + 2*bottle_cap_wall,
+               d2=hose_plug_d_int  + 2*hose_plug_wall,
+               h=link_h,
+               $fn=fn(50));
+      cylinder(d1=bottle_cap_d_ext,
+               d2=hose_plug_d_int,
+               h=link_h,
+               $fn=fn(50));
     }
   }
 
@@ -60,4 +71,6 @@ module adapter()
 }
 
 
+//intersection() { cube(100*[1,1,1]); 
 adapter();
+//}
