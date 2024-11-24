@@ -30,7 +30,7 @@ module adapter()
               pitch=3.25,
               tooth_angle=50,
               //tolerance=0.4,
-              tooth_height=3)
+              tooth_height=0) // defaults to pitch
       screw_head_hex(y=60, h=bottle_cap_h);
   }
 
@@ -71,6 +71,4 @@ module adapter()
 }
 
 
-//intersection() { cube(100*[1,1,1]); 
 adapter();
-//}
