@@ -25,13 +25,26 @@ module adapter()
 {
   module bottom()
   {
-    ScrewHole(outer_diam=bottle_cap_d_ext,
-              height=bottle_cap_h,
-              pitch=3.25,
-              tooth_angle=50,
-              //tolerance=0.4,
-              tooth_height=0) // defaults to pitch
-      screw_head_hex(y=60, h=bottle_cap_h);
+    module screw_hole()
+    {
+      pseudo_pitch = 3.25;
+      ScrewHole(outer_diam=bottle_cap_d_ext,
+                height=bottle_cap_h,
+                pitch=3*pseudo_pitch,
+                tooth_angle=50,
+                //tolerance=0.4,
+                tooth_height=pseudo_pitch) // defaults to pitch
+        children();
+    }
+
+    // this is an oddball screw, that has 3x the pitch, but each separate thread
+    // starts at 120deg offset, effectively making it as-if 3 separate threads.
+    screw_hole()
+      rotate([0, 0, 120])
+        screw_hole()
+          rotate([0, 0, 120])
+            screw_hole()
+              screw_head_hex(y=60, h=bottle_cap_h);
   }
 
   module link()
