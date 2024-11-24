@@ -42,6 +42,7 @@ module adapter()
 
   module top()
   {
+    // TODO: consider replacing threading into the hose with putting hose inside
     difference()
     {
       ScrewThread(outer_diam=hose_d_int, height=hose_plug_h);
