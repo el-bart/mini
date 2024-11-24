@@ -9,7 +9,8 @@ bottle_cap_d_int = 40.8;
 bottle_cap_h = 5;
 bottle_cap_wall = 2.5;
 
-// 1.5l bottle is 27mm (not strictly needed but useful for connecting a hose)
+// 1.5l bottle is 27mm (not strictly needed but useful for connecting a hose).
+// hose's wall is 2.85mm
 hose_plug_thread_wall = 1.7 + 0.8;
 hose_plug_wall = 2;
 hose_plug_h = 12;
@@ -43,6 +44,7 @@ module adapter()
   module top()
   {
     // TODO: consider replacing threading into the hose with putting hose inside
+    //       (possibly with internal thread, too)
     difference()
     {
       ScrewThread(outer_diam=hose_d_int, height=hose_plug_h);
