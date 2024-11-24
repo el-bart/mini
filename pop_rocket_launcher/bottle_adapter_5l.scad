@@ -33,10 +33,7 @@ module adapter()
   {
     difference()
     {
-      cylinder(d1=bottle_cap_d_ext + 2*bottle_cap_wall,
-               d2=hose_plug_d_int + 2*hose_plug_wall,
-               h=link_h,
-               $fn=fn(50));
+      cylinder(d1=bottle_cap_d_ext + 2*bottle_cap_wall, $fn=fn(50));
       cylinder(d1=bottle_cap_d_int, d2=hose_plug_d_int, h=link_h, $fn=fn(50));
     }
   }
