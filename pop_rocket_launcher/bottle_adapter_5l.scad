@@ -101,26 +101,24 @@ module adapter(mocks)
         children();
     }
 
-    // internal thread
+    // lower ~sealing ring
     difference()
     {
-      screw_hole()
-        cylinder(d=hose_plug_d_ext, h=hose_plug_h, $fn=fn(50));
+      $fn=fn(50);
+      cylinder(d=hose_plug_d_ext, h=hose_plug_wall);
       translate([0, 0, -eps])
-        cylinder(d=hose_plug_d_int, h=hose_plug_h + 2*eps, $fn=fn(50));
+        cylinder(d=hose_d_ext, h=hose_plug_wall + 2*eps);
     }
 
-    // front cover
-    translate([0, 0, hose_plug_h])
-    {
+    // internal thread
+    translate([0, 0, hose_plug_wall])
       difference()
       {
-        $fn=fn(50);
-        cylinder(d=hose_plug_d_ext, h=hose_plug_wall);
+        screw_hole()
+          cylinder(d=hose_plug_d_ext, h=hose_plug_h, $fn=fn(50));
         translate([0, 0, -eps])
-          cylinder(d=hose_d_ext, h=hose_plug_wall + 2*eps);
+          cylinder(d=hose_plug_d_int, h=hose_plug_h + 2*eps, $fn=fn(50));
       }
-    }
 
     %if(mocks)
       cylinder(d=hose_d_ext, h=hose_plug_h+10, $fn=fn(50));
