@@ -37,6 +37,34 @@ module adapter(mocks)
         children();
     }
 
+    module base_hex()
+    {
+      y = 60;
+      h = bottle_cap_h;
+      a = 120;
+      x = y/2 * 1/sin(a/2);
+
+      module corner_handle()
+      {
+        d = 4; // diameter of the rounding sphere
+        translate([0, 0, d/2])
+          hull()
+          {
+            $fn=fn(20);
+            sphere(d=d);
+            translate([0, 0, h - 2*d/2])
+              sphere(d=d);
+          }
+      }
+
+      for(r=[0 : a/2 : 360])
+        rotate([0, 0, r])
+          translate([x/2, y/2, 0])
+            corner_handle();
+
+      screw_head_hex(y=y, h=h);
+    }
+
     // this is an oddball screw, that has 3x the pitch, but each separate thread
     // starts at 120deg offset, effectively making it as-if 3 separate threads.
     screw_hole()
@@ -44,7 +72,7 @@ module adapter(mocks)
         screw_hole()
           rotate([0, 0, 120])
             screw_hole()
-              screw_head_hex(y=60, h=bottle_cap_h); // TODO: ROUND ME PLZ!
+              base_hex();
   }
 
   module link()
