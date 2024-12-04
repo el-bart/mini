@@ -9,19 +9,19 @@ bottle_cap_d_int = 40.8;
 bottle_cap_h = 10;
 bottle_cap_wall = 2.5;
 
-// 1.5l bottle is 27mm (not strictly needed but useful for connecting a hose).
-// hose's wall is 2.85mm
-hose_plug_thread_wall = 1.7 + 0.8;
+// hose has ext. diamater of 31mm
+hose_d_ext = 31;
 hose_plug_wall = 2;
+hose_plug_thread_r = 3;
+hose_plug_d_int = hose_d_ext;
+hose_plug_d_ext = hose_plug_d_int + 2*hose_plug_wall + 2*hose_plug_thread_r;
 hose_plug_h = 12;
-hose_d_int = 27;
-hose_plug_d_int = hose_d_int - 2*(hose_plug_thread_wall + hose_plug_wall);
 
 // keep link's internal wall angle at 45[deg]
-link_h = bottle_cap_d_int - hose_plug_d_int;
+link_h = bottle_cap_d_int - hose_d_ext;
 
 
-module adapter()
+module adapter(mocks)
 {
   module bottom()
   {
@@ -44,7 +44,7 @@ module adapter()
         screw_hole()
           rotate([0, 0, 120])
             screw_hole()
-              screw_head_hex(y=60, h=bottle_cap_h);
+              screw_head_hex(y=60, h=bottle_cap_h); // TODO: ROUND ME PLZ!
   }
 
   module link()
@@ -52,7 +52,7 @@ module adapter()
     difference()
     {
       cylinder(d1=bottle_cap_d_ext + 2*bottle_cap_wall,
-               d2=hose_plug_d_int  + 2*hose_plug_wall,
+               d2=hose_plug_d_ext,
                h=link_h,
                $fn=fn(50));
       cylinder(d1=bottle_cap_d_ext,
@@ -64,14 +64,38 @@ module adapter()
 
   module top()
   {
-    // TODO: consider replacing threading into the hose with putting hose inside
-    //       (possibly with internal thread, too)
+    module screw_hole()
+    {
+      pseudo_pitch = hose_plug_thread_r * 3/4;
+      ScrewHole(outer_diam=hose_plug_d_int + 2*hose_plug_thread_r/2,
+                height=hose_plug_h,
+                pitch=pseudo_pitch)
+        children();
+    }
+
+    // internal thread
     difference()
     {
-      ScrewThread(outer_diam=hose_d_int, height=hose_plug_h);
+      screw_hole()
+        cylinder(d=hose_plug_d_ext, h=hose_plug_h, $fn=fn(50));
       translate([0, 0, -eps])
         cylinder(d=hose_plug_d_int, h=hose_plug_h + 2*eps, $fn=fn(50));
     }
+
+    // front cover
+    translate([0, 0, hose_plug_h])
+    {
+      difference()
+      {
+        $fn=fn(50);
+        cylinder(d=hose_plug_d_ext, h=hose_plug_wall);
+        translate([0, 0, -eps])
+          cylinder(d=hose_d_ext, h=hose_plug_wall + 2*eps);
+      }
+    }
+
+    %if(mocks)
+      cylinder(d=hose_d_ext, h=hose_plug_h+10, $fn=fn(50));
   }
 
   bottom();
@@ -84,4 +108,4 @@ module adapter()
 }
 
 
-adapter();
+adapter(mocks=$preview);
