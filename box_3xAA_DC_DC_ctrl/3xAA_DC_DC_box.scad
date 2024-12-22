@@ -67,7 +67,7 @@ module box(mocks)
         cube([3*wall, 5, 3]);
       // on/off switch slot
       translate([wall+5, ext_size.y-wall, wall])
-        cube([20.8, 3*wall, 12.5+0.2]);
+        cube([20.8-0.5, 3*wall, 12.5+0.2]);
       // 3-state switch for voltage regulation
       translate([ext_size.x-wall-6/2-10, ext_size.y-wall, wall+13/2])
         rotate([-90, 0, 0])
