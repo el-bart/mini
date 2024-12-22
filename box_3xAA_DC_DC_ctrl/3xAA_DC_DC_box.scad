@@ -5,7 +5,7 @@ include <m3d/math.scad>
 wall = 1.5;
 ext_size = [68.9, 48.0, 14.6+2*wall];
 int_size = ext_size - wall*[2,2,2];
-cover_spacing = 0.4; // in all directions
+cover_spacing = 0.3; // in all directions
 cover_len = ext_size.y - wall;
 
 screw_d = 3;
