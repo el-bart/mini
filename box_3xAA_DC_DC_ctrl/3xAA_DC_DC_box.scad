@@ -62,6 +62,19 @@ module box(mocks)
         linear_extrude(cover_len+eps)
           offset(r=cover_spacing)
             cover_profile();
+      // Vcc cables slot
+      translate([-wall, wall, wall])
+        cube([3*wall, 5, 3]);
+      // on/off switch slot
+      translate([wall+5, ext_size.y-wall, wall])
+        cube([20.8, 3*wall, 12.5+0.2]);
+      // 3-state switch for voltage regulation
+      translate([ext_size.x-wall-6/2-10, ext_size.y-wall, wall+13/2])
+        rotate([-90, 0, 0])
+          cylinder(d=6, h=3*wall, $fn=fn(30));
+      // output DC wire
+      translate([ext_size.x-2*wall, wall, wall])
+        cube([3*wall, 5, 3]);
     }
   }
 
