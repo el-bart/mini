@@ -75,6 +75,10 @@ module box(mocks)
       // output DC wire
       translate([ext_size.x-2*wall, wall, wall])
         cube([3*wall, 5, 3]);
+      // 5mm LED slot
+      translate([ext_size.x/2, ext_size.y-wall, wall+13/2])
+        rotate([-90, 0, 0])
+          cylinder(d=5+0.2, h=3*wall, $fn=fn(30));
     }
   }
 
