@@ -51,6 +51,20 @@ module box(mocks)
 {
   module main_box()
   {
+    module rear_support()
+    {
+      h = min(wall, 2);
+      translate([0, -h, -h])
+        rotate([90, 0, 0])
+          rotate([0, 90, 0])
+            linear_extrude(int_size.x)
+              polygon([
+                [0, h],
+                [h, h],
+                [h, 0],
+              ]);
+    }
+
     difference()
     {
       cube(ext_size);
@@ -80,6 +94,9 @@ module box(mocks)
         rotate([-90, 0, 0])
           cylinder(d=5+0.2, h=3*wall, $fn=fn(30));
     }
+
+    translate([wall, ext_size.y-wall, wall+int_size.z-cover_spacing])
+      rear_support();
   }
 
   module threaded_insert_holder()
