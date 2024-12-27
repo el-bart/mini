@@ -6,12 +6,12 @@ pr_h = 1.6;
 pr_d = 6;
 pr_cut_x = 5;
 pr_cut_len = 2.7;
-spacing = 0.2;
+spacing = 0.4;
 
 wall = 2;
 handle_h = 25;
 handle_d = pr_d + wall + 2*5;
-handle_rounding = 4;
+handle_rounding = 2;
 hex_h = 10;
 
 
@@ -25,16 +25,15 @@ module knob()
       {
         difference()
         {
-          offset(delta=spacing)
-            circle(d=pr_d, $fn=fn(50));
+          circle(d=pr_d, $fn=fn(50));
           translate([0, -pr_cut_x])
-            offset(delta=spacing)
-              square([pr_cut_len, pr_d], center=true);
+            square([pr_cut_len, pr_d], center=true);
         }
       }
-  
+
       linear_extrude(pr_h + dh)
-        base_2d();
+        offset(delta=spacing)
+          base_2d();
     }
   
     difference()
