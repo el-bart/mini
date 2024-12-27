@@ -6,7 +6,7 @@ pr_h = 1.6;
 pr_d = 6;
 pr_cut_x = 5;
 pr_cut_len = 2.7;
-spacing = 0.4;
+spacing = 0.3;
 
 wall = 2;
 handle_h = 25;
