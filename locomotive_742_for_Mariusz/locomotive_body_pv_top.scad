@@ -46,7 +46,6 @@ module body()
         import("input_stls/742_vrch_meshmixer_fix3.stl");
 }
 
-body();
-if(0)
+%body();
 scale(0.5) // final scale is applied on g-code generation level
   pv_set();
