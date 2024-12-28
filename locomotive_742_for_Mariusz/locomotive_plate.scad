@@ -4,7 +4,7 @@ module plate()
 {
   h = 1;
   depth = 0.75;
-  txt_size = 2.3;
+  txt_size = 2.2;
   plate_size = [21, 10, h];
   difference()
   {
