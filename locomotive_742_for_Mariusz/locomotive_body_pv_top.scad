@@ -43,7 +43,7 @@ module body()
   scale(1) // final scale is applied on g-code generation level
     rotate([0, 0, -90])
       translate([-90.9-5, -21, -30])
-        import("input_stls/742_vrch_meshmixer_fix3.stl");
+        import("locomotive_body.stl");
 }
 
 %body();
