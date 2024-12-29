@@ -21,3 +21,24 @@ for charge control is needed.
 
 
 ## LEDs
+
+* 4x 5mm red LEDs (rear)
+ * 2x 2 LED in sequence, with 2.4k resistor
+ * params:
+   * 1mA @ 4.1V
+   * 0.9mA @ 3.7V
+   * LED voltage: 1.78V
+* 2x 5mm blue LEDs (interior)
+  * 2 LEDs in parallel, sharing 5.6k resistor
+  * params:
+    * 0.3mA @ 4.1V
+    * 0.2mA @ 3.7V
+    * LED voltage: 2.5V
+* 1x 5mm white LED (front)
+  * in sequence with 820 resistor
+  * params:
+    * 1.9mA @ 4.1V
+    * 1.4mA @ 3.7V
+    * LED voltage: 2.65V
+
+total current drawage at 4.1V: 4.5mA.
