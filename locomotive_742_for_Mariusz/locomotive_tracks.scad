@@ -4,13 +4,15 @@ module tracks(length)
   real_span = 1435;
   scale_down = scale_span / real_span;
 
-  sleeper_size = scale_down * [2500, 260, 150];
-  sleeper_span = scale_down * 600;
+  sleeper_size = scale_down * [0, 260, 150] + [70, 0, 0];
+  sleeper_span = 25;
 
-  track_size = scale_down * [70, 0, 150] + [0, length, 0];
+  track_size_real = [70, 0, 150];
+  track_size = [4.0, length, scale_down*track_size_real.z];
   track_span = scale_down * 1435;
 
   assert(track_span == scale_span);
+  assert(track_size.x == 4.0);
 
   module sleeper()
   {
