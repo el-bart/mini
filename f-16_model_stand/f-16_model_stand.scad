@@ -1,9 +1,18 @@
 use <m3d/fn.scad>
 use <m3d/rounded_cube.scad>
+use <m3d/threaded_inserts/cnc_kitchen.scad>
 include <m3d/math.scad>
 
 stand_span_int = 23;
 stand_span_ext = 30;
+
+screw_d = 3;
+screw_spacing = 0.5;
+screw_separate = 5;
+
+lcd_w = 16;
+lcd_back_angle = 55;
+lcd_len = 60;
 
 pitch = 15;
 roll = 30;
@@ -54,9 +63,6 @@ module model_holder()
     translate([-wing_support_size.x/2, 0, 0])
       src([wing_support_size.x, wing_support_size.x, h]);
     // main holder
-    screw_d = 3;
-    screw_spacing = 0.8;
-    screw_separate = 5;
     size = (screw_d + 2*screw_spacing + 2*screw_separate)*[1, 1.5, 0] + [0,0,side];
     translate([-size.x/2, 0, h])
       intersection()
@@ -80,5 +86,48 @@ module model_holder()
 }
 
 
+module bottom()
+{
+  front_wall = 2;
+  top_wall = 6+2;
+  base_size = [lcd_len, front_wall+lcd_w+15, top_wall+10];
+
+  module lcd_mock(dl)
+  {
+    l = base_size.x + dl;
+    module block()
+    {
+      cube([l, lcd_w, base_size.z]);
+    }
+
+    block();
+    translate([0, lcd_w, 0])
+      rotate([-lcd_back_angle, 0, 0])
+        translate([0, -lcd_w, 0])
+          block();
+  }
+
+  difference()
+  {
+    cube(base_size);
+    // LCD slot
+    translate([-eps, front_wall, top_wall])
+      lcd_mock(dl=2*eps);
+    // screw slot and hole
+    translate([base_size.x/2, front_wall+lcd_w/2, 0])
+    {
+      translate([0, 0, -eps])
+        cylinder(d=screw_d+screw_spacing, h=base_size.z, $fn=fn(50));
+      translate([0, 0, top_wall+eps])
+        ti_cnck_m3_standard(dl=eps);
+    }
+  }
+}
+
+
 rotate([90, 0, 0])
   model_holder();
+
+translate([-stand_span_ext, -lcd_len/2, 0])
+  rotate([0, 0, 90])
+    bottom();
