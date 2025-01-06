@@ -90,7 +90,7 @@ module bottom()
 {
   front_wall = 2;
   top_wall = 6+2;
-  base_size = [lcd_len, front_wall+lcd_w+15, top_wall+10];
+  base_size = [lcd_len, front_wall+lcd_w+8, top_wall+10];
 
   module lcd_mock(dl)
   {
@@ -102,7 +102,7 @@ module bottom()
 
     block();
     translate([0, lcd_w, 0])
-      rotate([-lcd_back_angle, 0, 0])
+      rotate([-(90-lcd_back_angle), 0, 0])
         translate([0, -lcd_w, 0])
           block();
   }
