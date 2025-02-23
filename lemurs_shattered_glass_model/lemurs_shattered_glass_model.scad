@@ -1,3 +1,3 @@
 linear_extrude(4)
   scale(3*[1,1,1])
-    import("pic/02_vector.svg");
+    import("pic/03_vector_simplified.svg");
