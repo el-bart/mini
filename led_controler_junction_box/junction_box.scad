@@ -1,5 +1,5 @@
-use <controller.scad>
-use <screw.scad>
+use <detail/controller.scad>
+use <detail/screw.scad>
 
 module side_bruse_impl()
 {
