@@ -5,12 +5,12 @@ module lock()
   base = 26.5;
   angle = 90-atan(base / (6.2-4.15));
   echo( str("angle = ", angle) );
+  h = 9.5;
+  center_d = 13.4 + 1;
+  size = [base, base, h];
 
   module high_end()
   {
-    h = 9.5;
-    center_d = 13.4 + 1;
-    size = [base, base, h];
     difference()
     {
       side_rounded_cube(size, 2, $fn=fn(30));
@@ -23,16 +23,16 @@ module lock()
     }
   }
 
-  // TODO: rotataion and intersection
-  rotate([angle, 0, 0])
-  intersection()
-  {
-    rotate([-angle, 0, 0])
-      high_end();
-    cube(2*base*[1,1,1]);
-  }
+  translate([0, 0, h])
+    rotate([180, 0, 0])
+      rotate([angle, 0, 0])
+        intersection()
+        {
+          rotate([-angle, 0, 0])
+            high_end();
+          cube(2*size);
+        }
 }
 
 
-rotate([180, 0, 0])
-  lock();
+lock();
