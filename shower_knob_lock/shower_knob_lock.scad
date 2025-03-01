@@ -18,8 +18,8 @@ module lock()
       translate([size.x/2, size.y/2, -eps])
         cylinder(d=center_d, h=h+2*eps, $fn=fn(50));
       // insertion slot
-      translate([size.x/2, 0, eps])
-        cube([center_d, base, 2*h+eps], center=true);
+      translate([size.x, size.y/2, eps])
+        cube([base, center_d, 2*h+eps], center=true);
     }
   }
 
