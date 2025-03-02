@@ -74,6 +74,7 @@ module receiver_box()
 }
 
 
-//receiver_box();
+translate([35, 0, 0])
+  receiver_box();
 
 transmitter_box();
