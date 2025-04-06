@@ -5,12 +5,14 @@ module hook()
   h = 5;
   ext = 10;
   d_in = 40+10;
-  d_out = d_in + ext;
+  d_out = d_in + 2*ext;
+  boom = 30;
+
   module body()
   {
     cylinder(d=d_out, h=h, $fn=fn(50));
     translate([d_in/2, -ext/2, 0])
-      cube([ext+20, ext, h]);
+      cube([ext+boom, ext, h]);
   }
 
   module part()
@@ -28,7 +30,7 @@ module hook()
     }
   }
 
-  translate([-d_out/2 - 20 - ext/2, 0, 0])
+  translate([-d_out/2 - boom, 0, 0])
     part();
 }
 
