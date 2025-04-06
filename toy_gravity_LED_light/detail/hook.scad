@@ -1,0 +1,29 @@
+include <../m3d/all.scad>
+
+module hook()
+{
+  h = 4;
+  ext = 10;
+  d_in = 40+10;
+  d_out = d_in + ext;
+  module body()
+  {
+    cylinder(d=d_out, h=h, $fn=fn(50));
+    translate([d_in/2, -ext/2, 0])
+      cube([ext+20, ext, h]);
+  }
+
+  difference()
+  {
+    body();
+    translate([0,0,-eps])
+    {
+      cylinder(d=d_in, h=h+2*eps, $fn=fn(60));
+      translate([1, -45-ext/2, 0])
+        rotate([0, 0, 30])
+          #cube(45*[1,1,0] + [0,0,h+2*eps]);
+    }
+  }
+}
+
+hook();
