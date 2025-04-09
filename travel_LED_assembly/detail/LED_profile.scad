@@ -1,9 +1,10 @@
 include <../m3d/all.scad>
+include <config.scad>
 
 module LED_profile_2d()
 {
-  s1 = [28.25, 1.1];
-  s2 = [22.5,  (8.15 + 8.20)/2];
+  s1 = profile_base_size;
+  s2 = profile_top_size;
   translate([-s1.x/2, -s2.y/2])
   {
     square(s1);
@@ -14,8 +15,7 @@ module LED_profile_2d()
 
 module LED_profile_slot_2d()
 {
-  r = 0.2;
-  offset(r=r, $fn=fn(20))
+  offset(r=profile_offset_r, $fn=fn(20))
     LED_profile_2d();
 }
 
