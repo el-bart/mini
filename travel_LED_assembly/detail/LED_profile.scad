@@ -12,11 +12,11 @@ module LED_profile_2d()
   }
 }
 
-module LED_profile_slot()
+module LED_profile_slot_2d()
 {
   r = 0.2;
   offset(r=r, $fn=fn(20))
     LED_profile_2d();
 }
 
-LED_profile_slot();
+LED_profile_slot_2d();
