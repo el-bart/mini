@@ -2,7 +2,7 @@ use <detail/LED_profile.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
-module TLA_conn_straight()
+module TLA_conn_straight(mocks=false)
 {
   module base()
   {
@@ -27,7 +27,7 @@ module TLA_conn_straight()
   translate([0, 0, conn_size.z/2])
   {
     base();
-    %if($preview)
+    %if(mocks)
     {
       h = conn_size.z + 2*10;
       translate([0, 0, -h/2])
@@ -37,4 +37,4 @@ module TLA_conn_straight()
   }
 }
 
-TLA_conn_straight();
+TLA_conn_straight(mocks=$preview);
