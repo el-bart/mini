@@ -37,6 +37,4 @@ module TLA_conn_straight()
   }
 }
 
-//intersection() { 
 TLA_conn_straight();
-//translate([0, 0, -50]) cube(100*[1,1,1]); } 
