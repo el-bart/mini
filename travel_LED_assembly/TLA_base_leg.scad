@@ -22,22 +22,24 @@ module TLA_base_leg(mocks=false)
     }
   }
 
-  leg();
-
-  %if(mocks)
+  translate([leg_w/2, 0, 0])
   {
-    translate([0, 0, leg_h])
-      TLA_conn_straight();
-    translate([leg_w, 0, 0])
-      rotate([0, 0, 180])
-      leg();
-    translate([-leg_w, 0, 0])
-      rotate([0, 0, 180])
-      leg();
+    leg();
+
+    %if(mocks)
+    {
+      translate([0, 0, leg_h])
+        TLA_conn_straight();
+      translate([leg_w, 0, 0])
+        rotate([0, 0, 180])
+        leg();
+      translate([-leg_w, 0, 0])
+        rotate([0, 0, 180])
+        leg();
+    }
   }
 }
 
 
 rotate([0, -90, 0])
-  translate([leg_w/2, 0, 0])
   TLA_base_leg(mocks=$preview);
