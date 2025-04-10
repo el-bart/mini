@@ -12,7 +12,9 @@ for(i=[1:2])
   rotate([90, 0, 0])
   TLA_conn_angle();
 
-for(i=[1:4])
+for(i=[1:5])
   for(j=[1:2])
     translate([-(j-1)*40 - 20, (i-1)*20, 0])
     TLA_conn_straight();
+translate([0 - 20, (6-1)*20, 0])
+  TLA_conn_straight();
