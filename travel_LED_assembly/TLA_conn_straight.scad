@@ -22,6 +22,10 @@ module TLA_conn_straight(mocks=false)
             cube(s);
         }
     }
+    // extra supports, to leave some space for power cables at the bottom
+    for(dx=[-1,+1])
+      translate([dx*conn_size.x/3, 0, 0])
+        cube([conn_size.x/3, conn_size.y, conn_middle_wall + 2*conn_side_cable_space], center=true);
   }
 
   translate([0, 0, conn_size.z/2])

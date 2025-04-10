@@ -3,5 +3,6 @@ profile_base_size = [28.25, 1.1];
 profile_offset_r = 0.2;
 
 conn_side_depth = 10;
+conn_side_cable_space = 2;
 conn_middle_wall = 2;
-conn_size = [35, 14, 2*conn_side_depth + conn_middle_wall];
+conn_size = [35, 14, 2*conn_side_depth + 2*conn_side_cable_space + conn_middle_wall];
