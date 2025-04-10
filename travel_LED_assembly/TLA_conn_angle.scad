@@ -1,5 +1,5 @@
-include <m3d/all.scad>
 use <TLA_conn_straight.scad>
+include <m3d/all.scad>
 include <detail/config.scad>
 
 module TLA_conn_angle(mocks=false)
