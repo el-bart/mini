@@ -17,6 +17,7 @@ fi
 for dev in /dev/ttyUSB*
 do
   EXTRA_FLAGS+=("--device" "$dev")
+  EXTRA_FLAGS+=("--group-add" "$(stat --format %g "$dev")")
   export PIO_PORT=$dev
 done
 
@@ -26,7 +27,6 @@ docker run \
   "${EXTRA_FLAGS[@]}" \
   --env "PIO_PORT" \
   --rm \
-  --group-add "$DIALOUT_GID" \
   -u "$(id -u):$(id -g)" \
   -v "$app_dir:/mnt" \
   -w "/mnt" \
