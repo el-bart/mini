@@ -1,8 +1,22 @@
 # kicad
-/board-backups
 *.net
 *-bak
+*.bak
 *-cache.lib
 fp-info-cache
 _autosave-*
 *.bck
+*-backups
+~*
+\#*\#
+
+# gerber files
+*.gbr
+*.drl
+*.gbrjob
+
+# BOM
+*.csv
+
+build/*
+home/*
