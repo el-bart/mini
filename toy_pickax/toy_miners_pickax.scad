@@ -11,9 +11,10 @@ module profile_2d()
     scale([1, scale_y])
     difference()
     {
-      circle(d=200, $fn=fn(50));
+      $fn=fn(350);
+      circle(d=200);
       translate([0, -50])
-        circle(d=250, $fn=fn(50));
+        circle(d=250);
     }
   // handle
   translate([-20/2, -260])
