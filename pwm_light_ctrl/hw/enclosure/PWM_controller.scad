@@ -61,7 +61,30 @@ module PWM_controller_bottom(mocks=false)
 }
 
 
+module PWM_controller_knob()
+{
+  wall = 1;
+  d_int = 6 + 0.1;
+  h = 8;
+  center_wall = 0.8;
+
+  difference()
+  {
+    cylinder(d=16, h=h+wall, $fn=9); // keep to choppy for easier grab
+    translate([0, 0, wall])
+      cylinder(d=d_int, h=h+eps, $fn=fn(50));
+  }
+  // center line for firm connection
+  s = [center_wall, d_int + 2*0.5, h];
+  translate([-s.x/2, -s.y/2, wall])
+    cube(s);
+}
+
+
 PWM_controller_bottom(mocks=$preview);
 
 translate([0, -size_ext.y-5, 0])
   PWM_controller_top();
+
+translate([size_ext.x + 10, 0, 0])
+  PWM_controller_knob();
