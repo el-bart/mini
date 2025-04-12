@@ -81,10 +81,16 @@ module PWM_controller_knob()
 }
 
 
-PWM_controller_bottom(mocks=$preview);
+module PWM_controller_all(mocks=false)
+{
+  PWM_controller_bottom(mocks=mocks);
 
-translate([0, -size_ext.y-5, 0])
-  PWM_controller_top();
+  translate([0, -size_ext.y-5, 0])
+    PWM_controller_top();
 
-translate([size_ext.x + 10, 0, 0])
-  PWM_controller_knob();
+  translate([size_ext.x + 10, 0, 0])
+    PWM_controller_knob();
+}
+
+
+PWM_controller_all(mocks=$preview);
