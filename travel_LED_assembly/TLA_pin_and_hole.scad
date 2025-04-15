@@ -48,28 +48,28 @@ module _TLA_base_shape(mocks=false)
 }
 
 
-module _TLA_template(d, mocks=false)
+module _TLA_template(d, bottom_wall=0, mocks=false)
 {
   rotate([90, 0, 0])
     difference()
     {
       _TLA_base_shape(mocks);
-      translate([0, base_bottom_wall, 0])
+      translate([0, bottom_wall ? bottom_wall : -eps, 0])
         _TLA_base_hole_center()
-        cylinder(d=d + base_d_spacing, h=base_len, $fn=fn(60));
+        cylinder(d=d + base_d_spacing, h=base_len+2*eps, $fn=fn(60));
     }
 }
 
 
 module TLA_hole(mocks=false)
 {
-  _TLA_template(base_d_hole, mocks);
+  _TLA_template(base_d_hole, 0, mocks);
 }
 
 
 module TLA_pin(mocks=false)
 {
-  _TLA_template(base_d_pin, mocks);
+  _TLA_template(base_d_pin, base_bottom_wall, mocks);
 }
 
 
