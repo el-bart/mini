@@ -11,12 +11,14 @@ base_d_pin = 3;
 base_d_spacing = 0.3 / 2;
 base_d_ext = max(base_d_pin, base_d_hole) + 2*base_side_wall;
 
+
 module _TLA_base_hole_center()
 {
   translate([0, 0, base_d_ext/2])
     rotate([-90, 0, 0])
     children();
 }
+
 
 module _TLA_base_shape(mocks=false)
 {
@@ -37,7 +39,8 @@ module _TLA_base_shape(mocks=false)
   }
 }
 
-module TLA_pin(mocks=false)
+
+module _TLA_template(d, mocks=false)
 {
   rotate([90, 0, 0])
     difference()
@@ -45,8 +48,25 @@ module TLA_pin(mocks=false)
       _TLA_base_shape(mocks);
       translate([0, base_bottom_wall, 0])
         _TLA_base_hole_center()
-        cylinder(d=base_d_hole + base_d_spacing, h=base_len, $fn=fn(60));
+        cylinder(d=d + base_d_spacing, h=base_len, $fn=fn(60));
     }
 }
 
-TLA_pin(mocks=$preview);
+
+module TLA_hole(mocks=false)
+{
+  _TLA_template(base_d_hole, mocks);
+}
+
+
+module TLA_pin(mocks=false)
+{
+  _TLA_template(base_d_pin, mocks);
+}
+
+
+TLA_hole(mocks=$preview);
+
+translate([0, 3, 0])
+  rotate([0, 0, 180])
+  TLA_pin(mocks=$preview);
