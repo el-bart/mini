@@ -14,21 +14,29 @@ base_d_ext = max(base_d_pin, base_d_hole) + 2*base_side_wall;
 
 module _TLA_base_hole_center()
 {
-  translate([0, 0, base_d_ext/2])
-    rotate([-90, 0, 0])
-    children();
+  for(dx=[-1,+1])
+    translate([dx * (profile_top_size.x/2 - base_d_ext/2), 0, base_d_ext/2])
+      rotate([-90, 0, 0])
+      children();
 }
 
 
 module _TLA_base_shape(mocks=false)
 {
+  module hole_block()
+  {
+    _TLA_base_hole_center()
+    {
+      rotate([+90, 0, 0])
+        translate([-base_d_ext/2, 0, -base_d_ext/2])
+        cube([base_d_ext, base_len, base_d_ext/2]);
+      cylinder(d=base_d_ext, h=base_len, $fn=fn(50));
+    }
+  }
 
   translate([-profile_top_size.x/2, 0, 0])
     cube([profile_top_size.x, base_len, base_bottom_wall]);
-  translate([-base_d_ext/2, 0, 0])
-    cube([base_d_ext, base_len, base_d_ext/2]);
-  _TLA_base_hole_center()
-    cylinder(d=base_d_ext, h=base_len, $fn=fn(50));
+  hole_block();
 
   %if(mocks)
   {
