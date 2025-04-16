@@ -65,7 +65,8 @@ module _TLA_template(d, bottom_wall=0, mocks=false)
     // bottom rails
     difference()
     {
-      bs = [profile_base_size.x, base_len, profile_top_size.y - profile_base_size.y];
+      bottom_clearance = 0.75;
+      bs = [profile_base_size.x, base_len, profile_top_size.y - profile_base_size.y - bottom_clearance];
       translate([-bs.x/2, 0, -bs.z])
         cube(bs);
       // cut-in
