@@ -11,6 +11,7 @@ base_d_hole = 4 + base_hole_spacing;
 base_d_pin  = 3 + base_hole_spacing;
 base_d_spacing = 0.3 / 2;
 base_d_ext = max(base_d_pin, base_d_hole) + 2*base_side_wall;
+base_hole_extra_len = 5; // extra space for cables
 
 
 module _TLA_base_hole_centers()
@@ -30,8 +31,8 @@ module _TLA_base_shape(mocks=false)
     {
       rotate([+90, 0, 0])
         translate([-base_d_ext/2, 0, -base_d_ext/2])
-        cube([base_d_ext, base_len, base_d_ext/2]);
-      cylinder(d=base_d_ext, h=base_len, $fn=fn(50));
+        cube([base_d_ext, base_len + base_hole_extra_len/2, base_d_ext/2]);
+      cylinder(d=base_d_ext, h=base_len + base_hole_extra_len/2, $fn=fn(50));
     }
   }
 
@@ -59,7 +60,7 @@ module _TLA_template(d, bottom_wall=0, mocks=false)
       _TLA_base_shape(mocks);
       translate([0, bottom_wall ? bottom_wall : -eps, 0])
         _TLA_base_hole_centers()
-        cylinder(d=d + base_d_spacing, h=base_len+2*eps, $fn=fn(60));
+        cylinder(d=d + base_d_spacing, h=base_len + base_hole_extra_len/2 + 2*eps, $fn=fn(60));
     }
     // bottom rails
     difference()
