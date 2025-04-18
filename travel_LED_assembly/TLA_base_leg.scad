@@ -26,17 +26,31 @@ module _TLA_base_leg_template(d)
           holes(d=10, dh=0);
       }
     // leg
-    hull()
+    difference()
     {
-      cylinder(d=profile_base_size.x, h=leg_h, $fn=fn(90));
-      translate([0, leg_len, 0])
-        cylinder(d=2*profile_base_size.x, h=leg_h, $fn=fn(160));
+      hull()
+      {
+        cylinder(d=profile_base_size.x, h=leg_h, $fn=fn(90));
+        translate([0, leg_len, 0])
+          cylinder(d=2*profile_base_size.x, h=leg_h, $fn=fn(160));
+      }
+      translate([0, 0, -eps])
+        hull()
+        {
+          delta = 0.6;
+          cylinder(d=profile_base_size.x*delta, h=leg_h+2*eps, $fn=fn(90));
+          translate([0, leg_len, 0])
+            cylinder(d=2*profile_base_size.x*delta, h=leg_h+2*eps, $fn=fn(160));
+        }
     }
+    // area under holders
+    cylinder(d=profile_base_size.x, h=leg_h, $fn=fn(90));
   }
 
   difference()
   {
     base();
+    // top slots for pin / hole
     translate([0, 0, leg_h])
       holes(d);
   }
@@ -62,8 +76,9 @@ module TLA_base_leg_pin(mocks=false)
 }
 
 
-TLA_base_leg_hole(mocks=$preview);
+rotate([0, 0, 6])
+  TLA_base_leg_hole(mocks=$preview);
 
 translate([profile_base_size.x+3, 0, 0])
-  rotate([0, 0, 180])
+  rotate([0, 0, -6])
   TLA_base_leg_pin(mocks=$preview);
