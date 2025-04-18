@@ -4,11 +4,19 @@ include <detail/config.scad>
 include <detail/TLA_base_hole_centers.scad>
 
 
+module _TLA_base_hole_centers_local()
+{
+  translate([0, 0, base_d_ext/2])
+    TLA_base_hole_centers()
+      rotate([-90, 0, 0])
+      children();
+}
+
 module _TLA_base_shape(mocks=false)
 {
   module hole_block()
   {
-    TLA_base_hole_centers()
+    _TLA_base_hole_centers_local()
     {
       rotate([+90, 0, 0])
         translate([-base_d_ext/2, 0, -base_d_ext/2])
@@ -40,7 +48,7 @@ module _TLA_template(d, bottom_wall=0, mocks=false)
     {
       _TLA_base_shape(mocks);
       translate([0, bottom_wall ? bottom_wall : -eps, 0])
-        TLA_base_hole_centers()
+        _TLA_base_hole_centers_local()
         cylinder(d=d + base_d_spacing, h=base_len + base_hole_extra_len/2 + 2*eps, $fn=fn(60));
     }
     // bottom rails
