@@ -1,41 +1,40 @@
-use <TLA_conn_straight.scad>
+use <TLA_pin_and_hole.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
+side = base_len + base_hole_extra_len/2;
+d = max(base_d_hole, base_d_pin);
+size = [side + 2*base_side_wall, 2*d + 3*base_side_wall, side + 2*base_side_wall];
+
+
 module TLA_conn_angle(mocks=false)
 {
-  arm = [profile_top_size.x, profile_top_size.y, conn_side_depth + (conn_size.x - profile_top_size.x)/2];
-
-  module quarter_circle()
+  difference()
   {
-    translate([0, arm.y, 0])
-      rotate([90, 0, 0])
-      intersection()
-      {
-        cylinder(r=arm.x, h=arm.y, $fn=fn(50));
-        cube(arm.x*[1,1,1]);
-      }
-  }
+    translate([-size.x/2, -size.y/2, 0])
+      rounded_cube(size, 2, $fn=fn(30));
 
-  // bottom
-  cube(arm);
-  // top
-  translate([0, 0, arm.z])
-  {
-    rotate([0, -90, 0])
-      cube(arm);
-    quarter_circle();
-  }
-
-  %if(mocks)
-  {
-    translate([profile_top_size.x/2, arm.y/2, -conn_side_depth - conn_middle_wall])
-      TLA_conn_straight();
-    translate([-arm.z + conn_side_depth, arm.y/2, arm.z + profile_top_size.x/2])
+    // top part
+    translate([0, -size.y/2 + d/2 + base_side_wall, -eps])
+      TLA_base_hole_centers()
+      cylinder(d=base_d_pin + base_d_spacing, h=side + eps, $fn=fn(60));
+    %if(mocks)
+      translate([side + size.x/2 + 2, 9, size.z/2])
       rotate([0, -90, 0])
-      TLA_conn_straight();
+      TLA_pin();
+
+    // bottom part
+    translate([size.x/2 - side + eps, size.y/2 - d/2 - base_side_wall, size.z/2])
+      rotate([0, 90, 0])
+      TLA_base_hole_centers()
+      cylinder(d=base_d_hole + base_d_spacing, h=side + eps, $fn=fn(60));
+    %if(mocks)
+      translate([0, 1.5, -side -2])
+      TLA_hole();
+
   }
 }
 
-rotate([90, 0, 0])
+translate([0, 0, size.z])
+rotate([180, 0, 0])
   TLA_conn_angle(mocks=$preview);
