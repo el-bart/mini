@@ -1,22 +1,14 @@
 use <detail/LED_profile.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
-
-
-module _TLA_base_hole_centers()
-{
-  for(dx=[-1,+1])
-    translate([dx * (profile_base_size.x/2 - base_d_ext/2), 0, base_d_ext/2])
-      rotate([-90, 0, 0])
-      children();
-}
+include <detail/TLA_base_hole_centers.scad>
 
 
 module _TLA_base_shape(mocks=false)
 {
   module hole_block()
   {
-    _TLA_base_hole_centers()
+    TLA_base_hole_centers()
     {
       rotate([+90, 0, 0])
         translate([-base_d_ext/2, 0, -base_d_ext/2])
@@ -48,7 +40,7 @@ module _TLA_template(d, bottom_wall=0, mocks=false)
     {
       _TLA_base_shape(mocks);
       translate([0, bottom_wall ? bottom_wall : -eps, 0])
-        _TLA_base_hole_centers()
+        TLA_base_hole_centers()
         cylinder(d=d + base_d_spacing, h=base_len + base_hole_extra_len/2 + 2*eps, $fn=fn(60));
     }
     // bottom rails
