@@ -2,17 +2,6 @@ use <detail/LED_profile.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
-base_len = 20;
-base_side_wall = 3;
-base_bottom_wall = 2;
-
-base_hole_spacing = 0.2;
-base_d_hole = 4 + base_hole_spacing;
-base_d_pin  = 3 + base_hole_spacing;
-base_d_spacing = 0.3 / 2;
-base_d_ext = max(base_d_pin, base_d_hole) + 2*base_side_wall;
-base_hole_extra_len = 5; // extra space for cables
-
 
 module _TLA_base_hole_centers()
 {
