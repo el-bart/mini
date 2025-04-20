@@ -21,7 +21,7 @@ module tran_bottle_holder(n, mocks=false)
   {
     ss = slot_size;
     bs = bottle_size;
-    side_rounded_cube(ss + [0,0,dh], slot_rounding);
+    side_rounded_cube(ss + [0,0,dh], slot_rounding, $fn=fn(30));
     %if(mocks)
       translate(0.5*[ss.x-bs.x, ss.y-bs.y, 0])
       bottle_mock();
