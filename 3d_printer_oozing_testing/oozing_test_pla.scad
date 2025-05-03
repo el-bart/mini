@@ -5,7 +5,7 @@ d=5;
 space=10;
 
 translate([-d, -d, 0])
-  cube([N*space, M*space, 0.2]);
+  cube([N*space, M*space, 2*0.2]);
 
 for(i=[0:N-1])
   for(j=[0:M-1])
