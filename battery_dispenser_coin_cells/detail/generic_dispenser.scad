@@ -7,9 +7,10 @@ module generic_dispenser(batt_d, batt_h, disp_h, wall=1.6, spacing=1, back_wall_
     cylinder(d=batt_d, h=batt_h);
   }
 
+  duct_tape_width = 20;
   leaf_r = max(2.5, 1.5*spacing); // amount of place to reserve for supporting batter from the bottom, on each side
   overlap = max(batt_d*0.2, 2);
-  size = [batt_d + 2*spacing + 2*wall, batt_d/2 + overlap + spacing + 2*wall, disp_h];
+  size = [max(duct_tape_width+1, batt_d + 2*spacing + 2*wall), batt_d/2 + overlap + spacing + 2*wall, disp_h];
   back_wall_width = max(back_wall_width_min, size.y);
 
   module holder()
