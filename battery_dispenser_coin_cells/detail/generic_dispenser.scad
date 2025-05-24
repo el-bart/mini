@@ -55,5 +55,6 @@ module generic_dispenser(batt_d, batt_h, disp_h, wall=1.6, spacing=1, back_wall_
     holder();
 }
 
+// just some samples here...
 //generic_dispenser(batt_d=20, batt_h=3.25, disp_h=150);
 generic_dispenser(batt_d=8, batt_h=3.25, disp_h=150);
