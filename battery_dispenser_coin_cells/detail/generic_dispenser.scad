@@ -9,12 +9,11 @@ module generic_dispenser(batt_d, batt_h, disp_h, wall=1.6, spacing=1, back_wall_
 
   leaf_r = max(2.5, 1.5*spacing); // amount of place to reserve for supporting batter from the bottom, on each side
   overlap = max(batt_d*0.2, 2);
+  size = [batt_d + 2*spacing + 2*wall, batt_d/2 + overlap + spacing + 2*wall, disp_h];
+  back_wall_width = max(back_wall_width_min, size.y);
 
   module holder()
   {
-    size = [batt_d + 2*spacing + 2*wall, batt_d/2 + overlap + spacing + 2*wall, disp_h];
-    back_wall_width = max(back_wall_width_min, size.y);
-
     module block()
     {
       translate([-size.x/2, batt_d/2 + spacing, 0])
@@ -44,14 +43,16 @@ module generic_dispenser(batt_d, batt_h, disp_h, wall=1.6, spacing=1, back_wall_
       translate([-extraction_slot_size.x/2, -extraction_slot_size.y + spacing, wall])
         cube(extraction_slot_size);
     }
+
+    %if(mocks)
+      for(dh=[wall: batt_h + 0.25 : disp_h - batt_h/2])
+        translate([0, 0, dh])
+          battery_mock();
   }
 
-  holder();
-
-  %if(mocks)
-    for(dh=[wall: batt_h + 0.25 : disp_h - batt_h/2])
-      translate([0, 0, dh])
-        battery_mock();
+  translate([0, 0, batt_d/2 + spacing + wall ])
+    rotate([-90, 0, 0])
+    holder();
 }
 
 //generic_dispenser(batt_d=20, batt_h=3.25, disp_h=150);
