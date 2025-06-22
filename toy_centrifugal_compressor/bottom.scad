@@ -1,5 +1,6 @@
 use<common/screw.scad>
 use<common/lego.scad>
+use<fan.scad>
 include <common/config.scad>
 include <m3d/all.scad>
 
@@ -47,3 +48,7 @@ module bottom()
 }
 
 bottom();
+%if($preview)
+  translate([0,0,wall+fan_spacing])
+  render()
+  fan();
