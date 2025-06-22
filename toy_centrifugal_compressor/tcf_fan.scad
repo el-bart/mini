@@ -25,12 +25,13 @@ module fan()
     }
   }
 
-  difference()
-  {
-    core();
-    translate([0,0,-eps])
-      lego_axle_slot(bh+2*eps);
-  }
+  render()
+    difference()
+    {
+      core();
+      translate([0,0,-eps])
+        lego_axle_slot(bh+2*eps);
+    }
 }
 
 fan();

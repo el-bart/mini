@@ -12,6 +12,10 @@ fan_blade_n = 6;
 fan_spacing = 0.5;
 fan_blade_thickness = 1.2;
 
+inlet_d = 20;
+inlet_holders = 8;
+inlet_holder_width = 1.6;
+
 duct_len = 40;
 duct_int = 5;
 duct_ext = duct_int + 2*wall;
