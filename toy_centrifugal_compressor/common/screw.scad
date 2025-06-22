@@ -15,9 +15,10 @@ module screw_slot(h)
   {
     union()
     {
-      cylinder(d=screw_hole_d + 2*wall, h=h, $fn=fn(40));
-      translate(screw_hole_d*[-1,-2,0])
-        cube([2*screw_hole_d, 2*screw_hole_d, h]);
+      d = screw_hole_d + 2*wall + 2*1;
+      cylinder(d=d, h=h, $fn=fn(40));
+      translate(d*[-0.5, -1, 0])
+        cube([d, d, h]);
     }
     translate([0,0,h+eps])
       ti_cnck_m3_short(dl=1);
