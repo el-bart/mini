@@ -5,7 +5,7 @@ spacing = 0.3;
 y = 1.80 + 2*spacing;
 x = 4.75 + 2*spacing;
 
-module leg_axle_slot(length)
+module lego_axle_slot(length)
 {
   linear_extrude(length)
     for(dr=[0, 90])
@@ -25,7 +25,7 @@ difference()
 {
   cylinder(d=10, h=10);
   translate([0, 0, -eps])
-    leg_axle_slot(length=10+2*eps);
+    lego_axle_slot(length=10+2*eps);
 }
 
 translate([15, 0 ,0])
@@ -40,5 +40,5 @@ translate([-15, 0 ,0])
   intersection()
   {
     #lego_round_slot(length=10);
-    leg_axle_slot(length=10);
+    lego_axle_slot(length=10);
   }
