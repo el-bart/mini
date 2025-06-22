@@ -4,7 +4,7 @@ include <m3d/all.scad>
 
 module fan()
 {
-  bh = h - 2*wall - 2*fan_spacing;
+  bh = h - 2*wall - 2*fan_spacing - fan_spacing;
   br = ( d_int - 2*fan_spacing ) / 2;
 
   module core()
