@@ -1,6 +1,6 @@
 use<common/screw.scad>
 use<common/lego.scad>
-use<tcf_fan.scad>
+use<tcp_fan.scad>
 include <common/config.scad>
 include <m3d/all.scad>
 

@@ -1,6 +1,6 @@
-use <../tcf_bottom.scad>
-use <../tcf_fan.scad>
-use <../tcf_top.scad>
+use <../tcp_bottom.scad>
+use <../tcp_fan.scad>
+use <../tcp_top.scad>
 include <../common/config.scad>
 include <../m3d/all.scad>
 
