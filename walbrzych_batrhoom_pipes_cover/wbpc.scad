@@ -1,7 +1,7 @@
 include <m3d/all.scad>
 
 h = 0.8;
-tape_space = 25 ;
+tape_space = 25;
 size = [160 + tape_space, 44 + tape_space, h];
 corner_r= 3;
 pipe_d = 34;
