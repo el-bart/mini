@@ -20,3 +20,6 @@ _autosave-*
 
 build/*
 home/*
+
+# misc
+core
