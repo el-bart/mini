@@ -1,5 +1,5 @@
 size_2d = [170, 280];
-wall = 1;
+wall = 0.9;
 
 module main_2d()
 {
@@ -27,16 +27,5 @@ module main_2d()
   }
 }
 
-/*
-rotate_extrude(angle=360)
-  intersection()
-  {
-    translate([-170/2, 0])
-      resize([170, 280])
-      import("model.svg");
-    square(300*[1,1]);
-  }
-  */
-
-rotate_extrude(angle=360)
+rotate_extrude(angle=360, $fn=40)
   main_2d();
