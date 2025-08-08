@@ -27,6 +27,8 @@ module main_2d()
       }
       square([size_2d.x, size_2d.y - wall - 1]);
     }
+    translate([0, size_2d.y - wall - 2])
+      square([10, wall]);
   }
 
   module hold_block()
