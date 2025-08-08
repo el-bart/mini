@@ -1,5 +1,6 @@
 size_2d = [170, 280];
 wall = 1.0;
+closed_top = true;
 
 module main_2d()
 {
@@ -27,8 +28,9 @@ module main_2d()
       }
       square([size_2d.x, size_2d.y - wall - 1]);
     }
-    translate([0, size_2d.y - wall - 2])
-      square([10, wall]);
+    if(closed_top)
+      translate([0, size_2d.y - wall - 2])
+        square([10, wall]);
   }
 
   module hold_block()
