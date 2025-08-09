@@ -1,12 +1,12 @@
 include <m3d/all.scad>
 
 LED_mock_size = [13, 7.5, 3];
-wall = 0.5;
+wall = 0.6;
 mod_h = 2*wall + LED_mock_size.z;
 
 base_d_int = 17;
 base_d_ext = base_d_int + 2*wall;
-cover_h = base_d_ext / 2 + 2;
+cover_h = 3;
 
 module LED_mock()
 {
@@ -45,24 +45,17 @@ module lamp(mocks=$preview)
   module top()
   {
     $fn=fn(40);
-    module hemisphere()
-    {
-      difference()
-      {
-        sphere(d=base_d_ext);
-        translate(-base_d_ext/2*[1,1,0] - base_d_ext*[0,0,1])
-          cube(base_d_ext*[1,1,1]);
-        sphere(d=base_d_int);
-      }
-    }
 
-    resize(base_d_ext*[1,1,0] + cover_h*[0,0,1])
-      hemisphere();
+    difference()
+    {
+      cylinder(d1=base_d_ext, d2=base_d_ext*2/3, h=cover_h);
+      cylinder(d1=base_d_int, d2=base_d_int*2/3, h=cover_h-wall);
+    }
   }
 
   bottom();
   translate([0, 0, mod_h])
-  top();
+    top();
 
   %if(mocks)
     translate([0, 0, wall])
