@@ -1,0 +1,73 @@
+include <m3d/all.scad>
+
+LED_mock_size = [13, 7.5, 3];
+wall = 0.5;
+mod_h = 2*wall + LED_mock_size.z;
+
+base_d_int = 17;
+base_d_ext = base_d_int + 2*wall;
+cover_h = base_d_ext / 2 + 2;
+
+module LED_mock()
+{
+  s = LED_mock_size;
+  translate([-s.x/2, -s.y/2, 0])
+  {
+    cube(s);
+    // cable
+    cube([s.x+20, 3, 1]);
+  }
+}
+
+
+module lamp(mocks=$preview)
+{
+  module bottom()
+  {
+    $fn=fn(50);
+    square_side = base_d_int / sqrt(2);
+
+    difference()
+    {
+      cylinder(d=base_d_ext, h=mod_h);
+      // inner space
+      translate([0, 0, wall])
+        cylinder(d=base_d_int, h=mod_h - 2*wall);
+      // slot for inserting LED
+      translate([0, -LED_mock_size.y/2, wall])
+        cube([base_d_ext, LED_mock_size.y, LED_mock_size.z]);
+      // top cut for light to pass through
+      translate(-square_side/2*[1,1,0] + [0, 0, mod_h - wall - eps])
+        cube(square_side*[1,1,0] + [0, 0, wall+2*eps]);
+    }
+  }
+
+  module top()
+  {
+    $fn=fn(40);
+    module hemisphere()
+    {
+      difference()
+      {
+        sphere(d=base_d_ext);
+        translate(-base_d_ext/2*[1,1,0] - base_d_ext*[0,0,1])
+          cube(base_d_ext*[1,1,1]);
+        sphere(d=base_d_int);
+      }
+    }
+
+    resize(base_d_ext*[1,1,0] + cover_h*[0,0,1])
+      hemisphere();
+  }
+
+  bottom();
+  translate([0, 0, mod_h])
+  top();
+
+  %if(mocks)
+    translate([0, 0, wall])
+    LED_mock();
+}
+
+
+lamp();
