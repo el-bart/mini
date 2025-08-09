@@ -1,7 +1,7 @@
 include <m3d/all.scad>
 
 LED_mock_size = [13, 7.5, 3];
-wall = 0.6;
+wall = 0.6; // if it's hard to print, go for 0.8
 mod_h = 2*wall + LED_mock_size.z;
 
 base_d_int = 17;
