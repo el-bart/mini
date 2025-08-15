@@ -2,4 +2,4 @@
 
 costing just under 0.50 EUR it was almost undelivable.
 
-lamp in question is marked as `TW1803B`, using `XY8051` LED lamp controller.
+lamp in question is marked as `TW1803B`, using `YX8051` LED lamp controller.
