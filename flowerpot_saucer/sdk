@@ -19,6 +19,7 @@ if tty -s
 then
   flags+=("-it")
 fi
+flags+=("--init")
 
 if [ -n "${vcs_hash:-}" ]
 then
@@ -32,17 +33,30 @@ flags+=(--workdir "/mnt")
 
 if [ -n "${SDK_3D_ENABLE_GUI:-}" ]
 then
-  if [ -z "${DISPLAY:-}" ]
+  if [ -z "${DISPLAY:-}" ] && [ -z "${WAYLAND_DISPLAY:-}" ]
   then
-    echo "$app: DISPLAY is not available" >&2
+    echo "$app: neither X11 (DISPLAY) nor Wayland (WAYLAND_DISPLAY) is available - aborting" >&2
     exit 2
   fi
-  echo "$app: enabling X11 display"
 
-  flags+=(--env DISPLAY)
-  flags+=(--env QT_X11_NO_MITSHM=1)
+  if [ -n "${DISPLAY:-}" ]
+  then
+    echo "$app: enabling X11 display"
+    flags+=(--env DISPLAY)
+    flags+=(--env QT_X11_NO_MITSHM=1)
+    flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
+  fi
+
+  if [ -n "${WAYLAND_DISPLAY:-}" ]
+  then
+    echo "$app: enabling Wayland display"
+    flags+=(--env WAYLAND_DISPLAY)
+    flags+=(--env XDG_RUNTIME_DIR)
+    flags+=(--volume "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY")
+    flags+=(--env QT_QPA_PLATFORM=wayland)
+  fi
+
   for path in \
-    "/tmp/.X11-unix" \
     "/run/user/$(id -u)/at-spi/bus_0"
   do
     if [ -e "$path" ]
@@ -56,6 +70,10 @@ then
   mkdir -p "$user_dir"
   flags+=(--volume "$user_dir:/home/user")
   flags+=(--env HOME="/home/user")
+
+  flags+=(--network=host)
+else
+  flags+=(--network=none)
 fi
 
 docker run \
