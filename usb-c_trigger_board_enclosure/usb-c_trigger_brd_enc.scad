@@ -26,14 +26,15 @@ module pcb_mock()
 }
 
 
-module enc(mocks=$preview)
+module enc(dl=0, mocks=$preview)
 {
-  translate([-size.x/2, -wall, 0])
+  s = size + [0,0,dl];
+  translate([-s.x/2, -wall, 0])
   {
-    cut_size = size - wall*[2,2,0] + 2*[0,0,eps];
+    cut_size = s - wall*[2,2,0] + 2*[0,0,eps];
     difference()
     {
-      side_rounded_cube(size, rounding, $fn=fn(50));
+      side_rounded_cube(s, rounding, $fn=fn(50));
       translate(wall*[1,1,0] - [0,0,eps])
         cube(cut_size);
     }
@@ -44,4 +45,4 @@ module enc(mocks=$preview)
 }
 
 
-enc();
+enc(dl=10);
