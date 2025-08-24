@@ -58,9 +58,9 @@ module front()
   }
 
   cut_h = 47.29;
-  cutoff_dh = 11;
+  cutoff_dh = 0;
   cutoff_len = 19;
-  cutoff_skew = 0.579; // this should be computed, but it's a pain, so it's eyeballed instead
+  cutoff_skew = 0.0; // this should be computed, but it's a pain, so it's eyeballed instead
 
   module cut_block()
   {
@@ -179,7 +179,7 @@ if(0)
 }
 
 
-if(0)
+if(1)
 {
   front();
   rear();
