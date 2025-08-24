@@ -31,10 +31,10 @@ for line in gcode_in.readlines():
         if ( current_layer % layers_per_segment ) == 0:
             current_retraction += retraction_delta
     else:
-        match = re.search('^G1 E-[0-9\\.]+ (F[0-9]+)$', line)
+        match = re.search('^G1 E(-?)[0-9\\.]+ (F[0-9]+)$', line)
         if match:
-            line = f"G1 E-{current_retraction:.2f} {match.group(1)}\n"
+            line = f"G1 E{match.group(1)}{current_retraction:.2f} {match.group(2)}\n"
             if last_printed_retraction != current_retraction:
-                sys.stdout.write(f"{sys.argv[0]}: layer {current_layer} -> retraction {current_retraction} (gcode: {line.strip()})\n")
+                sys.stdout.write(f"{sys.argv[0]}: layer {current_layer} -> retraction {current_retraction:.2f} (gcode: {line.strip()})\n")
                 last_printed_retraction = current_retraction
     gcode_out.write(line)
