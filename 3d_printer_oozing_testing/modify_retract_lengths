@@ -27,7 +27,7 @@ last_printed_retraction = -1
 for line in gcode_in.readlines():
     if re.match('^;LAYER_CHANGE$', line):
         current_layer += 1
-        line = f"{line.strip()} layer={current_layer}\n"
+        line += f"{line.strip()} layer={current_layer}\n"
         if ( current_layer % layers_per_segment ) == 0:
             current_retraction += retraction_delta
     else:
