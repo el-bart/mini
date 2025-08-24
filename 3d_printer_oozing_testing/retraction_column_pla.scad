@@ -30,7 +30,7 @@ module columns()
   }
 
   for(ix=[0:N-1])
-    translate([ix*(space_delta*ix), 0, 0])
+    translate([(ix + 1.6^ix)*space_delta, 0, 0])
       column();
 }
 
