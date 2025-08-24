@@ -1,0 +1,69 @@
+#!/bin/bash
+set -eu -o pipefail
+
+app=$(basename "$0")
+app_dir=$(dirname "$(readlink -e "$0")")
+
+if [ $# -ne 2 ]
+then
+  echo "$0 <retraction_start> <retraction_delta>" >&2
+  exit 2
+fi
+retraction_start=$1
+retraction_delta=$2
+shift 2
+
+cd "$app_dir"
+segment_h=$(cat retraction_column_pla.scad | grep '^segment_h *=' | sed 's/.*= *//' | tr -d ';')
+
+for f in $(find build -name 'retraction_column_*.gcode')
+do
+  grep -q ".*_dynamic.gcode$" <<< "$f" && continue
+  layer_h=$(cat "$f" | grep '^; layer_height *= *' | sed 's/.*= *//' | tr -d ';')
+  out="${f%.gcode}_dynamic.gcode"
+  echo "$app: processing $f -> $out"
+  ( set -x ; ./modify_retract_lengths "$layer_h" "$segment_h" "$retraction_start" "$retraction_delta" "$f" "$out" )
+done
+
+
+modify_retract_lengths
+
+import re
+import sys
+
+if len(sys.argv) != 1 + 2 + 2 + 2:
+    sys.stderr.write(f"{sys.argv[0]} <layer_h> <segment_h> <retraction_start> <retraction_delta> <in.gcode> <out.gcode>\n")
+    sys.exit(2)
+layer_h = float(sys.argv[1])
+segment_h = int(sys.argv[2])
+retraction_start = float(sys.argv[3])
+retraction_delta = float(sys.argv[4])
+gcode_in_path = sys.argv[5]
+gcode_out_path = sys.argv[6]
+
+layers_per_segment = segment_h / layer_h
+if layers_per_segment != int(layers_per_segment):
+    sys.stderr.write(f"{sys.argv[0]}: for h={segment_h} and {layer_h} layers, there's no round layers per segment ({layers_per_segment})\n")
+    sys.exit(3)
+
+gcode_in = open(gcode_in_path, 'r')
+gcode_out = open(gcode_out_path, 'w')
+
+current_layer = 0
+current_retraction = retraction_start
+last_printed_retraction = -1
+
+for line in gcode_in.readlines():
+    if re.match('^;LAYER_CHANGE$', line):
+        current_layer += 1
+        line = f"{line.strip()} layer={current_layer}\n"
+        if ( current_layer % layers_per_segment ) == 0:
+            current_retraction += retraction_delta
+    else:
+        match = re.search('^G1 E(-?)[0-9\\.]+ (F[0-9]+)$', line)
+        if match:
+            line = f"G1 E{match.group(1)}{current_retraction:.2f} {match.group(2)}\n"
+            if last_printed_retraction != current_retraction:
+                sys.stdout.write(f"{sys.argv[0]}: layer {current_layer} -> retraction {current_retraction:.2f} (gcode: {line.strip()})\n")
+                last_printed_retraction = current_retraction
+    gcode_out.write(line)
