@@ -49,12 +49,20 @@ run_flags+=(--hostname "steam-container")
 run_flags+=(--volume "/run/user/$UID/pulse:/run/user/$UID/pulse")
 
 # GPU
-run_flags+=(--volume "/dev/dri:/dev/dri")
+run_flags+=(--device  /dev/dri)
+run_flags+=(--device  /dev/kfd)
+#run_flags+=(--volume "/dev/dri:/dev/dri")
+#run_flags+=(--volume "/dev/kfd:/dev/kfd")
 run_flags+=(--volume "/dev/shm:/dev/shm")
+#run_flags+=(--runtime "amd")
+#run_flags+=(--env AMD_VISIBLE_DEVICES=all)
+#run_flags+=(--security-opt seccomp=unconfined)
+run_flags+=(--group-add "$(getent group video | cut -d: -f3)")
+run_flags+=(--group-add "$(getent group render | cut -d: -f3)")
 
 # perms mapped to local user to make things work
 run_flags+=(--user "$(id -u):$(id -g)")
-run_flags+=(--group-add "audio")
+run_flags+=(--group-add "$(getent group audio | cut -d: -f3)")
 
 # X11 pass-thorugh
 run_flags+=(--env DISPLAY="$DISPLAY")
@@ -67,7 +75,7 @@ run_flags+=(--env "HOME=/home/user")
 run_flags+=(--workdir "/home/user")
 
 # make sure joystick is forwarded
-run_flags+=(--group-add "$(grep input /etc/group | tr : ' ' | awk '{ print $3 }')")
+run_flags+=(--group-add "$(getent group input | cut -d: -f3)")
 for dev in $(find /dev/input/* /dev/hidraw* -type c)
 do
   run_flags+=(--device "$dev")
