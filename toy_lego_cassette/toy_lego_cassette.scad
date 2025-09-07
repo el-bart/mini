@@ -2,7 +2,7 @@ include <m3d/all.scad>
 
 r = 1;
 logo_h = 1;
-size = [64, 48, 10.2 - logo_h];
+size = [64, 48, 9.6 - logo_h];
 
 module cassette()
 {
