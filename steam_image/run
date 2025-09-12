@@ -42,6 +42,12 @@ run_flags+=(--tty)
 run_flags+=(--rm)
 run_flags+=(--name "steam_$USER")
 
+# proer signals passing
+run_flags+=(--init)
+
+# having too many possible descriptors cause issues with some applications
+run_flags+=(--ulimit "nofile=1024")
+
 # stable needed to prevent re-authorization on each startup
 run_flags+=(--hostname "steam-container")
 
