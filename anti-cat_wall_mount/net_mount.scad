@@ -5,9 +5,14 @@ side = 30;
 wall = 3;
 mount_hole = [7, 3];
 hole_wall_around = 4;
-holes_spacing = 35;
+holes = 6;
 
-holes = round(l / (holes_spacing + mount_hole.x));
+// M3x16
+screw_d = 5;
+screw_wall = 5;
+
+side_with_holes_size = [l, 2*hole_wall_around + mount_hole.y + wall, wall];
+holes_spacing = l / holes;
 
 
 module net_mount()
@@ -19,33 +24,49 @@ module net_mount()
 
   module net_mount_holes()
   {
-    s = [l, 2*hole_wall_around + mount_hole.y + wall, wall];
     difference()
     {
-      side_rounded_cube(s, wall, $fn=fn(20));
+      side_rounded_cube(side_with_holes_size, wall, $fn=fn(20));
       for(i=[0:holes-1])
-        translate([holes_spacing/2 + i*(holes_spacing + 2*mount_hole.x/2), 0, 0])
-          translate([0, wall + hole_wall_around, -eps])
+        translate([holes_spacing/2 + i*(holes_spacing), 0, 0])
+          translate([-mount_hole.y/2, wall + hole_wall_around, -eps])
           side_rounded_cube([mount_hole.x, mount_hole.y, wall+2*eps], 1, $fn=fn(30));
     }
   }
 
-  module strut()
+  module struts()
   {
+    module strut()
+    {
+      translate([0, wall, wall])
+        rotate([90, 0, 0])
+        rotate([0, 90, 0])
+        linear_extrude(wall)
+        polygon([
+            [0, 0],
+            [0, side-wall],
+            [side_with_holes_size.y - 2*wall, 0]
+        ]);
+    }
+
+    for(dx=[0+holes_spacing, l/2-wall/2, l-wall-holes_spacing])
+      translate([dx, 0, 0])
+        strut();
   }
 
-  // mount walls
+  module mount_walls()
   {
     translate([0, -side, 0])
       single_wall();
     translate([0, wall, 0])
       rotate([90, 0, 0])
       single_wall();
+    // filler for connector rounding
+    cube([l, wall, wall]);
   }
 
-  // filler for connector rounding
-  cube([l, wall, wall]);
-
+  mount_walls();
+  struts();
   net_mount_holes();
 }
 
