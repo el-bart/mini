@@ -34,5 +34,11 @@ module pack_connector(mocks=$preview)
 }
 
 
-rotate([-90, 0, 0])
-  pack_connector();
+module pack_connector_flat(mocks=$preview)
+{
+  rotate([-90, 0, 0])
+    translate([0, -battery_pack_size.y/2 - wall, 0])
+    pack_connector();
+}
+
+pack_connector_flat();
