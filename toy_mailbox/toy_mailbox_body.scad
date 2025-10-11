@@ -1,12 +1,12 @@
+use <detail/hinge.scad>
 include <m3d/all.scad>
+include <detail/config.scad>
 
-wall = 1.5;
-size_ext = [230, 320, 30];
-cut_2d = [220, 20];
 
 module box()
 {
   size_int = size_ext - wall*[2,2,1];
+  cut_2d = [220, 20];
 
   module body()
   {
@@ -28,7 +28,7 @@ module box()
   module lock_hinge()
   {
     screw_d = 3.1;
-    d = screw_d + 2*2*wall;
+    d = screw_d + 2*hinge_wall;
     h = size_ext.z - wall;
     spacing = 2;
 
@@ -49,10 +49,23 @@ module box()
     }
   }
 
+  module hinge_pair()
+  {
+    for(dy=[-1,+1])
+      translate([hinge_d_total/2 + size_ext.x, dy*(hinge_block_len + hinge_play/2) + hinge_block_len/2, -hinge_d_total/2 + hinge_d_total + size_ext.z - wall])
+        rotate([90, 0, 0])
+        hinge(hinge_screw_d + 0.1);
+  }
+
   body();
 
-  translate([0, 0.7*size_ext.y, 0])
+  translate([0, 0.6*size_ext.y, 0])
     lock_hinge();
+
+  for(dy=[hinge_dist_edge, size_ext.y-hinge_dist_edge])
+    translate([0, dy, 0])
+      hinge_pair();
+
 }
 
 
