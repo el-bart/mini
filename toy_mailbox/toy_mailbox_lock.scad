@@ -18,9 +18,14 @@ module lock_print()
     {
       union()
       {
-        cylinder(d=d, h=h, $fn=fn(40));
-        translate([0, -d/2, 0])
-          side_rounded_cube([bom_len, d, d], wall, $fn=fn(50));
+        $fn=fn(40);
+        cylinder(d=d, h=h);
+        hull()
+        {
+          cylinder(d=d, h=d);
+          translate([0, -d/2, 0])
+            side_rounded_cube([bom_len, d, d], wall);
+        }
       }
       // screw head hole
       translate([0, 0, -eps])
