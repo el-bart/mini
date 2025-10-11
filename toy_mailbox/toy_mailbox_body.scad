@@ -1,5 +1,6 @@
 use <detail/hinge.scad>
 use <toy_mailbox_cover.scad>
+use <toy_mailbox_lock.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
@@ -71,6 +72,7 @@ module box()
 
 
 box();
+// TODO: helper disks
 
 %if($preview)
 {
@@ -82,3 +84,6 @@ box();
     render() // avoids intersections() artifacts w/o affecting preview time really
     cover();
 }
+
+%if($preview)
+  lock();
