@@ -69,8 +69,4 @@ module box()
 }
 
 
-intersection()
-{
 box();
-//cube([400, 50, 300]);
-}
