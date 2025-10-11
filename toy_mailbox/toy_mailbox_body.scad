@@ -15,7 +15,7 @@ module box()
   {
     difference()
     {
-      rounded_cube(size_ext, wall, $fn=fn(30));
+      side_rounded_cube(size_ext, wall, $fn=fn(30));
       // gut the interior
       translate(wall*[1,1,1])
         cube(size_int + [0,0,1]);
