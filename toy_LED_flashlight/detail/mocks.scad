@@ -3,12 +3,12 @@ include <config.scad>
 
 module LED_assembly_mock()
 {
-  cylinder(d=21.2, h=13.5, $fn=fn(30));
+  cylinder(d=led_lens_d, h=13.5, $fn=fn(30));
   translate([0, 0, 13.5])
   {
     // resistors
     for(dy=[-1,+1])
-      translate([0, dy*(21.2/2 - 2.5/2), 0])
+      translate([0, dy*(led_lens_d/2 - 2.5/2), 0])
         cylinder(d=2.5, h=11);
     // radiator
     translate(-9/2*[1, 1, 0])
