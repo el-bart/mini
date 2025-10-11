@@ -1,4 +1,5 @@
 use <detail/hinge.scad>
+use <toy_mailbox_cover.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
@@ -70,3 +71,14 @@ module box()
 
 
 box();
+
+%if($preview)
+{
+  dp = [-size_ext.x - hinge_d_total/2, 0, -size_ext.z + wall - hinge_d_total/2];
+  open_angle = 5;
+  translate(-dp)
+    rotate([0, open_angle, 0])
+    translate(dp)
+    render() // avoids intersections() artifacts w/o affecting preview time really
+    cover();
+}
