@@ -1,4 +1,5 @@
 use <detail/hinge.scad>
+use <detail/helper_discs.scad>
 use <toy_mailbox_cover.scad>
 use <toy_mailbox_lock.scad>
 include <m3d/all.scad>
@@ -68,6 +69,8 @@ module box()
     translate([0, dy, 0])
       hinge_pair();
 
+  if(use_helper_discs)
+    helper_discs();
 }
 
 

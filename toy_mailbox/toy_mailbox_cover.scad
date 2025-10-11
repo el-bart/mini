@@ -1,7 +1,9 @@
 use <detail/hinge.scad>
+use <detail/helper_discs.scad>
 include <m3d/all.scad>
 include <detail/config.scad>
 
+print_off = [0, 0, -size_ext.z + wall];
 
 module cover()
 {
@@ -33,8 +35,11 @@ module cover()
     translate([0, dy, 0])
       hinge_centered();
 
+  if(use_helper_discs)
+    translate(-print_off)
+      helper_discs();
 }
 
 
-translate([0, 0, -size_ext.z + wall])
+translate(print_off)
   cover();
