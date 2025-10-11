@@ -18,9 +18,9 @@ module cover()
     }
   }
 
-  module hinge_pair()
+  module hinge_centered()
   {
-    translate([hinge_d_total/2 + size_ext.x, hinge_block_len/2, -hinge_d_total/2 + hinge_d_total + size_ext.z - wall])
+    translate([hinge_d_total/2 + size_ext.x, -hinge_block_len/2, -hinge_d_total/2 + hinge_d_total + size_ext.z - wall])
       rotate([0, 90, 0])
       rotate([0, 0, 180])
       rotate([90, 0, 0])
@@ -31,7 +31,7 @@ module cover()
 
   for(dy=[hinge_dist_edge, size_ext.y-hinge_dist_edge])
     translate([0, dy, 0])
-      hinge_pair();
+      hinge_centered();
 
 }
 
