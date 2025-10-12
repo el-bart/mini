@@ -2,7 +2,7 @@ include <m3d/all.scad>
 
 module opening_key()
 {
-  key_hole = [9.5 - 1.5, 2.6 - 0.8];
+  key_hole = [9.5 - 0.7, 2.6 - 0.8];
   key_len = 20;
   key_hold_d = 20;
   h = key_hole.y;
