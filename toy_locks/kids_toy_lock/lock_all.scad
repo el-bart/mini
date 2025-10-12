@@ -3,6 +3,7 @@ use <lock_key2.scad>
 use <lock_key.scad>
 use <lock_cap.scad>
 use <lock_base.scad>
+use <lock_opening_key.scad>
 
 lock_shackle();
 
@@ -16,3 +17,6 @@ translate([-85, 0, 0])
 
 translate([-80, 0, 0])
   lock_base();
+
+translate([25, -9, 0])
+  opening_key();
