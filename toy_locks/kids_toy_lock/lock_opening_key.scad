@@ -6,7 +6,7 @@ module opening_key()
   key_len = 20;
   key_hold_d = 20;
   h = key_hole.y;
-  rounding = 0.4;
+  rounding = 0.8;
   mount_hole_d = 4;
 
   assert( key_hole.y > 2*rounding );
