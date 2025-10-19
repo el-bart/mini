@@ -1,6 +1,6 @@
 include <m3d/all.scad>
 include <detail/config.scad>
-include <detail/main_tube.scad>
+use <detail/main_tube.scad>
 
 cable_cut_h = 100;
 cable_cut = [10, 7] + rounding*[2,2];
