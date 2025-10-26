@@ -2,7 +2,7 @@ include <config.scad>
 include <../m3d/all.scad>
 
 
-module key_porifle()
+module key_profile()
 {
   circle(d=key_d, $fn=fn(40));
   translate([-key_insert_d/2, -key_insert_h])
@@ -10,4 +10,4 @@ module key_porifle()
 }
 
 
-key_porifle();
+key_profile();
