@@ -12,3 +12,8 @@ wall_block_wall = 1.6;
 wall_block_notch_len = 5 + wall_block_wall;
 wall_block_len = 70;
 wall_block_h = bolt_d;
+
+bolt_guide_screw_d = 2.9 + 0.3;
+bolt_guide_h = bolt_guide_screw_d + 2*1.5;
+bolt_guide_spacing = 0.25;
+bolt_wall = 3;
