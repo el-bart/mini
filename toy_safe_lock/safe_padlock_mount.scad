@@ -7,7 +7,7 @@ d_int = 11.8 + 1.5;
 d_ext = d_int + 2*lock_wall;
 
 tape_width = 20;
-mount_len = 60;
+mount_len = 80;
 
 module safe_padlock_mount()
 {
@@ -59,4 +59,5 @@ module safe_padlock_mount()
 }
 
 
-safe_padlock_mount();
+mirror([0, 1, 0]) // mirroroing for safe with hinges on the right hand side
+  safe_padlock_mount();
