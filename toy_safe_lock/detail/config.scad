@@ -23,5 +23,5 @@ bolt_wall = 3;
 
 return_spring_len = 70;
 return_spring_h = 5;
-return_spring_w = 0.8;
+return_spring_w = 3*0.4;
 return_sprint_screw_d = bolt_guide_screw_d;
