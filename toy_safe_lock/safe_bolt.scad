@@ -14,7 +14,7 @@ module safe_bolt()
         cube(cut + eps*[2,2,1]);
     }
   // key-inset bolt
-  s2 = [3, key_insert_len, s.z];
+  s2 = [3, key_insert_h/2, s.z];
   translate([-s2.x/2, -s2.y, 0])
     cube(s2);
 }

@@ -8,8 +8,8 @@ key_insert_len = ken_teeth*ken_tooth_len + (ken_teeth-1)*key_tooth_spaceing;
 key_total_len = key_insert_len + 2 + 40 + 20;
 
 bolt_len = 80;
-bolt_h = key_insert_h;
 bolt_d = 7;
+bolt_h = 10;
 
 wall_block_wall = 1.6;
 wall_block_notch_len = 5 + wall_block_wall;
