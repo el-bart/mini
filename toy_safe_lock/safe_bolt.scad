@@ -17,6 +17,9 @@ module safe_bolt()
   s2 = [3, key_insert_h/2, s.z];
   translate([-s2.x/2, -s2.y, 0])
     cube(s2);
+  // end-stop for fully-open state
+  translate([s.x/2 - s2.x, s.y, 0])
+    cube(s2);
 }
 
 
