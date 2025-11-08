@@ -1,6 +1,6 @@
 key_d  =5;
 key_insert_d = 4;
-key_insert_h = 12;
+key_insert_h = 16;
 ken_teeth = 3;
 ken_tooth_len = 2;
 key_tooth_spaceing = 1.5;
