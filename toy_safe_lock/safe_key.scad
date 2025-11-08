@@ -28,8 +28,8 @@ module key_upright()
   difference()
   {
     general_body();
-    translate([key_insert_d/2, -30/2, -eps])
-      cube([key_d, 30, 2*key_total_len+2]);
+    translate([key_d/2 - 0.1, -60/2, -eps])
+      cube([key_d, 60, 2*key_total_len+2]);
   }
 }
 

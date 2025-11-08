@@ -1,4 +1,4 @@
-key_d  =5;
+key_d = 7;
 key_insert_d = 4;
 key_insert_h = 16;
 ken_teeth = 3;
