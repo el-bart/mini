@@ -8,8 +8,10 @@ module key_upright()
 {
   module general_body()
   {
-    linear_extrude(key_insert_len)
-      key_profile();
+    for(dz=[0:ken_teeth-1])
+      translate([0, 0, dz*(ken_tooth_len+key_tooth_spaceing)])
+        linear_extrude(ken_tooth_len)
+        key_profile();
     // main rod
     cylinder(d=key_d, h=key_total_len, $fn=fn(40));
     // top finish
