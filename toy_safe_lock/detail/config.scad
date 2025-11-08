@@ -20,3 +20,8 @@ bolt_guide_screw_d = 2.9 + 0.3;
 bolt_guide_h = bolt_guide_screw_d + 2*1.5;
 bolt_guide_spacing = 0.25;
 bolt_wall = 3;
+
+return_spring_len = 70;
+return_spring_h = 5;
+return_spring_w = 0.8;
+return_sprint_screw_d = bolt_guide_screw_d;
