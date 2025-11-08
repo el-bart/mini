@@ -6,7 +6,7 @@ use <safe_wall_block.scad>
 
 safe_bolt();
 
-translate([-20, 24, 0])
+translate([-60, 22, 0])
   key();
 
 for(dx=[-1,+1])
