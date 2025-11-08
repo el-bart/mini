@@ -9,6 +9,7 @@ module key_input()
   h1 = 1;
   h2 = 28;
   h = h1 + h2;
+  hole_tollerance_r = 0.5;
 
   module base()
   {
@@ -26,6 +27,7 @@ module key_input()
     l = h + 2*eps;
     cylinder(d=key_d, h=l, $fn=fn(40));
     linear_extrude(l)
+      offset(r=hole_tollerance_r, $fn=fn(30))
       key_profile();
   }
 
