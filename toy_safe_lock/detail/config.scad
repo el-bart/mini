@@ -1,10 +1,10 @@
 key_d = 7;
 key_insert_d = 4;
 key_insert_h = 16;
-ken_teeth = 3;
-ken_tooth_len = 2;
+key_teeth = 3;
+key_tooth_len = 2;
 key_tooth_spaceing = 1.5;
-key_insert_len = ken_teeth*ken_tooth_len + (ken_teeth-1)*key_tooth_spaceing;
+key_insert_len = key_teeth*key_tooth_len + (key_teeth-1)*key_tooth_spaceing;
 key_total_len = key_insert_len + 2 + 40 + 20;
 
 bolt_len = 80;
