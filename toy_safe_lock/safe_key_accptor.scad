@@ -3,14 +3,15 @@ include <detail/config.scad>
 include <m3d/all.scad>
 
 wall = 2;
-box_int = [2*(key_insert_h+2), key_insert_len + 1, key_insert_h+2];
+key_spacing = 1.5;
+box_int = [2*(key_insert_h+2), key_insert_len + 1, key_insert_d/2 + key_insert_h + key_spacing];
 box_ext = box_int + wall*[2,1,1];
 
 side = 2.5 * bolt_guide_screw_d;
 wall_for_screws_size = [box_ext.x + 2*side, wall, box_ext.z];
 
 
-module acceptor()
+module acceptor(mocks=false)
 {
   module core()
   {
@@ -37,12 +38,33 @@ module acceptor()
     }
   }
 
+  module turn_block()
+  {
+    s = [wall, box_int.y, box_int.z/2];
+    translate([-key_insert_d - key_spacing, 0, 0])
+    cube(s);
+  }
+
+  module comb_profile()
+  {
+    spacing = 0.25;
+    w = key_tooth_spaceing - 2*spacing;
+    s = [box_int.x/2, w, key_insert_h - key_insert_d];
+    for(dy=[0:key_teeth-1])
+      translate([0, -spacing + dy, 0])
+        cube(s);
+  }
+
   core();
+  turn_block();
+  comb_profile();
+
+  %if(mocks)
+    translate([-key_insert_d/2, 0, key_insert_h + key_spacing])
+    rotate([0, 90, 0])
+    rotate([0, 0, 90])
+    key();
 }
 
 
-acceptor();
-
-if(0)
-translate([-60, 27, 0])
-  key();
+acceptor(mocks=$preview);
