@@ -11,7 +11,7 @@ side = 2.5 * bolt_guide_screw_d;
 wall_for_screws_size = [box_ext.x + 2*side, wall, box_ext.z];
 
 
-module acceptor(mocks=false)
+module safe_key_accptor(mocks=false)
 {
   module core()
   {
@@ -56,16 +56,22 @@ module acceptor(mocks=false)
         cube(s);
   }
 
-  core();
-  turn_block();
-  comb_profile();
+  module whole()
+  {
+    core();
+    turn_block();
+    comb_profile();
 
-  %if(mocks)
-    translate([-key_insert_d/2, 0, key_insert_h + key_spacing])
-    rotate([0, 90/*-55*/, 0])
-    rotate([0, 0, 90])
-    key();
+    %if(mocks)
+      translate([-key_insert_d/2, 0, key_insert_h + key_spacing])
+      rotate([0, 90/*-55*/, 0])
+      rotate([0, 0, 90])
+      key();
+  }
+
+  translate([0, 0, wall])
+    whole();
 }
 
 
-acceptor(mocks=$preview);
+safe_key_accptor(mocks=$preview);
