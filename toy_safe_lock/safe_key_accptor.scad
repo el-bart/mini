@@ -48,10 +48,11 @@ module acceptor(mocks=false)
   module comb_profile()
   {
     spacing = 0.25;
+    off = key_insert_d/2 + 1;
     w = key_tooth_spaceing - 2*spacing;
-    s = [box_int.x/2, w, key_insert_h - key_insert_d];
-    for(dy=[0:key_teeth-1])
-      translate([0, -spacing + dy, 0])
+    s = [box_int.x/2 - off, w, key_insert_h - key_insert_d];
+    for(n=[0:key_teeth-1])
+      translate([off, -spacing + n*(key_tooth_len + key_tooth_spaceing), 0])
         cube(s);
   }
 
@@ -61,7 +62,7 @@ module acceptor(mocks=false)
 
   %if(mocks)
     translate([-key_insert_d/2, 0, key_insert_h + key_spacing])
-    rotate([0, 90, 0])
+    rotate([0, 90/*-55*/, 0])
     rotate([0, 0, 90])
     key();
 }
