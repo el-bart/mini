@@ -7,7 +7,7 @@ th_d = 4;
 rounding = 1;
 
 screw_d = 2 + 0.75;
-mount_d = screw_d * 2*1;
+mount_d = screw_d * 2*1.5;
 mount_h = 5;
 
 
@@ -36,17 +36,15 @@ module box()
     }
   }
 
-  module screw_mounts()
+  module whole()
   {
-    module mount_positions()
+    module mount_positions(span=54, dir=[-1,+1])
     {
       // dx=54
       // h=10
-      span = 54;
-      translate([span/2-wall, 0, 0])
-        for(dx=[-1,+1])
-          translate([dx*span/2, wall+10, 0])
-            children();
+      for(dx=dir)
+        translate([dx*span/2, wall+10, 0])
+          children();
     }
 
     module screw_mount()
@@ -54,14 +52,17 @@ module box()
       module unified()
       {
         translate([0, 0, size_ext.z - mount_h - mount_d])
-          mount_positions()
-          hull()
-          {
-            translate([0, 0, mount_d])
-              cylinder(d=mount_d, h=mount_h, $fn=fn(30));
-            cylinder(d=0.5, h=mount_d, $fn=fn(30));
-          }
-        main();
+          for(dir=[-1,+1])
+            hull()
+            {
+              mount_positions(dir=[dir])
+                translate([0, 0, mount_d])
+                cylinder(d=mount_d, h=mount_h, $fn=fn(30));
+              mount_positions(dir=[dir], span=size_ext.x)
+                cylinder(d=0.5, h=mount_d, $fn=fn(30));
+            }
+        translate([-size_ext.x/2, 0, 0])
+          main();
       }
 
       module holes()
@@ -88,8 +89,7 @@ module box()
       children();
   }
 
-  screw_mounts()
-    main();
+  whole();
 }
 
 
