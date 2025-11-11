@@ -1,4 +1,3 @@
-include <detail/config.scad>
 include <m3d/all.scad>
 
 wall = 1.5;
