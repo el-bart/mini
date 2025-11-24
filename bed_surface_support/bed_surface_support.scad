@@ -23,11 +23,12 @@ module support()
     ext_d = 8 + 1;
     ext_h = 5;
     driver_d = 11+3;
-    wood_wall = 15 - 3;
+    screw_hold = 5;
+    wood_wall = 15 - screw_hold;
     int = max(out, screw_len);
 
     for(dz=[-1,+1])
-      translate([0, down - 10 - driver_d/2, l/2 + dz*(l/2 - driver_d)])
+      translate([screw_hold, down - 10 - driver_d/2, l/2 + dz*(l/2 - driver_d)])
         rotate([0, 90, 0])
         translate([0, 0, -wood_wall])
         {
