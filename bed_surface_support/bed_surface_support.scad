@@ -27,20 +27,20 @@ module support()
     int = max(out, screw_len);
 
     for(dz=[-1,+1])
-    translate([0, down - 10 - driver_d/2, l/2 + dz*(l/2 - driver_d)])
-    rotate([0, 90, 0])
-    translate([0, 0, -wood_wall])
-    {
-      cylinder(d=int_d, h=int, $fn=fn(50));
-      translate([0, 0, wood_wall])
-      {
-        cylinder(d=ext_d, h=ext_h, $fn=fn(50));
-        translate([0, 0, ext_h])
+      translate([0, down - 10 - driver_d/2, l/2 + dz*(l/2 - driver_d)])
+        rotate([0, 90, 0])
+        translate([0, 0, -wood_wall])
         {
-          cylinder(d=driver_d, h=int, $fn=fn(50));
+          cylinder(d=int_d, h=int, $fn=fn(50));
+          translate([0, 0, wood_wall])
+          {
+            cylinder(d=ext_d, h=ext_h, $fn=fn(50));
+            translate([0, 0, ext_h])
+            {
+              cylinder(d=driver_d, h=int, $fn=fn(50));
+            }
+          }
         }
-      }
-    }
   }
 
   difference()
