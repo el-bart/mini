@@ -1,5 +1,5 @@
 # name of the application
-export PROGRAM_NAME:=lemurs_bobik
+export PROGRAM_NAME:=lamps_ctrl
 
 # toolchain
 export CC :=avr-gcc
