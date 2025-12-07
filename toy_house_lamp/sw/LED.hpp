@@ -13,9 +13,9 @@ struct Port
 {
   static constexpr auto b = _BV(0);
 
-  static void init() { DDRD  |=  b; }
-  static void on()   { PORTD |=  b; }
-  static void off()  { PORTD &= ~b; }
+  static void init() { DDRB  |=  b; }
+  static void on()   { PORTB |=  b; }
+  static void off()  { PORTB &= ~b; }
 };
 }
 
