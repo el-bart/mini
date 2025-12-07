@@ -13,6 +13,13 @@ int main(void)
 {
   //Watchdog::init();
   LED::State led;
+  LED::SwPWM pwm;
+
+  pwm.set(50);
+  while(true)
+  {
+    pwm.one_cycle();
+  }
 
   while(true)
   {

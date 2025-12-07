@@ -17,6 +17,33 @@ struct Port
 };
 
 
+struct SwPWM
+{
+  SwPWM() { Port::init(); }
+
+  // 0..100 %
+  void duty(uint8_t const d) { duty_ = ( d > 100u ? 100u, d); }
+
+  // cycle is 10ms
+  void one_cycle()
+  {
+    uint8_t n = 0;
+    if(duty_ > 0)
+    {
+      Port::on();
+      for(; n < duty_; ++n)
+        _delay_ms(0.1);
+    }
+    Port::off();
+    for(uint8_t i=0; i<on; ++i)
+      _delay_ms(0.1);
+  }
+
+private:
+  uint8_t duty_{0};
+};
+
+
 struct State
 {
   State() { Port::init(); }
