@@ -4,29 +4,25 @@
 #include "LED.hpp"
 
 
-namespace
-{
-}
-
-
 int main(void)
 {
   //Watchdog::init();
-  LED::State led;
-  LED::SwPWM pwm;
+  LED::State state;
 
   while(true)
   {
-    pwm.duty(50);
-    pwm.one_cycle();
-  }
+    state.enable_fade_in();
+    while(not state.stable())
+      state.one_cycle();
 
-  while(true)
-  {
-    // PoC
-    LED::Port::on();
-    _delay_ms(500);
-    LED::Port::off();
-    _delay_ms(500);
+    for(auto i=0; i<150; ++i)
+      state.one_cycle();
+
+    state.enable_fade_out();
+    while(not state.stable())
+      state.one_cycle();
+
+    for(auto i=0; i<100; ++i)
+      state.one_cycle();
   }
 }
