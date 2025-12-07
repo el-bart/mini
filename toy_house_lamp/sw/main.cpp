@@ -17,9 +17,9 @@ int main(void)
   while(true)
   {
     // PoC
-    LED::detail::Port::on();
+    LED::Port::on();
     _delay_ms(500);
-    LED::detail::Port::off();
+    LED::Port::off();
     _delay_ms(500);
   }
 }
