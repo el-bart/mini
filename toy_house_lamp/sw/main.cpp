@@ -1,7 +1,7 @@
 #include "config.hpp"       // this file must be included as first one!
 #include "Watchdog.hpp"
-#include <util/delay.h>
 #include "LED.hpp"
+#include <stdlib.h>
 
 namespace
 {
@@ -33,14 +33,14 @@ void cycle(LED::State& state, uint8_t on_s, uint8_t off_s)
 }
 
 
-inline void execute(LED::State& state)
+inline void run(LED::State& state)
 {
-  cycle(state, 4, 1);
-  cycle(state, 16, 3);
-  cycle(state, 11, 2);
-  cycle(state, 21, 4);
-  cycle(state, 42, 5);
-  cycle(state, 17, 2);
+  while(true)
+  {
+    auto const on_s  = 3u + rand() % 72u;
+    auto const off_s = 1u + rand() % 8u;
+    cycle(state, on_s, off_s);
+  }
 }
 
 }
@@ -50,6 +50,5 @@ int main(void)
 {
   Watchdog::init();
   LED::State state;
-  while(true)
-    execute(state);
+  run(state);
 }
