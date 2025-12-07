@@ -89,7 +89,7 @@ private:
     // ATTiny2313 does not have enough space for floating point code and GCC version used here
     // does not have compile-time power function. therefor LUT has been generated with a helper script:
     //
-    //   ./compute_gamma_correction_LUT
+    //   ./precompute_gamma_correction_LUT
     //
     switch(step_current_)
     {

@@ -11,5 +11,5 @@ print("    switch(step_current_)")
 print("    {")
 for n in range(0, steps+1):
   gc = gamma(n)
-  print(f"      case {n}: return static_cast<uint8_t>({gc});")
+  print(f"      case {n:>2}: return static_cast<uint8_t>({gc});")
 print("    }")
