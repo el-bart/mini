@@ -13,16 +13,16 @@ struct Port
 {
   static constexpr auto b = _BV(0);
 
-  static void init()   { DDRD |=  b; }
-  static void set()   { PORTD |=  b; }
-  static void clear() { PORTD &= ~b; }
+  static void init() { DDRD  |=  b; }
+  static void on()   { PORTD |=  b; }
+  static void off()  { PORTD &= ~b; }
 };
 }
 
 
-struct LED
+struct State
 {
-  LED() { P::init(); }
+  State() { P::init(); }
   void enable_fade_in()  { preset_ = 0x0000u; }
   void enable_fade_out() { preset_ = 0xFFFFu; }
 
