@@ -5,7 +5,7 @@
 namespace Watchdog
 {
 
-inline void init() { wdt_enable(WDTO_8S); }
+inline void init() { wdt_enable(WDTO_120MS); }
 inline void disable() { wdt_disable(); }
 inline void reset() { wdt_reset(); }
 
