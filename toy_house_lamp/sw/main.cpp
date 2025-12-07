@@ -15,9 +15,9 @@ int main(void)
   LED::State led;
   LED::SwPWM pwm;
 
-  pwm.set(50);
   while(true)
   {
+    pwm.duty(50);
     pwm.one_cycle();
   }
 

@@ -22,9 +22,9 @@ struct SwPWM
   SwPWM() { Port::init(); }
 
   // 0..100 %
-  void duty(uint8_t const d) { duty_ = ( d > 100u ? 100u, d); }
+  void duty(uint8_t const d) { duty_ = ( d > 100u ? 100u : d); }
 
-  // cycle is 10ms
+  // cycle is a little over 10ms (~10.5ms)
   void one_cycle()
   {
     uint8_t n = 0;
@@ -35,7 +35,7 @@ struct SwPWM
         _delay_ms(0.1);
     }
     Port::off();
-    for(uint8_t i=0; i<on; ++i)
+    for(; n < 100u; ++n)
       _delay_ms(0.1);
   }
 
