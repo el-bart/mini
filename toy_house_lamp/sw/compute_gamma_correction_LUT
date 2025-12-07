@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+steps = 20
+
+def gamma(n):
+  gamma_correction = 1.3
+  v = ( n / steps ) ** gamma_correction
+  return v * 100
+
+print("    switch(step_current_)")
+print("    {")
+for n in range(0, steps+1):
+  gc = gamma(n)
+  print(f"      case {n}: return static_cast<uint8_t>({gc});")
+print("    }")
