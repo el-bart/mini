@@ -7,7 +7,7 @@ struct PRNG
 {
   PRNG()
   {
-    auto seed = random();   // just to get the type - this line is 100% deterministic at this stage
+    uint16_t seed = 0;
     for(auto addr=0; addr<EEPROM::size; ++addr)
       seed += EEPROM::read(addr);
     srand(seed);
