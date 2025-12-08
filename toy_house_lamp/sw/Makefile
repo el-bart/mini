@@ -23,7 +23,10 @@ define run-in-gen
 	          `find . -type d | grep -v './\.' | \
 	          grep -v '^\./gen/' | grep -v '^\./gen$$' | \
 			  grep -v '^\.$$' | sed 's:^\./:$(GENDIR)/$@/:'`
-	+$(MAKE) $(MFLAGS) -C "$(GENDIR)/$@" -f "$(CURDIR)/Makefile" \
+	+$(MAKE) $(MFLAGS) \
+		-C "$(GENDIR)/$@" \
+		-f "$(CURDIR)/Makefile" \
+		EXTRA_COMMON_FLAGS=-I$(GENDIR)/$@ \
 		TARGET=$@ $(TARGET)
 endef
 
@@ -49,7 +52,9 @@ CXXSRCS:=$(filter-out $(CXXTESTSRCS), $(shell find . -iname '*.cpp'))
 CSRCS  :=$(filter-out $(CTESTSRCS),   $(shell find . -iname '*.c'  ))
 export CSRCS CXXSRCS
 
-COMMON_FLAGS:=-Wall -I$(SRCDIR)
+COMMON_FLAGS:=
+COMMON_FLAGS+=-Wall
+COMMON_FLAGS+=-I$(SRCDIR)
 
 CFLAGS+=$(COMMON_FLAGS)
 export CFLAGS
@@ -154,14 +159,14 @@ $(PROGRAM_NAME): $(CXXOBJS) $(COBJS)
 	$(LD) $(LDFLAGS) -o $@ $^
 
 # C++ source files:
-%.o: %.cpp $(SRCDIR)/Makefile
+%.o: %.cpp $(SRCDIR)/Makefile step2brightness.hpp
 	echo "CXX $*.cpp"
-	$(CXX) $(CXXFLAGS) -MMD -c "$(SRCDIR)/$*.cpp" -o "$@"
+	$(CXX) $(CXXFLAGS) $(EXTRA_COMMON_FLAGS) -MMD -c "$(SRCDIR)/$*.cpp" -o "$@"
 
 # C source files:
 %.o: %.c $(SRCDIR)/Makefile
 	echo "CC  $*.c"
-	$(CC) $(CFLAGS) -MMD -c "$(SRCDIR)/$*.c" -o "$@"
+	$(CC) $(CFLAGS) $(EXTRA_COMMON_FLAGS) -MMD -c "$(SRCDIR)/$*.c" -o "$@"
 
 $(HEX_FILE): $(PROGRAM_NAME)
 	echo "HEX $<"
@@ -175,6 +180,10 @@ $(BIN_FILE): $(PROGRAM_NAME)
 $(SRCDIR)/Makefile: $(SRCDIR)/config.mk
 	touch "$@"
 
+step2brightness.hpp: $(SRCDIR)/precompute_gamma_correction_LUT Makefile
+	echo "LUT $@"
+	$(SRCDIR)/precompute_gamma_correction_LUT > "$@.tmp"
+	mv "$@.tmp" "$@"
 
 # has C sources?
 -include $(CDEPS)

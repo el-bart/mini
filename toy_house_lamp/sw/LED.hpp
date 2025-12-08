@@ -1,6 +1,7 @@
 #pragma once
 #include "config.hpp"
 #include "Watchdog.hpp"
+#include "step2brightness.hpp"
 #include <util/delay.h>
 #include <math.h>
 
