@@ -12,3 +12,4 @@ static constexpr uint8_t  c_cycle_ms{10};
 static constexpr uint8_t  c_gamma_steps{20};
 static constexpr uint16_t c_fade_time_ms{1500};
 static constexpr uint8_t  c_cycles_per_fade_step{ c_fade_time_ms / c_gamma_steps / c_cycle_ms };
+static constexpr uint16_t c_cycles_per_PRNG_state_save{ 1000u / c_cycle_ms * 13 }; // 13[s]
