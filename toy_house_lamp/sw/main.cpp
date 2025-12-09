@@ -3,38 +3,6 @@
 #include "LED.hpp"
 #include "PRNG.hpp"
 
-#if 1
-
-void test()
-{
-  auto const n = EEPROM::read(1);
-
-  for(uint8_t i=0; i<n; ++i)
-  {
-    LED::Port::on();
-    _delay_ms(500);
-    LED::Port::off();
-    _delay_ms(500);
-  }
-}
-
-int main()
-{
-  LED::Port::init();
-
-  {
-    auto const n = EEPROM::read(1);
-    EEPROM::write(1, n+1u);
-  }
-
-  test();
-  _delay_ms(1500);
-  test();
-
-  while(true) { }
-}
-
-#else
 
 namespace
 {
@@ -68,20 +36,12 @@ void cycle(LED::State& state, uint8_t on_s, uint8_t off_s)
 
 inline void run(LED::State& state, PRNG& prng)
 {
-  auto countdown_to_PRNG_cycle_save = c_cycles_per_PRNG_state_save;
-
   while(true)
   {
+    prng.save_entropy();
     auto const on_s  = 3u + prng.random() % 72u;
     auto const off_s = 1u + prng.random() % 8u;
     cycle(state, on_s, off_s);
-
-    --countdown_to_PRNG_cycle_save;
-    if(countdown_to_PRNG_cycle_save == 0)
-    {
-      prng.save_entropy();
-      countdown_to_PRNG_cycle_save = c_cycles_per_PRNG_state_save;
-    }
   }
 }
 
@@ -95,5 +55,3 @@ int main(void)
   LED::State state;
   run(state, prng);
 }
-
-#endif
