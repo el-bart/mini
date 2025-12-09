@@ -28,7 +28,6 @@ struct EEPROM
 private:
   static void wait_for_last_write_to_complete()
   {
-     while(EECR & (1<<EEPE))
-     { }
+     eeprom_busy_wait();
   }
 };
