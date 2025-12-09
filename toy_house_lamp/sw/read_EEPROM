@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euxo pipefail
+tmp=$(mktemp)
+trap "rm -f $tmp" EXIT
+avrdude -P avrdroper -c usbasp -B 250kHz -p t2313 -U "eeprom:r:$tmp:r"
+hexdump -Cv "$tmp"
