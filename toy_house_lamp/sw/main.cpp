@@ -3,6 +3,39 @@
 #include "LED.hpp"
 #include "PRNG.hpp"
 
+#if 1
+
+void test()
+{
+  auto const n = EEPROM::read(1);
+
+  for(uint8_t i=0; i<n; ++i)
+  {
+    LED::Port::on();
+    _delay_ms(500);
+    LED::Port::off();
+    _delay_ms(500);
+  }
+}
+
+int main()
+{
+  LED::Port::init();
+
+  {
+    auto const n = EEPROM::read(1);
+    EEPROM::write(1, n+1u);
+  }
+
+  test();
+  _delay_ms(1500);
+  test();
+
+  while(true) { }
+}
+
+#else
+
 namespace
 {
 
@@ -62,3 +95,5 @@ int main(void)
   LED::State state;
   run(state, prng);
 }
+
+#endif
