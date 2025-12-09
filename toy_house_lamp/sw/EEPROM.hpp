@@ -12,7 +12,7 @@ struct EEPROM
   {
     Watchdog::reset();
     wait_for_last_write_to_complete();
-    auto const byte = eeprom_read_byte((uint8_t*)uint16_t{addr});
+    auto const byte = eeprom_read_byte( to_addr(addr) );
     Watchdog::reset();
     return byte;
   }
@@ -21,7 +21,7 @@ struct EEPROM
   {
     Watchdog::reset();
     wait_for_last_write_to_complete();
-    eeprom_write_byte((uint8_t*)uint16_t{addr}, byte);
+    eeprom_write_byte( to_addr(addr), byte);
     Watchdog::reset();
   }
 
@@ -29,5 +29,12 @@ private:
   static void wait_for_last_write_to_complete()
   {
      eeprom_busy_wait();
+  }
+
+  static uint8_t* to_addr(uint8_t const addr)
+  {
+    uint8_t* ptr = nullptr;
+    ptr += addr;
+    return ptr;
   }
 };
