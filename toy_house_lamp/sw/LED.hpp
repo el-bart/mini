@@ -82,7 +82,8 @@ private:
       ++step_current_;
     else
       --step_current_;
-    cycles_left_in_current_step_ = c_cycles_per_fade_step;
+    constexpr uint8_t cycles_per_fade_step = c_fade_time_ms / c_gamma_steps / c_cycle_ms;
+    cycles_left_in_current_step_ = cycles_per_fade_step;
   }
 
   inline uint8_t duty() const
