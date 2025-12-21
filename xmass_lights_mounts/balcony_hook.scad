@@ -82,6 +82,9 @@ module balcony_hook(
         // remove center
         translate([-span_int-wall, -side_in])
           square([span_int, side_in]);
+        // remove bottom notch
+        translate([-wall-rim_len, -side_out-(wall+rim_len)])
+          square((wall+2*rim_len)*[1,1]);
       }
       // keep only outskirts
       translate([-(span_int+2*wall+rim_len), -(side_in)])
