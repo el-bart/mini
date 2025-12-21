@@ -1,7 +1,10 @@
 include <m3d/all.scad>
 include <detail/config.scad>
 
-module corner_hook(side=20, hook_len=15)
+module corner_hook(
+    side=20,
+    hook_len=15,
+    corner_space_r = 6)
 {
   module profile()
   {
