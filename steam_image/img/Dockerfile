@@ -1,4 +1,4 @@
-FROM debian:12
+FROM debian:13
 RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get update && apt-get install -y \
     ca-certificates
@@ -28,11 +28,13 @@ RUN apt-get update && apt-get install --yes \
 
 # things needed by latest steam, that are not listed as a dependency
 RUN apt-get update && apt-get install --yes \
-    lsof
+    lsof \
+    adduser
 
 # mesa, GLX, etc...
 RUN apt-get update && apt-get install --yes \
     mesa-vulkan-drivers \
+    vulkan-tools \
     mesa-utils \
     libgl1-mesa-dri
 
