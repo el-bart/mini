@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eu -o pipefail
+app=$(basename "$0")
 app_dir=$(dirname "$(readlink -e "$0")")
 img='steam_image'
 
@@ -70,10 +71,27 @@ run_flags+=(--group-add "$(getent group render | cut -d: -f3)")
 run_flags+=(--user "$(id -u):$(id -g)")
 run_flags+=(--group-add "$(getent group audio | cut -d: -f3)")
 
-# X11 pass-thorugh
-run_flags+=(--env DISPLAY="$DISPLAY")
-run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
-run_flags+=(--env QT_X11_NO_MITSHM=1)
+if [ "${WAYLAND_DISPLAY:-}" != "" ]
+then
+  echo "$app: forwarding Wayland"
+  run_flags+=(--env WAYLAND_DISPLAY)
+  run_flags+=(--env DISPLAY)
+  run_flags+=(--env XDG_RUNTIME_DIR)
+  run_flags+=(--volume "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY")
+  run_flags+=(--volume "$XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR")
+else
+  if [ "${DISPLAY:-}" != "" ]
+  then
+    echo "$app: farwarding X11"
+    run_flags+=(--env DISPLAY)
+    run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
+    run_flags+=(--env QT_X11_NO_MITSHM=1)
+    xhost "+si:localuser:$USER"
+  else
+    echo "$app: neither Wayland nor X11 found - aborting" >&2
+    exit 2
+  fi
+fi
 
 # home dir with the actual content
 run_flags+=(--volume "$data:/home/user")
@@ -91,8 +109,6 @@ done
 run_flags+=(--cap-add SYS_ADMIN)
 run_flags+=(--security-opt apparmor=unconfined)
 run_flags+=(--security-opt seccomp=unconfined)
-
-xhost "+si:localuser:$USER"
 
 echo "$0: if CEF fails again, edit ~/data_misc/steam/data/.local/share/Steam/ubuntu12_64/steamwebhelper.sh"
 
