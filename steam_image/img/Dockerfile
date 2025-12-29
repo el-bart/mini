@@ -30,6 +30,12 @@ RUN apt-get update && apt-get install --yes \
 RUN apt-get update && apt-get install --yes \
     lsof
 
+# mesa, GLX, etc...
+RUN apt-get update && apt-get install --yes \
+    mesa-vulkan-drivers \
+    mesa-utils \
+    libgl1-mesa-dri
+
 # nifty trick to force rebuild from here - dist upgrade
 COPY last-dist-upgrade.ts /tmp/
 RUN apt-get update && apt-get dist-upgrade -y
