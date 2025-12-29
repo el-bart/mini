@@ -26,14 +26,27 @@ module holder(n)
       int_n();
   }
 
-  difference()
-  {
-    linear_extrude(h)
-      ext_n();
-    translate([0, 0, wall])
+  render()
+    difference()
+    {
       linear_extrude(h)
-      int_n();
-  }
+        ext_n();
+      translate([0, 0, wall])
+        linear_extrude(h)
+        int_n();
+      // avoid sharp corners near the top
+      union()
+      {
+        x = d/3;
+        translate([d/2, 0, h - x/sqrt(2)])
+          rotate([45, 0, 0])
+          cube(x*[0,1,1] + [(n-1)*d, 0, 0]);
+      }
+      // avoid almost-unprintable edge inside
+      translate([d/2, -wall, wall])
+        cube([(n-1)*d, d/4, h]);
+    }
 }
+
 
 holder(n=4);
