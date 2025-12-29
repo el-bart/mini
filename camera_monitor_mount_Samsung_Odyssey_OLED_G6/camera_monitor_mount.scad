@@ -1,18 +1,18 @@
 include <m3d/all.scad>
 
-module cam_mount(rot_angle)
+module cam_mount()
 {
   wall = 2;
 
   module int_profile_2d()
   {
     r = 2.5;
-    xy = 53;
-    dxy = xy - 2*r;
+    span_x = 52.5 - 2*r;
+    span_y = 50.0 - 2*r;
     hull()
       for(dx=[-1,+1])
         for(dy=[-1,+1])
-          translate([dx*dxy/2, dy*dxy/2])
+          translate([dx*span_x/2, dy*span_y/2])
             circle(r=r, $fn=fn(40));
   }
 
@@ -43,4 +43,5 @@ module cam_mount(rot_angle)
   body();
 }
 
-cam_mount();
+rotate([-180, 0, 0])
+  cam_mount();
