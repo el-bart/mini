@@ -85,6 +85,7 @@ then
   run_flags+=(--env DISPLAY)
   run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
   run_flags+=(--env QT_X11_NO_MITSHM=1)
+  run_flags+=(--env XDG_SESSION_TYPE)
 else
   if [ "${DISPLAY:-}" != "" ]
   then
@@ -92,12 +93,21 @@ else
     run_flags+=(--env DISPLAY)
     run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
     run_flags+=(--env QT_X11_NO_MITSHM=1)
-    #xhost "+si:localuser:$USER"
+    xhost "+si:localuser:$USER"
   else
     echo "$app: neither Wayland nor X11 found - aborting" >&2
     exit 2
   fi
 fi
+
+if false; then					
+# test run with Xwayland; run server in a separate window:
+#   Xwayland :1
+run_flags+=(--env DISPLAY=:1)
+run_flags+=(--volume "/tmp/.X11-unix:/tmp/.X11-unix:ro")
+run_flags+=(--env QT_X11_NO_MITSHM=1)
+xhost "+si:localuser:$USER"
+fi  								
 
 # home dir with the actual content
 run_flags+=(--volume "$data:/home/user")
@@ -106,10 +116,29 @@ run_flags+=(--workdir "/home/user")
 
 # make sure joystick is forwarded
 run_flags+=(--group-add "$(getent group input | cut -d: -f3)")
-for dev in $(find /dev/input/* /dev/hidraw* -type c)
+for dev in /dev/input/{event,mice,mouse}* /dev/hidraw*
 do
   run_flags+=(--device "$dev")
 done
+run_flags+=(--volume /dev/input/by-id:/dev/input/by-id)
+run_flags+=(--volume /dev/input/by-path:/dev/input/by-path)
+
+if false; then																													
+# mouse pointer stuff...
+run_flags+=(--env ENABLE_UINPUT=1)
+run_flags+=(--env ENABLE_EVDEV_INPUTS=1)
+				
+run_flags+=(--env GDK_SCALE=1)
+run_flags+=(--env QT_SCALE_FACTOR=1)
+#run_flags+=(--env LIBGL_ALWAYS_SOFTWARE=0)  # hardware GL
+#run_flags+=(--env SDL_VIDEODRIVER=wayland)  # dla gier SDL
+run_flags+=(--env WLR_NO_HARDWARE_CURSORS=1)  # wyłącz hardware cursor w Wayland
+run_flags+=(--env ELECTRON_OZONE_PLATFORM_HINT=wayland)  # dla Electron apps
+run_flags+=(--env WLR_RENDERER=vulkan) # xxx
+
+				
+run_flags+=(--env SDL_VIDEO_DRIVER=wayland)
+fi																																
 
 # making bwrap happy
 run_flags+=(--cap-add SYS_ADMIN)
@@ -124,3 +153,4 @@ steam_flags+=(-no-browser)
 
 set -x
 exec docker run "${run_flags[@]}" "$img" steam "${steam_flags[@]}" "$@"
+#exec docker run "${run_flags[@]}" "$img" xwayland-run -- steam "${steam_flags[@]}" "$@"
