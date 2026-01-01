@@ -38,6 +38,11 @@ RUN apt-get update && apt-get install --yes \
     mesa-utils \
     libgl1-mesa-dri
 
+# mesa, GLX, etc...
+RUN apt-get update && apt-get install --yes \
+    xwayland \
+    xwayland-run
+
 # nifty trick to force rebuild from here - dist upgrade
 COPY last-dist-upgrade.ts /tmp/
 RUN apt-get update && apt-get dist-upgrade -y
