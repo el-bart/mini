@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install --yes \
     mesa-utils \
     libgl1-mesa-dri
 
-# mesa, GLX, etc...
+# Xwayland stuff
 RUN apt-get update && apt-get install --yes \
     xwayland \
     xwayland-run
