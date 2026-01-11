@@ -10,7 +10,7 @@ echo '*' > "$home/.gitignore"
 
 build_flags=()
 build_flags+=(--tag "$img")
-time docker build "${build_flags[@]}" docker/
+time docker build "${build_flags[@]}" "$app_dir/docker/"
 
 run_flags=()
 
