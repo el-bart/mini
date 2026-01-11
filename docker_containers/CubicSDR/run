@@ -3,7 +3,7 @@ set -eu -o pipefail
 app=$(basename "$0")
 app_dir=$(dirname "$(readlink -e "$0")")
 img='cubicsdr'
-home=$app_dir/home
+home=$app_dir/.home
 
 mkdir -p "$home"
 echo '*' > "$home/.gitignore"
@@ -35,7 +35,6 @@ run_flags+=(--group-add "$(getent group audio | cut -d: -f3)")
 
 # perms mapped to local user to make things work
 run_flags+=(--user "$(id -u):$(id -g)")
-run_flags+=(--group-add "$(getent group audio | cut -d: -f3)")
 
 if [ "${WAYLAND_DISPLAY:-}" != "" ]
 then
@@ -65,10 +64,10 @@ else
 fi
 
 # forward all USB devices
-for dev in /dev/bus/usb/*/*
-do
-  run_flags+=(--device "$dev")
-done
+read bus_id dev_id <<< $(lsusb | grep RTL | awk '{ print $2, $4 }' | tr -d :)
+dev="/dev/bus/usb/$bus_id/$dev_id"
+run_flags+=(--device "$dev")
+run_flags+=(--group-add "$(stat --format %g "$dev")")
 
 # home dir with the actual content
 run_flags+=(--volume "$home:/home/user")
