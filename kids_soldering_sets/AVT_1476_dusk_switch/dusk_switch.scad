@@ -22,4 +22,21 @@ module box()
 }
 
 
+module LED_strightening_channel()
+{
+  wall = 1.5;
+  size_int = [25, 9, 2.5];
+  size_ext = size_int + wall*[0,2,1];
+  difference()
+  {
+    cube(size_ext);
+    translate(wall*[0,1,1] + eps*[-1,0,0])
+      cube(size_int + eps*[2,0,1]);
+  }
+}
+
+
 box();
+
+translate([0, -15, 0])
+  LED_strightening_channel();
