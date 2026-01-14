@@ -5,9 +5,9 @@ module holder()
   h = 20;
   space_laptop = 20.5;
   space_desk = 18.8;
-  wall_laptop = 3;
+  wall_laptop = 5;
   wall_desk = 3.5;
-  desk_h = 77;
+  desk_h = 71.5;
   holder_len = 100;
   holder_ext = 5;
 
@@ -23,9 +23,9 @@ module holder()
         // desk attachment
         translate([0, desk_h])
         {
-          square([wall_laptop + space_desk, wall_desk]);
+          square([wall_laptop + space_desk, wall_laptop]);
           translate([wall_laptop + space_desk, -30])
-            square([wall_desk, 30 + wall_desk]);
+            square([wall_desk, 30 + wall_laptop]);
         }
       }
     }
@@ -35,7 +35,7 @@ module holder()
   {
     r = 1.5;
     translate([-holder_ext, 0, 0])
-      side_rounded_cube([holder_ext + r, holder_len, wall_laptop], r, $fn=fn(50));
+      side_rounded_cube([holder_ext + r, holder_len, 2.5], r, $fn=fn(50));
   }
 
   linear_extrude(h)
