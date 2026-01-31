@@ -26,6 +26,7 @@ module flowerpot()
       rotate([0, 0, n*(360/flowerpot_bottom_hole_n)])
         translate([0, flowerpot_d/2/2, -eps])
         cylinder(d=flowerpot_bottom_hole_d, h=flowerpot_bottom+2*eps, $fn=fn(20));
+    cylinder(d=flowerpot_bottom_hole_d, h=flowerpot_bottom+2*eps, $fn=fn(20));
   }
 
   difference()
