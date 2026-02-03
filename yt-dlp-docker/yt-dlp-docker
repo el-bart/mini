@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+
+app=$(basename "$0")
+if [ $# -lt 2 ]
+then
+  echo "$app </output/dir/to/be/mounted> [yt-dlp-flags...]" >&2
+  exit 2
+fi
+
+[ -d "$1" ] || { echo "$app: output dir '$1' does not exist" >&2 ; exit 3 ; }
+output_dir=$(readlink -e "$1")
+shift 1
+
+img='yt-dlp-docker'
+docker build -t "$img" - <<EOF
+FROM debian:13
+RUN apt-get update && apt-get dist-upgrade -y
+RUN apt-get install -y python3 wget
+RUN wget -O /usr/local/bin/yt-dlp 'https://github.com/yt-dlp/yt-dlp/releases/download/2026.01.31/yt-dlp' && \
+    chmod 755 /usr/local/bin/yt-dlp
+ENTRYPOINT [ "yt-dlp" ]
+EOF
+
+flags=()
+stty > /dev/null 2>&1 && flags+=(-i)
+flags+=(-t)
+flags+=(--rm)
+flags+=(-u "$(id -u):$(id -g)")
+flags+=(--name "yt-dlp_${USER}_$$")
+
+flags+=(-v "$output_dir:$output_dir")
+flags+=(-w "$output_dir")
+
+flags+=("$img")
+
+set -x
+exec docker run "${flags[@]}" "$@"
