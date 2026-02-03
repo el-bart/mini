@@ -2,8 +2,9 @@
 set -euo pipefail
 app=$(basename "$0")
 
-version="2026.01.31"
-checksum="9c1957da32d454a2338c1bf650bf886a3af01d552159724e8c4eab2c4e3e84c0"
+readonly version="2026.01.31"
+readonly checksum="9c1957da32d454a2338c1bf650bf886a3af01d552159724e8c4eab2c4e3e84c0"
+readonly img='yt-dlp-docker'
 
 if [ $# -lt 2 ]
 then
@@ -12,10 +13,9 @@ then
 fi
 
 [ -d "$1" ] || { echo "$app: output dir '$1' does not exist" >&2 ; exit 3 ; }
-output_dir=$(readlink -e "$1")
+readonly output_dir=$(readlink -e "$1")
 shift 1
 
-img='yt-dlp-docker'
 docker build -t "$img" - <<EOF
 FROM debian:13
 RUN apt-get update && apt-get dist-upgrade -y
