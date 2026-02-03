@@ -1,7 +1,10 @@
 #!/bin/bash
 set -euo pipefail
-
 app=$(basename "$0")
+
+version="2026.01.31"
+checksum="9c1957da32d454a2338c1bf650bf886a3af01d552159724e8c4eab2c4e3e84c0"
+
 if [ $# -lt 2 ]
 then
   echo "$app </output/dir/to/be/mounted> [yt-dlp-flags...]" >&2
@@ -17,7 +20,9 @@ docker build -t "$img" - <<EOF
 FROM debian:13
 RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get install -y python3 wget
-RUN wget -O /usr/local/bin/yt-dlp 'https://github.com/yt-dlp/yt-dlp/releases/download/2026.01.31/yt-dlp' && \
+RUN wget -O /usr/local/bin/yt-dlp 'https://github.com/yt-dlp/yt-dlp/releases/download/$version/yt-dlp' && \
+    echo "$checksum  /usr/local/bin/yt-dlp" > /tmp/checksums && \
+    sha256sum -c /tmp/checksums && \
     chmod 755 /usr/local/bin/yt-dlp
 ENTRYPOINT [ "yt-dlp" ]
 EOF
