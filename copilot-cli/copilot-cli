@@ -1,0 +1,48 @@
+#!/bin/bash
+set -euo pipefail
+app=$(basename "$0")
+img='copilot-cli'
+home="$HOME/.copilot-cli/home"
+
+function ensure_allowed # <1:dir>
+{
+  local allowed_root_dirs=()
+  allowed_root_dirs+=(/tmp/tmp\.)
+  allowed_root_dirs+=($HOME/prjs/)
+  allowed_root_dirs+=($HOME/ext_prjs/)
+  allowed_root_dirs+=($HOME/tmp/)
+  for dir in "${allowed_root_dirs[@]}"
+  do
+    grep -q "^$dir" <<< "$1" && return 0
+  done
+  return 1
+}
+
+mkdir -p "$home"
+
+flags=()
+
+stty -a > /dev/null 2>&1 && flags+=(-i)
+flags+=(-t)
+flags+=(--rm)
+flags+=(--init)
+flags+=(--name="$img-$USER-$$")
+
+flags+=(-e REAL_USER="$(id -u):$(id -g)")
+flags+=(-v "$home:/home/user")
+
+flags+=(-e GITHUB_TOKEN)
+
+if ensure_allowed "$PWD"
+then
+  echo "$app: mounting $PWD"
+  flags+=(-v "$PWD:$PWD:ro")
+  flags+=(-w "$PWD")
+else
+  echo "$app: directory $PWD is not whitelisted - NOT MOUNTING"
+  flags+=(-w /home/user)
+fi
+
+flags+=("$img")
+
+exec docker run "${flags[@]}" "$@"
