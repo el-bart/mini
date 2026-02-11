@@ -9,9 +9,6 @@ allowed_paths="$cfg_dir/allowed_paths"
 mkdir -p "$cfg_dir"
 [ -f "$allowed_paths" ] || cat <<EOF > "$allowed_paths"
 ^/tmp/tmp\\.
-^$HOME/prjs/
-^$HOME/ext_prjs/
-^$HOME/tmp/
 EOF
 
 function ensure_allowed # <1:dir>
