@@ -9,5 +9,4 @@ RUN apt-get update && apt-get install -y \
 # see: https://www.npmjs.com/package/@github/copilot?activeTab=versions
 RUN npm install -g @github/copilot@0.0.406
 
-COPY shell_proxy /usr/local/bin/
-ENTRYPOINT ["shell_proxy", "copilot"]
+ENTRYPOINT ["copilot"]
