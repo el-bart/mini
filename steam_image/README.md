@@ -17,4 +17,12 @@ however in practice most games does not seem to work under Wayland.
 most noticeably - mouse pointer does not work correctly in most cases.
 since Xwayland does not really improve situation by a lot, it's left as-is.
 
-for now it's recommended to just use X11 session for running games.
+for now it's recommended to just use X11 session for running games or, use Xwayland wrappers
+
+### Xwayland wrappers
+
+you can stack following scripts:
+* [xwayland-proxy](https://github.com/el-bart/my_settings/blob/master/usr_local_bin/xwayland-proxy)
+* [run-in-openbox](https://github.com/el-bart/my_settings/blob/master/usr_local_bin/run-in-openbox)
+* [xwayland-openbox](https://github.com/el-bart/my_settings/blob/master/usr_local_bin/xwayland-openbox)
+all connected inside `steam-xwayland` to make it run under Xwayland w/o any extra fuss.
