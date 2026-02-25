@@ -2,8 +2,9 @@
 set -euo pipefail
 app=$(basename "$0")
 
-readonly version="2026.01.31"
-readonly checksum="9c1957da32d454a2338c1bf650bf886a3af01d552159724e8c4eab2c4e3e84c0"
+# see: https://github.com/yt-dlp/yt-dlp/releases/
+readonly version="2026.02.21"
+readonly checksum="91d023f421dffd6fd354d233edb784a05d5dde2c1c585fcb599d5cc23ecb759e"
 readonly img='yt-dlp-docker'
 
 if [ $# -lt 2 ]
@@ -25,6 +26,7 @@ RUN wget -O /usr/local/bin/yt-dlp 'https://github.com/yt-dlp/yt-dlp/releases/dow
     echo "$checksum  /usr/local/bin/yt-dlp" > /tmp/checksums && \
     sha256sum -c /tmp/checksums && \
     chmod 755 /usr/local/bin/yt-dlp
+RUN apt-get update && apt-get dist-upgrade -y # refresh deps, if needed
 ENTRYPOINT [ "yt-dlp" ]
 EOF
 
