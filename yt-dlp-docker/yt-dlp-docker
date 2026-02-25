@@ -35,7 +35,7 @@ stty > /dev/null 2>&1 && flags+=(-i)
 flags+=(-t)
 flags+=(--rm)
 flags+=(-u "$(id -u):$(id -g)")
-flags+=(--name "yt-dlp_${USER}_$$")
+flags+=(--name "yt-dlp_${USER:-crontab}_$$")
 
 flags+=(-v "$output_dir:$output_dir")
 flags+=(-w "$output_dir")
