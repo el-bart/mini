@@ -1,0 +1,4 @@
+#!/bin/bash
+app_dir=$(readlink -e "$(dirname "$0")")
+cd "$app_dir"
+./games-xwayland "/path/to/my/installed/game"
