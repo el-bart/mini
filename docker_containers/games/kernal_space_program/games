@@ -102,5 +102,8 @@ run_flags+=(--volume /dev/input/by-path:/dev/input/by-path)
 # installers
 run_flags+=(--volume ./installer:/mnt/installer:ro)
 
+# prevent network access - it all should be local now
+run_flags+=(--network none)
+
 set -x
 exec docker run "${run_flags[@]}" "$img" "$@"
