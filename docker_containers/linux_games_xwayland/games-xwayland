@@ -1,5 +1,5 @@
 #!/bin/bash
 app_dir=$(readlink -e "$(dirname "$0")")
 exec xwayland-openbox \
-  xterm -bg gray -fullscreen \
+  xterm -bg gray -fullscreen -e \
     "$app_dir/games" "$@"
