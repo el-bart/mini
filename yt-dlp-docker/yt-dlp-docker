@@ -3,8 +3,8 @@ set -euo pipefail
 app=$(basename "$0")
 
 # see: https://github.com/yt-dlp/yt-dlp/releases/
-readonly version="2026.03.03"
-readonly checksum="bc7b7b6a8a438571117efef98a0f9a12e634f6bbcd834896cddb6a1deedc9c4d"
+readonly version="2026.03.17"
+readonly checksum="3bda0968a01cde70d26720653003b28553c71be14dcb2e5f4c24e9921fdad745"
 readonly img='yt-dlp-docker'
 
 if [ $# -lt 2 ]
