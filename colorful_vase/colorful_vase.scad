@@ -16,11 +16,11 @@ module vase(n, d, h, twist)
     minkowski()
     {
       star();
-      circle(d=d*2/3, $fn=fn(40));
+      circle(d=d*2/3, $fn=fn(50));
     }
   }
 
-  linear_extrude(h, twist=twist)
+  linear_extrude(h, twist=twist, slices=h*1/0.2)
     base();
 }
 
