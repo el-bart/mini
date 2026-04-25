@@ -7,7 +7,7 @@ screw_separate = 5;
 rounding = 1.5;
 
 pitch = -10;
-roll = -20;
+roll = -26;
 
 
 module src(size)
@@ -31,7 +31,7 @@ module model_holder()
   module base()
   {
     size = (screw_d + 2*screw_spacing + 2*screw_separate)*[1, 1.5, 0] + [0,0,side];
-    translate([-size.x/2, -0.90, h-3.5])
+    translate([-size.x/2, -0.90, h-4.6])
       rotate([pitch, roll, 0])
       difference()
       {
