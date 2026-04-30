@@ -25,13 +25,12 @@ struct Servo final
 
     pwm_set_enabled(slice_num_, true);
 
-    pwm(255/2);
+    pos(255/2);
   }
 
   ~Servo()
   {
-    auto const level = 0;
-    pwm_set_chan_level(slice_num_, channel_, level);
+    pwm_set_enabled(slice_num_, false);
   }
 
   Servo(Servo const&) = delete;
@@ -39,10 +38,10 @@ struct Servo final
   Servo(Servo &&) = delete;
   Servo& operator=(Servo &&) = delete;
 
-  void pwm(uint8_t const pos)
+  void pos(uint8_t const p)
   {
     Range constexpr r_;
-    auto const level = r_.servo_min_ + (r_.servo_range_ * pos) / 256;
+    auto const level = r_.servo_min_ + (r_.servo_range_ * p) / 256;
     pwm_set_chan_level(slice_num_, channel_, level);
   }
 

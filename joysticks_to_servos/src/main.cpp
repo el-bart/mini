@@ -7,10 +7,13 @@ int main()
   stdio_init_all();
 
   Servo s{2};
+  Servo s3{3};
 
-  for(uint8_t pos=0; true; ++pos)
+  s3.pos(255/2);
+
+  for(uint8_t p=0; true; ++p)
   {
-    s.pwm(pos);
+    s.pos(p);
     sleep_ms(20);
   }
 }
