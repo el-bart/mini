@@ -17,14 +17,14 @@ if (PICO_SDK_VERSION_STRING VERSION_LESS "2.1.1")
   message(FATAL_ERROR "Raspberry Pi Pico SDK version 2.1.1 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
 endif()
 
-project(hello-pico C CXX ASM)
+project(main C CXX ASM)
 
 pico_sdk_init()
 
-add_executable(hello_world hello_world.cpp)
-target_link_libraries(hello_world pico_stdlib)
+add_executable(main main.cpp)
+target_link_libraries(main pico_stdlib)
 # create map/bin/hex/uf2 file etc.
-pico_add_extra_outputs(hello_world)
+pico_add_extra_outputs(main)
 
-pico_enable_stdio_uart(hello_world 1)
-pico_enable_stdio_usb (hello_world 0)
+pico_enable_stdio_uart(main 1)
+pico_enable_stdio_usb (main 0)

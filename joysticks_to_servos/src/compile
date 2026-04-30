@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eux -o pipefail
+mkdir -p build
 cd build
 time cmake -G Ninja ..
 time ninja
-time rp2040_flash hello_world.elf
+time rp2040_flash main.elf
