@@ -1,4 +1,3 @@
-#include "config.hpp"
 #include <cinttypes>
 #include <limits>
 #include "hardware/pwm.h"
