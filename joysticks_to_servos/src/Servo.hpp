@@ -23,6 +23,8 @@ struct Servo final
     Range constexpr r_;
     pwm_set_wrap(slice_num_, r_.max_);  // period
 
+    pwm_set_enabled(slice_num_, true);
+
     pwm(255/2);
   }
 
