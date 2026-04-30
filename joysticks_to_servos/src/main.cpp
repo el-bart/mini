@@ -1,4 +1,5 @@
-#include <iostream>
+#include "config.hpp"
+#include "Servo.hpp"
 #include "pico/stdlib.h"
 
 int main()
@@ -10,13 +11,11 @@ int main()
   gpio_init(pin);
   gpio_set_dir(pin, GPIO_OUT);
 
-  for(uint32_t n = 0; true; ++n)
-  {
-    std::cout << "Hello, world #" << n << "!\n";
+  Servo s{2};
 
-    gpio_put(pin, 1);
-    sleep_ms(delay);
-    gpio_put(pin, 0);
-    sleep_ms(delay);
+  for(uint8_t pos=0; true; ++pos)
+  {
+    s.pwm(pos);
+    sleep_ms(20);
   }
 }
