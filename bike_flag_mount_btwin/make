@@ -1,15 +1,4 @@
 #!/bin/bash
 set -eu -o pipefail
 app_dir=$(dirname "$(readlink -e "$0")")
-image="sdk_3d_printing"
-
-docker build -t "$image" "$app_dir/sdk/"
-
-docker run \
-  -it \
-  --rm \
-  -u "$(id -u):$(id -g)" \
-  -v "$app_dir:/mnt" \
-  -w "/mnt" \
-  "$image" \
-  make "$@"
+exec "$app_dir/sdk" make "$@"
