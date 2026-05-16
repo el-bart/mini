@@ -40,7 +40,11 @@ module bike_flag_mount()
         cylinder(d=d_stick+0.5, h=stick_hole_len+eps, $fn=fn(70));
     // flag screw-in hole
     translate([box_size[0]/2, box_size[1]-stick_hole_len+5, -eps])
-      cylinder(d=3+0.5, h=box_size[2]+2*eps, $fn=fn(50));
+    {
+      cylinder(d=2+0.5, h=box_size[2]+2*eps, $fn=fn(50));
+      translate([0, 0, box_size.z-2+eps])
+        cylinder(d=3.75+0.3, h=2+eps, $fn=fn(50));
+    }
   }
 }
 
