@@ -10,7 +10,6 @@ module ctrl_box()
   difference()
   {
     side_rounded_cube(size_ext, wall, $fn=fn(50));
-#
     translate(wall*[1,1,1])
       cube(size_int + [0,0,eps]);
   }
