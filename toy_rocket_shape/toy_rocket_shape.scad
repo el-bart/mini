@@ -1,18 +1,24 @@
 include <m3d/all.scad>
 
-d = 10;
+d = 20;
 h_body = 120;
 h_cone = 30;
 fin_n = 3;
 fin_h_ext = 20;
 fin_h_int = 35;
-fin_span = 5;
+fin_span = 8;
 fin_w = 1.5;
 
 $fn=fn(50);
 
 
-module body()
+module body_cylinder(h)
+{
+  cylinder(d=d, h=h, $fn=fn(50));
+}
+
+
+module body_bottom()
 {
   module fin()
   {
@@ -26,10 +32,16 @@ module body()
       }
   }
 
-  cylinder(d=d, h=h_body, $fn=fn(50));
   for(a=[0: 360/fin_n: 360])
     rotate([0, 0, a])
       fin();
+  body_cylinder(h_body/2);
+}
+
+
+module body_top()
+{
+  body_cylinder(h_body/2);
 }
 
 
@@ -58,7 +70,10 @@ module cone()
 }
 
 
-body();
+body_bottom();
+
+translate([0, - d - fin_span - fin_w, 0])
+  body_top();
 
 translate([0, d + fin_span + fin_w, 0])
   cone();
