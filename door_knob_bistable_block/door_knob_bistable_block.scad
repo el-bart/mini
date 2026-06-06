@@ -5,9 +5,11 @@ block_root_len = 35;
 block_arm_len = 34;
 block_arm_angle= 45;
 
-base_len = block_root_len + cos(block_arm_angle)*block_arm_len;
+base_wall = 3;
+base_len = 80;
 
-bounce_wall = 2;
+bounce_wall = 3;
+bounce_len = 60;
 bounce_h = 15;
 
 profile_h = 20;
@@ -49,7 +51,7 @@ module block_assembly()
 
     module base()
     {
-      s = [1.5, base_len];
+      s = [base_wall, base_len];
       translate([0, -s.y])
         square(s);
     }
@@ -59,11 +61,11 @@ module block_assembly()
       module shape()
       {
         $fn=fn(60);
-        translate([0, -base_len/2])
+        translate([0, -bounce_len/2])
           difference()
           {
-            circle(d=base_len);
-            circle(d=base_len - 0.1);
+            circle(d=bounce_len);
+            circle(d=bounce_len - 0.1);
           }
       }
 
@@ -71,7 +73,7 @@ module block_assembly()
       {
         minkowski()
         {
-          resize([2*bounce_h, base_len])
+          resize([2*bounce_h, bounce_len])
             shape();
           circle(d=bounce_wall, $fn=fn(10));
         }
@@ -79,11 +81,12 @@ module block_assembly()
 
       intersection()
       {
-        reshaped();
+        translate([0, -5, 0])
+          reshaped();
         // just take the inner part
         {
           l = max(block_root_len + 2*block_arm_len, base_len);
-          translate([0, -l])
+            translate([0, -l])
             square([l, l]);
         }
       }
