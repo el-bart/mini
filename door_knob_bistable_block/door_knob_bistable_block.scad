@@ -1,15 +1,15 @@
 include <m3d/all.scad>
 
-block_wall = 2;
-block_root_len = 45;
-block_points = [ [0, 0], [10, -30], [55, 0] ];
-
-base_wall = 3;
-base_len = 80;
-
 bounce_wall = 3;
 bounce_len = 60;
 bounce_h = 17;
+
+block_wall = 2.3;
+block_root_len = 60;
+block_d = bounce_len/2;
+
+base_wall = 3;
+base_len = 80;
 
 profile_h = 20;
 
@@ -29,30 +29,29 @@ module block_assembly()
       }
     }
 
-    module triangle(wall, positions)
+    module hook()
     {
-      module corner_at(pos)
+      module shape()
       {
-        translate(pos)
-          circle(d=wall, $fn=fn(40));
+        scale([1, 1.4])
+          translate([0, -block_d/2])
+          intersection()
+          {
+            difference()
+            {
+              $fn=fn(50);
+              circle(d=block_d);
+              circle(d=block_d - 0.1);
+            }
+            translate([0, -block_d/2])
+              square(block_d*[1,1]);
+          }
       }
 
-      hull()
+      minkowski()
       {
-        corner_at(positions[0]);
-        corner_at(positions[1]);
-      }
-
-      hull()
-      {
-        corner_at(positions[1]);
-        corner_at(positions[2]);
-      }
-
-      hull()
-      {
-        corner_at(positions[2]);
-        corner_at(positions[0]);
+        shape();
+        circle(d=block_wall, $fn=fn(10));
       }
     }
 
@@ -64,7 +63,7 @@ module block_assembly()
       {
         front_rounded_square([block_root_len, wall]);
         translate([block_root_len - wall/2, 0])
-          triangle(wall, block_points);
+          hook();
       }
     }
 
@@ -104,7 +103,7 @@ module block_assembly()
           reshaped();
         // just take the inner part
         {
-          l = max(block_root_len + block_points[2].x, base_len);
+          l = max(block_root_len + block_d, base_len);
             translate([0, -l])
             square([l, l]);
         }
