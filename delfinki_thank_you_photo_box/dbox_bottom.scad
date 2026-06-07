@@ -8,7 +8,7 @@ module bottom()
   intersection()
   {
     dbox_ext();
-    cube([size_ext.x, size_ext.y, box_cut_h]);
+    cube(size_ext - [0, 0, walls.z + eps]);
   }
 }
 
