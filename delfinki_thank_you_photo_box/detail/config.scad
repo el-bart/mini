@@ -7,7 +7,7 @@ corner_r = walls.x/2;
 size_int = photo_size + photo_spacing;
 size_ext = size_int + 2*walls;
 
-box_cut_edge_h = 5;
+box_cut_edge_h = 10;
 box_cut_h = walls.z + photo_size.z + photo_spacing.z - box_cut_edge_h;
 box_cut_spacing = 0.5;
 
