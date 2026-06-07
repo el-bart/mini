@@ -4,24 +4,44 @@ include <config.scad>
 
 module dbox_ext()
 {
-  module base()
+  module ext()
   {
-    s = size_ext - roundings*[2,2,1];
-    minkowski()
+    module base()
     {
-      translate(roundings*[1,1,0])
-        side_rounded_cube(s, corner_r=corner_r, $fn=fn(50));
-      sphere(r=roundings, $fn=fn(25));
+      s = size_ext - roundings*[2,2,1];
+      minkowski()
+      {
+        translate(roundings*[1,1,0])
+          side_rounded_cube(s, corner_r=corner_r, $fn=fn(50));
+        sphere(r=roundings, $fn=fn(25));
+      }
+    }
+
+    // remove bottom rounding
+    intersection()
+    {
+      base();
+      cube(size_ext);
     }
   }
 
-  // remove bottom rounding
-  intersection()
+  module int()
   {
-    base();
-    cube(size_ext);
+    assert(photo_spacing.x == photo_spacing.y);
+    side_rounded_cube(size_int, corner_r=photo_spacing.x, $fn=fn(50));
+  }
+
+  difference()
+  {
+    ext();
+    translate(walls)
+      int();
   }
 }
 
 
-dbox_ext();
+intersection()
+{
+  dbox_ext();
+  if(0) cube([50,50,50]);
+}
