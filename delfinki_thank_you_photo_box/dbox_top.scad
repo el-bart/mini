@@ -34,5 +34,6 @@ module top()
 }
 
 
-rotate([0, 180, 0])
+translate([0, 0, box_cut_edge_h + walls.z])
+  rotate([0, 180, 0])
   top();
