@@ -12,6 +12,9 @@ box_cut_h = walls.z + photo_size.z + photo_spacing.z - box_cut_edge_h;
 box_cut_spacing = 0.4;
 box_cut_top_spacing_extra = 0.4;
 
+finger_space_d = 16;
+finger_space_len = 60;
+
 engraving_h = 1.5;
 
 magnet_size = [5,5,1];

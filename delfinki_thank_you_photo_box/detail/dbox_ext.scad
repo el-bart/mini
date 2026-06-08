@@ -113,20 +113,48 @@ module dbox_cut_shape(only_cut=true)
 }
 
 
+module dbox_fingers_space()
+{
+  depth = walls.y/2;
+
+  module slot()
+  {
+    module cut()
+    {
+      $fn=fn(40);
+      translate([-eps, size_ext.y/2, box_cut_h])
+        rotate([0, 90, 0])
+        cylinder(d=finger_space_d, h=depth+eps);
+    }
+
+    hull()
+      for(dy=[-1,+1])
+        translate([0, dy*finger_space_len/2, 0])
+          cut();
+  }
+
+  for(dx=[0, size_ext.x - depth])
+    translate([dx, 0, 0])
+      slot();
+}
+
+
 module dbox_ext_cut()
 {
   difference()
   {
     dbox_ext();
     dbox_cut_shape();
+    dbox_fingers_space();
   }
 }
 
 
+!
 intersection()
 {
   dbox_ext_cut();
-  cube([20,190,70]);
+  cube([20,200,70]);
 }
 
 intersection()
