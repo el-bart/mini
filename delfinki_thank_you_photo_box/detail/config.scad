@@ -1,4 +1,4 @@
-photo_size = [100, 150, 150]; // TODO: OZ is yet to be determined - placeholder for now
+photo_size = [100, 150, 44];
 photo_spacing = 4*[1,1,0] + [0,0,2];
 walls = [8,8,4];
 roundings = 2;
