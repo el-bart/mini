@@ -10,7 +10,7 @@ size_ext = size_int + 2*walls;
 box_cut_edge_h = 10;
 box_cut_h = walls.z + photo_size.z + photo_spacing.z - box_cut_edge_h;
 box_cut_spacing = 0.4;
-box_cut_top_spacing_extra = 0.4;
+box_cut_top_spacing_extra = 0.4; // to make sure that the top won't wobble, if print surface is not 100% perfect
 
 finger_space_d = 16;
 finger_space_len = 60;

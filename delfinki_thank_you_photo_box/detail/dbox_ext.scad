@@ -82,8 +82,8 @@ module dbox_cut_shape(only_cut=true)
       profile_outer();
     linear_extrude(box_cut_edge_h)
       profile_cut_line_2d();
-    translate([0, 0, box_cut_edge_h - box_cut_spacing])
-      linear_extrude(box_cut_spacing + 0*box_cut_top_spacing_extra)
+    translate([0, 0, box_cut_edge_h - box_cut_spacing - box_cut_top_spacing_extra])
+      linear_extrude(box_cut_spacing + box_cut_top_spacing_extra)
         profile_inner();
   }
 
@@ -98,8 +98,8 @@ module dbox_cut_shape(only_cut=true)
         linear_extrude(box_cut_edge_h)
           offset(r=-0.1)
           profile_cut_line_2d();
-        translate([0, 0, box_cut_edge_h - box_cut_spacing])
-          linear_extrude(box_cut_spacing + 0*box_cut_top_spacing_extra)
+        translate([0, 0, box_cut_edge_h - box_cut_spacing - box_cut_top_spacing_extra])
+          linear_extrude(box_cut_spacing + box_cut_top_spacing_extra)
           offset(r=-0.1)
           profile_inner();
       }
