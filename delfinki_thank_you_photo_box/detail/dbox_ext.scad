@@ -115,7 +115,7 @@ module dbox_cut_shape(only_cut=true)
 
 module dbox_fingers_space()
 {
-  depth = walls.y/2;
+  depth = walls.y/2 + box_cut_spacing/2;
 
   module slot()
   {
