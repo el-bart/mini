@@ -7,8 +7,8 @@ module bottom()
 {
   intersection()
   {
-    dbox_ext();
-    cube(size_ext - [0, 0, walls.z + eps]);
+    dbox_ext_cut();
+    dbox_cut_shape(only_cut=false);
   }
 }
 

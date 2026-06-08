@@ -16,7 +16,11 @@ module bottom()
     intersection()
     {
       translate([0, 0, -box_cut_h])
-        dbox_ext();
+        difference()
+        {
+          dbox_ext();
+          dbox_cut_shape(only_cut=false);
+        }
       cube([size_ext.x, size_ext.y, box_cut_h]);
     }
   }
