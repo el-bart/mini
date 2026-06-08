@@ -133,9 +133,47 @@ module dbox_fingers_space()
           cut();
   }
 
-  for(dx=[0, size_ext.x - depth])
+  for(dx=[0, size_ext.x - depth + eps])
     translate([dx, 0, 0])
       slot();
+}
+
+
+module dbox_magnet_slots()
+{
+  module top_slot()
+  {
+    assert(walls.x == walls.y);
+    translate([0,
+               -magnet_slot_size.y/2 + size_ext.y/2,
+               box_cut_h + box_cut_spacing + magnet_dist_from_edge])
+      cube(magnet_slot_size);
+  }
+
+  module top_slots()
+  {
+    hull()
+      for(dy=[-1,+1])
+        translate([0, dy*( finger_space_len/2 + finger_space_d/2 + magnet_slot_size.y/2 + magnet_dist_from_edge ), 0])
+          top_slot();
+  }
+
+  module bottom_slots()
+  {
+    translate([0, 0, -magnet_dist_from_edge - box_cut_spacing - magnet_slot_size.z - magnet_dist_from_edge])
+      top_slots();
+  }
+
+  module slots()
+  {
+    top_slots();
+    bottom_slots();
+  }
+
+  from_edge = walls.x/2/2 -magnet_slot_size.x/2;
+  for(dx=[from_edge, size_ext.x - magnet_slot_size.x - from_edge])
+    translate([dx, 0, 0])
+      slots();
 }
 
 
@@ -146,6 +184,7 @@ module dbox_ext_cut()
     dbox_ext();
     dbox_cut_shape();
     dbox_fingers_space();
+    dbox_magnet_slots();
   }
 }
 
