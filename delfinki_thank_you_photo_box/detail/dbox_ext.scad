@@ -154,7 +154,7 @@ module dbox_magnet_slots()
   {
     hull()
       for(dy=[-1,+1])
-        translate([0, dy*( finger_space_len/2 + finger_space_d/2 + magnet_slot_size.y/2 + magnet_dist_from_edge ), 0])
+        translate([0, dy*( finger_space_len/2 + finger_space_d/2 + magnet_slot_size.y/2 + magnet_burry_depth ), 0])
           top_slot();
   }
 

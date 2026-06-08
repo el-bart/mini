@@ -21,3 +21,4 @@ magnet_size = [1,5,5];
 magnet_spacing = [0.2, 0.8, 1];
 magnet_slot_size = magnet_size + magnet_spacing;
 magnet_dist_from_edge = 2*0.2; // how deep beneath the plastic surface the magnets hide
+magnet_burry_depth = 3;
