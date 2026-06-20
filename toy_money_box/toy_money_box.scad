@@ -1,8 +1,8 @@
 include <m3d/all.scad>
 
-ext_size = [50, 20, 60];
+ext_size = [50, 30, 60];
 coin_slot_dh = [24, 2] + [2, 1];
-wall = 1.5;
+wall = 2.0;
 r = 1.3;
 screw_slot_d = 3+0.4;;
 
