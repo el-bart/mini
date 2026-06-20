@@ -1,6 +1,6 @@
 include <m3d/all.scad>
 
-ext_size = [50, 20, 100];
+ext_size = [50, 20, 60];
 coin_slot_dh = [24, 2] + [2, 1];
 wall = 1.5;
 r = 1.3;
@@ -87,8 +87,58 @@ module box()
 
 module cover()
 {
+  module main()
+  {
+    _center()
+    {
+      $fn=fn(40);
+      side_rounded_cube([ext_size.x, ext_size.y, wall], r);
+    }
+  }
+
+  module screw_holes()
+  {
+    screw_pos()
+      translate([0, 0, -eps])
+      cylinder(d=screw_slot_d, h=wall+2*eps, $fn=fn(40));
+  }
+
+  module coin_slot()
+  {
+    cs_d = coin_slot_dh[0];
+    cs_h = coin_slot_dh[1];
+    int = [cs_d, cs_h, cs_d/2+5];
+    ext = int + wall*[2,2,1];
+
+    module _center_slot(s)
+    {
+      translate(-1/2*[s.x, s.y, 0])
+        children();
+    }
+
+    difference()
+    {
+      union()
+      {
+        children();
+        _center_slot(ext)
+          cube(ext);
+      }
+      _center_slot(int)
+        translate([0, 0, -eps])
+        cube(int + [0,0, wall + 2*eps]);
+    }
+  }
+
+  difference()
+  {
+    coin_slot()
+      main();
+    screw_holes();
+  }
 }
 
 
 box();
-cover();
+translate([0, ext_size.y+5, 0])
+  cover();
