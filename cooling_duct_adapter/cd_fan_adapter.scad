@@ -7,12 +7,26 @@ module fan_adapter()
   fan_h_base = 3;
   fan_d_ext = fan_d_int + 2*wall;
 
+  duct_d_int = 125;
+  duct_h_base = 20;
+  duct_d_ext = duct_d_int + 2*wall;
+
+  if(0)
   difference()
   {
     $fn=fn(300);
     cylinder(d=fan_d_ext, h=fan_h_base);
     translate([0, 0, -eps])
       cylinder(d=fan_d_int, h=fan_h_base + 2*eps);
+  }
+
+  if(1)
+  difference()
+  {
+    $fn=fn(300);
+    cylinder(d=duct_d_ext, h=duct_h_base);
+    translate([0, 0, -eps])
+      cylinder(d=duct_d_int, h=duct_h_base + 2*eps);
   }
 }
 
