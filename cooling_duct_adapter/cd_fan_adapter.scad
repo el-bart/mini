@@ -7,9 +7,9 @@ module fan_adapter()
   fan_h_base = 3;
   fan_d_ext = fan_d_int + 2*wall;
 
-  duct_d_int = 125;
+  duct_d_ext = 125;
   duct_h_base = 20;
-  duct_d_ext = duct_d_int + 2*wall;
+  duct_d_int = duct_d_ext - 2*wall;
 
   if(0)
   difference()
