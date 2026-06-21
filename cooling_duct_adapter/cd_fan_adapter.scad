@@ -2,17 +2,17 @@ include <m3d/all.scad>
 
 module fan_adapter()
 {
-  d_int = 240;
   wall = 1.7;
-  h_base = 3;
-  d_ext = d_int + 2*wall;
+  fan_d_int = 240;
+  fan_h_base = 3;
+  fan_d_ext = fan_d_int + 2*wall;
 
   difference()
   {
     $fn=fn(300);
-    cylinder(d=d_ext, h=h_base);
+    cylinder(d=fan_d_ext, h=fan_h_base);
     translate([0, 0, -eps])
-      cylinder(d=d_int, h=h_base + 2*eps);
+      cylinder(d=fan_d_int, h=fan_h_base + 2*eps);
   }
 }
 
