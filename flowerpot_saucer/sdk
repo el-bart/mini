@@ -10,7 +10,7 @@ else
   vcs_root=$(dirname "$app_dir")
   vcs_hash="N/A"
 fi
-image="$(sed "s%^$vcs_root/%%" <<< "$app_dir" | tr '/.\- &' '_' | tr '[:upper:]' '[:lower:]')_3dsdk"
+image="$(sed "s%^$vcs_root/%%" <<< "$app_dir" | iconv -f utf8 -t ASCII//TRANSLIT | tr '/.\- &' '_' | tr '[:upper:]' '[:lower:]')_3dsdk"
 
 docker build -t "$image" "$app_dir/docker/"
 
@@ -25,6 +25,8 @@ if [ -n "${vcs_hash:-}" ]
 then
   flags+=(--env "VCS_HASH=$vcs_hash")
 fi
+
+docker_run_flags+=(--ulimit "nofile=1024")
 
 flags+=(--rm)
 flags+=(--user "$(id -u):$(id -g)")
