@@ -14,4 +14,4 @@ magnets_n = 3;
 magnet_h = 5;
 magnet_d = 5;
 plastic_over_magnet = 2*0.2;
-magnet_pos_r = (oring_d_int + 2*oring_phi)/2 + 10;
+magnet_pos_r = (oring_d_int + 2*oring_phi)/2 + 4;
