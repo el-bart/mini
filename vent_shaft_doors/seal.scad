@@ -1,4 +1,3 @@
-use<detail/oring.scad>
 use<detail/common.scad>
 include <detail/config.scad>
 
