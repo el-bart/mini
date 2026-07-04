@@ -39,7 +39,13 @@ module magnet_positions()
 module magnet_slots(dh=0)
 {
   magnet_positions()
+  {
+    // magnet slot
     cylinder(d=magnet_d+0.2, h=magnet_h+dh, $fn=fn(50));
+    // air-venting holes
+    translate([0,0,-100+eps])
+      cylinder(d=2, h=100, $fn=fn(20));
+  }
 }
 
 
