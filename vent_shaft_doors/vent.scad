@@ -28,18 +28,22 @@ module vent()
 
   difference()
   {
-    cylinder(r=r_shaft+15, h=wall);
+    cylinder(r=r_shaft+15, h=magnet_h + plastic_over_magnet);
     translate([0, 0, -eps])
       cylinder(r=r_shaft-wall, h=h+2*eps);
+    translate([0, 0, plastic_over_magnet])
+      magnet_slots(dh=eps);
   }
 
-  for(rot=[0, 90])
-    rotate([0, 0, rot])
-      for(dx=[-1, 1])
-        translate(dx*[r_shaft+5, 0, 0])
-          grab();
+  for(dr=[0 : 360/magnets_n : 360])
+    rotate([0, 0, dr])
+      rotate([0, 0, 90])
+      translate([r_shaft+3, 0, 0])
+      grab();
+
+  %if($preview)
+    translate([0, 0, -5/2])
+    oring();
 }
 
 vent();
-%translate([0, 0, -5/2])
-  oring();
