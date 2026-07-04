@@ -1,6 +1,7 @@
-use<detail/oring.scad>
 use<seal.scad>
-include<detail/common.scad>
+use<detail/oring.scad>
+use<detail/common.scad>
+include <detail/config.scad>
 
 module bars_()
 {
@@ -31,7 +32,7 @@ module vent()
     translate([0, 0, -eps])
       cylinder(r=r_shaft-wall, h=h+2*eps);
   }
-  
+
   for(rot=[0, 90])
     rotate([0, 0, rot])
       for(dx=[-1, 1])

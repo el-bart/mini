@@ -1,5 +1,6 @@
 use<detail/oring.scad>
-include<detail/common.scad>
+use<detail/common.scad>
+include <detail/config.scad>
 
 module base()
 {
