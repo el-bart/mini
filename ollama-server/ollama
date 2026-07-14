@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+app=$(basename "$0")
+img='ollama'
+
+cfg_dir="$HOME/.cache/ollama"
+
+mkdir -p "$cfg_dir"
+
+function ensure_allowed # <1:dir>
+{
+  grep -q -f "$allowed_paths" <<< "$(readlink -e "$1")" && return 0
+  return 1
+}
+
+flags=()
+
+stty -a > /dev/null 2>&1 && flags+=(--interactive)
+flags+=(--tty)
+flags+=(--rm)
+flags+=(--init)
+flags+=(--user="$(id -u):$(id -g)")
+flags+=(--name="$img-$USER-$$")
+
+flags+=(--env         HOME=/opt/ollama)
+flags+=(--volume "$cfg_dir:/opt/ollama")
+
+flags+=(--publish 127.0.0.1:11434:11434)
+
+flags+=("$img")
+
+exec docker run "${flags[@]}" "$@"
