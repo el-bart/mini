@@ -7,6 +7,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # see: https://www.npmjs.com/package/opencode-ai?activeTab=versions
-RUN npm install -g opencode-ai@1.17.20
+RUN npm install -g opencode-ai@1.18.1
 
 ENTRYPOINT ["opencode"]
