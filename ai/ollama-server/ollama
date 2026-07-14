@@ -24,8 +24,8 @@ flags+=(--init)
 flags+=(--user="$(id -u):$(id -g)")
 flags+=(--name="$name")
 
-flags+=(--env           HOME=/opt/ollama)
-flags+=(--volume "$cache_dir:/opt/ollama")
+flags+=(--env           HOME=/home/ollama)
+flags+=(--volume "$cache_dir:/home/ollama")
 
 flags+=(--network="$net")
 flags+=(--env OLLAMA_HOST="$name_server:11434")
