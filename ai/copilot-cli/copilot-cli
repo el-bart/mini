@@ -4,9 +4,11 @@ app=$(basename "$0")
 img='copilot-cli'
 
 cfg_dir="$HOME/.config/copilot-cli"
+home_dir="$cfg_dir/home"
 allowed_paths="$cfg_dir/allowed_paths"
 
 mkdir -p "$cfg_dir"
+mkdir -p "$home_dir"
 [ -f "$allowed_paths" ] || cat <<EOF > "$allowed_paths"
 ^/tmp/tmp\\.
 EOF
@@ -26,7 +28,8 @@ flags+=(--init)
 flags+=(--user="$(id -u):$(id -g)")
 flags+=(--name="$img-$USER-$$")
 
-flags+=(--env HOME=/tmp)
+flags+=(--env          HOME=/home/copilot)
+flags+=(--volume "$home_dir:/home/copilot")
 flags+=(--env GITHUB_TOKEN)
 
 if ensure_allowed "$PWD"
