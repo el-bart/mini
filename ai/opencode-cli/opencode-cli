@@ -14,6 +14,27 @@ mkdir -p "$home_dir"
 ^/tmp/tmp\\.
 EOF
 
+cfg="$home_dir/.config/opencode/opencode.jsonc"
+mkdir -p "$(dirname "$cfg")"
+[ -f "$cfg" ] || cat <<EOF > "$cfg"
+{
+  "\$schema": "https://opencode.ai/config.json",
+
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://ollama-$USER:11434/v1"
+      },
+      "models": {
+        "qwen3.6:latest": { "name": "qwen3.6:latest" }
+      }
+    }
+  }
+}
+EOF
+
 function ensure_allowed # <1:dir>
 {
   grep -q -f "$allowed_paths" <<< "$(readlink -e "$1")" && return 0
