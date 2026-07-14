@@ -3,11 +3,17 @@ set -euo pipefail
 app=$(basename "$0")
 img='ollama'
 net='ollama-net'
+name_server="$img-$USER"
+name="$name_server"
+
+# 1st container is assumed to be server - rest are the clients, with PID-based names
+docker container inspect "$name" > /dev/null 2>&1 && name="$name-$$" || true
+
+# create a network, if does not exist yet
+docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
 
 cache_dir="$HOME/.cache/ollama"
 mkdir -p "$cache_dir"
-
-docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
 
 flags=()
 
@@ -16,13 +22,13 @@ flags+=(--tty)
 flags+=(--rm)
 flags+=(--init)
 flags+=(--user="$(id -u):$(id -g)")
-flags+=(--name="$img-$USER")
+flags+=(--name="$name")
 
-flags+=(--env         HOME=/opt/ollama)
+flags+=(--env           HOME=/opt/ollama)
 flags+=(--volume "$cache_dir:/opt/ollama")
 
 flags+=(--network="$net")
-flags+=(--env OLLAMA_HOST="0.0.0.0:11434")
+flags+=(--env OLLAMA_HOST="$name_server:11434")
 
 flags+=(--read-only)
 flags+=("$img")
