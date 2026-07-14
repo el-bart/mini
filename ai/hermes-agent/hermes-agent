@@ -33,11 +33,6 @@ flags+=(--env              HOME=/home/hermes)
 flags+=(--volume "$home_dir:/home/hermes")
 
 flags+=(--network="$net")
-flags+=(--env HERMES_BASE_URL="http://ollama-$USER:11434/v1")
-# If Hermes expects an API key variable, leave it empty or omit it.
-flags+=(--env HERMES_API_KEY="")
-# If Hermes also needs an explicit model name, you can set it:
-flags+=(--env HERMES_MODEL="llama3.2:1b")
 
 if ensure_allowed "$PWD"
 then
