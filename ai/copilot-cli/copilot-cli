@@ -41,6 +41,7 @@ else
   flags+=(--workdir /tmp)
 fi
 
+flags+=(--read-only)
 flags+=("$img")
 
 exec docker run "${flags[@]}" "$@"
