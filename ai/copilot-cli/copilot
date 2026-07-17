@@ -42,6 +42,7 @@ else
 fi
 
 flags+=(--read-only)
+flags+=(--tmpfs /tmp:rw,nosuid,size=1g)
 flags+=("$img")
 
 exec docker run "${flags[@]}" "$@"
