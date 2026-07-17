@@ -10,3 +10,4 @@ RUN apt-get update && apt-get install -y \
 RUN wget -O /tmp/ollama.tar.zst https://ollama.com/download/ollama-linux-amd64.tar.zst
 RUN tar xf /tmp/ollama.tar.zst -C /usr/
 ENTRYPOINT ["ollama"]
+COPY mymodel /tmp/

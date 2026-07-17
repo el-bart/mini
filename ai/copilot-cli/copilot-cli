@@ -30,7 +30,6 @@ flags+=(--name="$img-$USER-$$")
 
 flags+=(--env          HOME=/home/copilot)
 flags+=(--volume "$home_dir:/home/copilot")
-flags+=(--env GITHUB_TOKEN)
 
 if ensure_allowed "$PWD"
 then
