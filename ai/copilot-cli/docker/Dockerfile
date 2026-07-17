@@ -7,6 +7,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 # see: https://www.npmjs.com/package/@github/copilot?activeTab=versions
-RUN npm install -g @github/copilot@0.0.406
+RUN npm install -g @github/copilot@1.0.71
 
 ENTRYPOINT ["copilot"]
