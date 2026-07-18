@@ -3,7 +3,7 @@ set -euo pipefail
 app=$(basename "$0")
 img='copilot-cli'
 
-cfg_dir="$HOME/.config/copilot-cli"
+cfg_dir="$HOME/.config/$app"
 home_dir="$cfg_dir/home"
 allowed_paths="$cfg_dir/allowed_paths"
 
