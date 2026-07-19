@@ -29,18 +29,6 @@ module dolphin_engrave(dh=eps)
       }
   }
 
-                                                        
-  if(0) {
-cube([x1, 1, h]);
-                        
-translate([0, -1, 0])
-  cube([x2, 1, h]);
-                        
-translate([x1 - wall, 0, 0])
-  rotate([0, a, 0])
-  cube([wall, 100, h]);
-  }                                                        
-
   translate([x1, 0, 0])
     rotate([0, a, 0])
     translate([-engraving_h, 0, 60])
