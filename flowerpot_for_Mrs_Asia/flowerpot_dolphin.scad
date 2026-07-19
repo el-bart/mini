@@ -9,13 +9,12 @@ wall = engraving_h + 2.0;
 
 module dolphin_engrave(dh=eps)
 {
-  b = 360/n/2;
+  b = 360/n/2; // half the angle of rotation of each wall
   function d2x(d) = d/2 * cos(b);
-  x1 = d2x(d1);
-  x2 = d2x(d2);
+  x1 = d2x(d1); // center-to-lower-edge
+  x2 = d2x(d2); // center-to-upper-edge
 
-  a = atan( (x2-x1) / h );
-  echo(a);
+  a = atan( (x2-x1) / h ); // wall angle
 
   module base()
   {
@@ -57,7 +56,9 @@ module flowerpot()
   difference()
   {
     body();
-    dolphin_engrave();
+    for(r=[0: 360/n : 360])
+      rotate([0, 0, r])
+        dolphin_engrave();
   }
 }
 
