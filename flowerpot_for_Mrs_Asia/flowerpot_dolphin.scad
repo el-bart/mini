@@ -1,4 +1,5 @@
 include <m3d/all.scad>
+use <flowerpot_saucer.scad>
 
 engraving_h = 1;
 d1 = 100;
@@ -63,3 +64,8 @@ module flowerpot()
 }
 
 flowerpot();
+
+%if($preview)
+  translate([0, 0, -2-2])
+  render()
+  saucer();
