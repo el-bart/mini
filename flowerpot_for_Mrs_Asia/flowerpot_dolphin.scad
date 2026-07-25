@@ -50,7 +50,7 @@ module flowerpot()
           cylinder(d1=d1-2*wall, d2=d2-2*wall, h=h, $fn=n);
         // de-watering hole
         translate([0, 0, -eps])
-          cylinder(d=3, h=wall+2*eps, $fn=fn(30));
+          cylinder(d=4.5, h=wall+2*eps, $fn=fn(30));
       }
   }
 
