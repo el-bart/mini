@@ -43,9 +43,10 @@ module _grided_cylinder(d, h)
 
   // bottom cylinder
   cylinder(d=d, h=h);
+  // top finish
   translate([0, 0, h])
   {
-    // top grid
+    // grid
     intersection()
     {
       grid();
@@ -60,6 +61,12 @@ module _grided_cylinder(d, h)
   }
 }
 
+module _vent_hole()
+{
+  translate([0, 0, -eps])
+    cylinder(d=1.5, h=h, $fn=fn(30));
+}
+
 
 module detector_mount()
 {
@@ -68,6 +75,7 @@ module detector_mount()
     _grided_cylinder(d=detector_mount_d, h=h, $fn=fn(50));
     translate([0, 0, 2*layer_h])
       _magnet_slot();
+    _vent_hole();
   }
 
 }
@@ -80,6 +88,7 @@ module wall_mount()
     _grided_cylinder(d=wall_mount_d, h=h, $fn=fn(50));
     translate([0, 0, 2*layer_h])
       _magnet_slot();
+    _vent_hole();
   }
 
 }
