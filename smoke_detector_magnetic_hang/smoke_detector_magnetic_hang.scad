@@ -41,17 +41,24 @@ module _grided_cylinder(d, h)
       vertical();
   }
 
+  // bottom cylinder
   cylinder(d=d, h=h);
   translate([0, 0, h])
+  {
+    // top grid
     intersection()
     {
       grid();
       cylinder(d=d, h=max(h, grid_h));
     }
+    // walls around
+    difference()
+    {
+      cylinder(d=d, h=grid_h);
+      cylinder(d=d-2*grid_w, h=grid_h+eps);
+    }
+  }
 }
-
-if(0)
-_grided_cylinder(d=50, h=5);
 
 
 module detector_mount()
