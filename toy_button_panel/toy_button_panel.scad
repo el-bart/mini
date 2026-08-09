@@ -5,6 +5,9 @@ size_high = [260, 30,  size_low.z];
 
 plate_angle = 7;
 
+font_type = "Liberation Mono:style=Bold";
+font_size = 7;
+
 module panel()
 {
   module base_plate()
@@ -61,15 +64,45 @@ module panel()
       }
     }
 
+    module ruler()
+    {
+      cube([50, 5, 1]);
+    }
+
+    module centered_text(txt, h)
+    {
+      //tm = textmetrics(txt, size=font_size, font=font_type);
+      //s = tm.size;
+      s = font_size*[1,1];
+      translate(-1/2*s)
+        linear_extrude(h)
+        text(txt, size=font_size, font=font_type);
+    }
+
+    module round_button(txt)
+    {
+      h = 2;
+      d = 10;
+      difference()
+      {
+        cylinder(d=d, h);
+        translate([0, 0, 0])
+          centered_text(txt, h+eps);
+      }
+    }
+
     base_plate();
     translate([0, 0, 1])
     {
       translate([-40, 120, 0])
         cipher_wheels();
-#           
-      translate([-40, 120, 0])
-        !
+      translate([-39, 102, 0])
         slider();
+      translate([20, 117.5, 0])
+        ruler();
+      for(dx=[0, 50])
+        translate([20+dx, 107.5, 0])
+          round_button("1");
     }
   }
 
@@ -82,7 +115,7 @@ module panel()
   }
   // top plate at the final angle
   rotate([plate_angle, 0, 0])
-//!    
+!    
     top_plate();
 }
 
