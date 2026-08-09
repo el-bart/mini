@@ -1,11 +1,11 @@
 include <m3d/all.scad>
 
-size_low  = [175, 100, 1];
-size_high = [260, 30,  size_low.z];
+size_low  = [140, 100, 1];
+size_high = [230, 30,  size_low.z];
 
-plate_angle = 7;
+plate_angle = 4;
 
-font_type = "Liberation Mono:style=Bold";
+font_type = "Liberation Sans:style=Bold";
 font_size = 7;
 
 module panel()
@@ -71,10 +71,11 @@ module panel()
 
     module centered_text(txt, h)
     {
+      // TODO: this can be enabled when never OpenSCAD is released
       //tm = textmetrics(txt, size=font_size, font=font_type);
       //s = tm.size;
       s = font_size*[1,1];
-      translate(-1/2*s)
+      translate(-0.45*s)
         linear_extrude(h)
         text(txt, size=font_size, font=font_type);
     }
@@ -86,8 +87,45 @@ module panel()
       difference()
       {
         cylinder(d=d, h);
-        translate([0, 0, 0])
+        centered_text(txt, h+eps);
+      }
+    }
+
+    module square_button(txt)
+    {
+      h = 2;
+      d = 10;
+      r = 2;
+      difference()
+      {
+        s = [d,d,h];
+        side_rounded_cube(s, r, $fn=fn(30));
+        translate(1/2*[s.x, s.y, 0])
           centered_text(txt, h+eps);
+      }
+    }
+
+    module numpad()
+    {
+      ox = 15;
+      oy = ox;
+
+      txt = "123456789*0#";
+      translate([0, 3*oy, 0])
+        for(i=[0:12-1])
+          translate([ox*(i%3), -oy*floor(i/3), 0])
+            square_button(txt[i]);
+    }
+
+    module phone_holder()
+    {
+      s = [55, 120, 15];
+      wall = 1.5;
+      difference()
+      {
+        cube(s);
+        translate(wall*[1,1,0] - [0,0,eps])
+          cube(s - wall*[2,1,0] + eps*[0,1,2]);
       }
     }
 
@@ -103,6 +141,10 @@ module panel()
       for(dx=[0, 50])
         translate([20+dx, 107.5, 0])
           round_button("1");
+      translate([80, 10, 0])
+        phone_holder();
+      translate([10, 30, 0])
+        numpad();
     }
   }
 
@@ -115,7 +157,6 @@ module panel()
   }
   // top plate at the final angle
   rotate([plate_angle, 0, 0])
-!    
     top_plate();
 }
 
