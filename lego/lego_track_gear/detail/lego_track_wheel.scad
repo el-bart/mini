@@ -1,4 +1,4 @@
-include <m3d/all.scad>
+include <../m3d/all.scad>
 
 module lego_track_wheel(n, h=5)
 {
