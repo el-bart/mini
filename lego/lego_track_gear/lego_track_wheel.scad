@@ -1,13 +1,7 @@
 include <m3d/all.scad>
-use <lego_track_wheel_57519_simple.scad>
 
 module lego_track_wheel(n, h=5)
 {
-  /*
-  // based on LEGO 57520
-  r_orig = 25.75 / 2;
-  n_orig = 6;
-  */
   // based on LEGO 57519
   r_orig = 20.5;
   n_orig = 10;
@@ -93,7 +87,3 @@ module lego_track_wheel(n, h=5)
 
 
 lego_track_wheel(n=10);
-
-translate([0, 0, -5.5])
-  rotate([0, 0, -18])
-  wheel();
