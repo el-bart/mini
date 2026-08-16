@@ -30,8 +30,10 @@ module lego_track_wheel(n, h=5)
   r = l / (2*pi);
   d = 2*r;
 
-  module beta_cut()
+  module beta_cut(dh)
   {
+    hdh = h + dh;
+
     module arc_cut(angle, r, h)
     {
       rotate([0, 0, 90])
@@ -45,8 +47,8 @@ module lego_track_wheel(n, h=5)
       rotate([0, 0, -b/2])
         difference()
         {
-          arc_cut(angle=b,   r=r+1, h=h);
-          arc_cut(angle=b+1, r=r,   h=h);
+          arc_cut(angle=b,   r=r+1, h=hdh);
+          arc_cut(angle=b+1, r=r,   h=hdh);
         }
     }
 
@@ -54,7 +56,7 @@ module lego_track_wheel(n, h=5)
     {
       d = 2;
       translate([0, r - 2.3 + d/2, 0])
-        cylinder(d=d, h=h, $fn=fn(40));
+        cylinder(d=d, h=hdh, $fn=fn(40));
     }
 
     hull()
@@ -82,13 +84,15 @@ module lego_track_wheel(n, h=5)
   difference()
   {
     cylinder(d=d, h=h, $fn=fn(100));
+
     translate([0,0,-eps])
       lego_axle_slot(h+3*eps);
-    ab = alpha4r(r) + beta4r(r);
-#
-    for(a=[0:ab:360])
+
+    abr = alpha4r(r) + beta4r(r);
+    for(a = [0 : abr : 360])
       rotate([0, 0, a])
-        beta_cut();
+        translate([0, 0, -eps])
+        beta_cut(dh=2*eps);
   }
 }
 
