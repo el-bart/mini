@@ -86,4 +86,4 @@ module lego_track_wheel(n, h=5)
 }
 
 
-lego_track_wheel(n=10);
+lego_track_wheel(n=6);
