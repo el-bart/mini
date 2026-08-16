@@ -1,17 +1,18 @@
 include <m3d/all.scad>
+use <lego_track_wheel_57519_simple.scad>
 
 module lego_track_wheel(n, h=5)
 {
+  /*
   // based on LEGO 57520
   r_orig = 25.75 / 2;
   n_orig = 6;
-  /*
-  // based on LEGO 57519
-  r_orig = 20.32;
-  n_orig = 10;
   */
+  // based on LEGO 57519
+  r_orig = 20.5;
+  n_orig = 10;
 
-  alpha = 2 * asin(8.25/2 / r_orig);    // angle of upper part
+  alpha = 2 * asin(7.5/2 / r_orig);     // angle of upper part
   alpha_beta = 360 / n_orig;
   beta = alpha_beta - alpha;            // angle of cut-in (at the top-to-top)
   l_tooth = (alpha_beta / 360) * 2*pi*r_orig;
@@ -48,8 +49,8 @@ module lego_track_wheel(n, h=5)
 
     module ball()
     {
-      d = 2;
-      translate([0, r - 2.3 + d/2, 0])
+      d = 2.2;
+      translate([0, r - 2.8 + d/2, 0])
         cylinder(d=d, h=hdh, $fn=fn(40));
     }
 
@@ -91,4 +92,8 @@ module lego_track_wheel(n, h=5)
 }
 
 
-lego_track_wheel(n=6);
+lego_track_wheel(n=10);
+
+translate([0, 0, -5.5])
+  rotate([0, 0, -18])
+  wheel();
