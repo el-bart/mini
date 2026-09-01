@@ -29,7 +29,7 @@ flags+=(--init)
 flags+=(--user="$(id -u):$(id -g)")
 flags+=(--name="$img-$USER-$$")
 
-flags+=(--env              HOME=/home/hermes)
+flags+=(--env         HOME="/home/hermes")
 flags+=(--volume "$home_dir:/home/hermes")
 
 flags+=(--network="$net")
