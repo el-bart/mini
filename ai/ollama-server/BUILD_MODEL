@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euxo pipefail
+ollama create qwen3.6-256k -f /tmp/mymodel
