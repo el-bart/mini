@@ -32,7 +32,6 @@ flags+=(--env OLLAMA_HOST="$name_server:11434")
 
 if [ -e /dev/kfd ] && [ -e /dev/dri ]
 then
-  echo "$app: enabling AMD GPU support"
   flags+=(--device=/dev/kfd)
   flags+=(--device=/dev/dri)
   for g in render video
