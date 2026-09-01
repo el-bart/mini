@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://ollama-el-bart:11434/v1"
+      },
+      "models": {
+        "qwen3.6-256k":    { "tools": true }, // this one rocks, but does not fit in 16GB VRAM alone
+        "gpt-oss:20b":     { "tools": true }, // tries to generate comamnds but fails
+        "qwen3.5:9b-q8_0": { "tools": true }, // fits on GPU, but fails to generate commands
+        "deepseek-r1:14b": { "tools": true }  // cannot run commands (explicitly refuses)
+      }
+    }
+  },
+
+  // Allow the agent to execute shell commands without prompting.
+  "permission": {
+    // Allow reading and searching project files.
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+
+    // Allow creating and modifying files.
+    "edit": "allow"
+  }
+
+}
