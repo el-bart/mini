@@ -1,4 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-source /opt/hermes/bin/activate
-exec "$@"

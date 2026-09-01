@@ -1,11 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 app=$(basename "$0")
-img='hermes-agent'
+ver="v2026.8.31"
+img="nousresearch/hermes-agent:$ver"
 net='ollama-net'
 
 cfg_dir="$HOME/.config/hermes-agent"
 home_dir="$cfg_dir/home"
+data_dir="$cfg_dir/data"
 allowed_paths="$cfg_dir/allowed_paths"
 
 mkdir -p "$cfg_dir"
@@ -26,11 +28,15 @@ stty -a > /dev/null 2>&1 && flags+=(--interactive)
 flags+=(--tty)
 flags+=(--rm)
 flags+=(--init)
-flags+=(--user="$(id -u):$(id -g)")
-flags+=(--name="$img-$USER-$$")
+flags+=(--name="hermes-agent-$USER-$$")
+
+#flags+=(--user="$(id -u):$(id -g)")
+flags+=(--env HERMES_UID="$(id -u)")
+flags+=(--env HERMES_GID="$(id -g)")
 
 flags+=(--env         HOME="/home/hermes")
 flags+=(--volume "$home_dir:/home/hermes")
+flags+=(--volume "$data_dir:/opt/data")
 
 flags+=(--network="$net")
 
