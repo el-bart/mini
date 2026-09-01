@@ -1,4 +1,7 @@
 #!/bin/bash
-set -euxo pipefail
-ollama create qwen3-coder-30b-128k -f /opt/models/qwen3-coder-30b-128k
-ollama create qwen3.6-128k         -f /opt/models/qwen3.6-128k
+set -euo pipefail
+for model in $(cd docker/models && ls)
+do
+  ( set -x ; ollama create "$model" -f "/opt/models/$model" )
+done
+echo "$0: all good"
