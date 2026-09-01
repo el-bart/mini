@@ -30,6 +30,17 @@ flags+=(--volume "$cache_dir:/home/ollama")
 flags+=(--network="$net")
 flags+=(--env OLLAMA_HOST="$name_server:11434")
 
+if [ -e /dev/kfd ] && [ -e /dev/dri ]
+then
+  echo "$app: enabling AMD GPU support"
+  flags+=(--device=/dev/kfd)
+  flags+=(--device=/dev/dri)
+  for g in render video
+  do
+    flags+=(--group-add "$(getent group "$g" | cut -d: -f3)")
+  done
+fi
+
 flags+=(--read-only)
 flags+=("$img")
 
