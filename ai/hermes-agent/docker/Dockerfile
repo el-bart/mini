@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
 
 COPY hermes-python-proxy /usr/local/bin/
 RUN python3 -m venv /opt/hermes
+# TODO: this is unsupported with newer versions of the harness
 # see: https://pypi.org/project/hermes-agent/
-RUN hermes-python-proxy pip install hermes-agent==0.18.2
+RUN hermes-python-proxy pip install hermes-agent==0.19.0
 
 ENTRYPOINT ["hermes-python-proxy", "hermes"]
