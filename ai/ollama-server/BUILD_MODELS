@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euxo pipefail
+ollama create qwen3-coder-30b-128k -f /opt/models/qwen3-coder-30b-128k
+ollama create qwen3.6-128k         -f /opt/models/qwen3.6-128k

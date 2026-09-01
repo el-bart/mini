@@ -17,4 +17,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 ENTRYPOINT ["ollama"]
-COPY mymodel /tmp/
+
+RUN mkdir /opt/models
+COPY models/* /opt/models/
