@@ -9,16 +9,21 @@
         "baseURL": "http://ollama-el-bart:11434/v1"
       },
       "models": {
-        "qwen3.6-256k":    { "tools": true }, // this one rocks, but does not fit in 16GB VRAM alone
-        "gpt-oss:20b":     { "tools": true }, // tries to generate comamnds but fails
-        "qwen3.5:9b-q8_0": { "tools": true }, // fits on GPU, but fails to generate commands
-        "deepseek-r1:14b": { "tools": true }  // cannot run commands (explicitly refuses)
+        // coding stuff:
+        "qwen3.6-128k":         { "tools": true  }, // this model rocks; ~50% GPU
+        "qwen3-coder-30b-128k": { "tools": true  }, // good - ~50% GPU
+        "gpt-oss-20b-128k":     { "tools": true  }, // good - ~50% GPU
+        "qwen3.5-9b-q8_0-64k":  { "tools": true  }, // fits in VRAM
+        "qwen3.8-27b-128k":     { "tools": true  }, // 1/3 GPU so a bit slower but still usable
+        "deepseek-r1:14b":      { "tools": false }  // 2/3 GPU but cannot run commands (with small context it explicitly states that)
       }
     }
   },
 
   // Allow the agent to execute shell commands without prompting.
   "permission": {
+    // deny everything by default
+    "*": "deny",
     // Allow reading and searching project files.
     "read": "allow",
     "glob": "allow",
