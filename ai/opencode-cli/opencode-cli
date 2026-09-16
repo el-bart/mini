@@ -37,7 +37,7 @@ EOF
 
 function ensure_allowed # <1:dir>
 {
-  grep -q -f "$allowed_paths" <<< "$(readlink -e "$1")" && return 0
+  grep -q -f "$allowed_paths" <<< "$(readlink -e "$1")/" && return 0
   return 1
 }
 
