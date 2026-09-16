@@ -12,6 +12,12 @@ docker container inspect "$name" > /dev/null 2>&1 && name="$name-$$" || true
 # create a network, if does not exist yet
 docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
 
+function cleanup
+{
+  docker network rm "$net"
+}
+trap cleanup EXIT
+
 cache_dir="$HOME/.cache/ollama"
 mkdir -p "$cache_dir"
 
@@ -43,4 +49,4 @@ fi
 flags+=(--read-only)
 flags+=("$img")
 
-exec docker run "${flags[@]}" "$@"
+docker run "${flags[@]}" "$@"
