@@ -34,7 +34,18 @@ flags+=(--name="$img-$USER-$$")
 flags+=(--env          HOME=/home/opencode)
 flags+=(--volume "$home_dir:/home/opencode")
 
-flags+=(--network="$net")
+if [ "${LLM_ALLOW_INTERNET:-0}" = "1" ] || [ "${LLM_ALLOW_INTERNET:-false}" = "true" ]
+then
+  echo "$app: harness is allowed internet access, per request"
+else
+  if docker inspect "$net" > /dev/null 2>&1
+  then
+    flags+=(--network="$net")
+  else
+    echo "$app: neither internet is allowed nor Ollama is found - disabling all networking" >&2
+    flags+=(--network=none)
+  fi
+fi
 
 if ensure_allowed "$PWD"
 then
