@@ -4,19 +4,14 @@ app=$(basename "$0")
 img='ollama'
 net='ollama-net'
 name_server="$img-$USER"
-name="$name_server"
-
-# 1st container is assumed to be server - rest are the clients, with PID-based names
-docker container inspect "$name" > /dev/null 2>&1 && name="$name-$$" || true
-
-# create a network, if does not exist yet
-docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
 
 function cleanup
 {
-  docker network rm "$net"
+  local readonly net_users="$(docker network inspect "$net" 2>/dev/null | jq '.[0].Containers | length')"
+  [ "$net_users" -gt 0 ] || docker network rm "$net"
 }
 trap cleanup EXIT
+
 
 cache_dir="$HOME/.cache/ollama"
 mkdir -p "$cache_dir"
@@ -28,13 +23,21 @@ flags+=(--tty)
 flags+=(--rm)
 flags+=(--init)
 flags+=(--user="$(id -u):$(id -g)")
-flags+=(--name="$name")
 
 flags+=(--env           HOME=/home/ollama)
 flags+=(--volume "$cache_dir:/home/ollama")
 
 flags+=(--network="$net")
 flags+=(--env OLLAMA_HOST="$name_server:11434")
+
+# 1st container is assumed to be server - rest are the clients, with PID-based names
+if docker container inspect "$name_server" > /dev/null 2>&1
+then
+  flags+=(--name "$name_server-client-$$")
+else
+  docker network create "$net"
+  flags+=(--name "$name_server")
+fi
 
 if [ -e /dev/kfd ] && [ -e /dev/dri ]
 then
