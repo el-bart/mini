@@ -1,6 +1,6 @@
 include <m3d/all.scad>
 
-module digit(d, h=3*0.2)
+module digit(d, h=1.6)
 {
   $fn = fn(100);
   f = "Free Sans:style=Bold";
