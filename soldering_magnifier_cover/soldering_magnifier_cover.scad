@@ -31,8 +31,18 @@ module cover()
         tooth(dir);
   }
 
-  linear_extrude(2)
-    profile();
+  //linear_extrude(2)
+  //  profile();
+
+  rotate([180, 0, 0])
+    translate([0, 0, -cover_h])
+    rotate_extrude(angle=360, $fn=fn(360))
+    intersection()
+    {
+      profile();
+      translate([0, -d_ext/2])
+        square([d_ext,d_ext]);
+    }
 }
 
 cover();
