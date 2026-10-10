@@ -8,12 +8,62 @@ depth_long = 15;
 tooth_angle = 30;
 screw_slot_d = 3 + 0.5;
 
+handle_h_int = 35;
+handle_d = 12;
+handle_cut = 1;
+
 module _screw_holes_pos()
 {
   for(dir=[-1,+1])
     translate([dir*(d_int/2-10), 0, 0])
       children();
 }
+
+
+module handle()
+{
+  $fn=fn(60);
+  h = handle_h_int - handle_d/2;
+
+  module bar()
+  {
+    module bar_round()
+    {
+      module corners()
+      {
+        _screw_holes_pos()
+          translate([0, 0, h])
+          sphere(d=handle_d);
+      }
+
+      hull()
+        corners();
+
+      _screw_holes_pos()
+        difference()
+        {
+          cylinder(d=handle_d, h=h);
+          // place for threaded insert
+          translate([0, 0, -eps])
+            rotate([180, 0, 0])
+            ti_cnck_m3_short(dl=10);
+        }
+    }
+
+    intersection()
+    {
+      bar_round();
+      s = [2*d_ext, handle_d - 2*handle_cut, d_ext];
+      translate([-s.x/2, -s.y/2, 0])
+        cube(s);
+    }
+  }
+
+  translate([0, 0, (handle_d - 2*handle_cut)/2])
+    rotate([-90, 0, 0])
+    bar();
+}
+
 
 module cover()
 {
@@ -60,4 +110,6 @@ module cover()
   }
 }
 
-cover();
+//cover();
+
+handle();
