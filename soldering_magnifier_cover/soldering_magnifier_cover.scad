@@ -13,19 +13,26 @@ module cover()
   {
     module tooth(dir)
     {
-      off = (dir > 0) ? : 0 : -rim;
-      translate([off, -depth_long, 0])
-        square([rim, depth_long]);
+      mirror([(dir>0)?0:1, 0])
+        translate([0, -depth_long, 0])
+        intersection()
+        {
+          square([rim, depth_long]);
+          rotate([0, 0, tooth_angle])
+            square(2*rim*[1,1]);
+        }
     }
 
     translate([-d_ext/2, 0])
       square([d_ext, cover_h]);
 
-#
-    tooth(+1);
+    for(dir=[-1,+1])
+      translate([dir*(d_ext/2-rim), 0])
+        tooth(dir);
   }
 
-  profile();
+  linear_extrude(2)
+    profile();
 }
 
 cover();
