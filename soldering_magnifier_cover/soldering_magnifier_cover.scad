@@ -110,6 +110,7 @@ module cover()
   }
 }
 
-//cover();
+cover();
 
-handle();
+translate([0, d_ext/2, 0])
+  handle();
