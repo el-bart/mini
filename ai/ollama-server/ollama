@@ -35,7 +35,7 @@ if docker container inspect "$name_server" > /dev/null 2>&1
 then
   flags+=(--name "$name_server-client-$$")
 else
-  docker network create "$net"
+  docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
   flags+=(--name "$name_server")
 fi
 
