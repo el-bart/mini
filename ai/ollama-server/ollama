@@ -27,6 +27,17 @@ flags+=(--user="$(id -u):$(id -g)")
 flags+=(--env           HOME=/home/ollama)
 flags+=(--volume "$cache_dir:/home/ollama")
 
+
+if ! docker network inspect "$net" > /dev/null 2>&1
+then
+  if [ "${LLM_ALLOW_INTERNET:-0}" = "1" ] || [ "${LLM_ALLOW_INTERNET:-false}" = "true" ]
+  then
+    echo "$app: network is allowed to access the internet, as requested"
+    docker network create "$net"
+  else
+    docker network create --internal "$net"
+  fi
+fi
 flags+=(--network="$net")
 flags+=(--env OLLAMA_HOST="$name_server:11434")
 
@@ -35,7 +46,6 @@ if docker container inspect "$name_server" > /dev/null 2>&1
 then
   flags+=(--name "$name_server-client-$$")
 else
-  docker network inspect "$net" > /dev/null 2>&1 || docker network create "$net"
   flags+=(--name "$name_server")
 fi
 
