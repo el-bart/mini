@@ -30,7 +30,11 @@
     "grep": "allow",
 
     // Allow creating and modifying files.
-    "edit": "allow"
+    "edit": "allow",
+
+    // Allow accessing the internet
+    "websearch": "allow",
+    "webfetch": "allow"
   }
 
 }
