@@ -18,7 +18,6 @@
     "read": "allow",
     "glob": "allow",
     "grep": "allow",
-    "print_tree": "allow",
 
     // Allow creating and modifying files.
     "edit": "allow",
