@@ -1,0 +1,2 @@
+FROM glm-4.7-flash:q8_0
+PARAMETER num_ctx 65536
