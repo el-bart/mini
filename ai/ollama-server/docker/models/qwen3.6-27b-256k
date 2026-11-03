@@ -1,3 +1,0 @@
-FROM qwen3.6:27b
-PARAMETER num_ctx 262144
-PARAMETER num_batch 1024
