@@ -8,6 +8,6 @@ RUN apt-get update && apt-get install -y \
 
 # see: https://www.npmjs.com/package/@opencode/cli?activeTab=versions
 # or:  npm view @opencode/cli
-RUN npm install -g @opencode/cli@2.2.0
+RUN npm install -g @opencode/cli@2.2.5
 
 ENTRYPOINT ["opencode"]
