@@ -1,3 +1,4 @@
+use <centering.scad>
 use <engine/dc/mt44.scad>
 use <engine/dc/mt44_conf.scad>
 use <engine/dc/mt83.scad>
@@ -6,6 +7,7 @@ use <engine/stepper/nema17.scad>
 use <fn.scad>
 use <inner_shell.scad>
 use <map.scad>
+use <math/triangles.scad>
 use <outer_shell.scad>
 use <rounded_cube.scad>
 use <screw_head_hex.scad>
