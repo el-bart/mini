@@ -1,6 +1,6 @@
 include <m3d/all.scad>
 
-coin_d = 20;
+coin_d = 25;
 coin_h = 2;
 engrave_h = 0.6;
 
