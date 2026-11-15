@@ -51,7 +51,7 @@ module door_mount()
       }
     }
 
-    for(r=[-90, +90, 180])
+    for(r=[-60, +60, 180])
       rotate([0, 0, r])
         arm(arm_span);
   }
