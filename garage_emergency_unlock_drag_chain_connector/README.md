@@ -11,3 +11,6 @@ center hole is 8mm lower than the top ones.
 * 10x11mm drag chain + end-connector
 * M3x8 screw x3
 * M3x3 (short) threaded insert x3
+* M3x25 screw x4
+* M3 nut x4
+* M3 washer x8
