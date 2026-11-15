@@ -7,7 +7,7 @@ center hole is 8mm lower than the top ones.
 
 ## parts needed
 * M4x40 screw x1
-* M4 threaded insert x1
+* M4 nut x1
 * 10x11mm drag chain + end-connector
 * M3x8 screw x3
-* M3 threaded insert x3
+* M3x5x4 threaded insert x3
