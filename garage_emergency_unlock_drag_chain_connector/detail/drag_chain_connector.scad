@@ -6,7 +6,7 @@ module drag_chain_connector_holes(dl=0)
   {
     module insert()
     {
-      ti_cnck_m3_standard(dl=dl+eps);
+      ti_cnck_m3_short(dl=dl+eps);
     }
 
     translate([0, -3.75, eps])
