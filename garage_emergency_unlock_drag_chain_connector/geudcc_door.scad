@@ -4,7 +4,6 @@ include <m3d/all.scad>
 
 magnet_d = 15;
 magnet_h = 5;
-magnets_n = 3;
 magnet_bottom_wall = 1.5;
 magnet_island_d = magnet_d + 2*3;
 
@@ -52,7 +51,7 @@ module door_mount()
       }
     }
 
-    for(r=[0 : 360/magnets_n: 360])
+    for(r=[-90, +90, 180])
       rotate([0, 0, r])
         arm(arm_span);
   }
@@ -109,6 +108,9 @@ module door_mount()
     // cable hole
     translate(-10/2*[1,1,0])
       cube(10*[1,1,0] + [0,0,20]);
+    // cable-insertion hole
+    translate([-1, 0, -eps])
+      cube([2, center_d, center_cut_h + center_wall + 2*eps]);
   }
 }
 
