@@ -113,6 +113,4 @@ module door_mount()
 }
 
 
-//intersection() { cube([29, 20.5, 50], center=true);
 door_mount();
-//}
